@@ -1,0 +1,407 @@
+.mc-page {
+  background-color: #FFFFFF;
+}
+
+.mc-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.mc-advisory-strip {
+  background-color: #0B192C;
+  color: #CBD5E1;
+  font-size: 12.5px;
+  line-height: 1.5;
+  text-align: center;
+  padding: 9px 24px;
+}
+
+.mc-back {
+  background: none;
+  border: none;
+  font-family: inherit;
+  color: #0284C7;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 18px 0 6px;
+}
+
+.mc-back:hover {
+  text-decoration: underline;
+}
+
+/* Hero */
+.mc-hero {
+  background: linear-gradient(180deg, #EBF5FF 0%, #FFFFFF 100%);
+  padding: 12px 0 40px;
+}
+
+.mc-hero-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.mc-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #0284C7;
+}
+
+.mc-h1 {
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -0.7px;
+  line-height: 1.22;
+  color: #0F172A;
+  margin: 0 0 14px 0;
+}
+
+.mc-lead {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #475569;
+  max-width: 780px;
+  margin: 0 0 28px 0;
+}
+
+.mc-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.mc-stat {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mc-stat-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0F172A;
+  line-height: 1.3;
+}
+
+.mc-stat-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #94A3B8;
+}
+
+.mc-body {
+  padding: 40px 24px 72px;
+}
+
+/* Callouts */
+.mc-callout {
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-bottom: 28px;
+  border: 1px solid;
+}
+
+.mc-callout p {
+  font-size: 14px;
+  line-height: 1.65;
+  margin: 0 0 10px 0;
+}
+
+.mc-callout p:last-child {
+  margin-bottom: 0;
+}
+
+.mc-callout-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+}
+
+.mc-callout--info {
+  background-color: #F0F9FF;
+  border-color: #BAE6FD;
+  color: #0C4A6E;
+}
+
+.mc-callout--warn {
+  background-color: #FFFBEB;
+  border-color: #FDE68A;
+  color: #92400E;
+}
+
+.mc-callout--danger {
+  background-color: #FEF2F2;
+  border-color: #FECACA;
+  color: #991B1B;
+}
+
+/* Sections */
+.mc-section {
+  margin-bottom: 40px;
+}
+
+.mc-section-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #0F172A;
+  margin: 0 0 18px 0;
+}
+
+/* Why choose */
+.mc-why-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.mc-why-card {
+  background-color: #F8FAFC;
+  border: 1px solid #F1F5F9;
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+
+.mc-why-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0F172A;
+  margin: 0 0 6px 0;
+}
+
+.mc-why-card p {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #64748B;
+  margin: 0;
+}
+
+/* Tables */
+.mc-table-scroll {
+  overflow-x: auto;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+}
+
+.mc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  min-width: 860px;
+}
+
+.mc-table--cost {
+  min-width: 0;
+}
+
+.mc-table th {
+  background-color: #0B192C;
+  color: #FFFFFF;
+  font-weight: 600;
+  text-align: left;
+  padding: 10px 12px;
+  white-space: nowrap;
+}
+
+.mc-table td {
+  padding: 10px 12px;
+  border-top: 1px solid #E2E8F0;
+  color: #334155;
+  line-height: 1.5;
+  vertical-align: top;
+}
+
+.mc-table tbody tr:nth-child(even) {
+  background-color: #F8FAFC;
+}
+
+.mc-table .mc-row--flagged {
+  background-color: #FFF7ED;
+}
+
+/* Eligibility */
+.mc-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.mc-subcard {
+  background-color: #F8FAFC;
+  border: 1px solid #F1F5F9;
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+
+.mc-subcard h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0284C7;
+  margin: 0 0 10px 0;
+}
+
+.mc-list {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.mc-list li {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+/* Documents */
+.mc-doc-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 20px;
+}
+
+.mc-doc-grid li {
+  font-size: 13.5px;
+  color: #334155;
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.mc-doc-grid li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #0284C7;
+  font-weight: 600;
+}
+
+.mc-licensing {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #334155;
+  background-color: #F8FAFC;
+  border-left: 3px solid #0284C7;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin: 0;
+}
+
+/* FAQs */
+.mc-faqs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mc-faq {
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 4px 16px;
+}
+
+.mc-faq summary {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #0F172A;
+  cursor: pointer;
+  padding: 12px 0;
+  list-style: none;
+}
+
+.mc-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.mc-faq summary::after {
+  content: '+';
+  float: right;
+  color: #0284C7;
+  font-weight: 600;
+}
+
+.mc-faq[open] summary::after {
+  content: '–';
+}
+
+.mc-faq p {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #475569;
+  margin: 0 0 14px 0;
+}
+
+/* CTA */
+.mc-cta-card {
+  background: linear-gradient(135deg, #0284C7 0%, #38BDF8 100%);
+  border-radius: 18px;
+  padding: 36px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.22);
+  margin-bottom: 28px;
+}
+
+.mc-cta-card h2 {
+  color: #FFFFFF;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.mc-cta-card p {
+  color: #F0F9FF;
+  font-size: 14.5px;
+  margin: 0 0 20px 0;
+}
+
+.mc-footnote {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #94A3B8;
+  margin: 0;
+  text-align: center;
+}
+
+.mc-notfound {
+  padding: 80px 24px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .mc-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .mc-h1 {
+    font-size: clamp(25px, 7vw, 30px);
+    overflow-wrap: anywhere;
+  }
+
+  .mc-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mc-why-grid,
+  .mc-two-col,
+  .mc-doc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mc-cta-card {
+    padding: 28px 18px;
+  }
+}

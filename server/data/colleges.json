@@ -1,0 +1,5997 @@
+[
+  {
+    "university": "Massachusetts Institute of Technology (MIT)",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Stanford University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Oxford",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Harvard University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Cambridge",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "National University of Singapore (NUS)",
+    "location": "Singapore",
+    "degree": "bachelor"
+  },
+  {
+    "university": "UCL (University College London)",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of Hong Kong",
+    "location": "Hong Kong SAR, China",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Nanyang Technological University, Singapore (NTU Singapore)",
+    "location": "Singapore",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Chicago",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Peking University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Pennsylvania",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Cornell University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Tsinghua University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of California, Berkeley (UCB)",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of Melbourne",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of New South Wales",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Yale University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Johns Hopkins University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Princeton University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of Sydney",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "McGill University",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "PSL University",
+    "location": "France",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Toronto",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Fudan University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "King's College London (KCL)",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Australian National University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The Chinese University of Hong Kong",
+    "location": "Hong Kong SAR, China",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Edinburgh",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of Manchester",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Monash University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of Tokyo",
+    "location": "Japan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Columbia University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Seoul National University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of British Columbia",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Institut Polytechnique de Paris",
+    "location": "France",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Northwestern University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of Queensland",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Michigan-Ann Arbor",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of California, Los Angeles (UCLA)",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Delft University of Technology",
+    "location": "Netherlands",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Shanghai Jiao Tong University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Zhejiang University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Yonsei University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Bristol",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Carnegie Mellon University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of Amsterdam",
+    "location": "Netherlands",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The Hong Kong Polytechnic University",
+    "location": "Hong Kong SAR, China",
+    "degree": "bachelor"
+  },
+  {
+    "university": "New York University (NYU)",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Kyoto University",
+    "location": "Japan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ludwig-Maximilians-Universität München",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universiti Malaya (UM)",
+    "location": "Malaysia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "KU Leuven",
+    "location": "Belgium",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Korea University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Duke University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "City University of Hong Kong",
+    "location": "Hong Kong SAR, China",
+    "degree": "bachelor"
+  },
+  {
+    "university": "National Taiwan University (NTU)",
+    "location": "Taiwan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of Auckland",
+    "location": "New Zealand",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of California, San Diego (UCSD)",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Texas at Austin",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Brown University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Université Paris-Saclay",
+    "location": "France",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Illinois at Urbana-Champaign",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Lund University",
+    "location": "Sweden",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Sorbonne University (merged from Paris IV & UPMC)",
+    "location": "France",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of Warwick",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Trinity College Dublin, The University of Dublin",
+    "location": "Ireland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Birmingham",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of Western Australia",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Glasgow",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Washington",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Adelaide University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Pennsylvania State University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad de Buenos Aires",
+    "location": "Argentina",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Leeds",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Southampton",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Boston University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Freie Universität Berlin",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Purdue University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of Osaka",
+    "location": "Japan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of Sheffield",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Uppsala University",
+    "location": "Sweden",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Durham University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Alberta",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Technology Sydney",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of Nottingham",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Politecnico di Milano",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Copenhagen",
+    "location": "Denmark",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Nanjing University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Utrecht University",
+    "location": "Netherlands",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Lomonosov Moscow State University",
+    "location": "Russian Federation",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Rheinisch-Westfälische Technische Hochschule Aachen",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidade de São Paulo (USP)",
+    "location": "Brazil",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Tohoku University",
+    "location": "Japan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Queen Mary University of London (QMUL)",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Wisconsin-Madison",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Qatar University",
+    "location": "Qatar",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of California, Davis",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Pontificia Universidad Católica de Chile",
+    "location": "Chile",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Helsinki",
+    "location": "Finland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University College Dublin",
+    "location": "Ireland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Leiden University",
+    "location": "Netherlands",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Rice University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Oslo",
+    "location": "Norway",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Waterloo",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Georgia Institute of Technology",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "RMIT University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Sungkyunkwan University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universiti Kebangsaan Malaysia (UKM)",
+    "location": "Malaysia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Sapienza University of Rome",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Humboldt-Universität zu Berlin",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Aarhus University",
+    "location": "Denmark",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Bath",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Science and Technology of China",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universiti Putra Malaysia (UPM)",
+    "location": "Malaysia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universiti Sains Malaysia (USM)",
+    "location": "Malaysia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad Nacional Autónoma de México (UNAM)",
+    "location": "Mexico",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Newcastle University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Alma Mater Studiorum - University of Bologna",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Macquarie University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of North Carolina, Chapel Hill",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "King Saud University",
+    "location": "Saudi Arabia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Texas A&M University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Technische Universität Berlin",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Southern California",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Stockholm University",
+    "location": "Sweden",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Groningen",
+    "location": "Netherlands",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Liverpool",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Cape Town",
+    "location": "South Africa",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Western University",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Vienna",
+    "location": "Austria",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universiti Teknologi Malaysia (UTM)",
+    "location": "Malaysia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Wageningen University & Research",
+    "location": "Netherlands",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Exeter",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Geneva",
+    "location": "Switzerland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Lancaster University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Basel",
+    "location": "Switzerland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Hanyang University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Barcelona",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Michigan State University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ghent University",
+    "location": "Belgium",
+    "degree": "bachelor"
+  },
+  {
+    "university": "King Abdul Aziz University (KAU)",
+    "location": "Saudi Arabia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Nagoya University",
+    "location": "Japan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Al-Farabi Kazakh National University",
+    "location": "Kazakhstan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Washington University in St. Louis",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Montreal",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of York",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Hokkaido University",
+    "location": "Japan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Kyushu University",
+    "location": "Japan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universitat Autónoma de Barcelona",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Arizona State University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "McMaster University",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad de Chile",
+    "location": "Chile",
+    "degree": "bachelor"
+  },
+  {
+    "university": "National Tsing Hua University",
+    "location": "Taiwan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Tongji University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of California, Santa Barbara (UCSB)",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Indian Institute of Technology Madras (IITM)",
+    "location": "India",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Cardiff University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Emory University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Curtin University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Bern",
+    "location": "Switzerland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Wollongong",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Wuhan University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Tecnológico de Monterrey (ITESM)",
+    "location": "Mexico",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University Complutense Madrid",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "UNIVERSITAS INDONESIA",
+    "location": "Indonesia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ohio State University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Queen's University, Ontario",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Université Catholique de Louvain (UCL)",
+    "location": "Belgium",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Reading",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Vrije Universiteit Amsterdam",
+    "location": "Netherlands",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Waseda University",
+    "location": "Japan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Otago",
+    "location": "New Zealand",
+    "degree": "bachelor"
+  },
+  {
+    "university": "National Yang Ming Chiao Tung University",
+    "location": "Taiwan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Queen's University Belfast",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universität Freiburg",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Gothenburg",
+    "location": "Sweden",
+    "degree": "bachelor"
+  },
+  {
+    "university": "National Cheng Kung University (NCKU)",
+    "location": "Taiwan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Twente",
+    "location": "Netherlands",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ecole Normale Supérieure de Lyon",
+    "location": "France",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad Autónoma de Madrid",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Deakin University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Rheinische Friedrich-Wilhelms-Universität Bonn",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Maryland, College Park",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Minnesota (System)",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Calgary",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad de Los Andes Colombia",
+    "location": "Colombia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Florida",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Eberhard Karls Universität Tübingen",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Indian Institute of Technology Kharagpur (IITKGP)",
+    "location": "India",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Keio University",
+    "location": "Japan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Technische Universität Dresden",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Ottawa",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Chulalongkorn University",
+    "location": "Thailand",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Tel Aviv University",
+    "location": "Israel",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universitas Gadjah Mada",
+    "location": "Indonesia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Loughborough University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Queensland University of Technology",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of Newcastle",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Université Libre de Bruxelles (ULB)",
+    "location": "Belgium",
+    "degree": "bachelor"
+  },
+  {
+    "university": "United Arab Emirates University",
+    "location": "United Arab Emirates",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Massey University",
+    "location": "New Zealand",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Lisbon",
+    "location": "Portugal",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universität Erlangen-Nürnberg",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "La Trobe University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidade Estadual de Campinas (Unicamp)",
+    "location": "Brazil",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Padova",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Rochester",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "American University of Beirut (AUB)",
+    "location": "Lebanon",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Porto",
+    "location": "Portugal",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Hebrew University of Jerusalem",
+    "location": "Israel",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Victoria University of Wellington",
+    "location": "New Zealand",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Georg-August-Universität Göttingen",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Hong Kong Baptist University",
+    "location": "Hong Kong SAR, China",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University College Cork",
+    "location": "Ireland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Beijing Normal University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Dartmouth College",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Massachusetts, Amherst",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Vanderbilt University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Strathclyde",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Taylor's University (Malaysia)",
+    "location": "Malaysia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Technische Universität Darmstadt",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Bandung Institute of Technology (ITB)",
+    "location": "Indonesia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Tianjin University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad Nacional de Colombia",
+    "location": "Colombia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Canterbury",
+    "location": "New Zealand",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Aberdeen",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Navarra",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Surrey",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Charles University",
+    "location": "Czechia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Norwegian University of Science And Technology",
+    "location": "Norway",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Griffith University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Middle East Technical University",
+    "location": "Türkiye",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Warsaw",
+    "location": "Poland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "American University of Sharjah (AUS)",
+    "location": "United Arab Emirates",
+    "degree": "bachelor"
+  },
+  {
+    "university": "North Carolina State University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Virginia",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Sun Yat-sen University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Milan",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Sussex",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Radboud University Nijmegen",
+    "location": "Netherlands",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Antwerp",
+    "location": "Belgium",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Pittsburgh",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Waikato",
+    "location": "New Zealand",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Dalhousie University",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Galway / Ollscoil na Gaillimhe",
+    "location": "Ireland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Georgetown University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Macau",
+    "location": "Macao SAR, China",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Heriot-Watt University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universitas Airlangga",
+    "location": "Indonesia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Arizona",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Bergen",
+    "location": "Norway",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of The Witwatersrand",
+    "location": "South Africa",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Swansea University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of California, Irvine",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Case Western Reserve University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Swinburne University of Technology",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Notre Dame",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Vrije Universiteit Brussel (VUB)",
+    "location": "Belgium",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Colorado Boulder",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Stellenbosch University",
+    "location": "South Africa",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Southern Denmark",
+    "location": "Denmark",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Xi'an Jiaotong University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Aalborg University",
+    "location": "Denmark",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Indiana University Bloomington",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Simon Fraser University",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Johannesburg",
+    "location": "South Africa",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Linköping University",
+    "location": "Sweden",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Miami",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Tasmania",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Goethe Universität Frankfurt am Main",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidade Federal do Rio de Janeiro",
+    "location": "Brazil",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Huazhong University of Science and Technology",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Bauman Moscow State Technical University",
+    "location": "Russian Federation",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Université Grenoble Alpes",
+    "location": "France",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Tehran",
+    "location": "Iran (Islamic Republic of)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Koc University",
+    "location": "Türkiye",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Sichuan University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Jordan",
+    "location": "Jordan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Leicester",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidade Nova de Lisboa",
+    "location": "Portugal",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Rutgers University – New Brunswick",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Sharjah",
+    "location": "United Arab Emirates",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Kyung Hee University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "York University",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Indian Institute of Technology Guwahati (IITG)",
+    "location": "India",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Sultan Qaboos University",
+    "location": "Oman",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Tufts University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad Politécnica de Madrid",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Illinois Chicago (UIC)",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Shandong University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Xiamen University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Oulu",
+    "location": "Finland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Pisa",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Cairo University",
+    "location": "Egypt",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Coimbra",
+    "location": "Portugal",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universität Innsbruck",
+    "location": "Austria",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Münster",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Tsukuba",
+    "location": "Japan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Quaid-i-azam University",
+    "location": "Pakistan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Nankai University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Università degli Studi di Roma - Tor Vergata",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "George Washington University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Mahidol University",
+    "location": "Thailand",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Victoria",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Virginia Polytechnic Institute (Virginia Tech)",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Chinese Academy of Sciences (UCAS)",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Pretoria",
+    "location": "South Africa",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Tartu",
+    "location": "Estonia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of the Philippines",
+    "location": "Philippines",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Turku",
+    "location": "Finland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "RUDN University",
+    "location": "Russian Federation",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universiti Brunei Darussalam (UBD)",
+    "location": "Brunei Darussalam",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Bogazici University",
+    "location": "Türkiye",
+    "degree": "bachelor"
+  },
+  {
+    "university": "National University of Sciences And Technology (NUST) Islamabad",
+    "location": "Pakistan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Pontificia Universidad Javeriana",
+    "location": "Colombia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Oxford Brookes University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Saint Petersburg State University",
+    "location": "Russian Federation",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Saskatchewan",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Liege",
+    "location": "Belgium",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Naples - Federico II",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The American University in Cairo",
+    "location": "Egypt",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of East Anglia (UEA)",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Northeastern University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Brunel University of London",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Flinders University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Beihang University (former BUAA)",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Birkbeck College, University of London",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "National and Kapodistrian University of Athens",
+    "location": "Greece",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Sejong University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Southeast University, China",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universitat Politècnica de Catalunya",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Aston University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ruhr-Universität Bochum",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Kent",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Western Sydney University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Umeå University",
+    "location": "Sweden",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Granada",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Limerick",
+    "location": "Ireland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Sabanci University",
+    "location": "Türkiye",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Florence",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Turin",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Auckland University of Technology",
+    "location": "New Zealand",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Dublin City University",
+    "location": "Ireland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Sunway University",
+    "location": "Malaysia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University at Buffalo SUNY",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Southern Queensland",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Bilkent University",
+    "location": "Türkiye",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Julius-Maximilians-Universität Würzburg",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Aveiro",
+    "location": "Portugal",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Université de Strasbourg",
+    "location": "France",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universitat Politecnica de Valencia",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Murdoch University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Tampere University",
+    "location": "Finland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Università  degli Studi di Pavia",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Washington State University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Aix-Marseille University",
+    "location": "France",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Dundee",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Masaryk University",
+    "location": "Czechia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universitat de Valencia",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "East China Normal University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "National Taiwan Normal University",
+    "location": "Taiwan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universitat Ramon Llull",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "National Sun Yat-sen University",
+    "location": "Taiwan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "James Cook University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Macau University of Science and Technology",
+    "location": "Macao SAR, China",
+    "degree": "bachelor"
+  },
+  {
+    "university": "National Research University Higher School of Economics (HSE, Moscow)",
+    "location": "Russian Federation",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universität Konstanz",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of California, Riverside",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Vilnius University",
+    "location": "Lithuania",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Belarusian State University",
+    "location": "Belarus",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universität Bayreuth",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Iowa State University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Kazan Federal University",
+    "location": "Russian Federation",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidade Estadual Paulista \"Júlio de Mesquita Filho\" (UNESP)",
+    "location": "Brazil",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Shenzhen University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Stony Brook University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Cyprus",
+    "location": "Cyprus",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Essex",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Colorado State University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad Nacional de La Plata",
+    "location": "Argentina",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of California, Santa Cruz",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Jordan University of Science & Technology",
+    "location": "Jordan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Royal Holloway University of London",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Concordia University",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Kansas",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ben Gurion University of The Negev",
+    "location": "Israel",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Laval University",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Tashkent Institute of Irrigation and Agricultural Mechanization Engineers - National Research University (TIIAME-NRU)",
+    "location": "Uzbekistan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad de Sevilla",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Jilin University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Pusan National University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Chung-Ang University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Hiroshima University",
+    "location": "Japan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Science and Technology Beijing",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Dalian University of Technology",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Duy Tan University",
+    "location": "Viet Nam",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Kobe University",
+    "location": "Japan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Aristotle University of Thessaloniki",
+    "location": "Greece",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Trento",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Edith Cowan University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad de Santiago de Chile - USACH",
+    "location": "Chile",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Imam Abdulrahman Bin Faisal University (formerly University of Dammam)",
+    "location": "Saudi Arabia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universiti Utara Malaysia (UUM)",
+    "location": "Malaysia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Canberra",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Justus-Liebig-Universität Gießen",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Central Queensland University Australia (CQUniversity)",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Northwestern Polytechnical University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Tomsk State University",
+    "location": "Russian Federation",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad de Costa Rica",
+    "location": "Costa Rica",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Shoolini University of Biotechnology and Management Sciences",
+    "location": "India",
+    "degree": "bachelor"
+  },
+  {
+    "university": "China Agricultural University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ewha Womans University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Guelph",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Institut Teknologi Sepuluh Nopember (ITS)",
+    "location": "Indonesia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "INTI International University",
+    "location": "Malaysia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ateneo de Manila University",
+    "location": "Philippines",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Bradford",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Lebanese University",
+    "location": "Lebanon",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Pontificia Universidad Católica Argentina Santa María de los Buenos Aires - UCA",
+    "location": "Argentina",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Stirling",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Kyungpook National University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad Austral - Argentina",
+    "location": "Argentina",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ural Federal University",
+    "location": "Russian Federation",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Huddersfield",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The University of Georgia",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Boston College",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Chiang Mai University",
+    "location": "Thailand",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Hull",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Salamanca",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universität Bremen",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Genoa",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Iowa",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Connecticut",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "King Khalid University",
+    "location": "Saudi Arabia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Lebanese American University",
+    "location": "Lebanon",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universität Leipzig",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Ljubljana",
+    "location": "Slovenia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Jinan University (China)",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Utah",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ain Shams University",
+    "location": "Egypt",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universiti Teknologi MARA - UiTM",
+    "location": "Malaysia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of the Punjab",
+    "location": "Pakistan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Hawaii at Mañoa",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Windsor",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Florida State University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Northumbria University at Newcastle",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Thammasat University",
+    "location": "Thailand",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Delaware",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Lahore University of Management Sciences (LUMS)",
+    "location": "Pakistan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Houston",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Coventry University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Jawaharlal Nehru University",
+    "location": "India",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Sogang University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Kwazulu-Natal",
+    "location": "South Africa",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ajou University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Debrecen",
+    "location": "Hungary",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Bangor University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Savitribai Phule Pune University",
+    "location": "India",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Minho",
+    "location": "Portugal",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Hacettepe University",
+    "location": "Türkiye",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Pontificia Universidade Católica do Rio de Janeiro (PUC - Rio)",
+    "location": "Brazil",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Chandigarh University",
+    "location": "India",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universität Jena",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Tabriz",
+    "location": "Iran (Islamic Republic of)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Florida International University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Iceland",
+    "location": "Iceland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Eotvos Lorand University",
+    "location": "Hungary",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Dhaka",
+    "location": "Bangladesh",
+    "degree": "bachelor"
+  },
+  {
+    "university": "American University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "National Central University",
+    "location": "Taiwan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Université Claude Bernard Lyon 1",
+    "location": "France",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Illinois Institute of Technology",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidade Federal de Minas Gerais",
+    "location": "Brazil",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Hasselt University",
+    "location": "Belgium",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Tulane University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Szeged",
+    "location": "Hungary",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Texas at Dallas",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "National Chengchi University",
+    "location": "Taiwan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Eastern Finland",
+    "location": "Finland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Siena",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Tennessee",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Nottingham Trent University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Peter the Great St.Petersburg Polytechnic University",
+    "location": "Russian Federation",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Ulster",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "City University of New York",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "International Islamic University Malaysia (IIUM)",
+    "location": "Malaysia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad de Concepción",
+    "location": "Chile",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Plymouth",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Christian-Albrechts-Universität zu Kiel",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Dongguk University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Saint Joseph University of Beirut (USJ)",
+    "location": "Lebanon",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Zhengzhou University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Umm Al-Qura University",
+    "location": "Saudi Arabia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of New Brunswick",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Diponegoro University",
+    "location": "Indonesia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Oregon State University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad del Pais Vasco",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Yeshiva University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Istanbul University",
+    "location": "Türkiye",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Kazakh National Pedagogical University Abai",
+    "location": "Kazakhstan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Missouri University of Science and Technology",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "National Chung Hsing University",
+    "location": "Taiwan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidade de Santiago de Compostela",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Crete",
+    "location": "Greece",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of South Carolina",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universität des Saarlandes",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Portsmouth",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Lincoln University College, Malaysia",
+    "location": "Malaysia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Southern Cross University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad de Zaragoza",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Fribourg",
+    "location": "Switzerland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Abo Akademi University",
+    "location": "Finland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Inha University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Manchester Metropolitan University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Manitoba",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "King Faisal University",
+    "location": "Saudi Arabia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Tromso, The Arctic University of Norway",
+    "location": "Norway",
+    "degree": "bachelor"
+  },
+  {
+    "university": "MGIMO University",
+    "location": "Russian Federation",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Paris Lodron University of Salzburg",
+    "location": "Austria",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad de la República (UdelaR)",
+    "location": "Uruguay",
+    "degree": "bachelor"
+  },
+  {
+    "university": "De La Salle University",
+    "location": "Philippines",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Konkuk University",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Université de Lille",
+    "location": "France",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Agriculture, Faisalabad",
+    "location": "Pakistan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of South Florida",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Bar-Ilan University",
+    "location": "Israel",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ca' Foscari University of Venice",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Kingston University, London",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Memorial University of Newfoundland",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "COMSATS University Islamabad",
+    "location": "Pakistan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Indian Institute of Technology Hyderabad (IITH)",
+    "location": "India",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Mumbai",
+    "location": "India",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Oklahoma",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Birla Institute of Technology and Science",
+    "location": "India",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Lehigh University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "East China University of Science and Technology",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Beirut Arab University",
+    "location": "Lebanon",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Haifa",
+    "location": "Israel",
+    "degree": "bachelor"
+  },
+  {
+    "university": "HUFS - Hankuk (Korea) University of Foreign Studies",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ritsumeikan University",
+    "location": "Japan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Brawijaya",
+    "location": "Indonesia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Comenius University Bratislava",
+    "location": "Slovakia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ton Duc Thang University",
+    "location": "Viet Nam",
+    "degree": "bachelor"
+  },
+  {
+    "university": "China University of Petroleum",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Cyprus University of Technology",
+    "location": "Cyprus",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Baku State University",
+    "location": "Azerbaijan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Université Côte d'Azur",
+    "location": "France",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Eastern Mediterranean University",
+    "location": "Northern Cyprus",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidade Federal do Rio Grande Do Sul",
+    "location": "Brazil",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Vellore Institute of Technology (VIT), Vellore, India",
+    "location": "India",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Rensselaer Polytechnic Institute",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Symbiosis International (Deemed University)",
+    "location": "India",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ankara Üniversitesi",
+    "location": "Türkiye",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Beijing University of Chemical Technology",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad de Alcalá",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Klagenfurt",
+    "location": "Austria",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Missouri, Columbia",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Jeonbuk National University (formerly known as Chonbuk National University)",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Kasetsart University",
+    "location": "Thailand",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Lingnan University, Hong Kong",
+    "location": "Hong Kong SAR, China",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Shiraz University",
+    "location": "Iran (Islamic Republic of)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Central Florida",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Zagreb",
+    "location": "Croatia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Asia University Taiwan",
+    "location": "Taiwan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Drexel University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Technische Universität Braunschweig",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Toronto Metropolitan University (formerly Ryerson University)",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Nebraska - Lincoln",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "National University of Uzbekistan",
+    "location": "Uzbekistan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Taras Shevchenko National University of Kyiv",
+    "location": "Ukraine",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Temple University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Cincinnati",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Patras",
+    "location": "Greece",
+    "degree": "bachelor"
+  },
+  {
+    "university": "UWE Bristol (University of the West of England)",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Auezov South Kazakhstan State University (SKSU)",
+    "location": "Kazakhstan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Far Eastern Federal University",
+    "location": "Russian Federation",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Princess Nourah bint Abdulrahman University",
+    "location": "Saudi Arabia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Sofia University \"St. Kliment Ohridski\"",
+    "location": "Bulgaria",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Texas Tech University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad Central de Venezuela - UCV",
+    "location": "Venezuela (Bolivarian Republic of)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Université de Tunis El Manar",
+    "location": "Tunisia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Yildiz Technical University",
+    "location": "Türkiye",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Aberystwyth University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Adam Mickiewicz University",
+    "location": "Poland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Brandeis University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Syracuse University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "The Catholic University of Korea",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Baghdad",
+    "location": "Iraq",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Malta",
+    "location": "Malta",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Messina",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Pecs",
+    "location": "Hungary",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Victoria University",
+    "location": "Australia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Martin-Luther-Universität Halle-Wittenberg",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of New Mexico",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Oregon",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Trieste",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Babes-Bolyai University",
+    "location": "Romania",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Government College University, Faisalabad",
+    "location": "Pakistan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Jamia Millia Islamia, New Delhi",
+    "location": "India",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Khoja Akhmet Yassawi International Kazakh-Turkish University",
+    "location": "Kazakhstan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Riga Technical University",
+    "location": "Latvia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Belgrade",
+    "location": "Serbia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Bucharest",
+    "location": "Romania",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Nizwa",
+    "location": "Oman",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Vietnam National University, Hanoi",
+    "location": "Viet Nam",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Philipps-Universität Marburg",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Rovira i Virgili University",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Rutgers University - Newark",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Calcutta",
+    "location": "India",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Alexandria University",
+    "location": "Egypt",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Carleton University",
+    "location": "Canada",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Kuwait University",
+    "location": "Kuwait",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Technological University of Dublin",
+    "location": "Ireland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad de Alicante",
+    "location": "Spain",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad del Rosario",
+    "location": "Colombia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Kentucky",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Mons",
+    "location": "Belgium",
+    "degree": "bachelor"
+  },
+  {
+    "university": "V.N. Karazin Kharkiv National University",
+    "location": "Ukraine",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Wayne State University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Applied Science Private University - Jordan",
+    "location": "Jordan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Beijing University of Technology",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Chiba University",
+    "location": "Japan",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Lanzhou University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Pontificia Universidad Católica de Valparaíso",
+    "location": "Chile",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universiti Tunku Abdul Rahman (UTAR)",
+    "location": "Malaysia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Wake Forest University",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "AGH University of Krakow",
+    "location": "Poland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Bournemouth University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Donghua University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Keele University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Middlesex University",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "National Technical University of Ukraine \"Igor Sikorsky Kyiv Polytechnic Institute\"",
+    "location": "Ukraine",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Northwest Agriculture and Forestry University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Ocean University of China",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Perugia University",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Qassim University",
+    "location": "Saudi Arabia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Soochow University",
+    "location": "China (Mainland)",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad de Montevideo",
+    "location": "Uruguay",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidad de San Francisco de Quito",
+    "location": "Ecuador",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidade de Brasilia (UnB)",
+    "location": "Brazil",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidade Federal de Santa Catarina",
+    "location": "Brazil",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universidade Federal de São Paulo (UNIFESP)",
+    "location": "Brazil",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universita' degli studi di Salerno",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Università  degli Studi di Palermo",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universität Duisburg-Essen",
+    "location": "Germany",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Universiti Malaysia Terengganu (UMT)",
+    "location": "Malaysia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Greenwich",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Hyderabad",
+    "location": "India",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Latvia",
+    "location": "Latvia",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Lincoln",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Maryland, Baltimore",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Maryland, Baltimore County",
+    "location": "United States of America",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Modena and Reggio Emilia",
+    "location": "Italy",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Ulsan",
+    "location": "Republic of Korea",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Westminster",
+    "location": "United Kingdom",
+    "degree": "bachelor"
+  },
+  {
+    "university": "University of Wroclaw",
+    "location": "Poland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Vietnam National University - Ho Chi Minh City (VNU-HCM)",
+    "location": "Viet Nam",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Zurich University of Applied Sciences (ZHAW)",
+    "location": "Switzerland",
+    "degree": "bachelor"
+  },
+  {
+    "university": "Imperial College London",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Stanford University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Oxford",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Harvard University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Cambridge",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "ETH Zurich (Swiss Federal Institute of Technology)",
+    "location": "Switzerland",
+    "degree": "master"
+  },
+  {
+    "university": "National University of Singapore (NUS)",
+    "location": "Singapore",
+    "degree": "master"
+  },
+  {
+    "university": "UCL (University College London)",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "California Institute of Technology (Caltech)",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "The University of Hong Kong",
+    "location": "Hong Kong SAR, China",
+    "degree": "master"
+  },
+  {
+    "university": "Nanyang Technological University, Singapore (NTU Singapore)",
+    "location": "Singapore",
+    "degree": "master"
+  },
+  {
+    "university": "University of Chicago",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Peking University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "University of Pennsylvania",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Cornell University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Tsinghua University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "University of California, Berkeley (UCB)",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "The University of Melbourne",
+    "location": "Australia",
+    "degree": "master"
+  },
+  {
+    "university": "The University of New South Wales",
+    "location": "Australia",
+    "degree": "master"
+  },
+  {
+    "university": "Yale University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "École Polytechnique Fédérale de Lausanne",
+    "location": "Switzerland",
+    "degree": "master"
+  },
+  {
+    "university": "Technical University of Munich",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "Johns Hopkins University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "The University of Sydney",
+    "location": "Australia",
+    "degree": "master"
+  },
+  {
+    "university": "McGill University",
+    "location": "Canada",
+    "degree": "master"
+  },
+  {
+    "university": "University of Toronto",
+    "location": "Canada",
+    "degree": "master"
+  },
+  {
+    "university": "Fudan University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "King's College London (KCL)",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Australian National University",
+    "location": "Australia",
+    "degree": "master"
+  },
+  {
+    "university": "The Chinese University of Hong Kong",
+    "location": "Hong Kong SAR, China",
+    "degree": "master"
+  },
+  {
+    "university": "University of Edinburgh",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "The University of Manchester",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Monash University",
+    "location": "Australia",
+    "degree": "master"
+  },
+  {
+    "university": "The University of Tokyo",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "Columbia University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Seoul National University",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "University of British Columbia",
+    "location": "Canada",
+    "degree": "master"
+  },
+  {
+    "university": "Northwestern University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "The University of Queensland",
+    "location": "Australia",
+    "degree": "master"
+  },
+  {
+    "university": "The Hong Kong University of Science and Technology",
+    "location": "Hong Kong SAR, China",
+    "degree": "master"
+  },
+  {
+    "university": "University of Michigan-Ann Arbor",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of California, Los Angeles (UCLA)",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Shanghai Jiao Tong University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Zhejiang University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Yonsei University",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "University of Bristol",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Carnegie Mellon University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "The University of Amsterdam",
+    "location": "Netherlands",
+    "degree": "master"
+  },
+  {
+    "university": "New York University (NYU)",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "London School of Economics and Political Science (LSE)",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Kyoto University",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "Ludwig-Maximilians-Universität München",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "Universiti Malaya (UM)",
+    "location": "Malaysia",
+    "degree": "master"
+  },
+  {
+    "university": "KU Leuven",
+    "location": "Belgium",
+    "degree": "master"
+  },
+  {
+    "university": "Korea University",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "Duke University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "National Taiwan University (NTU)",
+    "location": "Taiwan",
+    "degree": "master"
+  },
+  {
+    "university": "The University of Auckland",
+    "location": "New Zealand",
+    "degree": "master"
+  },
+  {
+    "university": "University of California, San Diego (UCSD)",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "King Fahd University of Petroleum & Minerals",
+    "location": "Saudi Arabia",
+    "degree": "master"
+  },
+  {
+    "university": "University of Texas at Austin",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Brown University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Illinois at Urbana-Champaign",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Lund University",
+    "location": "Sweden",
+    "degree": "master"
+  },
+  {
+    "university": "Sorbonne University (merged from Paris IV & UPMC)",
+    "location": "France",
+    "degree": "master"
+  },
+  {
+    "university": "The University of Warwick",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Trinity College Dublin, The University of Dublin",
+    "location": "Ireland",
+    "degree": "master"
+  },
+  {
+    "university": "University of Birmingham",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "The University of Western Australia",
+    "location": "Australia",
+    "degree": "master"
+  },
+  {
+    "university": "KTH Royal Institute of Technology",
+    "location": "Sweden",
+    "degree": "master"
+  },
+  {
+    "university": "University of Glasgow",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Ruprecht-Karls-Universität Heidelberg",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "University of Washington",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Pennsylvania State University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de Buenos Aires",
+    "location": "Argentina",
+    "degree": "master"
+  },
+  {
+    "university": "Tokyo Institute of Technology",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "University of Leeds",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "University of Southampton",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Boston University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Freie Universität Berlin",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "Purdue University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "The University of Osaka",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "The University of Sheffield",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Uppsala University",
+    "location": "Sweden",
+    "degree": "master"
+  },
+  {
+    "university": "Durham University",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "University of Alberta",
+    "location": "Canada",
+    "degree": "master"
+  },
+  {
+    "university": "The University of Nottingham",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Karlsruhe Institute of Technology (KIT)",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "University of Zurich (UZH)",
+    "location": "Switzerland",
+    "degree": "master"
+  },
+  {
+    "university": "University of Copenhagen",
+    "location": "Denmark",
+    "degree": "master"
+  },
+  {
+    "university": "Pohang University of Science And Technology (POSTECH)",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "Nanjing University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Utrecht University",
+    "location": "Netherlands",
+    "degree": "master"
+  },
+  {
+    "university": "Lomonosov Moscow State University",
+    "location": "Russian Federation",
+    "degree": "master"
+  },
+  {
+    "university": "Rheinisch-Westfälische Technische Hochschule Aachen",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "Technical University of Denmark",
+    "location": "Denmark",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade de São Paulo (USP)",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Tohoku University",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "Queen Mary University of London (QMUL)",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "University of Wisconsin-Madison",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Qatar University",
+    "location": "Qatar",
+    "degree": "master"
+  },
+  {
+    "university": "University of St Andrews",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Aalto University",
+    "location": "Finland",
+    "degree": "master"
+  },
+  {
+    "university": "University of California, Davis",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Pontificia Universidad Católica de Chile",
+    "location": "Chile",
+    "degree": "master"
+  },
+  {
+    "university": "University College Dublin",
+    "location": "Ireland",
+    "degree": "master"
+  },
+  {
+    "university": "Leiden University",
+    "location": "Netherlands",
+    "degree": "master"
+  },
+  {
+    "university": "University of Oslo",
+    "location": "Norway",
+    "degree": "master"
+  },
+  {
+    "university": "Indian Institute of Technology Delhi (IITD)",
+    "location": "India",
+    "degree": "master"
+  },
+  {
+    "university": "Sungkyunkwan University",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "Universiti Kebangsaan Malaysia (UKM)",
+    "location": "Malaysia",
+    "degree": "master"
+  },
+  {
+    "university": "Sapienza University of Rome",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "Indian Institute of Technology Bombay (IITB)",
+    "location": "India",
+    "degree": "master"
+  },
+  {
+    "university": "Humboldt-Universität zu Berlin",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "Aarhus University",
+    "location": "Denmark",
+    "degree": "master"
+  },
+  {
+    "university": "Universiti Putra Malaysia (UPM)",
+    "location": "Malaysia",
+    "degree": "master"
+  },
+  {
+    "university": "Universiti Sains Malaysia (USM)",
+    "location": "Malaysia",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Nacional Autónoma de México (UNAM)",
+    "location": "Mexico",
+    "degree": "master"
+  },
+  {
+    "university": "Newcastle University",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Alma Mater Studiorum - University of Bologna",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "Macquarie University",
+    "location": "Australia",
+    "degree": "master"
+  },
+  {
+    "university": "Eindhoven University of Technology",
+    "location": "Netherlands",
+    "degree": "master"
+  },
+  {
+    "university": "Erasmus University Rotterdam",
+    "location": "Netherlands",
+    "degree": "master"
+  },
+  {
+    "university": "University of North Carolina, Chapel Hill",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "King Saud University",
+    "location": "Saudi Arabia",
+    "degree": "master"
+  },
+  {
+    "university": "Texas A&M University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Southern California",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Groningen",
+    "location": "Netherlands",
+    "degree": "master"
+  },
+  {
+    "university": "University of Liverpool",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "University of Cape Town",
+    "location": "South Africa",
+    "degree": "master"
+  },
+  {
+    "university": "Western University",
+    "location": "Canada",
+    "degree": "master"
+  },
+  {
+    "university": "University of Vienna",
+    "location": "Austria",
+    "degree": "master"
+  },
+  {
+    "university": "University of Exeter",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "University of Geneva",
+    "location": "Switzerland",
+    "degree": "master"
+  },
+  {
+    "university": "Lancaster University",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "University of Basel",
+    "location": "Switzerland",
+    "degree": "master"
+  },
+  {
+    "university": "Hanyang University",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "University of Barcelona",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "Michigan State University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Ghent University",
+    "location": "Belgium",
+    "degree": "master"
+  },
+  {
+    "university": "King Abdul Aziz University (KAU)",
+    "location": "Saudi Arabia",
+    "degree": "master"
+  },
+  {
+    "university": "Nagoya University",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "Chalmers University of Technology",
+    "location": "Sweden",
+    "degree": "master"
+  },
+  {
+    "university": "Al-Farabi Kazakh National University",
+    "location": "Kazakhstan",
+    "degree": "master"
+  },
+  {
+    "university": "Washington University in St. Louis",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Montreal",
+    "location": "Canada",
+    "degree": "master"
+  },
+  {
+    "university": "University of York",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Hokkaido University",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "Kyushu University",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "Universitat Autónoma de Barcelona",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "McMaster University",
+    "location": "Canada",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de Chile",
+    "location": "Chile",
+    "degree": "master"
+  },
+  {
+    "university": "Khalifa University of Science and Technology",
+    "location": "United Arab Emirates",
+    "degree": "master"
+  },
+  {
+    "university": "Tongji University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Cardiff University",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Emory University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Bern",
+    "location": "Switzerland",
+    "degree": "master"
+  },
+  {
+    "university": "University of Wollongong",
+    "location": "Australia",
+    "degree": "master"
+  },
+  {
+    "university": "Wuhan University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Tecnológico de Monterrey (ITESM)",
+    "location": "Mexico",
+    "degree": "master"
+  },
+  {
+    "university": "University Complutense Madrid",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "UNIVERSITAS INDONESIA",
+    "location": "Indonesia",
+    "degree": "master"
+  },
+  {
+    "university": "Ohio State University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Queen's University, Ontario",
+    "location": "Canada",
+    "degree": "master"
+  },
+  {
+    "university": "Université Catholique de Louvain (UCL)",
+    "location": "Belgium",
+    "degree": "master"
+  },
+  {
+    "university": "Universität Hamburg",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "Vrije Universiteit Amsterdam",
+    "location": "Netherlands",
+    "degree": "master"
+  },
+  {
+    "university": "University of Otago",
+    "location": "New Zealand",
+    "degree": "master"
+  },
+  {
+    "university": "Vienna University of Technology",
+    "location": "Austria",
+    "degree": "master"
+  },
+  {
+    "university": "National Yang Ming Chiao Tung University",
+    "location": "Taiwan",
+    "degree": "master"
+  },
+  {
+    "university": "Queen's University Belfast",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Universität Freiburg",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "University of Gothenburg",
+    "location": "Sweden",
+    "degree": "master"
+  },
+  {
+    "university": "National Cheng Kung University (NCKU)",
+    "location": "Taiwan",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Autónoma de Madrid",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "Deakin University",
+    "location": "Australia",
+    "degree": "master"
+  },
+  {
+    "university": "Rheinische Friedrich-Wilhelms-Universität Bonn",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "University of Maryland, College Park",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Minnesota (System)",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Calgary",
+    "location": "Canada",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de Los Andes Colombia",
+    "location": "Colombia",
+    "degree": "master"
+  },
+  {
+    "university": "University of Florida",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Lausanne",
+    "location": "Switzerland",
+    "degree": "master"
+  },
+  {
+    "university": "Eberhard Karls Universität Tübingen",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "Keio University",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "Technische Universität Dresden",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "Indian Institute of Science (IISc) Bangalore",
+    "location": "India",
+    "degree": "master"
+  },
+  {
+    "university": "University of Ottawa",
+    "location": "Canada",
+    "degree": "master"
+  },
+  {
+    "university": "Chulalongkorn University",
+    "location": "Thailand",
+    "degree": "master"
+  },
+  {
+    "university": "Indian Institute of Technology Kanpur (IITK)",
+    "location": "India",
+    "degree": "master"
+  },
+  {
+    "university": "Tel Aviv University",
+    "location": "Israel",
+    "degree": "master"
+  },
+  {
+    "university": "Universitas Gadjah Mada",
+    "location": "Indonesia",
+    "degree": "master"
+  },
+  {
+    "university": "The University of Newcastle",
+    "location": "Australia",
+    "degree": "master"
+  },
+  {
+    "university": "Université Libre de Bruxelles (ULB)",
+    "location": "Belgium",
+    "degree": "master"
+  },
+  {
+    "university": "United Arab Emirates University",
+    "location": "United Arab Emirates",
+    "degree": "master"
+  },
+  {
+    "university": "University of Lisbon",
+    "location": "Portugal",
+    "degree": "master"
+  },
+  {
+    "university": "Universität Erlangen-Nürnberg",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Estadual de Campinas (Unicamp)",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "University of Padova",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "University of Rochester",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "American University of Beirut (AUB)",
+    "location": "Lebanon",
+    "degree": "master"
+  },
+  {
+    "university": "University of Porto",
+    "location": "Portugal",
+    "degree": "master"
+  },
+  {
+    "university": "Maastricht University",
+    "location": "Netherlands",
+    "degree": "master"
+  },
+  {
+    "university": "Hebrew University of Jerusalem",
+    "location": "Israel",
+    "degree": "master"
+  },
+  {
+    "university": "Politecnico di Torino",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "Georg-August-Universität Göttingen",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "Hamad Bin Khalifa University",
+    "location": "Qatar",
+    "degree": "master"
+  },
+  {
+    "university": "University College Cork",
+    "location": "Ireland",
+    "degree": "master"
+  },
+  {
+    "university": "Dartmouth College",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Vanderbilt University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Universiti Teknologi Petronas (UTP)",
+    "location": "Malaysia",
+    "degree": "master"
+  },
+  {
+    "university": "Harbin Institute of Technology",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Université Paris 1 Panthéon-Sorbonne",
+    "location": "France",
+    "degree": "master"
+  },
+  {
+    "university": "Beijing Institute of Technology",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Nacional de Colombia",
+    "location": "Colombia",
+    "degree": "master"
+  },
+  {
+    "university": "University of Aberdeen",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "University of Navarra",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "Charles University",
+    "location": "Czechia",
+    "degree": "master"
+  },
+  {
+    "university": "Universitat Pompeu Fabra",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "Norwegian University of Science And Technology",
+    "location": "Norway",
+    "degree": "master"
+  },
+  {
+    "university": "Griffith University",
+    "location": "Australia",
+    "degree": "master"
+  },
+  {
+    "university": "UCSI University",
+    "location": "Malaysia",
+    "degree": "master"
+  },
+  {
+    "university": "Universität zu Köln",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "University of Virginia",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Sun Yat-sen University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "University of Milan",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "University of Sussex",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Radboud University Nijmegen",
+    "location": "Netherlands",
+    "degree": "master"
+  },
+  {
+    "university": "University of Antwerp",
+    "location": "Belgium",
+    "degree": "master"
+  },
+  {
+    "university": "University of Pittsburgh",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Dalhousie University",
+    "location": "Canada",
+    "degree": "master"
+  },
+  {
+    "university": "University of Galway / Ollscoil na Gaillimhe",
+    "location": "Ireland",
+    "degree": "master"
+  },
+  {
+    "university": "Georgetown University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Universitas Airlangga",
+    "location": "Indonesia",
+    "degree": "master"
+  },
+  {
+    "university": "University of Arizona",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Bergen",
+    "location": "Norway",
+    "degree": "master"
+  },
+  {
+    "university": "University of The Witwatersrand",
+    "location": "South Africa",
+    "degree": "master"
+  },
+  {
+    "university": "Swansea University",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "University of California, Irvine",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Case Western Reserve University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Vrije Universiteit Brussel (VUB)",
+    "location": "Belgium",
+    "degree": "master"
+  },
+  {
+    "university": "Istanbul Technical University",
+    "location": "Türkiye",
+    "degree": "master"
+  },
+  {
+    "university": "Université Paris Cité",
+    "location": "France",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Carlos III de Madrid",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "Stellenbosch University",
+    "location": "South Africa",
+    "degree": "master"
+  },
+  {
+    "university": "Jagiellonian University",
+    "location": "Poland",
+    "degree": "master"
+  },
+  {
+    "university": "Xi'an Jiaotong University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Aalborg University",
+    "location": "Denmark",
+    "degree": "master"
+  },
+  {
+    "university": "Indiana University Bloomington",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "City St George's, University of London",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Ulsan National Institute of Science and Technology",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "Universität Stuttgart",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "University of Miami",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Goethe Universität Frankfurt am Main",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "L.N. Gumilyov Eurasian National University",
+    "location": "Kazakhstan",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Federal do Rio de Janeiro",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Huazhong University of Science and Technology",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Université Grenoble Alpes",
+    "location": "France",
+    "degree": "master"
+  },
+  {
+    "university": "Koc University",
+    "location": "Türkiye",
+    "degree": "master"
+  },
+  {
+    "university": "Sichuan University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "University of Jordan",
+    "location": "Jordan",
+    "degree": "master"
+  },
+  {
+    "university": "University of Leicester",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Nova de Lisboa",
+    "location": "Portugal",
+    "degree": "master"
+  },
+  {
+    "university": "University of Delhi",
+    "location": "India",
+    "degree": "master"
+  },
+  {
+    "university": "Kyung Hee University",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "Sultan Qaboos University",
+    "location": "Oman",
+    "degree": "master"
+  },
+  {
+    "university": "Tufts University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Illinois Chicago (UIC)",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Indian Institute of Technology Roorkee (IITR)",
+    "location": "India",
+    "degree": "master"
+  },
+  {
+    "university": "Shandong University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Xiamen University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "University of Oulu",
+    "location": "Finland",
+    "degree": "master"
+  },
+  {
+    "university": "University of Pisa",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "Cairo University",
+    "location": "Egypt",
+    "degree": "master"
+  },
+  {
+    "university": "University of Coimbra",
+    "location": "Portugal",
+    "degree": "master"
+  },
+  {
+    "university": "Technion - Israel Institute of Technology",
+    "location": "Israel",
+    "degree": "master"
+  },
+  {
+    "university": "Universität Innsbruck",
+    "location": "Austria",
+    "degree": "master"
+  },
+  {
+    "university": "University of Münster",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "University of Tsukuba",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "Nankai University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "George Washington University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Mahidol University",
+    "location": "Thailand",
+    "degree": "master"
+  },
+  {
+    "university": "Virginia Polytechnic Institute (Virginia Tech)",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Chinese Academy of Sciences (UCAS)",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "University of Pretoria",
+    "location": "South Africa",
+    "degree": "master"
+  },
+  {
+    "university": "University of Tartu",
+    "location": "Estonia",
+    "degree": "master"
+  },
+  {
+    "university": "University of the Philippines",
+    "location": "Philippines",
+    "degree": "master"
+  },
+  {
+    "university": "University of Turku",
+    "location": "Finland",
+    "degree": "master"
+  },
+  {
+    "university": "RUDN University",
+    "location": "Russian Federation",
+    "degree": "master"
+  },
+  {
+    "university": "Sciences Po Paris",
+    "location": "France",
+    "degree": "master"
+  },
+  {
+    "university": "National University of Sciences And Technology (NUST) Islamabad",
+    "location": "Pakistan",
+    "degree": "master"
+  },
+  {
+    "university": "Pontificia Universidad Javeriana",
+    "location": "Colombia",
+    "degree": "master"
+  },
+  {
+    "university": "Saint Petersburg State University",
+    "location": "Russian Federation",
+    "degree": "master"
+  },
+  {
+    "university": "Sharif University of Technology",
+    "location": "Iran (Islamic Republic of)",
+    "degree": "master"
+  },
+  {
+    "university": "South China University of Technology",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "University of Saskatchewan",
+    "location": "Canada",
+    "degree": "master"
+  },
+  {
+    "university": "University of Liege",
+    "location": "Belgium",
+    "degree": "master"
+  },
+  {
+    "university": "University of Naples - Federico II",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "University of East Anglia (UEA)",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "University of Luxembourg",
+    "location": "Luxembourg",
+    "degree": "master"
+  },
+  {
+    "university": "Flinders University",
+    "location": "Australia",
+    "degree": "master"
+  },
+  {
+    "university": "Southeast University, China",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Ruhr-Universität Bochum",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "Western Sydney University",
+    "location": "Australia",
+    "degree": "master"
+  },
+  {
+    "university": "Umeå University",
+    "location": "Sweden",
+    "degree": "master"
+  },
+  {
+    "university": "University of Granada",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "University of Limerick",
+    "location": "Ireland",
+    "degree": "master"
+  },
+  {
+    "university": "University of Florence",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "University of Turin",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "Dublin City University",
+    "location": "Ireland",
+    "degree": "master"
+  },
+  {
+    "university": "University at Buffalo SUNY",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Julius-Maximilians-Universität Würzburg",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "Université de Strasbourg",
+    "location": "France",
+    "degree": "master"
+  },
+  {
+    "university": "Tampere University",
+    "location": "Finland",
+    "degree": "master"
+  },
+  {
+    "university": "Università  degli Studi di Pavia",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "Washington State University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Aix-Marseille University",
+    "location": "France",
+    "degree": "master"
+  },
+  {
+    "university": "University of Dundee",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Universitat de Valencia",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "James Cook University",
+    "location": "Australia",
+    "degree": "master"
+  },
+  {
+    "university": "University of California, Riverside",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Vilnius University",
+    "location": "Lithuania",
+    "degree": "master"
+  },
+  {
+    "university": "Kazan Federal University",
+    "location": "Russian Federation",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Estadual Paulista \"Júlio de Mesquita Filho\" (UNESP)",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Stony Brook University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Nacional de La Plata",
+    "location": "Argentina",
+    "degree": "master"
+  },
+  {
+    "university": "University of Kansas",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Ben Gurion University of The Negev",
+    "location": "Israel",
+    "degree": "master"
+  },
+  {
+    "university": "Laval University",
+    "location": "Canada",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de Sevilla",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "Jilin University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Pusan National University",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "Chung-Ang University",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "Hiroshima University",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "Kobe University",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "Aristotle University of Thessaloniki",
+    "location": "Greece",
+    "degree": "master"
+  },
+  {
+    "university": "Warsaw University of Technology",
+    "location": "Poland",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de Santiago de Chile - USACH",
+    "location": "Chile",
+    "degree": "master"
+  },
+  {
+    "university": "Central South University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Imam Abdulrahman Bin Faisal University (formerly University of Dammam)",
+    "location": "Saudi Arabia",
+    "degree": "master"
+  },
+  {
+    "university": "Justus-Liebig-Universität Gießen",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "China Agricultural University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Ewha Womans University",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "Ateneo de Manila University",
+    "location": "Philippines",
+    "degree": "master"
+  },
+  {
+    "university": "Lebanese University",
+    "location": "Lebanon",
+    "degree": "master"
+  },
+  {
+    "university": "Pontificia Universidad Católica Argentina Santa María de los Buenos Aires - UCA",
+    "location": "Argentina",
+    "degree": "master"
+  },
+  {
+    "university": "Kyungpook National University",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Austral - Argentina",
+    "location": "Argentina",
+    "degree": "master"
+  },
+  {
+    "university": "The University of Georgia",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Chiang Mai University",
+    "location": "Thailand",
+    "degree": "master"
+  },
+  {
+    "university": "University of Hull",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "University of Salamanca",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "University of Genoa",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "University of Iowa",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Connecticut",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "King Khalid University",
+    "location": "Saudi Arabia",
+    "degree": "master"
+  },
+  {
+    "university": "Lebanese American University",
+    "location": "Lebanon",
+    "degree": "master"
+  },
+  {
+    "university": "Universität Leipzig",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "University of Ljubljana",
+    "location": "Slovenia",
+    "degree": "master"
+  },
+  {
+    "university": "Jinan University (China)",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "University of Utah",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Ain Shams University",
+    "location": "Egypt",
+    "degree": "master"
+  },
+  {
+    "university": "Universiti Teknologi MARA - UiTM",
+    "location": "Malaysia",
+    "degree": "master"
+  },
+  {
+    "university": "University of Hawaii at Mañoa",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Florida State University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Thammasat University",
+    "location": "Thailand",
+    "degree": "master"
+  },
+  {
+    "university": "University of Kwazulu-Natal",
+    "location": "South Africa",
+    "degree": "master"
+  },
+  {
+    "university": "Ajou University",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "University of Debrecen",
+    "location": "Hungary",
+    "degree": "master"
+  },
+  {
+    "university": "Bangor University",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "University of Minho",
+    "location": "Portugal",
+    "degree": "master"
+  },
+  {
+    "university": "Hacettepe University",
+    "location": "Türkiye",
+    "degree": "master"
+  },
+  {
+    "university": "Chandigarh University",
+    "location": "India",
+    "degree": "master"
+  },
+  {
+    "university": "Universität Jena",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "Florida International University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Dhaka",
+    "location": "Bangladesh",
+    "degree": "master"
+  },
+  {
+    "university": "Université Claude Bernard Lyon 1",
+    "location": "France",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Federal de Minas Gerais",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Hasselt University",
+    "location": "Belgium",
+    "degree": "master"
+  },
+  {
+    "university": "Tulane University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Szeged",
+    "location": "Hungary",
+    "degree": "master"
+  },
+  {
+    "university": "University of Texas at Dallas",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Siena",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "University of Tennessee",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "City University of New York",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "International Islamic University Malaysia (IIUM)",
+    "location": "Malaysia",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de Concepción",
+    "location": "Chile",
+    "degree": "master"
+  },
+  {
+    "university": "University of Plymouth",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Christian-Albrechts-Universität zu Kiel",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "Dongguk University",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "Saint Joseph University of Beirut (USJ)",
+    "location": "Lebanon",
+    "degree": "master"
+  },
+  {
+    "university": "Zhengzhou University",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Umm Al-Qura University",
+    "location": "Saudi Arabia",
+    "degree": "master"
+  },
+  {
+    "university": "Diponegoro University",
+    "location": "Indonesia",
+    "degree": "master"
+  },
+  {
+    "university": "Yeshiva University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Istanbul University",
+    "location": "Türkiye",
+    "degree": "master"
+  },
+  {
+    "university": "University of Crete",
+    "location": "Greece",
+    "degree": "master"
+  },
+  {
+    "university": "University of South Carolina",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Universität des Saarlandes",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de Zaragoza",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "Inha University",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "University of Manitoba",
+    "location": "Canada",
+    "degree": "master"
+  },
+  {
+    "university": "King Faisal University",
+    "location": "Saudi Arabia",
+    "degree": "master"
+  },
+  {
+    "university": "University of Tromso, The Arctic University of Norway",
+    "location": "Norway",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de la República (UdelaR)",
+    "location": "Uruguay",
+    "degree": "master"
+  },
+  {
+    "university": "Konkuk University",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "Université de Lille",
+    "location": "France",
+    "degree": "master"
+  },
+  {
+    "university": "Bar-Ilan University",
+    "location": "Israel",
+    "degree": "master"
+  },
+  {
+    "university": "Memorial University of Newfoundland",
+    "location": "Canada",
+    "degree": "master"
+  },
+  {
+    "university": "University of Mumbai",
+    "location": "India",
+    "degree": "master"
+  },
+  {
+    "university": "University of Oklahoma",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Beirut Arab University",
+    "location": "Lebanon",
+    "degree": "master"
+  },
+  {
+    "university": "University of Brawijaya",
+    "location": "Indonesia",
+    "degree": "master"
+  },
+  {
+    "university": "Comenius University Bratislava",
+    "location": "Slovakia",
+    "degree": "master"
+  },
+  {
+    "university": "Université Côte d'Azur",
+    "location": "France",
+    "degree": "master"
+  },
+  {
+    "university": "Eastern Mediterranean University",
+    "location": "Northern Cyprus",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Federal do Rio Grande Do Sul",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Ankara Üniversitesi",
+    "location": "Türkiye",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de Alcalá",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "University of Missouri, Columbia",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Jeonbuk National University (formerly known as Chonbuk National University)",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "University of Central Florida",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Zagreb",
+    "location": "Croatia",
+    "degree": "master"
+  },
+  {
+    "university": "Drexel University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Temple University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Cincinnati",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Patras",
+    "location": "Greece",
+    "degree": "master"
+  },
+  {
+    "university": "Texas Tech University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Central de Venezuela - UCV",
+    "location": "Venezuela (Bolivarian Republic of)",
+    "degree": "master"
+  },
+  {
+    "university": "Université de Tunis El Manar",
+    "location": "Tunisia",
+    "degree": "master"
+  },
+  {
+    "university": "The Catholic University of Korea",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "University of Baghdad",
+    "location": "Iraq",
+    "degree": "master"
+  },
+  {
+    "university": "University of Malta",
+    "location": "Malta",
+    "degree": "master"
+  },
+  {
+    "university": "University of Messina",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "University of Pecs",
+    "location": "Hungary",
+    "degree": "master"
+  },
+  {
+    "university": "Martin-Luther-Universität Halle-Wittenberg",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "University of New Mexico",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Trieste",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "Khoja Akhmet Yassawi International Kazakh-Turkish University",
+    "location": "Kazakhstan",
+    "degree": "master"
+  },
+  {
+    "university": "University of Belgrade",
+    "location": "Serbia",
+    "degree": "master"
+  },
+  {
+    "university": "Alexandria University",
+    "location": "Egypt",
+    "degree": "master"
+  },
+  {
+    "university": "Kuwait University",
+    "location": "Kuwait",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de Alicante",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad del Rosario",
+    "location": "Colombia",
+    "degree": "master"
+  },
+  {
+    "university": "University of Kentucky",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "V.N. Karazin Kharkiv National University",
+    "location": "Ukraine",
+    "degree": "master"
+  },
+  {
+    "university": "Wayne State University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Chiba University",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "Universiti Tunku Abdul Rahman (UTAR)",
+    "location": "Malaysia",
+    "degree": "master"
+  },
+  {
+    "university": "Wake Forest University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Keele University",
+    "location": "United Kingdom",
+    "degree": "master"
+  },
+  {
+    "university": "Ocean University of China",
+    "location": "China (Mainland)",
+    "degree": "master"
+  },
+  {
+    "university": "Perugia University",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "Qassim University",
+    "location": "Saudi Arabia",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de Montevideo",
+    "location": "Uruguay",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de San Francisco de Quito",
+    "location": "Ecuador",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade de Brasilia (UnB)",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Federal de Santa Catarina",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Federal de São Paulo (UNIFESP)",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Universita' degli studi di Salerno",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "Universität Duisburg-Essen",
+    "location": "Germany",
+    "degree": "master"
+  },
+  {
+    "university": "University of Hyderabad",
+    "location": "India",
+    "degree": "master"
+  },
+  {
+    "university": "University of Latvia",
+    "location": "Latvia",
+    "degree": "master"
+  },
+  {
+    "university": "University of Maryland, Baltimore",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Maryland, Baltimore County",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Modena and Reggio Emilia",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "University of Ulsan",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Federal do Paraná (UFPR)",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Federal de Pernambuco (UFPE)",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Federal de Santa Maria",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Federal de Viçosa",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Federal do Ceará (UFC)",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Federal Fluminense",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade do Estado do Rio de Janeiro (UERJ)",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Federal da Bahia",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de Guadalajara (UDG)",
+    "location": "Mexico",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de las Américas Puebla (UDLAP)",
+    "location": "Mexico",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de Puerto Rico",
+    "location": "Puerto Rico",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad del Valle",
+    "location": "Colombia",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Nacional de Rosario",
+    "location": "Argentina",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Nacional de Córdoba",
+    "location": "Argentina",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de Castilla-La Mancha",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Autónoma de Nuevo León (UANL)",
+    "location": "Mexico",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Autónoma de Guadalajara",
+    "location": "Mexico",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Autónoma del Estado de Hidalgo",
+    "location": "Mexico",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Autónoma del Estado de México",
+    "location": "Mexico",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Andrés Bello - UNAB",
+    "location": "Chile",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Austral de Chile",
+    "location": "Chile",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Católica del Norte",
+    "location": "Chile",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Científica del Sur",
+    "location": "Peru",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de los Andes Chile",
+    "location": "Chile",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de los Andes Mérida",
+    "location": "Venezuela (Bolivarian Republic of)",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad de Valparaíso",
+    "location": "Chile",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad del Norte",
+    "location": "Colombia",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Industrial de Santander",
+    "location": "Colombia",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Nacional de Asunción",
+    "location": "Paraguay",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Nacional de Cuyo",
+    "location": "Argentina",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Nacional del Centro de la Provincia de Buenos Aires",
+    "location": "Argentina",
+    "degree": "master"
+  },
+  {
+    "university": "Universidad Pontificia Bolivariana",
+    "location": "Colombia",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Federal de Uberlândia",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Universidade Federal do Rio Grande Do Norte",
+    "location": "Brazil",
+    "degree": "master"
+  },
+  {
+    "university": "Universitas Sumatera Utara",
+    "location": "Indonesia",
+    "degree": "master"
+  },
+  {
+    "university": "Université de Caen Normandie",
+    "location": "France",
+    "degree": "master"
+  },
+  {
+    "university": "Université de Sousse",
+    "location": "Tunisia",
+    "degree": "master"
+  },
+  {
+    "university": "Universiti Malaysia Sarawak (UNIMAS)",
+    "location": "Malaysia",
+    "degree": "master"
+  },
+  {
+    "university": "University of Alabama, Birmingham",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Ioannina",
+    "location": "Greece",
+    "degree": "master"
+  },
+  {
+    "university": "University of Louisville",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Malaysia Sabah (UMS)",
+    "location": "Malaysia",
+    "degree": "master"
+  },
+  {
+    "university": "University of Murcia",
+    "location": "Spain",
+    "degree": "master"
+  },
+  {
+    "university": "University of Nairobi",
+    "location": "Kenya",
+    "degree": "master"
+  },
+  {
+    "university": "University of Nevada - Reno",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Parma",
+    "location": "Italy",
+    "degree": "master"
+  },
+  {
+    "university": "University of Tabuk",
+    "location": "Saudi Arabia",
+    "degree": "master"
+  },
+  {
+    "university": "University of Texas at San Antonio",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Toledo",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Vermont",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "University of Warmia and Mazury in Olsztyn",
+    "location": "Poland",
+    "degree": "master"
+  },
+  {
+    "university": "West Virginia University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Zagazig University",
+    "location": "Egypt",
+    "degree": "master"
+  },
+  {
+    "university": "Zarqa University",
+    "location": "Jordan",
+    "degree": "master"
+  },
+  {
+    "university": "Akdeniz Üniversitesi",
+    "location": "Türkiye",
+    "degree": "master"
+  },
+  {
+    "university": "Aswan University",
+    "location": "Egypt",
+    "degree": "master"
+  },
+  {
+    "university": "Belgorod State University",
+    "location": "Russian Federation",
+    "degree": "master"
+  },
+  {
+    "university": "Benha University",
+    "location": "Egypt",
+    "degree": "master"
+  },
+  {
+    "university": "Central Michigan University",
+    "location": "United States of America",
+    "degree": "master"
+  },
+  {
+    "university": "Kanazawa University",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "Khon Kaen University",
+    "location": "Thailand",
+    "degree": "master"
+  },
+  {
+    "university": "Makerere University",
+    "location": "Uganda",
+    "degree": "master"
+  },
+  {
+    "university": "Mansoura University",
+    "location": "Egypt",
+    "degree": "master"
+  },
+  {
+    "university": "Nagasaki University",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "Osaka Metropolitan University",
+    "location": "Japan",
+    "degree": "master"
+  },
+  {
+    "university": "Soonchunhyang University",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "Sumy State University",
+    "location": "Ukraine",
+    "degree": "master"
+  },
+  {
+    "university": "Taif University",
+    "location": "Saudi Arabia",
+    "degree": "master"
+  },
+  {
+    "university": "Tanta University",
+    "location": "Egypt",
+    "degree": "master"
+  },
+  {
+    "university": "The Catholic University of Korea",
+    "location": "Republic of Korea",
+    "degree": "master"
+  },
+  {
+    "university": "The Hashemite University",
+    "location": "Jordan",
+    "degree": "master"
+  },
+  {
+    "university": "Walailak University",
+    "location": "Thailand",
+    "degree": "master"
+  },
+  {
+    "university": "Yamaguchi University",
+    "location": "Japan",
+    "degree": "master"
+  }
+]

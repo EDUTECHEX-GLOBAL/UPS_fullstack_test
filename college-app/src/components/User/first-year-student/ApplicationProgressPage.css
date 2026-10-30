@@ -1,0 +1,474 @@
+/* ============================================================
+   ApplicationProgressPage.css
+   Styles for the /applicationprogress detail page.
+   Extends Dashboard.css — same colour scheme & variables.
+   ============================================================ */
+
+/* ── Back button in header ── */
+.application-progress-dashboard {
+  width: 100%;
+  min-width: 0;
+}
+
+.application-progress-dashboard .appage-back-btn {
+  background: none;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+  font-family: var(--font);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.application-progress-dashboard .appage-back-btn:hover {
+  background: var(--primary-pale);
+  border-color: var(--primary);
+}
+
+/* ── Section list container ── */
+.application-progress-dashboard .appage-section-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Individual section row ── */
+.application-progress-dashboard .appage-section-row {
+  border-bottom: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border-radius: var(--radius-lg);
+}
+.application-progress-dashboard .appage-section-row:last-child {
+  border-bottom: none;
+}
+.application-progress-dashboard .appage-section-row:hover {
+  background: var(--gray-50);
+  margin: 0 -8px;
+  padding: 0 8px;
+}
+.application-progress-dashboard .appage-section-row--locked {
+  opacity: 0.72;
+}
+.application-progress-dashboard .appage-section-row--locked:hover {
+  opacity: 1;
+}
+
+/* ── Row inner layout ── */
+.application-progress-dashboard .appage-section-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 6px;
+  gap: 16px;
+}
+
+/* ── Left info block ── */
+.application-progress-dashboard .appage-section-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.application-progress-dashboard .appage-section-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.application-progress-dashboard .appage-section-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.application-progress-dashboard .appage-lock-tag {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--warning);
+  background: var(--warning-pale);
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.application-progress-dashboard .appage-section-desc {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+
+/* ── Inline progress bar ── */
+.application-progress-dashboard .appage-prog-bar {
+  height: 4px;
+  background: var(--gray-100);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  max-width: 220px;
+}
+.application-progress-dashboard .appage-prog-fill {
+  height: 100%;
+  background: var(--primary-gradient);
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+
+/* ── Right block: % + action button ── */
+.application-progress-dashboard .appage-section-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+/* Percentage */
+.application-progress-dashboard .appage-pct {
+  font-size: 13px;
+  font-weight: 700;
+  min-width: 42px;
+  text-align: right;
+  white-space: nowrap;
+}
+.application-progress-dashboard .appage-pct--success  { color: var(--success); }
+.application-progress-dashboard .appage-pct--progress { color: var(--primary); }
+.application-progress-dashboard .appage-pct--warning  { color: var(--warning); }
+.application-progress-dashboard .appage-pct--zero     { color: var(--gray-400); }
+
+/* Action button */
+.application-progress-dashboard .appage-action-btn {
+  background: none;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+  font-family: var(--font);
+  white-space: nowrap;
+}
+.application-progress-dashboard .appage-action-btn:hover {
+  background: var(--primary-pale);
+}
+.application-progress-dashboard .appage-action-btn.appage-action--done {
+  color: var(--success);
+}
+.application-progress-dashboard .appage-action-btn.appage-action--done:hover {
+  background: var(--success-pale);
+}
+.application-progress-dashboard .appage-action-btn.appage-action--locked {
+  color: var(--gray-400);
+}
+.application-progress-dashboard .appage-action-btn.appage-action--locked:hover {
+  color: var(--warning);
+  background: var(--warning-pale);
+}
+
+/* ============================================================
+   DASHBOARD SUMMARY BOX  (ap-summary-* classes used in Dashboard.js)
+   ============================================================ */
+
+/* The whole Application Progress card is clickable */
+.application-progress-dashboard .ap-summary-clickable {
+  cursor: pointer;
+  transition: box-shadow var(--transition-base), border-color var(--transition-base) !important;
+  border: 1.5px solid var(--border-light) !important;
+}
+.application-progress-dashboard .ap-summary-clickable:hover {
+  box-shadow: var(--shadow-md) !important;
+  border-color: var(--primary) !important;
+}
+.application-progress-dashboard .ap-summary-clickable:hover .dashboard-card__title {
+  color: var(--primary);
+}
+
+/* Stat tiles grid */
+.application-progress-dashboard .ap-summary-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.application-progress-dashboard .ap-summary-stat {
+  background: var(--gray-50);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 12px 10px;
+  text-align: center;
+}
+
+.application-progress-dashboard .ap-summary-stat__num {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.application-progress-dashboard .ap-num--success  { color: var(--success); }
+.application-progress-dashboard .ap-num--progress { color: var(--primary); }
+.application-progress-dashboard .ap-num--warning  { color: var(--warning); }
+.application-progress-dashboard .ap-num--zero     { color: var(--gray-400); }
+
+.application-progress-dashboard .ap-summary-stat__label {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+/* Mini pills */
+.application-progress-dashboard .ap-summary-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.application-progress-dashboard .ap-summary-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+.application-progress-dashboard .ap-pill--done {
+  background: #dcfce7;
+  color: #15803d;
+}
+.application-progress-dashboard .ap-pill--prog {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+.application-progress-dashboard .ap-pill--warn {
+  background: var(--warning-pale);
+  color: #a16207;
+}
+.application-progress-dashboard .ap-pill--zero {
+  background: var(--gray-100);
+  color: var(--gray-500);
+}
+.application-progress-dashboard .ap-pill--lock {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Overall progress bar */
+.application-progress-dashboard .ap-summary-overall-bar {
+  height: 6px;
+  background: var(--gray-100);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.application-progress-dashboard .ap-summary-overall-fill {
+  height: 100%;
+  background: var(--primary-gradient);
+  border-radius: var(--radius-full);
+  transition: width 0.6s ease;
+}
+
+.application-progress-dashboard .ap-summary-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.application-progress-dashboard .ap-summary-bar-label {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+.application-progress-dashboard .ap-summary-bar-pct {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* CTA row at bottom of summary card */
+.application-progress-dashboard .ap-summary-cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-light);
+}
+.application-progress-dashboard .ap-summary-cta-text {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+.application-progress-dashboard .ap-summary-cta-arrow {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  transition: transform var(--transition-fast);
+}
+.application-progress-dashboard .ap-summary-clickable:hover .ap-summary-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .application-progress-dashboard .dashboard-header .dashboard-header__inner {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .application-progress-dashboard .dashboard-header .dashboard-header__title-group {
+    align-items: flex-start;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .application-progress-dashboard .dashboard-header .dashboard-header__welcome {
+    font-size: 22px;
+    line-height: 1.15;
+  }
+
+  .application-progress-dashboard .dashboard-header .dashboard-header__subtitle {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .application-progress-dashboard .dashboard-header .dashboard-header__actions {
+    width: 100%;
+  }
+
+  .application-progress-dashboard .dashboard-header .header-user-chip {
+    max-width: 100%;
+  }
+
+  .application-progress-dashboard .dashboard-progress-banner-new {
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .application-progress-dashboard .dashboard-banner__chip {
+    font-size: 11px;
+  }
+
+  .application-progress-dashboard .dashboard-banner__title-new {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .application-progress-dashboard .dashboard-banner__desc-new {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .application-progress-dashboard .dashboard-card__header {
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .application-progress-dashboard .dashboard-badge {
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  .application-progress-dashboard .ap-summary-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .application-progress-dashboard .appage-section-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 2px;
+  }
+
+  .application-progress-dashboard .appage-section-name-row {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .application-progress-dashboard .appage-section-name {
+    font-size: 13px;
+    line-height: 1.25;
+  }
+
+  .application-progress-dashboard .appage-section-desc {
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+
+  .application-progress-dashboard .appage-prog-bar {
+    max-width: none;
+    width: 100%;
+  }
+
+  .application-progress-dashboard .appage-section-right {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .application-progress-dashboard .appage-pct {
+    min-width: 36px;
+    text-align: left;
+  }
+
+  .application-progress-dashboard .appage-back-btn {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .application-progress-dashboard .dashboard-header .dashboard-header__inner {
+    flex-direction: column;
+  }
+
+  .application-progress-dashboard .dashboard-header .dashboard-header__title-group {
+    width: 100%;
+  }
+
+  .application-progress-dashboard .dashboard-header .header-user-chip__name,
+  .application-progress-dashboard .dashboard-header .header-user-chip__caret {
+    display: none;
+  }
+
+  .application-progress-dashboard .dashboard-progress-banner-new {
+    padding: 16px;
+  }
+
+  .application-progress-dashboard .dashboard-progress-banner-new > div:first-child {
+    transform: scale(0.85);
+    transform-origin: top left;
+    margin-right: -8px;
+    margin-bottom: -8px;
+  }
+
+  .application-progress-dashboard .dashboard-card {
+    padding: 16px;
+  }
+
+  .application-progress-dashboard .ap-summary-pills {
+    gap: 4px;
+  }
+
+  .application-progress-dashboard .ap-summary-pill {
+    font-size: 10px;
+    padding: 3px 7px;
+  }
+
+  .application-progress-dashboard .appage-section-row:hover {
+    margin: 0;
+    padding: 0;
+  }
+
+  .application-progress-dashboard .appage-section-right {
+    align-items: center;
+  }
+
+  .application-progress-dashboard .appage-action-btn {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+}

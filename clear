@@ -1,0 +1,11 @@
+[35mHEAD:ai-agent/node_modules/@aws-sdk/credential-provider-ini/dist-cjs/index.js[m[36m:[m[32m156[m[36m:[m    typeof arg.[1;31maws_secret_access_key[m === "string" &&
+[35mHEAD:ai-agent/node_modules/@aws-sdk/credential-provider-ini/dist-cjs/index.js[m[36m:[m[32m163[m[36m:[m        secretAccessKey: profile.[1;31maws_secret_access_key[m,
+[35mHEAD:ai-agent/node_modules/@aws-sdk/credential-provider-ini/dist-es/resolveStaticCredentials.js[m[36m:[m[32m5[m[36m:[m    typeof arg.[1;31maws_secret_access_key[m === "string" &&
+[35mHEAD:ai-agent/node_modules/@aws-sdk/credential-provider-ini/dist-es/resolveStaticCredentials.js[m[36m:[m[32m12[m[36m:[m        secretAccessKey: profile.[1;31maws_secret_access_key[m,
+[35mHEAD:ai-agent/node_modules/@aws-sdk/credential-provider-ini/dist-types/resolveStaticCredentials.d.ts[m[36m:[m[32m8[m[36m:[m    [1;31maws_secret_access_key[m: string;
+[35mHEAD:ai-agent/node_modules/@aws-sdk/credential-provider-ini/dist-types/ts3.4/resolveStaticCredentials.d.ts[m[36m:[m[32m5[m[36m:[m  [1;31maws_secret_access_key[m: string;
+[35mHEAD:ai-agent/node_modules/@aws-sdk/credential-providers/README.md[m[36m:[m[32m595[m[36m:[m[1;31maws_secret_access_key[m=bar
+[35mHEAD:ai-agent/node_modules/@aws-sdk/credential-providers/README.md[m[36m:[m[32m599[m[36m:[m[1;31maws_secret_access_key[m=bar2
+[35mHEAD:ai-agent/node_modules/@aws-sdk/credential-providers/README.md[m[36m:[m[32m607[m[36m:[m[1;31maws_secret_access_key[m=bar
+[35mHEAD:ai-agent/node_modules/@aws-sdk/credential-providers/README.md[m[36m:[m[32m611[m[36m:[m[1;31maws_secret_access_key[m=bar2
+[35mHEAD:ai-agent/node_modules/@aws-sdk/credential-providers/README.md[m[36m:[m[32m619[m[36m:[m[1;31maws_secret_access_key[m=bar

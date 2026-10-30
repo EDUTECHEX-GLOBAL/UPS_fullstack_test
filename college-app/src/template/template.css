@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.template-site,
+.template-site *,
+.template-site button,
+.template-site input,
+.template-site select,
+.template-site textarea {
+  font-family: 'Poppins', sans-serif;
+  font-synthesis: none;
+}
+
+.template-site {
+  width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+.template-site *,
+.template-site *::before,
+.template-site *::after {
+  box-sizing: border-box;
+}
+
+.template-site img,
+.template-site svg {
+  max-width: 100%;
+}
+
+@media (max-width: 600px) {
+  .template-site .header-container,
+  .template-site .hero-container,
+  .template-site .explore-container,
+  .template-site .top-study-container,
+  .template-site .your-future-container,
+  .template-site .steps-container,
+  .template-site .testimonials-container,
+  .template-site .footer-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .template-site .hero-section,
+  .template-site .explore-section,
+  .template-site .top-study-section,
+  .template-site .steps-section,
+  .template-site .testimonials-section {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .template-site .your-future-section {
+    padding: 40px 0;
+  }
+
+  .template-site .section-title {
+    font-size: clamp(24px, 7vw, 29px);
+  }
+}

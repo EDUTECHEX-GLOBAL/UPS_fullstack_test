@@ -1,0 +1,23 @@
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand-logo__img {
+  height: 34px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Light variant for dark backgrounds (footer) */
+.brand-logo--light .brand-logo__img {
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+
+@media (max-width: 480px) {
+  .brand-logo__img {
+    height: 30px;
+  }
+}

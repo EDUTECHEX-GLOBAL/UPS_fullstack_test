@@ -1,0 +1,552 @@
+/* ── Personal Details Section Styling ── */
+
+.personal-section {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  padding: 32px;
+  border: 1px solid #E2E8F0;
+  font-family: 'Inter', 'Poppins', sans-serif;
+  color: #0F172A;
+}
+
+.personal-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.personal-header-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: #EFF6FF;
+  color: #2563EB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.personal-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 4px 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.personal-subtitle {
+  color: #64748B;
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+.personal-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.personal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.personal-section-block {
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+.personal-section-heading {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.personal-subsection-heading {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1E293B;
+  margin: 0 0 16px 0;
+}
+
+.personal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.personal-full-width {
+  grid-column: 1 / -1;
+}
+
+.personal-label {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #0F172A;
+}
+
+.required {
+  color: #EF4444;
+  margin-left: 4px;
+}
+
+.optional {
+  color: #94A3B8;
+  font-weight: 400;
+  font-size: 0.82rem;
+  margin-left: 6px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  color: #94A3B8;
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+.personal-input,
+.personal-select,
+.personal-date {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  color: #0F172A;
+  transition: all 0.2s ease;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.input-wrapper input:only-child,
+.input-wrapper select:only-child {
+  padding-left: 16px;
+}
+
+.personal-input::placeholder {
+  color: #94A3B8;
+}
+
+.personal-input:focus,
+.personal-select:focus,
+.personal-date:focus {
+  outline: none;
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.personal-input.error {
+  border-color: #EF4444;
+  background-color: #FEF2F2;
+}
+
+/* ── Date Input Compact Responsive Styling ── */
+.personal-input[type="date"],
+input[type="date"].personal-input {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  height: 48px;
+  padding: 0 12px;
+  font-size: 0.92rem;
+  color: #0F172A;
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  position: relative;
+}
+
+.personal-input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 4px;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.personal-input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  background-color: #EFF6FF;
+  color: #2563EB;
+}
+
+.personal-error {
+  color: #EF4444;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+.personal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 32px;
+  border-top: 1px solid #E2E8F0;
+  padding-top: 24px;
+}
+
+.btn-next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2563EB;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 0 28px;
+  height: 48px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-next:hover {
+  background-color: #1D4ED8;
+}
+
+.btn-back {
+  background-color: #ffffff;
+  color: #475569;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 0 24px;
+  height: 48px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+  background-color: #F8FAFC;
+  color: #0F172A;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .personal-section {
+    padding: 20px 14px;
+    border-radius: 14px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .personal-section-block {
+    padding: 16px 14px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .personal-title {
+    font-size: 1.2rem;
+  }
+
+  .personal-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  
+  .personal-actions {
+    flex-direction: column-reverse;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+  
+  .btn-next, .btn-back {
+    width: 100%;
+    height: 46px;
+  }
+}
+
+@media (max-width: 480px) {
+  .personal-section {
+    padding: 16px 10px;
+    border-radius: 12px;
+  }
+
+  .personal-section-block {
+    padding: 14px 10px;
+  }
+}
+
+/* ── Custom Dropdown Styling for Personal Details Select ── */
+.personal-custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.personal-custom-select-trigger {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  color: #0F172A;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.personal-custom-select.error .personal-custom-select-trigger {
+  border-color: #EF4444;
+  background-color: #FEF2F2;
+}
+
+.personal-custom-select-trigger:focus,
+.personal-custom-select.open .personal-custom-select-trigger {
+  outline: none;
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.personal-custom-select-trigger .placeholder-text {
+  color: #94A3B8;
+}
+
+.personal-custom-select-trigger .selected-text {
+  color: #0F172A;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.personal-custom-select-arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #64748B;
+  transition: transform 0.2s ease;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.personal-custom-select.open .personal-custom-select-arrow {
+  transform: rotate(180deg);
+}
+
+.personal-custom-select-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+.personal-custom-select-option {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #334155;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  display: block;
+}
+
+.personal-custom-select-option:hover {
+  background-color: #F1F5F9;
+  color: #0F172A;
+}
+
+.personal-custom-select-option.active {
+  background-color: #EFF6FF;
+  color: #2563EB;
+  font-weight: 600;
+}
+
+/* Basic details form layout and actions */
+.personal-section {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.personal-header {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.personal-section-block {
+  padding: 20px;
+  margin-bottom: 16px;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.personal-passport-block {
+  margin-bottom: 8px;
+}
+
+.personal-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.personal-field {
+  min-width: 0;
+}
+
+.personal-field label {
+  line-height: 1.4;
+}
+
+.personal-input {
+  min-width: 0;
+  height: 44px;
+}
+
+.personal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.personal-btn-next {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 9px;
+  background: #087f9c;
+  color: #fff;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.personal-btn-next:hover:not(:disabled) {
+  background: #06677f;
+  box-shadow: 0 4px 12px rgba(8, 127, 156, 0.2);
+  transform: translateY(-1px);
+}
+
+.personal-btn-next:focus-visible {
+  outline: 3px solid rgba(8, 127, 156, 0.28);
+  outline-offset: 2px;
+}
+
+.personal-btn-next:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.education-btn-back {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 22px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  background: #fff;
+  color: #334155;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.education-btn-back:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.education-btn-back:focus-visible {
+  outline: 3px solid rgba(8, 127, 156, 0.28);
+  outline-offset: 2px;
+}
+
+.education-btn-back:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .personal-section {
+    padding: 18px 14px;
+    border-radius: 12px;
+  }
+
+  .personal-section-block {
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+
+  .personal-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .personal-actions {
+    margin-top: 16px;
+    padding-top: 14px;
+  }
+
+  .personal-btn-next {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .education-btn-back {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .personal-custom-select-trigger {
+    height: 44px;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+}

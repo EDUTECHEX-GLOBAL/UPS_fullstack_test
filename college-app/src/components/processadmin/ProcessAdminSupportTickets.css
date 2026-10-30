@@ -1,0 +1,571 @@
+/* Support Tickets */
+.process-admin-dashboard .pad-support-page {
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.process-admin-dashboard .pad-support-header,
+.process-admin-dashboard .pad-support-stats,
+.process-admin-dashboard .pad-support-layout,
+.process-admin-dashboard .pad-support-filters {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+.process-admin-dashboard .pad-support-header {
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.process-admin-dashboard .pad-support-kicker {
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.process-admin-dashboard .pad-support-header h2 { font-size: 22px; margin: 3px 0; }
+.process-admin-dashboard .pad-support-header p { color: var(--text-mid); font-size: 13px; }
+.process-admin-dashboard .pad-support-refresh,
+.process-admin-dashboard .pad-support-send {
+  border: 0;
+  border-radius: 9px;
+  background: var(--primary);
+  color: #fff;
+  padding: 10px 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.process-admin-dashboard .pad-support-refresh:disabled,
+.process-admin-dashboard .pad-support-send:disabled { opacity: .65; cursor: not-allowed; }
+.process-admin-dashboard .pad-support-error {
+  background: #fff1f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.process-admin-dashboard .pad-support-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+}
+.process-admin-dashboard .pad-support-stats div { padding: 16px 18px; background: #fff; }
+.process-admin-dashboard .pad-support-stats strong { display: block; font-size: 24px; color: var(--text); }
+.process-admin-dashboard .pad-support-stats span { color: var(--text-lt); font-size: 12px; font-weight: 700; }
+.process-admin-dashboard .pad-support-filters { padding: 10px; display: flex; gap: 8px; }
+.process-admin-dashboard .pad-support-filters button {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text-mid);
+  padding: 8px 13px;
+  border-radius: 9px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.process-admin-dashboard .pad-support-filters button.active { background: var(--primary-lt); color: var(--primary); border-color: var(--primary-bd); }
+.process-admin-dashboard .pad-support-layout {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  min-height: 560px;
+  overflow: hidden;
+}
+.process-admin-dashboard .pad-support-list {
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  max-height: calc(100vh - 290px);
+}
+.process-admin-dashboard .pad-support-ticket {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: #fff;
+  padding: 15px;
+  cursor: pointer;
+}
+.process-admin-dashboard .pad-support-ticket:hover,
+.process-admin-dashboard .pad-support-ticket.active { background: var(--primary-lt); }
+.process-admin-dashboard .pad-support-ticket-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.process-admin-dashboard .pad-support-ticket h3 { font-size: 13px; margin: 8px 0 4px; color: var(--text); }
+.process-admin-dashboard .pad-support-ticket p,
+.process-admin-dashboard .pad-support-ticket small { color: var(--text-mid); font-size: 12px; }
+.process-admin-dashboard .pad-support-attachment-chip {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 8px;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 900;
+}
+.process-admin-dashboard .pad-support-attachment-chip.available {
+  background: #ecfdf5;
+  color: #059669;
+}
+.process-admin-dashboard .pad-support-attachment-chip.missing {
+  background: #fff7ed;
+  color: #c2410c;
+}
+.process-admin-dashboard .pad-support-status {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 9px;
+  font-size: 11px;
+  font-weight: 800;
+  background: #eff6ff;
+  color: var(--blue);
+}
+.process-admin-dashboard .pad-support-status.open { background: #ecfeff; color: #0891b2; }
+.process-admin-dashboard .pad-support-status.in-progress { background: #fffbeb; color: #d97706; }
+.process-admin-dashboard .pad-support-status.resolved { background: #ecfdf5; color: #059669; }
+.process-admin-dashboard .pad-support-status.closed { background: #f1f5f9; color: #64748b; }
+.process-admin-dashboard .pad-support-status.large { padding: 7px 12px; }
+.process-admin-dashboard .pad-support-detail { padding: 18px; overflow-y: auto; max-height: calc(100vh - 290px); }
+.process-admin-dashboard .pad-support-detail-head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; margin-bottom: 16px; }
+.process-admin-dashboard .pad-support-detail-head span { color: var(--primary); font-weight: 800; font-size: 12px; }
+.process-admin-dashboard .pad-support-detail-head h2 { font-size: 20px; margin: 4px 0; }
+.process-admin-dashboard .pad-support-detail-head p { color: var(--text-mid); font-size: 13px; }
+.process-admin-dashboard .pad-support-meta-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px; }
+.process-admin-dashboard .pad-support-meta-grid div,
+.process-admin-dashboard .pad-support-message-block,
+.process-admin-dashboard .pad-support-reply-box {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+}
+.process-admin-dashboard .pad-support-meta-grid div { padding: 11px; }
+.process-admin-dashboard .pad-support-meta-grid span,
+.process-admin-dashboard .pad-support-message-block span,
+.process-admin-dashboard .pad-support-reply-row span { display: block; color: var(--text-lt); font-size: 11px; font-weight: 800; margin-bottom: 4px; }
+.process-admin-dashboard .pad-support-meta-grid strong { font-size: 13px; color: var(--text); word-break: break-word; }
+.process-admin-dashboard .pad-support-message-block { padding: 13px; margin-bottom: 14px; }
+.process-admin-dashboard .pad-support-message-block p { color: var(--text); font-size: 14px; line-height: 1.55; white-space: pre-wrap; }
+.process-admin-dashboard .pad-support-timeline { margin-bottom: 14px; }
+.process-admin-dashboard .pad-support-timeline h3 { font-size: 14px; margin-bottom: 8px; }
+.process-admin-dashboard .pad-support-activity { border-left: 3px solid var(--border); padding: 8px 0 10px 12px; margin-bottom: 8px; }
+.process-admin-dashboard .pad-support-activity.partner { border-left-color: var(--primary); }
+.process-admin-dashboard .pad-support-activity.student { border-left-color: var(--blue); }
+.process-admin-dashboard .pad-support-activity strong { text-transform: capitalize; color: var(--text); font-size: 12px; }
+.process-admin-dashboard .pad-support-activity p { color: var(--text-mid); font-size: 13px; margin: 3px 0; white-space: pre-wrap; }
+.process-admin-dashboard .pad-support-activity time { color: var(--text-lt); font-size: 11px; }
+.process-admin-dashboard .pad-support-reply-box { padding: 13px; display: flex; flex-direction: column; gap: 10px; }
+.process-admin-dashboard .pad-support-reply-row { display: flex; justify-content: flex-end; }
+.process-admin-dashboard .pad-support-reply-row label { min-width: 190px; }
+.process-admin-dashboard .pad-support-reply-row select,
+.process-admin-dashboard .pad-support-reply-box textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 9px 10px;
+  font: inherit;
+}
+.process-admin-dashboard .pad-support-reply-box textarea { min-height: 120px; resize: vertical; }
+.process-admin-dashboard .pad-support-send { align-self: flex-end; }
+.process-admin-dashboard .pad-support-empty { padding: 24px; color: var(--text-lt); font-weight: 700; text-align: center; }
+
+@media (max-width: 900px) {
+  .process-admin-dashboard .pad-support-layout { grid-template-columns: 1fr; }
+  .process-admin-dashboard .pad-support-list { border-right: 0; border-bottom: 1px solid var(--border); max-height: 320px; }
+  .process-admin-dashboard .pad-support-meta-grid,
+  .process-admin-dashboard .pad-support-stats { grid-template-columns: 1fr; }
+  .process-admin-dashboard .pad-support-header { align-items: flex-start; flex-direction: column; }
+}
+.process-admin-dashboard .pad-support-attachment {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  padding: 13px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.process-admin-dashboard .pad-support-attachment span {
+  display: block;
+  color: var(--text-lt);
+  font-size: 11px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.process-admin-dashboard .pad-support-attachment strong {
+  display: block;
+  color: var(--text);
+  font-size: 13px;
+  word-break: break-word;
+}
+.process-admin-dashboard .pad-support-attachment p {
+  margin: 4px 0 0;
+  color: var(--text-mid);
+  font-size: 12px;
+}
+.process-admin-dashboard .pad-support-attachment a {
+  display: inline-flex;
+  margin-top: 7px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.process-admin-dashboard .pad-support-attachment-thumb {
+  width: 96px;
+  height: 72px;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-top: 0 !important;
+}
+.process-admin-dashboard .pad-support-attachment-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .process-admin-dashboard .pad-support-attachment { align-items: stretch; flex-direction: column; }
+  .process-admin-dashboard .pad-support-attachment-thumb { width: 100%; height: 150px; }
+}
+
+
+/* Process support compact mobile repair */
+.process-admin-dashboard .pad-support-page,
+.process-admin-dashboard .pad-support-page * {
+  box-sizing: border-box;
+}
+
+.process-admin-dashboard .pad-support-page {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.process-admin-dashboard .pad-support-header,
+.process-admin-dashboard .pad-support-stats,
+.process-admin-dashboard .pad-support-layout,
+.process-admin-dashboard .pad-support-filters,
+.process-admin-dashboard .pad-support-list,
+.process-admin-dashboard .pad-support-ticket,
+.process-admin-dashboard .pad-support-detail,
+.process-admin-dashboard .pad-support-reply-box {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.process-admin-dashboard .pad-support-status-select {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.process-admin-dashboard .pad-support-status-trigger {
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--text);
+  padding: 9px 10px;
+  font: inherit;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.process-admin-dashboard .pad-support-status-trigger span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.process-admin-dashboard .pad-support-status-trigger span:last-child {
+  flex: 0 0 auto;
+  color: var(--text-lt);
+  transition: transform .18s ease;
+}
+
+.process-admin-dashboard .pad-support-status-select.is-open .pad-support-status-trigger,
+.process-admin-dashboard .pad-support-status-trigger:focus-visible {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, .14);
+  outline: 0;
+}
+
+.process-admin-dashboard .pad-support-status-select.is-open .pad-support-status-trigger span:last-child {
+  transform: rotate(180deg);
+}
+
+.process-admin-dashboard .pad-support-status-menu {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  max-height: min(240px, 42vh);
+  overflow-y: auto;
+  padding: 5px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 16px 32px rgba(15, 23, 42, .16);
+}
+
+.process-admin-dashboard .pad-support-status-option {
+  width: 100%;
+  min-height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  padding: 8px 11px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.process-admin-dashboard .pad-support-status-option:hover,
+.process-admin-dashboard .pad-support-status-option:focus-visible {
+  background: var(--primary-lt);
+  outline: 0;
+}
+
+.process-admin-dashboard .pad-support-status-option.is-selected {
+  background: #ccfbf1;
+  color: var(--primary);
+}
+
+@media (max-width: 700px) {
+  .process-admin-dashboard .pad-support-page {
+    gap: 10px;
+  }
+
+  .process-admin-dashboard .pad-support-header {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .process-admin-dashboard .pad-support-header h2 {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .process-admin-dashboard .pad-support-header p,
+  .process-admin-dashboard .pad-support-kicker,
+  .process-admin-dashboard .pad-support-stats {
+    display: none;
+  }
+
+  .process-admin-dashboard .pad-support-refresh {
+    width: 100%;
+    min-height: 36px;
+    justify-content: center;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .process-admin-dashboard .pad-support-filters {
+    padding: 8px;
+    gap: 6px;
+    overflow-x: auto;
+    border-radius: 10px;
+  }
+
+  .process-admin-dashboard .pad-support-filters button {
+    flex: 0 0 auto;
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+
+  .process-admin-dashboard .pad-support-layout {
+    display: block;
+    min-height: 0;
+    border-radius: 10px;
+    overflow: visible;
+  }
+
+  .process-admin-dashboard .pad-support-list {
+    max-height: 230px;
+    overflow-y: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .process-admin-dashboard .pad-support-ticket {
+    padding: 12px 14px;
+  }
+
+  .process-admin-dashboard .pad-support-ticket-top {
+    align-items: flex-start;
+  }
+
+  .process-admin-dashboard .pad-support-ticket-top strong,
+  .process-admin-dashboard .pad-support-ticket h3,
+  .process-admin-dashboard .pad-support-ticket p,
+  .process-admin-dashboard .pad-support-ticket small {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .process-admin-dashboard .pad-support-ticket h3 {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .process-admin-dashboard .pad-support-attachment-chip {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 8px;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 900;
+}
+.process-admin-dashboard .pad-support-attachment-chip.available {
+  background: #ecfdf5;
+  color: #059669;
+}
+.process-admin-dashboard .pad-support-attachment-chip.missing {
+  background: #fff7ed;
+  color: #c2410c;
+}
+.process-admin-dashboard .pad-support-status {
+    flex: 0 0 auto;
+    padding: 4px 7px;
+    font-size: 10px;
+  }
+
+  .process-admin-dashboard .pad-support-detail {
+    padding: 12px;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .process-admin-dashboard .pad-support-detail-head {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .process-admin-dashboard .pad-support-detail-head h2 {
+    font-size: 16px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  .process-admin-dashboard .pad-support-detail-head p,
+  .process-admin-dashboard .pad-support-meta-grid strong,
+  .process-admin-dashboard .pad-support-message-block p,
+  .process-admin-dashboard .pad-support-activity p {
+    overflow-wrap: anywhere;
+  }
+
+  .process-admin-dashboard .pad-support-meta-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .process-admin-dashboard .pad-support-meta-grid div,
+  .process-admin-dashboard .pad-support-message-block,
+  .process-admin-dashboard .pad-support-reply-box,
+  .process-admin-dashboard .pad-support-attachment {
+    border-radius: 9px;
+  }
+
+  .process-admin-dashboard .pad-support-message-block,
+  .process-admin-dashboard .pad-support-attachment,
+  .process-admin-dashboard .pad-support-timeline {
+    margin-bottom: 12px;
+  }
+
+  .process-admin-dashboard .pad-support-timeline h3 {
+    font-size: 13px;
+  }
+
+  .process-admin-dashboard .pad-support-activity {
+    padding-left: 10px;
+  }
+
+  .process-admin-dashboard .pad-support-reply-box {
+    padding: 11px;
+  }
+
+  .process-admin-dashboard .pad-support-reply-row {
+    display: block;
+  }
+
+  .process-admin-dashboard .pad-support-reply-row label {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .process-admin-dashboard .pad-support-reply-box textarea {
+    min-height: 98px;
+    width: 100%;
+    max-width: 100%;
+    font-size: 13px;
+  }
+
+  .process-admin-dashboard .pad-support-send {
+    width: 100%;
+    min-height: 40px;
+    justify-content: center;
+    align-self: stretch;
+    padding: 9px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 390px) {
+  .process-admin-dashboard .pad-support-detail,
+  .process-admin-dashboard .pad-support-ticket,
+  .process-admin-dashboard .pad-support-reply-box {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .process-admin-dashboard .pad-support-status-menu {
+    max-height: 190px;
+  }
+}
+.process-admin-dashboard .pad-support-attachment.missing {
+  border-color: #fed7aa;
+  background: #fff7ed;
+}
+.process-admin-dashboard .pad-support-attachment small {
+  display: block;
+  margin-top: 6px;
+  color: var(--text-lt);
+  font-size: 11px;
+  word-break: break-all;
+}
+.process-admin-dashboard .pad-support-attachment em {
+  display: block;
+  margin-top: 8px;
+  color: #c2410c;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.4;
+}

@@ -1,0 +1,333 @@
+/* ===== Modal Overlay - Matching Home Page Background ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 32, 44, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes otpverificationfadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* ===== OTP Modal - Glass Morphism Effect ===== */
+.otp-modal {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 40px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== Header Accent ===== */
+.otp-modal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2C5AA0, #1E3D6F);
+  border-radius: 20px 20px 0 0;
+}
+
+/* ===== Modal Title ===== */
+.modal-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #2D3748, #4A5568);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== Modal Message ===== */
+.modal-message {
+  color: #4A5568;
+  margin-bottom: 30px;
+  line-height: 1.6;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.modal-message b {
+  color: #2C5AA0;
+  font-weight: 600;
+  background: rgba(44, 90, 160, 0.1);
+  padding: 2px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  margin: 0 2px;
+}
+
+/* ===== OTP Input ===== */
+.otp-input {
+  width: 100%;
+  padding: 16px 20px;
+  margin-bottom: 25px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 2px;
+  border: 2px solid #E2E8F0;
+  border-radius: 12px;
+  background: white;
+  color: #2D3748;
+  transition: all 0.3s ease;
+  font-family: "Poppins", monospace;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.otp-input:focus {
+  border-color: #2C5AA0;
+  box-shadow: 
+    0 0 0 3px rgba(44, 90, 160, 0.1),
+    0 4px 15px rgba(44, 90, 160, 0.2);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.otp-input::placeholder {
+  color: #A0AEC0;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+/* ===== Alerts ===== */
+.alert {
+  margin: 20px 0;
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-left: 4px solid;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.alert-error {
+  background: linear-gradient(135deg, rgba(229, 62, 62, 0.1) 0%, rgba(229, 62, 62, 0.05) 100%);
+  color: #742A2A;
+  border-left-color: #E53E3E;
+}
+
+.alert-success {
+  background: linear-gradient(135deg, rgba(72, 187, 120, 0.1) 0%, rgba(72, 187, 120, 0.05) 100%);
+  color: #22543D;
+  border-left-color: #38A169;
+}
+
+/* ===== Modal Actions ===== */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.modal-btn {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.modal-btn:hover::before {
+  left: 100%;
+}
+
+.modal-btn.primary {
+  background: linear-gradient(135deg, #2C5AA0 0%, #1E3D6F 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
+}
+
+.modal-btn.primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(44, 90, 160, 0.4);
+}
+
+.modal-btn.primary:disabled {
+  background: #A0AEC0;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.modal-btn.secondary {
+  background: rgba(255, 255, 255, 0.8);
+  color: #4A5568;
+  border: 2px solid #E2E8F0;
+}
+
+.modal-btn.secondary:hover {
+  background: rgba(44, 90, 160, 0.1);
+  color: #2C5AA0;
+  border-color: #2C5AA0;
+  transform: translateY(-2px);
+}
+
+/* ===== Loading Animation ===== */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.modal-btn.primary:disabled {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 15px;
+  }
+  
+  .otp-modal {
+    padding: 30px 25px;
+    max-width: 400px;
+  }
+  
+  .modal-title {
+    font-size: 1.6rem;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .modal-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .otp-modal {
+    padding: 25px 20px;
+    border-radius: 16px;
+  }
+  
+  .modal-title {
+    font-size: 1.4rem;
+  }
+  
+  .modal-message {
+    font-size: 0.95rem;
+  }
+  
+  .otp-input {
+    padding: 14px 16px;
+    font-size: 1.1rem;
+  }
+  
+  .modal-btn {
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  .otp-modal {
+    padding: 20px 15px;
+  }
+  
+  .modal-title {
+    font-size: 1.3rem;
+  }
+  
+  .otp-input {
+    padding: 12px 14px;
+    font-size: 1rem;
+  }
+}
+
+/* ===== Success State Enhancement ===== */
+.otp-modal.success {
+  border-color: rgba(72, 187, 120, 0.3);
+}
+
+.otp-modal.success::before {
+  background: linear-gradient(90deg, #38A169, #2F855A);
+}
+
+/* ===== Error State Enhancement ===== */
+.otp-modal.error {
+  border-color: rgba(229, 62, 62, 0.3);
+}
+
+.otp-modal.error::before {
+  background: linear-gradient(90deg, #E53E3E, #C53030);
+}

@@ -1,0 +1,67 @@
+.dynamic-field-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.dynamic-field-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.required-asterisk {
+  color: #e74c3c;
+  margin-left: 4px;
+}
+
+.dynamic-input,
+.dynamic-textarea,
+.dynamic-file-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.dynamic-input:focus,
+.dynamic-textarea:focus {
+  border-color: #0056b3;
+  outline: none;
+}
+
+.dynamic-textarea {
+  resize: vertical;
+}
+
+.dynamic-radio-group {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.dynamic-radio-label {
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.dynamic-radio-label input[type="radio"] {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.dynamic-field-group.has-error .dynamic-input,
+.dynamic-field-group.has-error .dynamic-textarea {
+  border-color: #e74c3c;
+}
+
+.dynamic-field-error-text {
+  display: block;
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 4px;
+}

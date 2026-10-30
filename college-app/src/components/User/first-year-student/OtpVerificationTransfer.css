@@ -1,0 +1,304 @@
+/* Copy all styling from TransferStudent.css OTP sections */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes otpverificationtransferfadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.otp-modal {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 50px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.otp-modal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2C5AA0, #1E3D6F);
+  border-radius: 20px 20px 0 0;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(226, 232, 240, 0.8);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: #2D3748;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+}
+
+.modal-close-btn:hover {
+  background: #E2E8F0;
+  color: #1a202c;
+  transform: scale(1.1);
+}
+
+.otp-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.modal-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2C5AA0;
+  margin: 0;
+}
+
+.modal-message {
+  font-size: 0.95rem;
+  color: #4A5568;
+  line-height: 1.6;
+  margin: 15px 0 0 0;
+  text-align: center;
+}
+
+.modal-message b {
+  color: #2D3748;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.otp-input-group {
+  margin: 30px 0;
+}
+
+.otp-input {
+  width: 100%;
+  padding: 18px 16px;
+  border: 2px solid #E2E8F0;
+  border-radius: 12px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 8px;
+  text-align: center;
+  color: #2D3748;
+  background-color: #fff;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  font-family: "Courier New", monospace;
+}
+
+.otp-input:focus {
+  border-color: #2C5AA0;
+  box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+  outline: none;
+}
+
+.otp-input::placeholder {
+  color: #A0AEC0;
+  letter-spacing: normal;
+  font-family: "Poppins", sans-serif;
+}
+
+.otp-input:disabled {
+  background-color: #F7FAFC;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.hint-text {
+  display: block;
+  font-size: 0.8rem;
+  color: #718096;
+  margin-top: 6px;
+  font-weight: 400;
+}
+
+.alert {
+  padding: 16px 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 2px solid;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alert-error {
+  background: rgba(229, 62, 62, 0.1);
+  border-color: #E53E3E;
+  color: #E53E3E;
+}
+
+.alert-success {
+  background: rgba(72, 187, 120, 0.1);
+  border-color: #38A169;
+  color: #38A169;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+.modal-btn {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Poppins", sans-serif;
+  min-width: 120px;
+}
+
+.modal-btn.primary {
+  background: linear-gradient(135deg, #2C5AA0 0%, #1E3D6F 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
+}
+
+.modal-btn.primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(44, 90, 160, 0.4);
+}
+
+.modal-btn.secondary {
+  background: rgba(226, 232, 240, 0.8);
+  color: #2D3748;
+  border: 1px solid #E2E8F0;
+}
+
+.modal-btn.secondary:hover:not(:disabled) {
+  background: #E2E8F0;
+  border-color: #CBD5E0;
+  transform: translateY(-2px);
+}
+
+.modal-btn:disabled {
+  background: #A0AEC0;
+  color: #fff;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.resend-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #E2E8F0;
+  text-align: center;
+}
+
+.resend-text {
+  font-size: 0.9rem;
+  color: #718096;
+  margin: 0 0 12px 0;
+  font-weight: 500;
+}
+
+.resend-btn {
+  background: rgba(44, 90, 160, 0.1);
+  border: 2px solid #2C5AA0;
+  color: #2C5AA0;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.resend-btn:hover:not(:disabled) {
+  background: #2C5AA0;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
+}
+
+.resend-btn:disabled {
+  background: rgba(44, 90, 160, 0.05);
+  border-color: #CBD5E0;
+  color: #A0AEC0;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .otp-modal {
+    padding: 35px 30px;
+  }
+
+  .modal-title {
+    font-size: 1.4rem;
+  }
+
+  .modal-message {
+    font-size: 0.85rem;
+  }
+
+  .otp-input {
+    font-size: 1.1rem;
+    padding: 16px 12px;
+  }
+
+  .modal-btn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+  }
+}

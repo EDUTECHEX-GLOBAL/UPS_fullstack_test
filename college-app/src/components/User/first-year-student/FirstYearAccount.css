@@ -1,0 +1,1143 @@
+/* ═══════════════════════════════════════════════
+   FirstYearAccount.css — Account Creation
+   Mobile-first compact layout for all screen sizes
+   Breakpoints: ≤900 · ≤640 · ≤480 · ≤360 · short landscape
+   ═══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --fy-blue:       #0878ee;
+  --fy-blue-2:     #308cf4;
+  --fy-blue-soft:  #eff7ff;
+  --fy-blue-ring:  rgba(37, 133, 255, 0.12);
+  --fy-navy:       #102f61;
+  --fy-navy-2:     #153766;
+  --fy-muted:      #7186a5;
+  --fy-muted-2:    #8299b7;
+  --fy-border:     #dce8f5;
+  --fy-border-lt:  #f1f5f9;
+  --fy-green:      #047857;
+  --fy-green-lt:   #ecfdf5;
+  --fy-green-bd:   #a7f3d0;
+  --fy-red:        #ef4444;
+  --fy-red-txt:    #b91c1c;
+  --fy-red-lt:     #fef2f2;
+  --fy-red-bd:     #fecaca;
+  --fy-t:          0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --fy-font:       'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ═══════════════════════════════
+   PAGE WRAPPER
+═══════════════════════════════ */
+.fy-wrapper {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 28px 42px;
+  padding-left: max(28px, env(safe-area-inset-left));
+  padding-right: max(28px, env(safe-area-inset-right));
+  padding-bottom: max(42px, env(safe-area-inset-bottom));
+  background: #fff;
+  color: var(--fy-navy);
+  font-family: var(--fy-font);
+  overflow-x: hidden;
+  position: relative;
+}
+
+.fy-wrapper::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 15% 8%, rgba(8, 120, 238, 0.05) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 92%, rgba(16, 185, 129, 0.04) 0%, transparent 55%),
+    #fff;
+  pointer-events: none;
+}
+
+.fy-wrapper button,
+.fy-wrapper input {
+  font-family: var(--fy-font);
+}
+
+/* ═══════════════════════════════
+   BRAND HEADER
+═══════════════════════════════ */
+.fy-brand-header {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1480px;
+  min-height: 48px;
+  margin: 0 auto 28px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.fy-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.fy-svg-logo {
+  display: block;
+  height: 42px;
+  width: auto;
+}
+
+.fy-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  background: #fff;
+  border: 1px solid #c9e0ff;
+  border-radius: 12px;
+  color: var(--fy-blue);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background var(--fy-t), border-color var(--fy-t);
+}
+
+.fy-back-btn:hover {
+  background: #f4f9ff;
+  border-color: #9ccaff;
+}
+
+.fy-back-btn svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ═══════════════════════════════
+   CARD
+═══════════════════════════════ */
+.fy-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 700px;
+  padding: 30px 44px 22px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid #e2edf8;
+  border-radius: 17px;
+  box-shadow: 0 12px 34px rgba(44, 105, 165, 0.12);
+}
+
+/* ── Header ── */
+.fy-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+  margin-bottom: 26px;
+}
+
+.fy-heading-icon {
+  display: grid;
+  flex: 0 0 70px;
+  width: 70px;
+  height: 70px;
+  place-items: center;
+  border-radius: 50%;
+  background: #e8f5ff;
+  color: var(--fy-blue);
+}
+
+.fy-heading-icon svg {
+  width: 44px;
+  height: 44px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fy-heading-copy {
+  min-width: 0;
+}
+
+.fy-title {
+  margin: 1px 0 4px;
+  color: var(--fy-navy);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  line-height: 1.25;
+}
+
+.fy-subtitle,
+.fy-signin-prompt {
+  margin: 0;
+  color: var(--fy-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.fy-signin-link {
+  color: var(--fy-blue);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* ═══════════════════════════════
+   APPLICANT TYPE PILLS
+═══════════════════════════════ */
+.fy-type-selector-wrapper {
+  margin: 0 0 18px;
+}
+
+.fy-type-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--fy-navy);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.fy-type-pills {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.fy-type-pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  min-height: 74px;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1.5px solid var(--fy-border);
+  border-radius: 11px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--fy-t), background var(--fy-t), box-shadow var(--fy-t);
+}
+
+.fy-type-pill:hover {
+  border-color: #b5d3f7;
+}
+
+.fy-type-pill.active {
+  border-color: #2585ff;
+  background: #f7fbff;
+  box-shadow: 0 0 0 1px rgba(37, 133, 255, 0.15);
+}
+
+.fy-type-icon {
+  display: grid;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--fy-blue-soft);
+  color: var(--fy-blue);
+}
+
+.fy-type-icon svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fy-type-copy {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+  padding-right: 18px;
+}
+
+.fy-type-text {
+  color: var(--fy-navy-2);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.fy-type-copy small {
+  color: #8497b3;
+  font-size: 10.5px;
+  line-height: 1.3;
+}
+
+.fy-radio {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid #b8c9dd;
+  border-radius: 50%;
+}
+
+.fy-type-pill.active .fy-radio {
+  border: 4px solid #2585ff;
+}
+
+/* ═══════════════════════════════
+   ALERTS
+═══════════════════════════════ */
+.fy-alert {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  animation: fyFadeIn 0.2s ease-out;
+}
+
+.fy-alert span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@keyframes fyFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fy-alert-error   { background: var(--fy-red-lt);   border: 1px solid var(--fy-red-bd);   color: var(--fy-red-txt); }
+.fy-alert-success { background: var(--fy-green-lt); border: 1px solid var(--fy-green-bd); color: var(--fy-green); }
+
+.fy-alert-close {
+  flex-shrink: 0;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.fy-alert-close:hover { opacity: 1; }
+
+/* ═══════════════════════════════
+   FORM FIELDS
+═══════════════════════════════ */
+.fy-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fy-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.fy-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.fy-applying-field {
+  margin-bottom: 18px;
+}
+
+.fy-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.fy-label {
+  color: var(--fy-navy);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.fy-req { color: var(--fy-red); }
+
+.fy-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #059669;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.fy-field-err {
+  color: #c2414b;
+  font-size: 11px;
+}
+
+/* ── Inputs ── */
+.fy-input-shell {
+  position: relative;
+  width: 100%;
+}
+
+.fy-input {
+  width: 100%;
+  height: 43px;
+  padding: 0 14px;
+  background: #fff;
+  border: 1.5px solid var(--fy-border);
+  border-radius: 10px;
+  color: #17365f;
+  font-size: 13px;
+  outline: none;
+  transition: border-color var(--fy-t), box-shadow var(--fy-t);
+}
+
+.fy-input-shell > .fy-input {
+  padding-left: 44px;
+}
+
+.fy-input::placeholder {
+  color: #9aacc5;
+  opacity: 1;
+}
+
+.fy-input:focus {
+  border-color: #5da5ff;
+  box-shadow: 0 0 0 3px var(--fy-blue-ring);
+}
+
+.fy-input:disabled {
+  cursor: not-allowed;
+}
+
+.fy-input-error {
+  border-color: var(--fy-red) !important;
+  background: #fffbfa;
+}
+
+.fy-input-verified {
+  border-color: #86d2aa !important;
+  background: #f7fdf9 !important;
+  color: #1f5f3f;
+}
+
+.fy-field-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  z-index: 1;
+  display: flex;
+  width: 18px;
+  height: 18px;
+  color: var(--fy-muted-2);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.fy-field-icon svg { width: 100%; height: 100%; }
+
+/* ── Password toggle ── */
+.fy-pw-input {
+  padding-right: 46px !important;
+}
+
+.fy-pw-toggle {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  color: var(--fy-muted-2);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: color var(--fy-t), background var(--fy-t);
+}
+
+.fy-pw-toggle:hover {
+  color: var(--fy-blue);
+  background: rgba(8, 120, 238, 0.08);
+}
+
+/* ═══════════════════════════════
+   CUSTOM DROPDOWN (Applying For)
+═══════════════════════════════ */
+.fy-dd {
+  position: relative;
+  width: 100%;
+}
+
+.fy-dd-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  height: 43px;
+  padding: 0 14px;
+  background: #fff;
+  border: 1.5px solid var(--fy-border);
+  border-radius: 10px;
+  color: #8296b3;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--fy-t), box-shadow var(--fy-t);
+}
+
+.fy-dd-trigger.has-value {
+  color: #17365f;
+  font-weight: 600;
+}
+
+.fy-dd-trigger:hover { border-color: #b5d3f7; }
+
+.fy-dd-trigger:focus-visible,
+.fy-dd-trigger.open {
+  outline: none;
+  border-color: #5da5ff;
+  box-shadow: 0 0 0 3px var(--fy-blue-ring);
+}
+
+.fy-dd-value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fy-dd-chevron {
+  flex-shrink: 0;
+  color: #7890b2;
+  transition: transform var(--fy-t);
+}
+
+.fy-dd-trigger.open .fy-dd-chevron { transform: rotate(180deg); }
+
+.fy-dd-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  max-height: 220px;
+  margin: 0;
+  padding: 5px;
+  overflow-y: auto;
+  list-style: none;
+  background: #fff;
+  border: 1.5px solid var(--fy-border);
+  border-radius: 11px;
+  box-shadow: 0 14px 30px rgba(27, 75, 130, 0.16);
+  animation: fyFadeIn 0.14s ease-out;
+}
+
+.fy-dd-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 11px 12px;
+  border-radius: 8px;
+  color: var(--fy-navy-2);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.fy-dd-option:hover,
+.fy-dd-option:focus-visible {
+  outline: none;
+  background: #f1f7ff;
+}
+
+.fy-dd-option.selected {
+  background: var(--fy-blue-soft);
+  color: var(--fy-blue);
+  font-weight: 700;
+}
+
+/* ═══════════════════════════════
+   EMAIL + OTP
+═══════════════════════════════ */
+.fy-email-input-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fy-email-shell {
+  flex: 1;
+  min-width: 0;
+}
+
+.fy-send-code-btn {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 43px;
+  padding: 0 17px;
+  background: #1683f8;
+  border: 0;
+  border-radius: 9px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--fy-t);
+}
+
+.fy-send-code-btn:hover:not(:disabled) { background: #0a74e6; }
+
+.fy-send-code-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fy-send-code-btn:disabled {
+  background: #e8eef7;
+  color: #8293ab;
+  cursor: not-allowed;
+}
+
+.fy-otp-box {
+  padding: 14px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.fy-otp-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #1e293b;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.fy-otp-row {
+  display: flex;
+  gap: 8px;
+}
+
+.fy-otp-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0 10px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-align: center;
+}
+
+.fy-otp-input::placeholder {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.fy-verify-btn {
+  flex-shrink: 0;
+  height: 43px;
+  padding: 0 18px;
+  background: #059669;
+  border: 0;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--fy-t);
+}
+
+.fy-verify-btn:hover:not(:disabled) { background: #047857; }
+.fy-verify-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.fy-otp-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.fy-otp-hint {
+  min-width: 0;
+  color: #64748b;
+  font-size: 11.5px;
+  overflow-wrap: anywhere;
+}
+
+.fy-otp-hint strong { font-weight: 600; color: #475569; }
+
+.fy-resend-link {
+  flex-shrink: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: #0891b2;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ═══════════════════════════════
+   PASSWORD RULES + MATCH
+═══════════════════════════════ */
+.fy-pw-rules {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px 12px;
+  margin-top: 4px;
+  padding: 8px 12px;
+  background: var(--fy-border-lt);
+  border-radius: 8px;
+}
+
+.fy-rule {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #94a3b8;
+  font-size: 11.5px;
+  transition: color var(--fy-t);
+}
+
+.fy-rule.met {
+  color: var(--fy-green);
+  font-weight: 600;
+}
+
+.fy-rule-dot {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+}
+
+.fy-rule-dot svg { width: 12px; height: 12px; }
+.fy-rule.met .fy-rule-dot svg { stroke: var(--fy-green); }
+
+.fy-match-indicator {
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.fy-match-indicator.match    { color: var(--fy-green); }
+.fy-match-indicator.mismatch { color: var(--fy-red-txt); }
+
+/* ═══════════════════════════════
+   SUBMIT
+═══════════════════════════════ */
+.fy-btn-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 47px;
+  margin-top: 2px;
+  background: linear-gradient(100deg, var(--fy-blue), var(--fy-blue-2));
+  border: 0;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--fy-t), box-shadow var(--fy-t), filter var(--fy-t);
+}
+
+.fy-btn-submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(8, 120, 238, 0.32);
+}
+
+.fy-btn-submit:disabled {
+  cursor: not-allowed;
+  filter: saturate(0.85);
+}
+
+.fy-submit-icon,
+.fy-submit-arrow {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fy-spinner-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fy-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: fySpin 0.7s linear infinite;
+}
+
+@keyframes fySpin { to { transform: rotate(360deg); } }
+
+/* ── Footer ── */
+.fy-card-footer {
+  margin-top: 14px;
+  text-align: center;
+}
+
+.fy-terms-text {
+  margin: 0;
+  color: var(--fy-muted);
+  font-size: 10.5px;
+  line-height: 1.5;
+}
+
+.fy-terms-text a {
+  color: var(--fy-blue);
+  text-decoration: underline;
+}
+
+/* ═══════════════════════════════
+   FOCUS VISIBILITY + REDUCED MOTION
+═══════════════════════════════ */
+.fy-type-pill:focus-visible,
+.fy-back-btn:focus-visible,
+.fy-send-code-btn:focus-visible,
+.fy-verify-btn:focus-visible,
+.fy-btn-submit:focus-visible,
+.fy-pw-toggle:focus-visible {
+  outline: 2px solid #5da5ff;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   TABLET  ≤ 900px
+═══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .fy-wrapper {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+
+  .fy-card {
+    padding: 26px 32px 20px;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE  ≤ 640px  (compact)
+═══════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .fy-wrapper {
+    padding: 12px 12px 24px;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+
+  /* Header: logo left, Sign In right (no overlap on narrow phones) */
+  .fy-brand-header {
+    min-height: 40px;
+    margin-bottom: 14px;
+    justify-content: space-between;
+  }
+
+  .fy-logo {
+    position: static;
+    transform: none;
+  }
+
+  .fy-svg-logo { height: 26px; }
+
+  .fy-back-btn {
+    gap: 6px;
+    padding: 7px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+
+  .fy-back-btn svg { width: 15px; height: 15px; }
+
+  /* Card */
+  .fy-card {
+    padding: 18px 16px 16px;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(44, 105, 165, 0.1);
+  }
+
+  .fy-card-header {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .fy-heading-icon {
+    flex-basis: 44px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .fy-heading-icon svg { width: 28px; height: 28px; }
+
+  .fy-title {
+    margin: 0 0 3px;
+    font-size: 19px;
+    letter-spacing: -0.4px;
+    line-height: 1.25;
+  }
+
+  .fy-subtitle,
+  .fy-signin-prompt {
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+
+  /* Alerts */
+  .fy-alert {
+    margin-bottom: 14px;
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+
+  /* Applicant type: two compact tiles side by side */
+  .fy-type-selector-wrapper { margin-bottom: 14px; }
+
+  .fy-type-label,
+  .fy-label { font-size: 12.5px; }
+
+  .fy-type-label { margin-bottom: 6px; }
+
+  .fy-type-pills { gap: 8px; }
+
+  .fy-type-pill {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    min-height: 0;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .fy-type-icon {
+    flex-basis: 34px;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+  }
+
+  .fy-type-icon svg { width: 22px; height: 22px; }
+
+  .fy-type-copy {
+    gap: 2px;
+    padding-right: 0;
+  }
+
+  .fy-type-text { font-size: 12px; line-height: 1.25; }
+  .fy-type-copy small { font-size: 10px; line-height: 1.3; }
+
+  .fy-radio {
+    top: 10px;
+    right: 10px;
+    width: 13px;
+    height: 13px;
+  }
+
+  /* Fields */
+  .fy-applying-field { margin-bottom: 14px; }
+  .fy-form { gap: 12px; }
+  .fy-row { gap: 10px; }
+  .fy-field { gap: 5px; }
+
+  /* 16px font on inputs prevents iOS focus-zoom */
+  .fy-input,
+  .fy-dd-trigger {
+    height: 42px;
+    font-size: 16px;
+    border-radius: 9px;
+  }
+
+  .fy-input::placeholder { font-size: 13px; }
+
+  .fy-input-shell > .fy-input { padding-left: 38px; }
+
+  .fy-field-icon {
+    left: 12px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .fy-dd-trigger { padding: 0 12px; }
+  .fy-dd-option { padding: 12px; font-size: 14px; }
+
+  /* Email: input + compact button on one row */
+  .fy-email-input-group { gap: 8px; }
+
+  .fy-send-code-btn {
+    height: 42px;
+    padding: 0 12px;
+    gap: 6px;
+    font-size: 11.5px;
+  }
+
+  .fy-send-code-btn svg { width: 14px; height: 14px; }
+
+  /* OTP */
+  .fy-otp-box { padding: 12px; }
+  .fy-otp-label { font-size: 12px; }
+  .fy-otp-input { font-size: 18px; letter-spacing: 3px; }
+  .fy-verify-btn { height: 42px; padding: 0 14px; font-size: 12.5px; }
+  .fy-otp-hint { font-size: 11px; }
+
+  /* Password rules */
+  .fy-pw-rules {
+    gap: 4px 8px;
+    padding: 7px 10px;
+  }
+
+  .fy-rule { font-size: 10.5px; gap: 5px; }
+
+  /* Submit */
+  .fy-btn-submit {
+    height: 44px;
+    gap: 8px;
+    font-size: 12.5px;
+  }
+
+  .fy-submit-icon,
+  .fy-submit-arrow { width: 16px; height: 16px; }
+
+  .fy-card-footer { margin-top: 12px; }
+  .fy-terms-text { font-size: 10px; }
+}
+
+/* ═══════════════════════════════════════════════
+   SMALL PHONES  ≤ 480px
+═══════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .fy-wrapper {
+    padding-top: 10px;
+  }
+
+  .fy-card {
+    padding: 16px 14px 14px;
+  }
+
+  .fy-svg-logo { height: 24px; }
+
+  /* Email button becomes icon-led and tighter */
+  .fy-send-code-btn { padding: 0 10px; }
+}
+
+/* ═══════════════════════════════════════════════
+   VERY SMALL  ≤ 360px  (Galaxy Fold, iPhone SE 1st gen)
+═══════════════════════════════════════════════ */
+@media (max-width: 360px) {
+  .fy-wrapper {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .fy-card { padding: 14px 12px 12px; }
+
+  .fy-heading-icon { display: none; }
+
+  .fy-title { font-size: 17px; }
+
+  /* Applicant tiles stack; description hidden to stay compact */
+  .fy-type-pills { grid-template-columns: 1fr; gap: 6px; }
+
+  .fy-type-pill {
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 10px;
+  }
+
+  .fy-type-copy small { display: none; }
+
+  .fy-radio { top: 50%; transform: translateY(-50%); }
+
+  /* Names stack */
+  .fy-row { grid-template-columns: 1fr; }
+
+  /* Email + OTP stack */
+  .fy-email-input-group { flex-direction: column; align-items: stretch; }
+  .fy-send-code-btn { width: 100%; }
+
+  .fy-otp-row { flex-direction: column; }
+  .fy-verify-btn { width: 100%; }
+
+  .fy-pw-rules { grid-template-columns: 1fr; }
+
+  .fy-btn-submit { font-size: 12px; padding: 0 8px; }
+  .fy-submit-icon { display: none; }
+}
+
+/* ═══════════════════════════════════════════════
+   SHORT LANDSCAPE PHONES
+═══════════════════════════════════════════════ */
+@media (max-height: 520px) and (orientation: landscape) {
+  .fy-wrapper { padding-top: 8px; }
+  .fy-brand-header { margin-bottom: 8px; }
+  .fy-card { max-width: 560px; }
+  .fy-heading-icon { display: none; }
+  .fy-dd-menu { max-height: 150px; }
+}

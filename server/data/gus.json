@@ -1,0 +1,1826 @@
+[
+  {
+    "UNITID": 100001,
+    "INSTNM": "University of Sunderland (GUS)",
+    "IALIAS": "UOS GUS",
+    "ADDR": "St Peter's Campus, St Peter's Way",
+    "CITY": "Sunderland",
+    "STABBR": "ENG",
+    "ZIP": "SR6 0DD",
+    "FIPS": 826,
+    "OBEREG": 8,
+    "CHFNM": "Sir David Bell",
+    "CHFTITLE": "Vice-Chancellor",
+    "GENTELE": "+44 191 515 2000",
+    "WEBADDR": "https://www.sunderland.ac.uk/",
+    "ADMINURL": "https://www.sunderland.ac.uk/study/how-to-apply",
+    "FAIDURL": "https://www.sunderland.ac.uk/study/fees-and-funding",
+    "APPLURL": "https://www.sunderland.ac.uk/apply",
+    "SECTOR": 1,
+    "ICLEVEL": 1,
+    "CONTROL": 1,
+    "HLOFFER": 9,
+    "UGOFFER": 1,
+    "GROFFER": 1,
+    "DEGGRANT": 1,
+    "HBCU": 2,
+    "LOCALE": 32,
+    "OPENPUBL": 1,
+    "CYACTIVE": 1,
+    "POSTSEC": 1,
+    "INSTCAT": 2,
+    "LANDGRNT": 2,
+    "INSTSIZE": 3,
+    "LONGITUD": -1.4069,
+    "LATITUDE": 54.9045,
+    "GUS_DATA": {
+      "country": "United Kingdom",
+      "level": "Undergraduate",
+      "major_areas": [
+        {
+          "major_area": "Business Management",
+          "specific_programs": [
+            {"program_name": "Business Management"},
+            {"program_name": "Business Management (Accounting and Finance)"},
+            {"program_name": "Business Management (Human Resource Management)"},
+            {"program_name": "Business Management (Marketing)"},
+            {"program_name": "Business Management (Tourism)"}
+          ]
+        },
+        {
+          "major_area": "Criminology",
+          "specific_programs": [
+            {"program_name": "Criminology"},
+            {"program_name": "Criminology and Psychology"},
+            {"program_name": "Criminology with Cybercrime"},
+            {"program_name": "Criminology with Law"}
+          ]
+        },
+        {
+          "major_area": "Computing & IT",
+          "specific_programs": [
+            {"program_name": "Computing"},
+            {"program_name": "Business Management and Computing"}
+          ]
+        },
+        {
+          "major_area": "Health Sciences",
+          "specific_programs": [
+            {"program_name": "Health and Care Management"},
+            {"program_name": "Forensic and Criminal Investigation"}
+          ]
+        },
+        {
+          "major_area": "Psychology",
+          "specific_programs": [
+            {"program_name": "Psychology (BPS)"},
+            {"program_name": "Psychology with Counselling"},
+            {"program_name": "Human Resource Management and Psychology"}
+          ]
+        },
+        {
+          "major_area": "Law",
+          "specific_programs": [
+            {"program_name": "Law"},
+            {"program_name": "Business Management and Law"}
+          ]
+        },
+        {
+          "major_area": "Design",
+          "specific_programs": [
+            {"program_name": "Graphic Design"}
+          ]
+        }
+      ],
+      "programs_data": [
+        {
+          "id": "PROG-001",
+          "title": "BA (Hons) Business Management",
+          "locations": ["Berlin, Germany", "Leeds, United Kingdom", "London Ealing, United Kingdom", "London Holborn, United Kingdom", "London Tower Hill, United Kingdom", "Manchester, United Kingdom", "Birmingham, United Kingdom", "Online, Distance Learning"],
+          "studyMode": "On Campus & Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-002",
+          "title": "BA (Hons) Business Management (Accounting and Finance)",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-003",
+          "title": "BA (Hons) Business Management (Accounting and Finance) (Top-Up)",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-004",
+          "title": "BA (Hons) Business Management (Human Resource Management)",
+          "locations": ["Berlin, Germany", "Online, Distance Learning"],
+          "studyMode": "On Campus & Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-005",
+          "title": "BA (Hons) Business Management (Human Resource Management) (Top-Up)",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-006",
+          "title": "BA (Hons) Business Management (Human Resource Management) with Foundation Year",
+          "locations": ["Berlin, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-007",
+          "title": "BA (Hons) Business Management (Marketing)",
+          "locations": ["Online, Distance Learning", "Berlin, Germany"],
+          "studyMode": "Online & On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-008",
+          "title": "BA (Hons) Business Management (Marketing) (Top-Up)",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-009",
+          "title": "BA (Hons) Business Management (Marketing) with Foundation Year",
+          "locations": ["Berlin, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Details"]
+        },
+        {
+          "id": "PROG-010",
+          "title": "BA (Hons) Business Management (Top-Up)",
+          "locations": ["London Ealing, United Kingdom", "Manchester, United Kingdom", "London Tower Hill, United Kingdom", "London Holborn, United Kingdom", "Leeds, United Kingdom", "Birmingham, United Kingdom", "Online, Distance Learning"],
+          "studyMode": "On Campus & Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-011",
+          "title": "BA (Hons) Business Management (Tourism)",
+          "locations": ["Berlin, Germany", "Online, Distance Learning"],
+          "studyMode": "On Campus & Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-012",
+          "title": "BA (Hons) Business Management (Tourism) (Top-Up)",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-013",
+          "title": "BA (Hons) Business Management (Tourism) with Foundation Year",
+          "locations": ["Berlin, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-014",
+          "title": "BA (Hons) Business Management and Computing",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-015",
+          "title": "BA (Hons) Business Management and Law",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-016",
+          "title": "BA (Hons) Business Management with Foundation Year",
+          "locations": ["London Tower Hill, United Kingdom", "London Holborn, United Kingdom", "Berlin, Germany", "Leeds, United Kingdom", "London Ealing, United Kingdom", "Manchester, United Kingdom", "Birmingham, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-017",
+          "title": "BA (Hons) Criminology",
+          "locations": ["Online, Distance Learning", "Birmingham, United Kingdom", "London Tower Hill, United Kingdom"],
+          "studyMode": "Online & On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-018",
+          "title": "BA (Hons) Criminology and Psychology",
+          "locations": ["Manchester, United Kingdom", "Birmingham, United Kingdom", "Online, Distance Learning", "London Tower Hill, United Kingdom", "London Holborn, United Kingdom", "London Ealing, United Kingdom", "Leeds, United Kingdom"],
+          "studyMode": "On Campus & Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-019",
+          "title": "BA (Hons) Criminology and Psychology with Foundation Year",
+          "locations": ["London Tower Hill, United Kingdom", "London Ealing, United Kingdom", "Birmingham, United Kingdom", "Leeds, United Kingdom", "London Holborn, United Kingdom", "Manchester, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-020",
+          "title": "BA (Hons) Criminology with Cybercrime",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-021",
+          "title": "BA (Hons) Criminology with Foundation Year",
+          "locations": ["Manchester, United Kingdom", "Birmingham, United Kingdom", "London Holborn, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-022",
+          "title": "BA (Hons) Criminology with Law",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-023",
+          "title": "BA (Hons) Graphic Design",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-024",
+          "title": "BA (Hons) Human Resource Management and Psychology",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-025",
+          "title": "BA Business Administration (HRM)",
+          "locations": ["Berlin, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-026",
+          "title": "BA Business Administration (HRM) with Foundation Year",
+          "locations": ["Berlin, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-027",
+          "title": "BA Business Administration (Marketing)",
+          "locations": ["Berlin, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-028",
+          "title": "BA Business Administration (Marketing) with Foundation Year",
+          "locations": ["Berlin, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-029",
+          "title": "BA Business Administration with Foundation Year",
+          "locations": ["Berlin, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-030",
+          "title": "BSc (Hons) Accounting and Finance",
+          "locations": ["London Holborn, United Kingdom", "Leeds, United Kingdom", "Online, Distance Learning", "London Tower Hill, United Kingdom", "Manchester, United Kingdom", "Birmingham, United Kingdom"],
+          "studyMode": "On Campus & Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-031",
+          "title": "BSc (Hons) Accounting and Finance with Foundation Year",
+          "locations": ["London Tower Hill, United Kingdom", "Birmingham, United Kingdom", "Manchester, United Kingdom", "Leeds, United Kingdom", "London Holborn, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-032",
+          "title": "BSc (Hons) Computing",
+          "locations": ["London Tower Hill, United Kingdom", "Birmingham, United Kingdom", "Berlin, Germany", "Manchester, United Kingdom", "Online, Distance Learning", "London Holborn, United Kingdom", "Leeds, United Kingdom", "London Ealing, United Kingdom"],
+          "studyMode": "On Campus & Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-033",
+          "title": "BSc (Hons) Computing (Top-Up)",
+          "locations": ["Distance Learning", "London Tower Hill, United Kingdom", "Manchester, United Kingdom", "Birmingham, United Kingdom", "London Holborn, United Kingdom", "London Ealing, United Kingdom"],
+          "studyMode": "Online & On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-034",
+          "title": "BSc (Hons) Computing with Foundation Year",
+          "locations": ["Berlin, Germany", "Birmingham, United Kingdom", "Leeds, United Kingdom", "London Ealing, United Kingdom", "London Holborn, United Kingdom", "London Tower Hill, United Kingdom", "Manchester, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-035",
+          "title": "BSc (Hons) Digital Marketing",
+          "locations": ["Online, Distance Learning", "Leeds, United Kingdom", "London Holborn, United Kingdom", "London Tower Hill, United Kingdom", "Manchester, United Kingdom", "Birmingham, United Kingdom"],
+          "studyMode": "On Campus & Online",
+          "level": "Undergraduate",
+          "actions": ["Details"]
+        },
+        {
+          "id": "PROG-036",
+          "title": "BSc (Hons) Digital Marketing with Foundation Year",
+          "locations": ["Birmingham, United Kingdom", "London Ealing, United Kingdom", "Leeds, United Kingdom", "London Holborn, United Kingdom", "Manchester, United Kingdom", "London Tower Hill, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Details"]
+        },
+        {
+          "id": "PROG-037",
+          "title": "BSc (Hons) Forensic and Criminal Investigation",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Details"]
+        },
+        {
+          "id": "PROG-038",
+          "title": "BSc (Hons) Health and Care Management",
+          "locations": ["Leeds, United Kingdom", "London Tower Hill, United Kingdom", "London Holborn, United Kingdom", "London Ealing, United Kingdom", "Birmingham, United Kingdom", "Manchester, United Kingdom", "Online, Distance Learning", "Berlin, Germany"],
+          "studyMode": "On Campus & Online",
+          "level": "Undergraduate",
+          "actions": ["Details"]
+        },
+        {
+          "id": "PROG-039",
+          "title": "BSc (Hons) Health and Care Management (Top-Up)",
+          "locations": ["London Holborn, United Kingdom", "Online, Distance Learning", "Manchester, United Kingdom", "London Tower Hill, United Kingdom", "Birmingham, United Kingdom", "Leeds, United Kingdom", "London Ealing, United Kingdom"],
+          "studyMode": "On Campus & Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-040",
+          "title": "BSc (Hons) Health and Care Management with Foundation Year",
+          "locations": ["Berlin, Germany", "Manchester, United Kingdom", "London Tower Hill, United Kingdom", "London Holborn, United Kingdom", "London Ealing, United Kingdom", "Leeds, United Kingdom", "Birmingham, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-041",
+          "title": "BSc (Hons) Project Management",
+          "locations": ["Manchester, United Kingdom", "Birmingham, United Kingdom", "London Holborn, United Kingdom", "Online, Distance Learning", "London Tower Hill, United Kingdom"],
+          "studyMode": "On Campus & Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-042",
+          "title": "BSc (Hons) Project Management with Foundation Year",
+          "locations": ["London Tower Hill, United Kingdom", "Manchester, United Kingdom", "Birmingham, United Kingdom", "London Holborn, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-043",
+          "title": "BSc (Hons) Psychology (BPS)",
+          "locations": ["London Tower Hill, United Kingdom", "Leeds, United Kingdom", "Manchester, United Kingdom", "Online, Distance Learning", "London Holborn, United Kingdom", "Birmingham, United Kingdom"],
+          "studyMode": "On Campus & Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-044",
+          "title": "BSc (Hons) Psychology with Counselling",
+          "locations": ["Manchester, United Kingdom", "Leeds, United Kingdom", "Birmingham, United Kingdom", "London Tower Hill, United Kingdom", "London Holborn, United Kingdom", "Online, Distance Learning"],
+          "studyMode": "On Campus & Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-045",
+          "title": "BSc (Hons) Psychology with Counselling with Foundation Year",
+          "locations": ["Birmingham, United Kingdom", "London Tower Hill, United Kingdom", "London Holborn, United Kingdom", "Manchester, United Kingdom", "Leeds, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-046",
+          "title": "BSc (Hons) Psychology with Foundation Year",
+          "locations": ["Birmingham, United Kingdom", "Leeds, United Kingdom", "London Holborn, United Kingdom", "London Tower Hill, United Kingdom", "Manchester, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-047",
+          "title": "BSc (Hons) Supply Chain Management",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-048",
+          "title": "CertHE Business Management",
+          "locations": ["Manchester, United Kingdom", "London Tower Hill, United Kingdom", "London Holborn, United Kingdom", "Leeds, United Kingdom", "Birmingham, United Kingdom", "London Ealing, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-049",
+          "title": "CertHE Computing",
+          "locations": ["London Holborn, United Kingdom", "Birmingham, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-050",
+          "title": "CertHE Health and Care Management",
+          "locations": ["Birmingham, United Kingdom", "Leeds, United Kingdom", "London Holborn, United Kingdom", "London Tower Hill, United Kingdom", "Manchester, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-051",
+          "title": "Chartered Manager (Business Management) – Level 6",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-052",
+          "title": "Chartered Manager (Health and Care Management) – Level 6",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-053",
+          "title": "Level 4 Certificate in HE Health and Care Management",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-054",
+          "title": "Level 5 Diploma in HE Health and Care Management",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-055",
+          "title": "LLB (Hons) Law",
+          "locations": ["London Holborn, United Kingdom", "Online, Distance Learning", "Birmingham, United Kingdom", "Leeds, United Kingdom", "London Tower Hill, United Kingdom", "Manchester, United Kingdom"],
+          "studyMode": "On Campus & Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-056",
+          "title": "LLB (Hons) Law with Foundation Year",
+          "locations": ["Holborn, United Kingdom", "Manchester, United Kingdom", "London Tower Hill, United Kingdom", "London Holborn, United Kingdom", "Leeds, United Kingdom", "Birmingham, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-057",
+          "title": "Project Manager Degree Apprenticeship - Level 6",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        },
+        {
+          "id": "PROG-058",
+          "title": "Supply Chain Degree Apprenticeship - Level 6",
+          "locations": ["Online, Distance Learning"],
+          "studyMode": "Online",
+          "level": "Undergraduate",
+          "actions": ["Activate", "Details"]
+        }
+      ]
+    }
+  },
+  {
+    "UNITID": 100002,
+    "INSTNM": "Avila University",
+    "IALIAS": "Avila",
+    "ADDR": "11901 Wornall Road",
+    "CITY": "Kansas City",
+    "STABBR": "MO",
+    "ZIP": "64145",
+    "FIPS": 29,
+    "OBEREG": 4,
+    "CHFNM": "Dr. James T. Burchett",
+    "CHFTITLE": "President",
+    "GENTELE": "8169428400",
+    "WEBADDR": "https://www.avila.edu/",
+    "ADMINURL": "https://www.avila.edu/admissions",
+    "FAIDURL": "https://www.avila.edu/financial-aid",
+    "APPLURL": "https://www.avila.edu/apply",
+    "SECTOR": 1,
+    "ICLEVEL": 1,
+    "CONTROL": 2,
+    "HLOFFER": 9,
+    "UGOFFER": 1,
+    "GROFFER": 1,
+    "DEGGRANT": 1,
+    "HBCU": 2,
+    "LOCALE": 12,
+    "OPENPUBL": 1,
+    "CYACTIVE": 1,
+    "POSTSEC": 1,
+    "INSTCAT": 2,
+    "LANDGRNT": 2,
+    "INSTSIZE": 2,
+    "LONGITUD": -94.6006,
+    "LATITUDE": 39.0344,
+    "GUS_DATA": {
+      "country": "USA",
+      "level": "Undergraduate",
+      "major_areas": [
+        {
+          "major_area": "Business & Accounting",
+          "specific_programs": [
+            {"program_name": "Accounting"},
+            {"program_name": "Business Administration"},
+            {"program_name": "International Business"},
+            {"program_name": "Management"},
+            {"program_name": "Marketing"}
+          ]
+        },
+        {
+          "major_area": "Health Sciences",
+          "specific_programs": [
+            {"program_name": "Nursing"},
+            {"program_name": "Kinesiology"},
+            {"program_name": "Professional Health Science"},
+            {"program_name": "Wellness Studies"}
+          ]
+        },
+        {
+          "major_area": "Psychology",
+          "specific_programs": [
+            {"program_name": "Psychology"},
+            {"program_name": "Psychology Mental Health"},
+            {"program_name": "Psychology Research"}
+          ]
+        },
+        {
+          "major_area": "Sciences",
+          "specific_programs": [
+            {"program_name": "Biology"},
+            {"program_name": "Applied Science"},
+            {"program_name": "Computer Science"}
+          ]
+        },
+        {
+          "major_area": "Social Sciences",
+          "specific_programs": [
+            {"program_name": "Social Work"},
+            {"program_name": "Communication"},
+            {"program_name": "Business Education"}
+          ]
+        }
+      ],
+      "programs_data": [
+        {
+          "id": "PROG-059",
+          "title": "Accounting, B.S.B.A.",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-060",
+          "title": "B.A. Psychology Mental Health",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-061",
+          "title": "B.A. Psychology Research",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-062",
+          "title": "B.S. Applied Science",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-063",
+          "title": "Biology, B.S.",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-064",
+          "title": "Business Administration, B.S.B.A.",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-065",
+          "title": "Business Education, B.A.",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-066",
+          "title": "Communication B.A. - Advertising and Public Relations",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-067",
+          "title": "Communication B.A. - Film and Digital media",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-068",
+          "title": "Communication B.A. - Sports Communication",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-069",
+          "title": "Computer Science, B.S.",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-070",
+          "title": "International Business, B.S.B.A.",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-071",
+          "title": "Kinesiology B.S - General Concentration",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-072",
+          "title": "Kinesiology B.S - Rehabilitation Science",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-073",
+          "title": "Kinesiology B.S - Strength and Training",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-074",
+          "title": "Management, B.S.B.A.",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-075",
+          "title": "Marketing, B.S.B.A.",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-076",
+          "title": "Nursing, Pre-Licensure, B.S.N.",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-077",
+          "title": "Professional Health Science B.S. - Biomedical Science",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-078",
+          "title": "Professional Health Science B.S. - Premedical and pre-pharm Studies",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-079",
+          "title": "Psychology, B.A.",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-080",
+          "title": "Social Work, B.S.W.",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-081",
+          "title": "Wellness Studies, B.S.",
+          "locations": ["Kansas City, Missouri, United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        }
+      ]
+    }
+  },
+  {
+    "UNITID": 100003,
+    "INSTNM": "Berlin School of Business & Innovation",
+    "IALIAS": "BSBI",
+    "ADDR": "Potsdamer Straße 180-182",
+    "CITY": "Berlin",
+    "STABBR": "BE",
+    "ZIP": "10783",
+    "FIPS": 276,
+    "OBEREG": 8,
+    "CHFNM": "Prof. Dr. Kyriakos Kouveliotis",
+    "CHFTITLE": "Provost",
+    "GENTELE": "+49 30 920 383 2724",
+    "WEBADDR": "https://www.berlinsbi.com/",
+    "ADMINURL": "https://www.berlinsbi.com/apply-now",
+    "FAIDURL": "https://www.berlinsbi.com/fees-funding",
+    "APPLURL": "https://www.berlinsbi.com/apply-now",
+    "SECTOR": 2,
+    "ICLEVEL": 1,
+    "CONTROL": 3,
+    "HLOFFER": 9,
+    "UGOFFER": 1,
+    "GROFFER": 1,
+    "DEGGRANT": 1,
+    "HBCU": 2,
+    "LOCALE": 11,
+    "OPENPUBL": 1,
+    "CYACTIVE": 1,
+    "POSTSEC": 1,
+    "INSTCAT": 2,
+    "LANDGRNT": 2,
+    "INSTSIZE": 2,
+    "LONGITUD": 13.3765,
+    "LATITUDE": 52.4974,
+    "GUS_DATA": {
+      "country": "Germany",
+      "level": "Undergraduate",
+      "major_areas": [
+        {
+          "major_area": "Creative Arts",
+          "specific_programs": [
+            {"program_name": "Animation"},
+            {"program_name": "Comic and Concept Art"},
+            {"program_name": "Game Design"},
+            {"program_name": "Graphic Design"}
+          ]
+        },
+        {
+          "major_area": "Social Sciences",
+          "specific_programs": [
+            {"program_name": "Psychology"},
+            {"program_name": "Sociology"}
+          ]
+        }
+      ],
+      "programs_data": [
+        {
+          "id": "PROG-082",
+          "title": "BA (Hons) Animation",
+          "locations": ["Hamburg, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-083",
+          "title": "BA (Hons) Animation (4 year International Route)",
+          "locations": ["Hamburg, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-084",
+          "title": "BA (Hons) Animation Year 3 direct entry",
+          "locations": ["Hamburg, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-085",
+          "title": "BA (Hons) Comic and Concept Art",
+          "locations": ["Hamburg, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-086",
+          "title": "BA (Hons) Comic and Concept Art Foundation (International Route)",
+          "locations": ["Hamburg, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-087",
+          "title": "BA (Hons) Comic and Concept Art Year 3 direct entry",
+          "locations": ["Hamburg, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-088",
+          "title": "BA (Hons) Game Design",
+          "locations": ["Hamburg, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-089",
+          "title": "BA (Hons) Game Design Foundation (International Route)",
+          "locations": ["Hamburg, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-090",
+          "title": "BA (Hons) Graphic Design",
+          "locations": ["Hamburg, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-091",
+          "title": "BSc (Hons) Psychology",
+          "locations": ["Berlin, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-092",
+          "title": "BSc (Hons) Sociology (with Integrated Foundation Year)",
+          "locations": ["Berlin, Germany"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        }
+      ]
+    }
+  },
+  {
+    "UNITID": 100004,
+    "INSTNM": "Canterbury Christ Church University",
+    "IALIAS": "CCCU",
+    "ADDR": "North Holmes Road",
+    "CITY": "Canterbury",
+    "STABBR": "ENG",
+    "ZIP": "CT1 1QU",
+    "FIPS": 826,
+    "OBEREG": 8,
+    "CHFNM": "Professor Rama Thirunamachandran",
+    "CHFTITLE": "Vice-Chancellor",
+    "GENTELE": "+44 1227 767700",
+    "WEBADDR": "https://www.canterbury.ac.uk/",
+    "ADMINURL": "https://www.canterbury.ac.uk/study-here/how-to-apply",
+    "FAIDURL": "https://www.canterbury.ac.uk/study-here/fees-and-funding",
+    "APPLURL": "https://www.canterbury.ac.uk/study-here/how-to-apply",
+    "SECTOR": 1,
+    "ICLEVEL": 1,
+    "CONTROL": 1,
+    "HLOFFER": 9,
+    "UGOFFER": 1,
+    "GROFFER": 1,
+    "DEGGRANT": 1,
+    "HBCU": 2,
+    "LOCALE": 33,
+    "OPENPUBL": 1,
+    "CYACTIVE": 1,
+    "POSTSEC": 1,
+    "INSTCAT": 2,
+    "LANDGRNT": 2,
+    "INSTSIZE": 3,
+    "LONGITUD": 1.0847,
+    "LATITUDE": 51.2796,
+    "GUS_DATA": {
+      "country": "United Kingdom",
+      "level": "Undergraduate",
+      "major_areas": [
+        {
+          "major_area": "Engineering",
+          "specific_programs": [
+            {"program_name": "General Engineering"},
+            {"program_name": "Software Engineering"},
+            {"program_name": "Architectural Engineering"},
+            {"program_name": "Biomedical Engineering"},
+            {"program_name": "Chemical Engineering"},
+            {"program_name": "Mechanical Engineering"},
+            {"program_name": "Product Design Engineering"}
+          ]
+        },
+        {
+          "major_area": "Arts & Media",
+          "specific_programs": [
+            {"program_name": "Photography"},
+            {"program_name": "Archaeology"},
+            {"program_name": "Film Production"},
+            {"program_name": "Games Design"},
+            {"program_name": "History"}
+          ]
+        },
+        {
+          "major_area": "Business & Computing",
+          "specific_programs": [
+            {"program_name": "Business Management"},
+            {"program_name": "Business Information Systems"},
+            {"program_name": "Computer Science"},
+            {"program_name": "Accounting and Finance"}
+          ]
+        },
+        {
+          "major_area": "Health Sciences",
+          "specific_programs": [
+            {"program_name": "Diagnostic Radiography"},
+            {"program_name": "Physiotherapy"},
+            {"program_name": "Public Health"},
+            {"program_name": "Sports Therapy & Rehabilitation"}
+          ]
+        },
+        {
+          "major_area": "Social Sciences",
+          "specific_programs": [
+            {"program_name": "Criminal Investigation"},
+            {"program_name": "Politics and International Relations"},
+            {"program_name": "Professional Policing"},
+            {"program_name": "Countering Terrorism and Extremism"},
+            {"program_name": "Sport Management"},
+            {"program_name": "Wildlife Ecology and Conservation"}
+          ]
+        },
+        {
+          "major_area": "Law",
+          "specific_programs": [
+            {"program_name": "Law"},
+            {"program_name": "Law with Criminology"}
+          ]
+        }
+      ],
+      "programs_data": [
+        {
+          "id": "PROG-093",
+          "title": "BA (Hons) Photography",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-094",
+          "title": "BA (Hons) Archaeology with Foundation Year",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-095",
+          "title": "BA (Hons) Early Childhood Studies",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-096",
+          "title": "BA (Hons) Education Studies",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-097",
+          "title": "BA (Hons) Film Production",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-098",
+          "title": "BA (Hons) Film Production with Foundation Year",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-099",
+          "title": "BA (Hons) Games Design",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-100",
+          "title": "BA (Hons) History",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-101",
+          "title": "BEng (Hons) General Engineering",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-102",
+          "title": "BEng (Hons) Software Engineering",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-103",
+          "title": "BEng (Hons) Software Engineering with Foundation Year",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-104",
+          "title": "BEng Architectural Engineering",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-105",
+          "title": "BEng Biomedical Engineering",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-106",
+          "title": "BEng Biomedical Engineering with Foundation Year",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-107",
+          "title": "BEng Chemical Engineering",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-108",
+          "title": "BEng Chemical Engineering with Foundation Year",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-109",
+          "title": "BEng General Engineering with Foundation Year",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-110",
+          "title": "BEng Mechanical Engineering",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-111",
+          "title": "BEng Mechanical Engineering with Foundation Year",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-112",
+          "title": "BEng Product Design Engineering with Foundation Year",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-113",
+          "title": "BSc (Hons) Business Information Systems with Foundation Year",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-114",
+          "title": "BSc (Hons) Business Management",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-115",
+          "title": "BSc (Hons) Business Management & Economics",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-116",
+          "title": "BSc (Hons) Business Management with Foundation Year",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-117",
+          "title": "BSc (Hons) Business Management with Professional Placement",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-118",
+          "title": "BSc (Hons) Computer Science",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-119",
+          "title": "BSc (Hons) Countering Terrorism and Extremism",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-120",
+          "title": "BSc (Hons) Criminal Investigation",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-121",
+          "title": "BSc (Hons) Diagnostic Radiography",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-122",
+          "title": "BSc (Hons) Physiotherapy",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-123",
+          "title": "BSc (Hons) Politics and International Relations",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-124",
+          "title": "BSc (Honors) Professional Policing",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-125",
+          "title": "BSc (Hons) Public Health",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-126",
+          "title": "BSc (Honors) Public Health with Foundation Year",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-127",
+          "title": "BSc (Hons) Sport Management",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-128",
+          "title": "BSc (Honors) Sports Therapy & Rehabilitation",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-129",
+          "title": "BSc (Hons) Sports Therapy and Rehabilitation with Foundation Year",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-130",
+          "title": "BSc (Honors) Wildlife Ecology and Conservation Science",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-131",
+          "title": "BSc (Hons) Accounting and Finance",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-132",
+          "title": "LL.B Law (Hons) with Criminology",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-133",
+          "title": "LL.B. Law (Hons)",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-134",
+          "title": "LL.B. Law (Hons) with Foundation Year",
+          "locations": ["Canterbury, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        }
+      ]
+    }
+  },
+  {
+    "UNITID": 100005,
+    "INSTNM": "Catholic University of America",
+    "IALIAS": "CUA",
+    "ADDR": "620 Michigan Avenue NE",
+    "CITY": "Washington",
+    "STABBR": "DC",
+    "ZIP": "20064",
+    "FIPS": 11,
+    "OBEREG": 2,
+    "CHFNM": "Dr. Peter Kilpatrick",
+    "CHFTITLE": "President",
+    "GENTELE": "2023195000",
+    "WEBADDR": "https://www.catholic.edu/",
+    "ADMINURL": "https://admissions.catholic.edu/",
+    "FAIDURL": "https://financialaid.catholic.edu/",
+    "APPLURL": "https://admissions.catholic.edu/apply/",
+    "SECTOR": 1,
+    "ICLEVEL": 1,
+    "CONTROL": 2,
+    "HLOFFER": 9,
+    "UGOFFER": 1,
+    "GROFFER": 1,
+    "DEGGRANT": 1,
+    "HBCU": 2,
+    "LOCALE": 11,
+    "OPENPUBL": 1,
+    "CYACTIVE": 1,
+    "POSTSEC": 1,
+    "INSTCAT": 3,
+    "LANDGRNT": 2,
+    "INSTSIZE": 3,
+    "LONGITUD": -77.0004,
+    "LATITUDE": 38.9332,
+    "GUS_DATA": {
+      "country": "USA",
+      "level": "Undergraduate",
+      "major_areas": [
+        {
+          "major_area": "Business Administration",
+          "specific_programs": [
+            {"program_name": "Accounting"},
+            {"program_name": "Data Analytics for Business"},
+            {"program_name": "Entrepreneurship"},
+            {"program_name": "Finance"},
+            {"program_name": "International Business"},
+            {"program_name": "Marketing"},
+            {"program_name": "Markets & Political Economy"},
+            {"program_name": "People and Organizations"},
+            {"program_name": "Sales"},
+            {"program_name": "Sports Management"},
+            {"program_name": "Technology and Operations Management"}
+          ]
+        },
+        {
+          "major_area": "Engineering & Technology",
+          "specific_programs": [
+            {"program_name": "Architecture"},
+            {"program_name": "Biomedical Engineering"},
+            {"program_name": "Artificial Intelligence"}
+          ]
+        },
+        {
+          "major_area": "Sciences",
+          "specific_programs": [
+            {"program_name": "Biochemistry"},
+            {"program_name": "Biology"},
+            {"program_name": "Chemical Physics"},
+            {"program_name": "Chemistry"}
+          ]
+        },
+        {
+          "major_area": "Arts & Humanities",
+          "specific_programs": [
+            {"program_name": "Acting for Theatre, Film, and Television"},
+            {"program_name": "Anthropology"},
+            {"program_name": "Architectural Studies"},
+            {"program_name": "Art and Design"},
+            {"program_name": "Art History"}
+          ]
+        }
+      ],
+      "programs_data": [
+        {
+          "id": "PROG-135",
+          "title": "Accounting (BS)",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-136",
+          "title": "Acting for Theatre, Film, and Television (BFA)",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-137",
+          "title": "Anthropology (BA)",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-138",
+          "title": "Architectural Studies (BA)",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-139",
+          "title": "Architecture (BSArch) and Civil Engineering (BCE) - Integ Path to Arch Lic",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-140",
+          "title": "Art and Design (BA)",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-141",
+          "title": "Art History (BA)",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-142",
+          "title": "Artificial Intelligence (BS)",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-143",
+          "title": "Biochemistry (BS)",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-144",
+          "title": "Biology (BA)",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-145",
+          "title": "Biology (BS)",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-146",
+          "title": "Biomedical Engineering (BBE) - Pre-med",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-147",
+          "title": "Business Administration (BSBA) - Accounting",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-148",
+          "title": "Business Administration (BSBA) - Data Analytics for Business",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-149",
+          "title": "Business Administration (BSBA) - Entrepreneurship",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-150",
+          "title": "Business Administration (BSBA) - Exploratory",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-151",
+          "title": "Business Administration (BSBA) - Finance",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-152",
+          "title": "Business Administration (BSBA) - International Business",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-153",
+          "title": "Business Administration (BSBA) - Marketing",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-154",
+          "title": "Business Administration (BSBA) - Markets & Political Economy",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-155",
+          "title": "Business Administration (BSBA) - People and Organizations",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-156",
+          "title": "Business Administration (BSBA)",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-157",
+          "title": "Business Administration (BSBA) - Sales",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-158",
+          "title": "Business Administration (BSBA) - Sports Management",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-159",
+          "title": "Business Administration (BSBA) - Technology and Operations Management",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-160",
+          "title": "Chemical Physics (BS)",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-161",
+          "title": "Chemistry (BS)",
+          "locations": ["Washington D.C., United States"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        }
+      ]
+    }
+  },
+  {
+    "UNITID": 100006,
+    "INSTNM": "Hartpury University",
+    "IALIAS": "Hartpury",
+    "ADDR": "Hartpury House",
+    "CITY": "Gloucester",
+    "STABBR": "ENG",
+    "ZIP": "GL19 3BE",
+    "FIPS": 826,
+    "OBEREG": 8,
+    "CHFNM": "Professor Andy Collop",
+    "CHFTITLE": "Vice-Chancellor",
+    "GENTELE": "+44 1452 702100",
+    "WEBADDR": "https://www.hartpury.ac.uk/",
+    "ADMINURL": "https://www.hartpury.ac.uk/study/how-to-apply/",
+    "FAIDURL": "https://www.hartpury.ac.uk/study/fees-funding/",
+    "APPLURL": "https://www.hartpury.ac.uk/study/how-to-apply/",
+    "SECTOR": 1,
+    "ICLEVEL": 1,
+    "CONTROL": 1,
+    "HLOFFER": 9,
+    "UGOFFER": 1,
+    "GROFFER": 1,
+    "DEGGRANT": 1,
+    "HBCU": 2,
+    "LOCALE": 32,
+    "OPENPUBL": 1,
+    "CYACTIVE": 1,
+    "POSTSEC": 1,
+    "INSTCAT": 2,
+    "LANDGRNT": 2,
+    "INSTSIZE": 2,
+    "LONGITUD": -2.2900,
+    "LATITUDE": 51.8275,
+    "GUS_DATA": {
+      "country": "United Kingdom",
+      "level": "Undergraduate",
+      "major_areas": [
+        {
+          "major_area": "Animal Sciences",
+          "specific_programs": [
+            {"program_name": "Animal Behaviour and Welfare"},
+            {"program_name": "Animal Behaviour and Training with Canine (Clinical)"},
+            {"program_name": "Bioveterinary Science"}
+          ]
+        },
+        {
+          "major_area": "Environmental Sciences",
+          "specific_programs": [
+            {"program_name": "Environmental Science"},
+            {"program_name": "Biological Sciences"}
+          ]
+        },
+        {
+          "major_area": "Equestrian Studies",
+          "specific_programs": [
+            {"program_name": "Equestrian Performance and Welfare"}
+          ]
+        },
+        {
+          "major_area": "Business",
+          "specific_programs": [
+            {"program_name": "Business Management"}
+          ]
+        }
+      ],
+      "programs_data": [
+        {
+          "id": "PROG-162",
+          "title": "BSc (Hons) Environmental Science",
+          "locations": ["Gloucestershire, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate",
+          "actions": ["Apply", "Details"]
+        },
+        {
+          "id": "PROG-163",
+          "title": "BSc (Hons) Environmental Science (with Foundation Year)",
+          "locations": ["Gloucestershire, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-164",
+          "title": "BSc (Hons) Equestrian Performance and Welfare",
+          "locations": ["Gloucestershire, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-165",
+          "title": "BSc (Hons) Equestrian Performance and Welfare (with Foundation Year)",
+          "locations": ["Gloucestershire, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-166",
+          "title": "BSc (Hons) Biological Sciences (with Foundation Year)",
+          "locations": ["Gloucestershire, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-167",
+          "title": "BSc (Hons) Bioveterinary Science",
+          "locations": ["Gloucestershire, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-168",
+          "title": "BSc (Hons) Bioveterinary Science (with Foundation Year)",
+          "locations": ["Gloucestershire, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-169",
+          "title": "BSc (Hons) Business Management",
+          "locations": ["Gloucestershire, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-170",
+          "title": "BSc (Hons) Animal Behaviour and Training with Canine (Clinical)",
+          "locations": ["Gloucestershire, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-171",
+          "title": "BSc (Hons) Animal Behaviour and Welfare",
+          "locations": ["Gloucestershire, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-172",
+          "title": "BSc (Hons) Animal Behaviour and Welfare (with Foundation Year)",
+          "locations": ["Gloucestershire, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        },
+        {
+          "id": "PROG-173",
+          "title": "BSc (Hons) Biological Sciences",
+          "locations": ["Gloucestershire, United Kingdom"],
+          "studyMode": "On Campus",
+          "level": "Undergraduate"
+        }
+      ]
+    }
+  }
+]

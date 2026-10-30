@@ -1,0 +1,2259 @@
+/* processAdminDashboard.css — Teal Design System + Real SVG Logo */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --primary: #14b8a6;
+  --primary-dk: #0d9488;
+  --primary-lt: #f0fdfa;
+  --primary-bd: #99f6e4;
+  --secondary: #f59e0b;
+  --secondary-lt: #fffbeb;
+  --blue: #2563eb;
+  --blue-lt: #eff6ff;
+  --violet: #7c3aed;
+  --violet-lt: #ede9fe;
+  --amber: #f59e0b;
+  --amber-lt: #fffbeb;
+  --danger: #ef4444;
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --text: #0f2942;
+  --text-mid: #475569;
+  --text-lt: #94a3b8;
+  --border: #eef0f4;
+  --sb-w: 220px;
+  --sb-closed: 68px;
+  --navbar-h: 64px;
+  --radius: 13px;
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 20px rgba(20, 184, 166, 0.12);
+  --t: 0.2s cubic-bezier(.4, 0, .2, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ════════════════════════════════════
+   LAYOUT
+════════════════════════════════════ */
+.process-admin-dashboard {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.process-admin-dashboard .loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background: var(--bg);
+  color: var(--text-mid);
+  gap: 14px;
+}
+
+.process-admin-dashboard .loading-container p {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-mid);
+}
+
+.process-admin-dashboard .loading-spinner {
+  width: 46px;
+  height: 46px;
+  border: 4px solid rgba(20, 184, 166, 0.18);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin .85s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ════════════════════════════════════
+   MOBILE OVERLAY
+════════════════════════════════════ */
+.pad-mob-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 41, 66, 0.45);
+  backdrop-filter: blur(3px);
+  z-index: 200;
+  animation: overlayIn .2s ease;
+}
+
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.pad-mob-overlay.show {
+  display: block;
+}
+
+/* ════════════════════════════════════
+   SIDEBAR
+════════════════════════════════════ */
+.process-admin-dashboard .sidebar {
+  width: var(--sb-w);
+  height: 100vh;
+  height: 100dvh;
+  position: sticky;
+  top: 0;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transition: width var(--t);
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.05);
+  z-index: 300;
+  overflow: hidden;
+}
+
+.process-admin-dashboard .sidebar.closed {
+  width: var(--sb-closed);
+}
+
+/* ── Logo header ── */
+.process-admin-dashboard .sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 12px 12px;
+  border-bottom: 1px solid var(--border);
+  min-height: var(--navbar-h);
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+/* ── Real SVG logo container ── */
+.pad-logo-wrap {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.pad-logo-svg {
+  width: 148px;
+  height: auto;
+  display: block;
+  flex-shrink: 0;
+}
+
+.process-admin-dashboard .sidebar.closed .pad-logo-wrap {
+  display: none;
+}
+
+.process-admin-dashboard .sidebar-toggle {
+  background: var(--primary-lt);
+  border: 1px solid var(--primary-bd);
+  color: var(--primary);
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--t), color var(--t);
+  flex-shrink: 0;
+}
+
+.process-admin-dashboard .sidebar-toggle:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.process-admin-dashboard .sidebar.closed .sidebar-header {
+  justify-content: center;
+  padding: 14px 8px;
+}
+
+/* ── Nav menu ── */
+.process-admin-dashboard .sidebar-menu {
+  list-style: none;
+  padding: 14px 10px;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+
+.process-admin-dashboard .sidebar-menu::-webkit-scrollbar {
+  width: 3px;
+}
+
+.process-admin-dashboard .sidebar-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.process-admin-dashboard .sidebar-menu::-webkit-scrollbar-thumb {
+  background: var(--primary-lt);
+  border-radius: 3px;
+}
+
+.process-admin-dashboard .sidebar-menu::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+.process-admin-dashboard .sidebar-menu>li {
+  padding: 9px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  margin-bottom: 3px;
+  transition: background var(--t), color var(--t);
+  color: var(--text-mid);
+  font-weight: 500;
+  font-size: 13px;
+  white-space: nowrap;
+  position: relative;
+}
+
+.process-admin-dashboard .sidebar-menu>li:hover {
+  background: var(--primary-lt);
+  color: var(--primary);
+}
+
+.process-admin-dashboard .sidebar-menu>li.active {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.process-admin-dashboard .sidebar-menu>li.active .sb-ico {
+  background: rgba(255, 255, 255, 0.18) !important;
+  color: #fff !important;
+}
+
+.process-admin-dashboard .kansas-parent {
+  justify-content: space-between;
+}
+
+.process-admin-dashboard .kansas-parent.expanded {
+  background: var(--primary-lt);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.process-admin-dashboard .dropdown-arrow {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  color: var(--text-lt);
+}
+
+/* ── Sub-menu ── */
+.process-admin-dashboard .sub-menu {
+  list-style: none;
+  padding: 3px 0 3px 14px;
+  border-left: 2px solid var(--primary-lt);
+  margin: 2px 0 2px 20px;
+}
+
+.process-admin-dashboard .sub-menu li {
+  padding: 7px 12px;
+  border-radius: 8px;
+  margin-bottom: 2px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text-mid);
+  transition: background var(--t), color var(--t);
+  white-space: nowrap;
+  position: relative;
+}
+
+.process-admin-dashboard .sub-menu li:hover {
+  background: var(--primary-lt);
+  color: var(--primary);
+}
+
+.process-admin-dashboard .sub-menu li.active {
+  background: var(--primary-lt);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.process-admin-dashboard .sub-menu li.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  height: 60%;
+  width: 3px;
+  background: var(--primary);
+  border-radius: 0 3px 3px 0;
+}
+
+/* ── Icon boxes ── */
+.process-admin-dashboard .sb-ico {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  flex-shrink: 0;
+  transition: background var(--t), color var(--t);
+}
+
+.process-admin-dashboard .sb-ico-sm {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+}
+
+.process-admin-dashboard .sb-teal {
+  background: var(--primary-lt);
+  color: var(--primary);
+}
+
+.process-admin-dashboard .sb-blue {
+  background: var(--blue-lt);
+  color: var(--blue);
+}
+
+.process-admin-dashboard .sb-amber {
+  background: var(--amber-lt);
+  color: var(--amber);
+}
+
+/* ── NEW: Master University sidebar icon colour ── */
+.process-admin-dashboard .sb-indigo {
+  background: var(--violet-lt);
+  color: var(--violet);
+}
+
+.process-admin-dashboard .sidebar.closed .sub-menu {
+  display: none;
+}
+
+.process-admin-dashboard .sidebar.closed .dropdown-arrow {
+  display: none;
+}
+
+/* ── Sidebar footer / logout ── */
+.process-admin-dashboard .sidebar-footer {
+  padding: 16px 12px 24px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+.process-admin-dashboard .logout-btn-sidebar {
+  width: 100%;
+  background: #fff1f2;
+  color: var(--danger);
+  border: 1px solid #fecaca;
+  padding: 11px 1px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all var(--t);
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: 'Outfit', sans-serif;
+}
+
+.process-admin-dashboard .logout-btn-sidebar:hover {
+  background: var(--danger);
+  color: #fff;
+  border-color: var(--danger);
+  box-shadow: 0 4px 14px rgba(239, 68, 68, .28);
+}
+
+.process-admin-dashboard .logout-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.process-admin-dashboard .logout-btn-sidebar:hover .logout-circle {
+  background: rgba(255, 255, 255, .25);
+}
+
+.process-admin-dashboard .sidebar.closed .logout-btn-sidebar span:last-child {
+  display: none;
+}
+
+/* ════════════════════════════════════
+   MAIN CONTENT
+════════════════════════════════════ */
+.process-admin-dashboard .main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  height: 100vh;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* ════════════════════════════════════
+   NAVBAR
+════════════════════════════════════ */
+.process-admin-dashboard .navbar {
+  background: var(--surface);
+  padding: 0 24px;
+  height: var(--navbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  flex-shrink: 0;
+  gap: 16px;
+}
+
+.process-admin-dashboard .navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pad-hamburger {
+  display: none;
+  background: var(--primary-lt);
+  border: 1px solid var(--primary-bd);
+  color: var(--primary);
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--t);
+}
+
+.pad-hamburger:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.process-admin-dashboard .navbar-left h1 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -.3px;
+  white-space: nowrap;
+}
+
+.process-admin-dashboard .navbar-left h1 span {
+  color: var(--primary);
+}
+
+.process-admin-dashboard .navbar-center {
+  flex: 1;
+  max-width: 440px;
+}
+
+.process-admin-dashboard .search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.process-admin-dashboard .search-icon-left {
+  position: absolute;
+  left: 14px;
+  color: var(--text-lt);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.process-admin-dashboard .search-input {
+  width: 100%;
+  padding: 9px 18px 9px 38px;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  font-size: 13px;
+  outline: none;
+  background: #f8fafc;
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  transition: border-color var(--t), box-shadow var(--t), background var(--t);
+}
+
+.process-admin-dashboard .search-input::placeholder {
+  color: var(--text-lt);
+}
+
+.process-admin-dashboard .search-input:focus {
+  border-color: var(--primary);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.12);
+}
+
+.process-admin-dashboard .navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.process-admin-dashboard .notif-btn {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--secondary-lt);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--secondary);
+  transition: all var(--t);
+}
+
+.process-admin-dashboard .notif-btn:hover {
+  background: #fde68a;
+}
+
+.process-admin-dashboard .notif-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background: var(--danger);
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.process-admin-dashboard .admin-profile {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 5px 14px 5px 5px;
+  background: var(--primary-lt);
+  border: 1.5px solid var(--primary-bd);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color var(--t);
+}
+
+.process-admin-dashboard .admin-profile:hover {
+  border-color: var(--primary);
+}
+
+.process-admin-dashboard .profile-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #7c6edb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.process-admin-dashboard .profile-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.process-admin-dashboard .mail-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, .28);
+  transition: all var(--t);
+}
+
+.process-admin-dashboard .mail-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+/* ════════════════════════════════════
+   CONTENT AREA
+════════════════════════════════════ */
+.process-admin-dashboard .content-area {
+  flex: 1;
+  padding: 22px 24px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--bg);
+}
+
+.process-admin-dashboard .content-area::-webkit-scrollbar {
+  width: 5px;
+}
+
+.process-admin-dashboard .content-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.process-admin-dashboard .content-area::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 4px;
+}
+
+.process-admin-dashboard .content-area::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* ════════════════════════════════════
+   DASHBOARD CONTENT
+════════════════════════════════════ */
+.process-admin-dashboard .pad-dash {
+  max-width: 1400px;
+}
+
+.process-admin-dashboard .pad-stats-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.process-admin-dashboard .pad-stat-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px 16px 14px;
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  transition: transform var(--t), box-shadow var(--t);
+}
+
+.process-admin-dashboard .pad-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.process-admin-dashboard .pad-stat-ico {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.process-admin-dashboard .pad-sv {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 3px;
+  letter-spacing: -1px;
+}
+
+.process-admin-dashboard .pad-sl {
+  font-size: 11.5px;
+  color: var(--text-mid);
+  font-weight: 500;
+}
+
+.process-admin-dashboard .pad-charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.process-admin-dashboard .pad-chart-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.process-admin-dashboard .pad-chart-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px 8px;
+}
+
+.process-admin-dashboard .pad-chart-title {
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 400;
+}
+
+.process-admin-dashboard .pad-chart-title strong {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.process-admin-dashboard .pad-pills {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.process-admin-dashboard .pad-pill {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 20px;
+  background: #f1f5f9;
+  color: var(--text-lt);
+}
+
+.process-admin-dashboard .pad-pill-teal {
+  background: var(--primary-lt);
+  color: var(--primary);
+}
+
+.process-admin-dashboard .pad-pill-amber {
+  background: var(--amber-lt);
+  color: var(--amber);
+}
+
+.process-admin-dashboard .pad-chart-body {
+  padding: 0 14px 4px;
+}
+
+.process-admin-dashboard .pad-chart-xlbls {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 14px 8px;
+  font-size: 10px;
+  color: var(--text-lt);
+}
+
+.process-admin-dashboard .pad-bar-xlbls {
+  display: flex;
+  gap: 4px;
+  padding: 4px 14px 10px;
+  font-size: 9px;
+  color: var(--text-lt);
+}
+
+.process-admin-dashboard .pad-bar-xlbls span {
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.process-admin-dashboard .pad-chart-footer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 18px 14px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.process-admin-dashboard .pad-cfi {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.process-admin-dashboard .pad-cfd {
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.process-admin-dashboard .pad-view-all-link {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.process-admin-dashboard .pad-view-all-link:hover {
+  text-decoration: underline;
+}
+
+.process-admin-dashboard .pad-lines-ico {
+  margin-left: auto;
+  color: var(--text-lt);
+  display: flex;
+  align-items: center;
+}
+
+.process-admin-dashboard .pad-bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 290px;
+  gap: 14px;
+}
+
+.process-admin-dashboard .pad-table-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.process-admin-dashboard .pad-table-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+}
+
+.process-admin-dashboard .pad-section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.process-admin-dashboard .pad-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.process-admin-dashboard .pad-table thead tr {
+  background: var(--primary-lt);
+}
+
+.process-admin-dashboard .pad-table th {
+  padding: 9px 18px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: left;
+}
+
+.process-admin-dashboard .pad-table td {
+  padding: 12px 18px;
+  font-size: 13px;
+  color: var(--text);
+  border-top: 1px solid var(--border);
+}
+
+.process-admin-dashboard .pad-table tbody tr:hover {
+  background: var(--primary-lt);
+}
+
+.process-admin-dashboard .pad-chev {
+  color: var(--text-lt);
+  font-size: 11px;
+}
+
+.process-admin-dashboard .pad-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.process-admin-dashboard .pad-pending {
+  background: var(--amber-lt);
+  color: #92400e;
+}
+
+.process-admin-dashboard .pad-approved {
+  background: var(--primary-lt);
+  color: var(--primary-dk);
+}
+
+.process-admin-dashboard .pad-review {
+  background: var(--blue-lt);
+  color: var(--blue);
+}
+
+.process-admin-dashboard .pad-table-footer {
+  padding: 10px 18px 14px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--border);
+}
+
+.process-admin-dashboard .pad-view-all-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 16px;
+  border-radius: 8px;
+  border: 1.5px solid var(--primary-bd);
+  background: var(--primary-lt);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition: all var(--t);
+}
+
+.process-admin-dashboard .pad-view-all-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.process-admin-dashboard .pad-activity-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.process-admin-dashboard .pad-activity-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.process-admin-dashboard .pad-activity-arrow {
+  font-size: 18px;
+  color: var(--text-lt);
+  cursor: pointer;
+}
+
+.process-admin-dashboard .pad-activity-list {
+  padding: 10px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.process-admin-dashboard .pad-act-day {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--text-lt);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  padding: 2px 0;
+}
+
+.process-admin-dashboard .pad-act-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+
+.process-admin-dashboard .pad-act-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.process-admin-dashboard .pad-dot-teal {
+  background: var(--primary-lt);
+  color: var(--primary);
+}
+
+.process-admin-dashboard .pad-dot-blue {
+  background: var(--blue-lt);
+  color: var(--blue);
+}
+
+.process-admin-dashboard .pad-dot-indigo {
+  background: var(--violet-lt);
+  color: var(--violet);
+}
+
+.process-admin-dashboard .pad-act-txt {
+  font-size: 12.5px;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+
+.process-admin-dashboard .pad-act-txt strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ════════════════════════════════════
+   STATUS BADGES
+════════════════════════════════════ */
+.process-admin-dashboard .status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+
+.process-admin-dashboard .status-badge.completed {
+  background: var(--primary-lt);
+  color: var(--primary-dk);
+}
+
+.process-admin-dashboard .status-badge.incomplete {
+  background: #fff1f2;
+  color: var(--danger);
+}
+
+.process-admin-dashboard .status-badge.in-progress {
+  background: var(--blue-lt);
+  color: var(--blue);
+}
+
+.process-admin-dashboard .status-badge.not-started {
+  background: #f1f5f9;
+  color: var(--text-lt);
+}
+
+/* ════════════════════════════════════
+   APPLICATION MODAL
+════════════════════════════════════ */
+.process-admin-dashboard .application-id-badge {
+  background: linear-gradient(90deg, var(--primary), var(--primary-dk));
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .4px;
+  display: inline-block;
+}
+
+.process-admin-dashboard .days-badge {
+  font-size: 11px;
+  color: var(--text-lt);
+  margin-top: 4px;
+}
+
+.process-admin-dashboard .priority-high {
+  margin-left: 5px;
+  color: var(--danger);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1
+  }
+
+  50% {
+    opacity: .3
+  }
+}
+
+.process-admin-dashboard .application-details-modal {
+  background: var(--surface);
+  border-radius: 16px;
+  width: 800px;
+  max-width: 95vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14);
+}
+
+.process-admin-dashboard .details-section {
+  margin-bottom: 16px;
+  padding: 16px 20px;
+  background: var(--bg);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.process-admin-dashboard .details-section h4 {
+  margin: 0 0 12px 0;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+  border-bottom: 2px solid var(--primary-lt);
+  padding-bottom: 8px;
+}
+
+.process-admin-dashboard .info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.process-admin-dashboard .info-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.process-admin-dashboard .info-row.full-width {
+  grid-column: 1/-1;
+}
+
+.process-admin-dashboard .info-label {
+  font-size: 10px;
+  color: var(--text-lt);
+  margin-bottom: 3px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+}
+
+.process-admin-dashboard .info-value {
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.process-admin-dashboard .status-update-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.process-admin-dashboard .status-btn {
+  padding: 9px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--t);
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+}
+
+.process-admin-dashboard .status-btn.submitted {
+  background: var(--primary);
+}
+
+.process-admin-dashboard .status-btn.under-review {
+  background: var(--amber);
+}
+
+.process-admin-dashboard .status-btn.accepted {
+  background: #059669;
+}
+
+.process-admin-dashboard .status-btn.rejected {
+  background: var(--danger);
+}
+
+.process-admin-dashboard .status-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+.process-admin-dashboard .modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.process-admin-dashboard .download-pdf-btn {
+  padding: 10px 20px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-dk));
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all var(--t);
+  font-family: 'Outfit', sans-serif;
+}
+
+.process-admin-dashboard .download-pdf-btn:hover {
+  filter: brightness(1.07);
+  transform: translateY(-2px);
+}
+
+.process-admin-dashboard .download-pdf-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.process-admin-dashboard .email-doc-btn {
+  padding: 6px 13px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 700;
+  transition: all var(--t);
+  font-family: 'Outfit', sans-serif;
+}
+
+.process-admin-dashboard .email-doc-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.process-admin-dashboard .email-doc-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.process-admin-dashboard .refresh-btn-small {
+  background: linear-gradient(90deg, var(--primary), var(--primary-dk));
+  color: #fff;
+  border: none;
+  padding: 9px 20px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all var(--t);
+  font-family: 'Outfit', sans-serif;
+}
+
+.process-admin-dashboard .refresh-btn-small:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+/* ════════════════════════════════════
+   FOOTER
+════════════════════════════════════ */
+.process-admin-dashboard .dashboard-footer {
+  background: var(--surface);
+  padding: 12px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  color: var(--text-lt);
+  font-size: 12px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+
+/* ══════════════════════════════════════════════════════
+   MASTER UNIVERSITY — embedded panel overrides
+   MasterUniversity.js renders inside .content-area, so
+   its full-page layout (.mu-wrapper, .mu-sidebar,
+   .mu-topbar, .mu-main) must be neutralised and all its
+   components restyled to fit the parent dashboard shell.
+══════════════════════════════════════════════════════ */
+
+/* 1. Reset the full-page wrapper */
+.mu-wrapper {
+  display: block !important;
+  min-height: unset !important;
+  background: transparent !important;
+  font-family: 'Outfit', 'Segoe UI', sans-serif;
+}
+
+/* 2. Hide the duplicate sidebar, topbar, and standalone footer
+      that MasterUniversity renders — the parent dashboard already
+      has all of these. */
+.mu-wrapper .mu-sidebar,
+.mu-wrapper .mu-topbar,
+.mu-wrapper .mu-sidebar-logo,
+.mu-wrapper .mu-sidebar-logout {
+  display: none !important;
+}
+
+/* 3. Remove the left margin that was meant to clear the sidebar */
+.mu-wrapper .mu-main {
+  margin-left: 0 !important;
+  display: block !important;
+  min-height: unset !important;
+}
+
+/* 4. Banner — align with dashboard card style */
+.mu-wrapper .mu-banner {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.mu-wrapper .mu-banner-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+}
+
+.mu-wrapper .mu-banner-uni-badge {
+  background: var(--primary-lt);
+  color: var(--primary-dk);
+  border: 1px solid var(--primary-bd);
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+}
+
+/* 5. Stat cards — 4 columns, match parent card style */
+.mu-wrapper .mu-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.mu-wrapper .mu-stat-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  border-top-width: 4px;
+  transition: transform var(--t), box-shadow var(--t);
+}
+
+.mu-wrapper .mu-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.mu-wrapper .mu-stat-card--total {
+  border-top-color: var(--primary);
+}
+
+.mu-wrapper .mu-stat-card--incomplete {
+  border-top-color: var(--amber);
+}
+
+.mu-wrapper .mu-stat-card--completed {
+  border-top-color: #22c55e;
+}
+
+.mu-wrapper .mu-stat-card--inprogress {
+  border-top-color: var(--blue);
+}
+
+.mu-wrapper .mu-stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .6px;
+  color: var(--text-lt);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.mu-wrapper .mu-stat-value {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -1px;
+  font-family: 'Outfit', sans-serif;
+}
+
+/* 6. Table section card */
+.mu-wrapper .mu-table-section {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin: 0;
+}
+
+/* 7. University quick-tab strip */
+.mu-wrapper .mu-uni-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  padding: 0 16px;
+  background: var(--primary-lt);
+  scrollbar-width: none;
+}
+
+.mu-wrapper .mu-uni-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.mu-wrapper .mu-uni-tab {
+  padding: 10px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-mid);
+  background: transparent;
+  border: none;
+  border-bottom: 2.5px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--t), border-color var(--t);
+  font-family: 'Outfit', sans-serif;
+}
+
+.mu-wrapper .mu-uni-tab:hover {
+  color: var(--primary);
+}
+
+.mu-wrapper .mu-uni-tab--active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  font-weight: 700;
+}
+
+/* 8. Filter row */
+.mu-wrapper .mu-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.mu-wrapper .mu-table-search {
+  flex: 1;
+  min-width: 180px;
+  max-width: 360px;
+  padding: 8px 14px 8px 38px;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  font-size: 13px;
+  outline: none;
+  background: #f8fafc;
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  transition: border-color var(--t), box-shadow var(--t);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 12px center;
+}
+
+.mu-wrapper .mu-table-search:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.12);
+  background-color: #fff;
+}
+
+.mu-wrapper .mu-filter-btns {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.mu-wrapper .mu-filter-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: all var(--t);
+  font-family: 'Outfit', sans-serif;
+}
+
+.mu-wrapper .mu-filter-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.mu-wrapper .mu-filter-btn--active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+/* 9. Table */
+.mu-wrapper .mu-table-wrap {
+  overflow-x: auto;
+}
+
+.mu-wrapper .mu-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.mu-wrapper .mu-table thead tr {
+  background: var(--primary-lt);
+  border-bottom: 1px solid var(--border);
+}
+
+.mu-wrapper .mu-table thead th {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  color: var(--primary);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.mu-wrapper .mu-table-row {
+  border-bottom: 1px solid var(--border);
+  transition: background var(--t);
+}
+
+.mu-wrapper .mu-table-row:last-child {
+  border-bottom: none;
+}
+
+.mu-wrapper .mu-table-row:hover {
+  background: var(--primary-lt);
+}
+
+.mu-wrapper .mu-table td {
+  padding: 13px 16px;
+  vertical-align: middle;
+}
+
+/* 10. Application ID badge */
+.mu-wrapper .mu-app-id {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--primary-dk);
+  background: var(--primary-lt);
+  border: 1px solid var(--primary-bd);
+  border-radius: 20px;
+  padding: 2px 10px;
+  display: inline-block;
+  margin-bottom: 4px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.mu-wrapper .mu-app-subid {
+  font-size: 11px;
+  color: var(--text-lt);
+  font-family: 'Outfit', sans-serif;
+}
+
+/* 11. University name pill — teal to match design system */
+.mu-wrapper .mu-uni-name-cell {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary-dk);
+  background: var(--primary-lt);
+  border: 1px solid var(--primary-bd);
+  border-radius: 20px;
+  padding: 4px 12px;
+  display: inline-block;
+  white-space: nowrap;
+  font-family: 'Outfit', sans-serif;
+}
+
+/* 12. Student cell */
+.mu-wrapper .mu-student-cell {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.mu-wrapper .mu-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dk));
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: 'Outfit', sans-serif;
+}
+
+.mu-wrapper .mu-student-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+}
+
+.mu-wrapper .mu-student-email {
+  font-size: 11.5px;
+  color: var(--blue);
+  font-family: 'Outfit', sans-serif;
+}
+
+.mu-wrapper .mu-student-phone {
+  font-size: 11.5px;
+  color: var(--primary);
+  font-family: 'Outfit', sans-serif;
+}
+
+/* 13. Status badges — aligned with global .status-badge */
+.mu-wrapper .mu-status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  font-family: 'Outfit', sans-serif;
+  white-space: nowrap;
+}
+
+.mu-wrapper .status-completed {
+  background: var(--primary-lt);
+  color: var(--primary-dk);
+}
+
+.mu-wrapper .status-incomplete {
+  background: #fff1f2;
+  color: var(--danger);
+}
+
+.mu-wrapper .status-inprogress {
+  background: var(--blue-lt);
+  color: var(--blue);
+}
+
+/* 14. Submitted date */
+.mu-wrapper .mu-submitted {
+  font-size: 12.5px;
+  color: var(--text-mid);
+  white-space: nowrap;
+  font-family: 'Outfit', sans-serif;
+}
+
+/* 15. Progress bar */
+.mu-wrapper .mu-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 110px;
+}
+
+.mu-wrapper .mu-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.mu-wrapper .mu-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-dk));
+  border-radius: 4px;
+  transition: width .4s ease;
+}
+
+.mu-wrapper .mu-progress-pct {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  font-family: 'Outfit', sans-serif;
+}
+
+/* 16. Action buttons */
+.mu-wrapper .mu-action-btns {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.mu-wrapper .mu-btn-view {
+  padding: 6px 14px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition: all var(--t);
+}
+
+.mu-wrapper .mu-btn-view:hover {
+  background: var(--primary-dk);
+  transform: translateY(-1px);
+}
+
+.mu-wrapper .mu-btn-doc {
+  padding: 6px 10px;
+  background: transparent;
+  color: var(--text-mid);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition: all var(--t);
+}
+
+.mu-wrapper .mu-btn-doc:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* 17. Banner action buttons */
+.mu-wrapper .mu-btn {
+  padding: 8px 18px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-family: 'Outfit', sans-serif;
+  transition: all var(--t);
+}
+
+.mu-wrapper .mu-btn--primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.mu-wrapper .mu-btn--primary:hover {
+  background: var(--primary-dk);
+}
+
+.mu-wrapper .mu-btn--outline {
+  background: transparent;
+  border: 1.5px solid var(--primary-bd);
+  color: var(--primary);
+}
+
+.mu-wrapper .mu-btn--outline:hover {
+  background: var(--primary-lt);
+}
+
+/* 18. Empty state */
+.mu-wrapper .mu-table-empty {
+  text-align: center;
+  padding: 48px 16px;
+  color: var(--text-lt);
+  font-size: 14px;
+  font-family: 'Outfit', sans-serif;
+}
+
+/* 19. Table footer */
+.mu-wrapper .mu-table-footer {
+  padding: 10px 16px;
+  text-align: right;
+  font-size: 12px;
+  color: var(--text-lt);
+  border-top: 1px solid var(--border);
+  font-family: 'Outfit', sans-serif;
+}
+
+/* 20. Banner left flex alignment */
+.mu-wrapper .mu-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.mu-wrapper .mu-banner-right {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE — 1200px
+════════════════════════════════════ */
+@media (max-width: 1200px) {
+  .process-admin-dashboard .pad-stats-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .mu-wrapper .mu-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE — 960px
+════════════════════════════════════ */
+@media (max-width: 960px) {
+  .process-admin-dashboard .navbar-center {
+    display: none;
+  }
+
+  .process-admin-dashboard .pad-charts-row {
+    grid-template-columns: 1fr;
+  }
+
+  .process-admin-dashboard .pad-stats-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .process-admin-dashboard .pad-bottom-row {
+    grid-template-columns: 1fr;
+  }
+
+  .mu-wrapper .mu-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mu-wrapper .mu-filter-row {
+    flex-wrap: wrap;
+  }
+
+  .mu-wrapper .mu-filter-btns {
+    margin-left: 0;
+  }
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE — 768px (mobile drawer)
+════════════════════════════════════ */
+@media (max-width: 768px) {
+  .process-admin-dashboard {
+    flex-direction: row;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .process-admin-dashboard .sidebar {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    width: 260px !important;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 300;
+    transition: left .28s cubic-bezier(.4, 0, .2, 1);
+    box-shadow: none;
+  }
+
+  .process-admin-dashboard .sidebar.mobile-open {
+    left: 0;
+    box-shadow: 4px 0 28px rgba(0, 0, 0, 0.12);
+  }
+
+  .process-admin-dashboard .sidebar.mobile-open .pad-logo-wrap {
+    display: flex;
+  }
+
+  .process-admin-dashboard .main-content {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .process-admin-dashboard .navbar {
+    padding: 0 14px;
+    height: 56px;
+    gap: 10px;
+  }
+
+  .pad-hamburger {
+    display: flex;
+  }
+
+  .process-admin-dashboard .navbar-center {
+    display: none;
+  }
+
+  .process-admin-dashboard .profile-name {
+    display: none;
+  }
+
+  .process-admin-dashboard .admin-profile {
+    padding: 5px;
+    border-radius: 50%;
+  }
+
+  .process-admin-dashboard .mail-btn {
+    display: none;
+  }
+
+  .process-admin-dashboard .content-area {
+    padding: 14px 12px;
+  }
+
+  .process-admin-dashboard .pad-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .process-admin-dashboard .pad-stat-card {
+    padding: 12px 12px 10px;
+    gap: 10px;
+  }
+
+  .process-admin-dashboard .pad-stat-ico {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  .process-admin-dashboard .pad-sv {
+    font-size: 22px;
+  }
+
+  .process-admin-dashboard .pad-sl {
+    font-size: 11px;
+  }
+
+  .process-admin-dashboard .pad-charts-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .process-admin-dashboard .pad-bottom-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .process-admin-dashboard .pad-table th:nth-child(3),
+  .process-admin-dashboard .pad-table td:nth-child(3),
+  .process-admin-dashboard .pad-table th:nth-child(5),
+  .process-admin-dashboard .pad-table td:nth-child(5) {
+    display: none;
+  }
+
+  .process-admin-dashboard .pad-table th,
+  .process-admin-dashboard .pad-table td {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
+  .process-admin-dashboard .pad-pills {
+    display: none;
+  }
+
+  .process-admin-dashboard .dashboard-footer {
+    padding: 10px 14px;
+    font-size: 11px;
+  }
+
+  .process-admin-dashboard .application-details-modal {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .process-admin-dashboard .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .process-admin-dashboard .modal-actions {
+    flex-wrap: wrap;
+  }
+
+  .process-admin-dashboard .modal-actions button {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .pad-logo-svg {
+    width: 130px;
+  }
+
+  /* MasterUniversity mobile */
+  .mu-wrapper .mu-stats-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .mu-wrapper .mu-stat-value {
+    font-size: 26px;
+  }
+
+  .mu-wrapper .mu-banner {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .mu-wrapper .mu-banner-right {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .mu-wrapper .mu-uni-tabs {
+    padding: 0 10px;
+  }
+
+  .mu-wrapper .mu-filter-row {
+    padding: 10px 12px;
+  }
+
+  .mu-wrapper .mu-table-search {
+    max-width: 100%;
+  }
+
+  .mu-wrapper .mu-filter-btns {
+    margin-left: 0;
+  }
+
+  .mu-wrapper .mu-table td,
+  .mu-wrapper .mu-table th {
+    padding: 10px 10px;
+  }
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE — 480px
+════════════════════════════════════ */
+@media (max-width: 480px) {
+  .process-admin-dashboard .navbar {
+    padding: 0 10px;
+    height: 52px;
+  }
+
+  .process-admin-dashboard .pad-stats-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .process-admin-dashboard .pad-stat-card {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .process-admin-dashboard .pad-stat-ico {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .process-admin-dashboard .pad-sv {
+    font-size: 20px;
+  }
+
+  .process-admin-dashboard .pad-sl {
+    font-size: 10px;
+  }
+
+  .process-admin-dashboard .content-area {
+    padding: 10px 8px;
+  }
+
+  .process-admin-dashboard .pad-table-card {
+    overflow-x: auto;
+  }
+
+  .process-admin-dashboard .pad-table {
+    min-width: 400px;
+  }
+
+  .process-admin-dashboard .pad-chart-hdr {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .process-admin-dashboard .pad-act-txt {
+    font-size: 11.5px;
+  }
+
+  .process-admin-dashboard .navbar-left h1 {
+    font-size: 14px;
+  }
+
+  .process-admin-dashboard .navbar-left h1 span {
+    display: none;
+  }
+
+  .process-admin-dashboard .dashboard-footer {
+    font-size: 10px;
+    padding: 8px 10px;
+  }
+
+  /* MasterUniversity 480px */
+  .mu-wrapper .mu-stats-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .mu-wrapper .mu-stat-value {
+    font-size: 22px;
+  }
+
+  .mu-wrapper .mu-stat-label {
+    font-size: 9px;
+  }
+
+  .mu-wrapper .mu-banner-title {
+    font-size: 14px;
+  }
+
+  .mu-wrapper .mu-table-wrap {
+    overflow-x: auto;
+  }
+
+  .mu-wrapper .mu-table {
+    min-width: 560px;
+  }
+}
+
+.process-admin-dashboard .pad-mobile-app-list { display: none; }
+
+/* Replace the cramped university table with readable summary cards on tablets. */
+@media (max-width: 1100px) {
+  .process-admin-dashboard .pad-bottom-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .process-admin-dashboard .pad-table-card { overflow: hidden; }
+  .process-admin-dashboard .pad-table { display: none; }
+  .process-admin-dashboard .pad-mobile-app-list {
+    display: grid;
+    gap: 9px;
+    padding: 0 10px 10px;
+  }
+  .process-admin-dashboard .pad-mobile-app-card {
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: #fff;
+  }
+  .process-admin-dashboard .pad-mobile-app-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--border);
+  }
+  .process-admin-dashboard .pad-mobile-app-student {
+    display: flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  .process-admin-dashboard .pad-mobile-app-student strong {
+    min-width: 0;
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+  .process-admin-dashboard .pad-mobile-app-top .pad-badge {
+    flex: 0 0 auto;
+    max-width: 105px;
+    padding: 5px 8px;
+    font-size: 10px;
+    white-space: normal;
+  }
+  .process-admin-dashboard .pad-mobile-app-detail { display: grid; gap: 3px; padding-top: 9px; }
+  .process-admin-dashboard .pad-mobile-app-detail span {
+    color: var(--text-lt);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .process-admin-dashboard .pad-mobile-app-detail strong {
+    display: -webkit-box;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--text-mid);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .process-admin-dashboard .pad-mobile-app-detail.program strong { color: var(--text-lt); }
+  .process-admin-dashboard .pad-mobile-app-date { padding-top: 8px; color: var(--text-lt); font-size: 10px; }
+  .process-admin-dashboard .pad-mobile-app-skeleton {
+    height: 118px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: linear-gradient(90deg, #f1f5f9 25%, #f8fafc 50%, #f1f5f9 75%);
+    background-size: 200% 100%;
+    animation: pad-mobile-shimmer 1.3s ease infinite;
+  }
+  .process-admin-dashboard .pad-mobile-app-empty { padding: 20px 12px; color: var(--text-lt); font-size: 12px; text-align: center; }
+  .process-admin-dashboard .pad-table-footer { flex-wrap: wrap; justify-content: flex-start; gap: 7px; padding: 10px; }
+  .process-admin-dashboard .pad-table-footer .pad-view-all-btn { margin-left: 0 !important; }
+}
+
+@keyframes pad-mobile-shimmer { to { background-position: -200% 0; } }

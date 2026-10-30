@@ -1,0 +1,578 @@
+/* ── Education Details Section Styling ── */
+
+.education-page,
+.education-page *,
+.education-page *::before,
+.education-page *::after {
+  box-sizing: border-box;
+}
+
+.education-page {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.education-form-panel {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+  margin-bottom: 24px;
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.education-section {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  padding: 32px;
+  border: 1px solid #E2E8F0;
+  font-family: 'Inter', 'Poppins', sans-serif;
+  color: #0F172A;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.education-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.education-subtitle {
+  color: #64748B;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.education-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.education-card:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.education-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.education-card-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  min-width: 0;
+}
+
+.education-field {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.education-field label {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #0F172A;
+}
+
+.required {
+  color: #EF4444;
+  margin-left: 2px;
+}
+
+.education-input,
+.education-select {
+  width: 100%;
+  max-width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  color: #0F172A;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.education-input:focus,
+.education-select:focus {
+  outline: none;
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.education-field input,
+.education-field select,
+.education-select-wrap {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.education-select-wrap {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.education-select-wrap.open {
+  z-index: 30;
+}
+
+.education-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+  color: #0f172a;
+  font: inherit;
+  font-size: 0.92rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.education-select-trigger > span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.education-select-trigger:focus-visible {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.education-select-trigger:disabled {
+  background: #f8fafc;
+  cursor: not-allowed;
+}
+
+.education-select-arrow {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  border-right: 2px solid #64748b;
+  border-bottom: 2px solid #64748b;
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.education-select-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  width: 100%;
+  max-width: 100%;
+  max-height: min(240px, 40dvh);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 6px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.14);
+}
+
+.education-select-menu.opens-up {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+
+.education-select-option {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 7px;
+  background: #fff;
+  color: #334155;
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.education-select-option:hover,
+.education-select-option:focus-visible,
+.education-select-option.active {
+  outline: none;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* ── Custom Dropdown Styling (Reference: AdminVerifyDocuments.css) ── */
+.edu-custom-select {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  z-index: 20;
+}
+
+.edu-custom-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: #0F172A;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.edu-custom-select-trigger .placeholder-text {
+  color: #94A3B8;
+}
+
+.edu-custom-select-trigger .selected-text {
+  color: #0F172A;
+}
+
+.edu-custom-select-trigger:hover,
+.edu-custom-select-trigger:focus,
+.edu-custom-select.open .edu-custom-select-trigger {
+  border-color: #2563EB;
+  background-color: #ffffff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.edu-custom-select-arrow {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-right: 2px solid #64748B;
+  border-bottom: 2px solid #64748B;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.18s ease;
+}
+
+.edu-custom-select.open .edu-custom-select-arrow {
+  transform: translateY(2px) rotate(225deg);
+}
+
+.edu-custom-select-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: 240px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid #CBD5E1;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.12), 0 8px 10px -6px rgba(15, 23, 42, 0.08);
+  z-index: 100;
+  box-sizing: border-box;
+  padding: 6px;
+}
+
+.edu-custom-select-option {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #334155;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.edu-custom-select-option:hover,
+.edu-custom-select-option:focus {
+  background-color: #EFF6FF;
+  color: #1D4ED8;
+  outline: none;
+}
+
+.edu-custom-select-option.active {
+  background-color: #DBEAFE;
+  color: #1D4ED8;
+  font-weight: 600;
+}
+
+.btn-remove {
+  background-color: #FEF2F2;
+  color: #EF4444;
+  border: 1px solid #FCA5A5;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-remove:hover {
+  background-color: #FEE2E2;
+}
+
+.btn-add-education {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background-color: #F8FAFC;
+  color: #2563EB;
+  border: 2px dashed #CBD5E1;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 2rem;
+  box-sizing: border-box;
+}
+
+.btn-add-education:hover {
+  background-color: #EFF6FF;
+  border-color: #2563EB;
+}
+
+.education-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  border-top: 1px solid #E2E8F0;
+  padding-top: 24px;
+}
+
+.btn-next {
+  background-color: #2563EB;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 0 28px;
+  height: 48px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-next:hover {
+  background-color: #1D4ED8;
+}
+
+.btn-back {
+  background-color: #ffffff;
+  color: #475569;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 0 24px;
+  height: 48px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+  background-color: #F8FAFC;
+  color: #0F172A;
+}
+
+.badge-required {
+  background-color: #FEF2F2;
+  color: #EF4444;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.section-subheader {
+  color: #0F172A;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-bottom: 2px solid #2563EB;
+  padding-bottom: 0.25rem;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Mobile Compact Responsive Layout ── */
+@media (max-width: 768px) {
+  .education-page {
+    width: 100%;
+    padding: 20px 14px;
+  }
+
+  .education-form-panel {
+    padding: 16px 14px;
+    margin-bottom: 18px;
+  }
+
+  .education-section {
+    padding: 20px 14px;
+    border-radius: 14px;
+  }
+
+  .education-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .education-subtitle {
+    font-size: 0.88rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .education-card {
+    padding: 16px 14px;
+    border-radius: 10px;
+    margin-bottom: 1.25rem;
+    overflow: visible;
+  }
+
+  .education-card-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .education-card-header h3 {
+    font-size: 1rem;
+  }
+
+  .education-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .education-field label {
+    font-size: 0.85rem;
+  }
+
+  .education-input,
+  .education-select,
+  .edu-custom-select-trigger,
+  .education-select-trigger {
+    height: 44px;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+
+  .btn-add-education {
+    padding: 14px;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .education-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 10px;
+    padding-top: 16px;
+  }
+
+  .education-actions > button,
+  .education-actions > div,
+  .education-actions > div > button {
+    width: 100%;
+    height: 46px;
+    min-width: 0;
+    font-size: 0.9rem;
+  }
+
+  .education-actions > div {
+    height: auto;
+  }
+
+  .education-actions .personal-btn-next,
+  .education-actions .education-btn-back {
+    min-height: 46px;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .education-page {
+    padding: 16px 10px;
+    border-radius: 12px;
+  }
+
+  .education-form-panel,
+  .education-card {
+    padding: 14px 10px;
+  }
+
+  .edu-custom-select-option {
+    padding: 9px 12px;
+    font-size: 0.85rem;
+  }
+
+  .education-select-option {
+    padding: 9px 10px;
+    font-size: 0.85rem;
+  }
+}

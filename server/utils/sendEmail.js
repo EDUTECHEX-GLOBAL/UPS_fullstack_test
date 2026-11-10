@@ -1,3 +1,6 @@
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
 
@@ -13,6 +16,11 @@ const SENDER_NAME = process.env.EMAIL_FROM_NAME || "UPS Platform";
 const SENDER_ADDR = process.env.EMAIL_FROM_ADDR || "support@ups.edutechex.com";
 const SUPPORT_ADDR = process.env.SUPPORT_EMAIL || "edutechexcollege@gmail.com";
 const SMTP_USER = process.env.BREVO_SMTP_USER || "ae0fed001@smtp-brevo.com";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const LOGO_PATH = path.join(__dirname, "../assets/edutech-logo.png");
+const PASSWORD_RESET_LOGO_PATH = path.join(__dirname, "../src/assets/Edutech-logo.png");
+const WHITE_LOGO_PATH = path.join(__dirname, "../src/assets/Edutech-logo-white.png");
 const from = `"${SENDER_NAME}" <${SENDER_ADDR}>`;
 const supportContactHtml = `<p>Questions? Contact us at <a href="mailto:${SUPPORT_ADDR}">${SUPPORT_ADDR}</a></p>`;
 
@@ -63,9 +71,27 @@ const logSmtpError = (error) => {
   console.error("SMTP Command:", error.command);
 };
 
-const sendViaBrevoSMTP = async ({ to, subject, html, text, replyTo, attachments }) => {
+const sendViaBrevoSMTP = async ({ to, subject, html, text, replyTo, attachments = [] }) => {
   const finalHtml = ensureSupportContact(html);
   const finalReplyTo = replyTo || process.env.SUPPORT_EMAIL || SENDER_ADDR;
+
+  const finalAttachments = Array.isArray(attachments) ? [...attachments] : [];
+  if (finalHtml.includes("cid:edutechex-logo") && !finalAttachments.some((a) => a.cid === "edutechex-logo")) {
+    const logoFile = fs.existsSync(WHITE_LOGO_PATH)
+      ? WHITE_LOGO_PATH
+      : fs.existsSync(PASSWORD_RESET_LOGO_PATH)
+      ? PASSWORD_RESET_LOGO_PATH
+      : fs.existsSync(LOGO_PATH)
+      ? LOGO_PATH
+      : null;
+    if (logoFile) {
+      finalAttachments.push({
+        filename: "edutech-logo.png",
+        path: logoFile,
+        cid: "edutechex-logo",
+      });
+    }
+  }
 
   console.log("Sender:", {
     name: SENDER_NAME,
@@ -80,14 +106,14 @@ const sendViaBrevoSMTP = async ({ to, subject, html, text, replyTo, attachments 
     html: finalHtml,
     text: text || finalHtml.replace(/<[^>]*>/g, ""),
     replyTo: finalReplyTo,
-    attachments,
+    attachments: finalAttachments,
   });
 };
 
 // ORIGINAL FUNCTION (backward compatible)
-export const sendEmail = async (to, subject, html) => {
+export const sendEmail = async (to, subject, html, attachments = []) => {
   try {
-    const response = await sendViaBrevoSMTP({ to, subject, html });
+    const response = await sendViaBrevoSMTP({ to, subject, html, attachments });
     console.log("Email sent successfully to:", to);
     console.log("Message ID:", response.messageId);
     return {
@@ -142,6 +168,43 @@ export const sendEmailEnhanced = async (options) => {
       subject: options?.subject,
     };
   }
+};
+
+export const sendPasswordResetOTPEmail = async (to, firstName, otp) => {
+  const safeName = String(firstName || "there").replace(/[&<>\"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '\"': "&quot;",
+    "'": "&#39;",
+  }[char]));
+  const attachments = fs.existsSync(PASSWORD_RESET_LOGO_PATH)
+    ? [{ filename: "Edutech-logo.png", path: PASSWORD_RESET_LOGO_PATH, cid: "edutechex-logo" }]
+    : [];
+  const html = `
+    <!doctype html>
+    <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+    <body style="margin:0;padding:24px 12px;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#172033;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;">
+        <tr><td align="center" style="padding:24px 20px;background:#f8fafc;border-bottom:1px solid #e2e8f0;">
+          ${attachments.length ? '<img src="cid:edutechex-logo" alt="EDUTECHEX" width="190" style="display:block;width:190px;max-width:100%;height:auto;border:0;">' : '<strong style="font-size:22px;color:#263b8f;">EDUTECHEX</strong>'}
+        </td></tr>
+        <tr><td style="padding:28px 28px 32px;">
+          <h1 style="margin:0 0 20px;font-size:26px;line-height:1.25;color:#172033;">Password Reset Code</h1>
+          <p style="margin:0 0 14px;font-size:16px;line-height:1.6;">Hi ${safeName},</p>
+          <p style="margin:0 0 12px;font-size:16px;line-height:1.6;">Use this code to reset your password:</p>
+          <div style="margin:18px 0 22px;padding:16px 12px;background:#f1f5f9;border-radius:10px;text-align:center;font-size:34px;line-height:1.2;font-weight:700;letter-spacing:7px;color:#263b8f;">${otp}</div>
+          <p style="margin:0 0 18px;font-size:15px;line-height:1.6;">This code expires in <strong>10 minutes</strong>.</p>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:#64748b;">If you didn’t request a password reset, you can ignore this email.</p>
+        </td></tr>
+      </table>
+    </body></html>`;
+  return sendEmailEnhanced({
+    to,
+    subject: "College App - Reset Your Password",
+    html,
+    attachments,
+  });
 };
 
 // OTP EMAIL FUNCTION
@@ -371,6 +434,90 @@ export const emailTemplates = {
         </html>`,
     };
   },
+
+  accountApproved: (data) => {
+    const { studentName = "Student", loginUrl } = data;
+    const finalLoginUrl = loginUrl || `${(process.env.CLIENT_URL || "http://localhost:3000").replace(/\/$/, "")}/sign-in`;
+    return {
+      subject: "Your Account Has Been Approved - EduTechEx UPS Platform",
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Account Approved</title>
+        </head>
+        <body style="margin:0;padding:0;background:#f4f6f9;font-family:'Segoe UI',Arial,sans-serif;">
+          <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
+            <tr><td align="center">
+              <table width="560" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);max-width:92%;">
+                <tr>
+                  <td style="background:linear-gradient(135deg,#0284c7,#0369a1);padding:36px 40px;text-align:center;">
+                    <div style="background:#ffffff;padding:12px 28px;border-radius:12px;display:inline-block;margin:0 auto 14px;box-shadow:0 4px 14px rgba(0,0,0,0.12);">
+                      <img src="cid:edutechex-logo" alt="EDUTECHEX" width="180" style="display:block;max-width:180px;height:auto;margin:0 auto;" />
+                    </div>
+                    <p style="color:rgba(255,255,255,0.95);margin:0;font-size:14px;font-weight:600;letter-spacing:0.3px;">Account Approved Successfully ✅</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:36px 40px;">
+                    <p style="color:#1e293b;font-size:16px;margin:0 0 16px;font-weight:600;">Dear <strong>${studentName}</strong>,</p>
+                    <p style="color:#475569;font-size:15px;line-height:1.7;margin:0 0 20px;">
+                      Great news! Your account has been reviewed and <strong style="color:#0284c7;">approved by the Admin</strong>. You are now officially cleared to log in and start using your student portal.
+                    </p>
+                    <div style="background:#f0fdf4;border-left:4px solid #22c55e;padding:16px 20px;border-radius:6px;margin:0 0 28px;">
+                      <p style="color:#166534;font-size:14px;font-weight:600;margin:0 0 4px;">Status: Active & Approved</p>
+                      <p style="color:#15803d;font-size:13px;line-height:1.5;margin:0;">
+                        You can now log in using your registered email and password to access your dashboard, complete your enrollment, and submit your applications.
+                      </p>
+                    </div>
+                    <div style="text-align:center;margin:32px 0;">
+                      <a href="${finalLoginUrl}" target="_blank" style="background:#0284c7;color:#ffffff;text-decoration:none;padding:14px 32px;font-size:15px;font-weight:600;border-radius:8px;display:inline-block;box-shadow:0 4px 12px rgba(2,132,199,0.3);">
+                        Log In to Your Account →
+                      </a>
+                    </div>
+                    <p style="color:#64748b;font-size:13px;line-height:1.6;margin:24px 0 0;">
+                      If the button above does not work, copy and paste this link into your browser:<br>
+                      <a href="${finalLoginUrl}" style="color:#0284c7;word-break:break-all;">${finalLoginUrl}</a>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:20px 40px 28px;text-align:center;border-top:1px solid #f1f5f9;background:#fafafa;">
+                    <p style="color:#64748b;font-size:12px;margin:0 0 4px;">Questions? Contact us at <a href="mailto:${SUPPORT_ADDR}" style="color:#0284c7;">${SUPPORT_ADDR}</a></p>
+                    <p style="color:#94a3b8;font-size:11px;margin:0;">© 2026 EduTechEx UPS Platform. All rights reserved.</p>
+                  </td>
+                </tr>
+              </table>
+            </td></tr>
+          </table>
+        </body>
+        </html>`,
+    };
+  },
+};
+
+// SEND ACCOUNT APPROVAL EMAIL HELPER
+export const sendAccountApprovalEmail = async ({ to, studentName, loginUrl }) => {
+  const finalLoginUrl = loginUrl || `${(process.env.CLIENT_URL || "http://localhost:3000").replace(/\/$/, "")}/sign-in`;
+  const template = emailTemplates.accountApproved({ studentName, loginUrl: finalLoginUrl });
+
+  const attachments = [];
+  if (fs.existsSync(LOGO_PATH)) {
+    attachments.push({
+      filename: "edutech-logo.png",
+      path: LOGO_PATH,
+      cid: "edutechex-logo",
+    });
+  }
+
+  return await sendEmailEnhanced({
+    to,
+    subject: template.subject,
+    html: template.html,
+    attachments,
+  });
 };
 
 // BATCH EMAILS
@@ -395,7 +542,9 @@ export const sendBatchEmails = async (emails) => {
 const emailService = {
   sendEmail,
   sendEmailEnhanced,
+  sendPasswordResetOTPEmail,
   sendOTPEmail,
+  sendAccountApprovalEmail,
   emailTemplates,
   sendBatchEmails,
 };

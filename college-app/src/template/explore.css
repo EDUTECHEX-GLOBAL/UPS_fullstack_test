@@ -118,7 +118,7 @@
 @media (max-width: 992px) {
   .explore-layout {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 32px;
   }
 
   .section-subtitle {
@@ -127,7 +127,7 @@
 
   .explore-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 16px;
   }
 
   .card-image-wrapper {
@@ -136,12 +136,21 @@
 }
 
 @media (max-width: 560px) {
+  .explore-section {
+    padding: 44px 0;
+  }
+
+  .explore-layout {
+    gap: 24px;
+  }
+
   .explore-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
 
   .section-title {
-    font-size: 26px;
+    font-size: clamp(23px, 6.8vw, 27px);
   }
 
   .card-image-wrapper {
@@ -154,5 +163,16 @@
 
   .explore-card:hover .card-image {
     transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .explore-section {
+    padding: 36px 0;
+  }
+
+  .explore-info-cta .btn {
+    width: 100%;
+    justify-content: center;
   }
 }

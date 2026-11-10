@@ -134,7 +134,7 @@ export const getUniversitySelection = async (req, res) => {
     const uniCountries = Array.from(new Set(eligibleUnis.map(u => u.country).filter(Boolean)));
     const activeCountries = uniCountries.length > 0 ? uniCountries : selectedCountries;
 
-    const isApproved = program?.programApprovalStatus === 'approved';
+    const isApproved = uniSelection?.status === 'Completed' && (uniSelection?.selectedUniversities || []).length > 0;
 
     const resultData = {
       isApproved,
@@ -142,8 +142,10 @@ export const getUniversitySelection = async (req, res) => {
       programType: programObj.programType || 'bachelors',
       selectedCountry: uniSelection?.selectedCountry || activeCountries[0] || '',
       selectedCountries: activeCountries,
-      eligibleUniversities: eligibleUnis,
-      selectedUniversities: (uniSelection?.selectedUniversities || []).map((university) => {
+      // Only expose partner-assigned universities after the partner approves
+      // the shortlist. Program approval alone does not authorize student selection.
+      eligibleUniversities: [],
+      selectedUniversities: (isApproved ? uniSelection.selectedUniversities : []).map((university) => {
         const eligible = eligibleUnis.find((candidate) =>
           candidate.universityName.toLowerCase() === String(university.universityName || '').toLowerCase() &&
           candidate.country.toLowerCase() === String(university.country || '').toLowerCase()
@@ -164,7 +166,7 @@ export const getUniversitySelection = async (req, res) => {
           programName: selectedPrograms.join(', ')
         };
       }),
-      studentSelectedPrograms: uniSelection?.studentSelectedPrograms || [],
+      studentSelectedPrograms: isApproved ? (uniSelection?.studentSelectedPrograms || []) : [],
       status: uniSelection?.status || 'selected',
     };
 
@@ -187,8 +189,8 @@ export const saveStudentUniversityChoices = async (req, res) => {
       UniversitySelection.findOne({ userId }),
       TestScores.findOne({ userId }).lean()
     ]);
-    if (!selection || !Array.isArray(selection.selectedUniversities)) {
-      return res.status(404).json({ success: false, message: 'No approved universities were found.' });
+    if (!selection || selection.status !== 'Completed' || !Array.isArray(selection.selectedUniversities)) {
+      return res.status(403).json({ success: false, message: 'Your partner has not approved a university assignment yet.' });
     }
 
     const approvedById = new Map(selection.selectedUniversities.map((university) => [String(university.universityId), university]));
@@ -253,45 +255,11 @@ export const saveStudentUniversityChoices = async (req, res) => {
 export const saveUniversitySelection = async (req, res) => {
   try {
     const userId = getUserId(req);
-    const { programType, selectedCountry, selectedUniversities } = req.body;
-
-    if (!programType || !Array.isArray(selectedUniversities) || selectedUniversities.length === 0 || selectedUniversities.length > 5) {
-      return res.status(400).json({ success: false, message: 'programType and between 1 to 5 selectedUniversities are required.' });
+    const selection = await UniversitySelection.findOne({ userId }).lean();
+    if (!selection || selection.status !== 'Completed' || !selection.selectedUniversities?.length) {
+      return res.status(403).json({ success: false, message: 'Your partner has not approved a university assignment yet.' });
     }
-
-    const invalidUniversities = selectedUniversities.filter(u => !u.universityId || !u.universityName || !u.country);
-    if (invalidUniversities.length > 0) {
-      return res.status(400).json({ success: false, message: 'One or more invalid university selections. Ensure each university has an id, name, and country.' });
-    }
-
-    const program = await ProgramSelection.findOne({ userId }).lean();
-    if (!program || program.programApprovalStatus !== 'approved') {
-      return res.status(403).json({ success: false, message: 'Program selection must be approved before selecting a university.' });
-    }
-
-    const studentSelectedPrograms = [];
-    for (const u of selectedUniversities) {
-      const progs = Array.isArray(u.selectedPrograms) && u.selectedPrograms.length > 0
-        ? u.selectedPrograms
-        : (u.programName && u.programName !== 'Degree Program' ? u.programName.split(', ').map(p => p.trim()).filter(Boolean) : []);
-      for (const prog of progs) {
-        studentSelectedPrograms.push({
-          universityId: u.universityId,
-          universityName: u.universityName,
-          country: u.country,
-          programName: prog,
-          degree: u.degree || ''
-        });
-      }
-    }
-
-    const selection = await UniversitySelection.findOneAndUpdate(
-      { userId },
-      { userId, programType, selectedCountry: selectedCountry || '', selectedUniversities, studentSelectedPrograms, status: 'selected' },
-      { new: true, upsert: true, runValidators: true, setDefaultsOnInsert: true }
-    );
-
-    return res.status(200).json({ success: true, message: 'University selection saved successfully.', data: selection });
+    return res.status(403).json({ success: false, message: 'University assignments are managed by your partner.' });
   } catch (error) {
     console.error('saveUniversitySelection Error:', error);
     return res.status(500).json({ success: false, message: 'Failed to save university selection.', error: error.message });

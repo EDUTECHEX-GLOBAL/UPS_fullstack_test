@@ -74,27 +74,41 @@ const Contact = () => {
     const phone = values.phone.trim();
     const message = values.message.trim();
 
-    if (name.length < 2 || name.length > 120 || !/^\p{L}[\p{L}\p{M}]*(?:[ .'-]\p{L}[\p{L}\p{M}]*)*$/u.test(name)) {
-      errors.fullName = 'Enter a valid name using letters, spaces, apostrophes, periods, or hyphens.';
+    if (!name) {
+      errors.fullName = 'Please enter your full name.';
+    } else if (name.length < 2 || name.length > 120 || !/^[\p{L}\s]+$/u.test(name)) {
+      errors.fullName = 'Enter a valid name using letters and spaces only.';
     }
-    if (email.length > 254 || !/^[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,63}$/i.test(email)) {
+
+    if (!email) {
+      errors.email = 'Please enter your email address.';
+    } else if (email.length < 5 || email.length > 254 || !/^[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,63}$/i.test(email)) {
       errors.email = 'Enter a valid email address, including a valid domain.';
     }
-    if (!/^\d{10}$/.test(phone)) {
+
+    if (!phone) {
+      errors.phone = 'Please enter your phone number.';
+    } else if (!/^\d{10}$/.test(phone)) {
       errors.phone = 'Enter a 10-digit phone number.';
     }
+
     if (values.country && !['USA', 'UK', 'Canada', 'Australia', 'Germany', 'New Zealand'].includes(values.country)) {
       errors.country = 'Select a country from the list.';
     }
+
     if (values.programLevel && !["Bachelor's Degree", "Master's Degree", 'Doctorate / PhD', 'Diploma / Certificate'].includes(values.programLevel)) {
       errors.programLevel = 'Select a program level from the list.';
     }
+
     const messageWords = message.match(/\p{L}{2,}/gu) || [];
-    if (/\p{N}/u.test(message)) {
-      errors.message = 'Please remove numbers from your message.';
+    if (!message) {
+      errors.message = 'Please enter your message.';
+    } else if (/[^\p{L}\s]/u.test(message)) {
+      errors.message = 'Only letters and spaces are allowed. Numbers, punctuation and special characters are not allowed.';
     } else if (message.length < 10 || message.length > 5000 || messageWords.length < 2) {
-      errors.message = 'Enter a message of at least 10 characters with a few words.';
+      errors.message = 'Enter a message of at least 10 characters with at least two words.';
     }
+
     return errors;
   };
 
@@ -121,12 +135,14 @@ const Contact = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     const safeValue = name === 'fullName'
-      ? value.replace(/[^\p{L}\p{M} .'-]/gu, '')
+      ? value.replace(/[^\p{L}\s]/gu, '')
       : name === 'phone'
         ? value.replace(/\D/g, '').slice(0, 10)
-        : name === 'message'
-          ? value.replace(/\p{N}/gu, '')
-        : value;
+        : name === 'email'
+          ? value.replace(/[^\w.@+-]/g, '').slice(0, 254)
+          : name === 'message'
+            ? value.replace(/[^\p{L}\s]/gu, '')
+            : value;
     updateField(name, safeValue);
   };
 
@@ -289,6 +305,7 @@ const Contact = () => {
                       placeholder="Enter your full name" 
                       value={formData.fullName}
                       onChange={handleChange}
+                      onBlur={() => validateField('fullName')}
                       maxLength={120}
                       autoComplete="name"
                       required 
@@ -377,6 +394,7 @@ const Contact = () => {
                       placeholder="Tell us about your goals, questions or how we can help you..."
                       value={formData.message}
                       onChange={handleChange}
+                      onBlur={() => validateField('message')}
                       minLength={10}
                       maxLength={5000}
                       required
@@ -402,4 +420,3 @@ const Contact = () => {
 };
 
 export default Contact;
-

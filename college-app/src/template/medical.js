@@ -8,6 +8,16 @@ const Medical = ({ onViewChange }) => {
     if (onViewChange) onViewChange('contact');
   };
 
+  const handleCountrySelect = (e, countryId) => {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
+      return;
+    }
+    e.preventDefault();
+    if (onViewChange) {
+      onViewChange('medical-country', countryId);
+    }
+  };
+
   return (
     <div className="medical-page">
       <section className="medical-hero">
@@ -23,7 +33,12 @@ const Medical = ({ onViewChange }) => {
 
           <div className="medical-country-nav">
             {medicalCountries.map((c) => (
-              <a key={c.id} href={`#medical-${c.id}`} className="medical-chip">
+              <a
+                key={c.id}
+                href={`#medical-${c.id}`}
+                className="medical-chip"
+                onClick={(e) => handleCountrySelect(e, c.id)}
+              >
                 <CountryFlag id={c.id} size={18} />
                 {c.name}
               </a>
@@ -51,6 +66,7 @@ const Medical = ({ onViewChange }) => {
                 key={c.id}
                 href={`#medical-${c.id}`}
                 className={`medical-card medical-card--link ${c.flagged ? 'medical-card--flagged' : ''}`}
+                onClick={(e) => handleCountrySelect(e, c.id)}
               >
                 <div className="medical-card-head">
                   <CountryFlag id={c.id} size={34} className="medical-card-flag" />

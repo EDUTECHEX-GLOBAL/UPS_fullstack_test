@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   FaCheckCircle, FaClock, FaExclamationTriangle, FaTimesCircle,
-  FaFilePdf, FaCopy, FaSignOutAlt, FaArrowLeft, FaPrint,
+  FaFilePdf, FaCopy, FaSignOutAlt, FaArrowLeft, FaPrint, FaDownload,
   FaUserCheck, FaHourglassHalf, FaLock, FaExternalLinkAlt, FaRedo
 } from 'react-icons/fa';
+import * as jsPDFModule from 'jspdf';
 import EdutechLogo from '../../../assets/Edutech-logo.svg';
 import axiosInstance from '../../../api/axiosInstance';
 import './ApplicationStatus.css';
@@ -15,6 +16,7 @@ const ApplicationStatus = () => {
 
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [downloadingSummary, setDownloadingSummary] = useState(false);
   const [toastMessage, setToastMessage] = useState(
     location.state?.justSubmitted
       ? { type: 'success', text: 'Application successfully submitted for approval!' }
@@ -69,6 +71,116 @@ const ApplicationStatus = () => {
     navigator.clipboard.writeText(statusData.applicationNumber);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleDownloadSummary = () => {
+    if (downloadingSummary) return;
+    setDownloadingSummary(true);
+    try {
+      const JsPDFConstructor = [
+        jsPDFModule.jsPDF,
+        jsPDFModule.default?.jsPDF,
+        jsPDFModule.default,
+      ].find((candidate) => typeof candidate === 'function');
+      if (!JsPDFConstructor) throw new Error('PDF generator is unavailable.');
+
+      const doc = new JsPDFConstructor({ unit: 'mm', format: 'a4' });
+      const margin = 16;
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const pageHeight = doc.internal.pageSize.getHeight();
+      const contentWidth = pageWidth - margin * 2;
+      let y = 20;
+
+      const ensureSpace = (height) => {
+        if (y + height > pageHeight - margin) {
+          doc.addPage();
+          y = 18;
+        }
+      };
+
+      const addSection = (title, rows) => {
+        ensureSpace(14);
+        doc.setFillColor(8, 145, 178);
+        doc.roundedRect(margin, y, contentWidth, 8, 1.5, 1.5, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.setTextColor(255, 255, 255);
+        doc.text(title, margin + 3, y + 5.5);
+        y += 12;
+
+        rows.filter(([, value]) => value !== undefined && value !== null && String(value).trim() !== '').forEach(([label, value]) => {
+          const safeValue = Array.isArray(value) ? value.join(', ') : String(value);
+          const valueLines = doc.splitTextToSize(safeValue, contentWidth - 57);
+          const rowHeight = Math.max(6, valueLines.length * 4.5 + 1);
+          ensureSpace(rowHeight);
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(9);
+          doc.setTextColor(71, 85, 105);
+          doc.text(String(label), margin + 1, y + 3.5);
+          doc.setFont('helvetica', 'normal');
+          doc.setTextColor(15, 23, 42);
+          doc.text(valueLines, margin + 57, y + 3.5);
+          y += rowHeight;
+          doc.setDrawColor(226, 232, 240);
+          doc.line(margin, y, pageWidth - margin, y);
+        });
+        y += 7;
+      };
+
+      const bachelor = education.bachelorDetails || {};
+      const master = education.masterDetails || {};
+      const medical = education.medicalDetails || {};
+      const educationRows = applyingFor === "Master's"
+        ? [['Degree', master.degreeType], ['Institution', master.university], ['Major', master.courseMajor], ['GPA', master.gpa], ['Graduation Year', master.graduationYear]]
+        : applyingFor === 'Medical'
+          ? [['Highest Education', medical.highestEducation], ['Institution', medical.institution], ['Score / GPA', medical.percentageGpa]]
+          : [['Highest Education', bachelor.highestEducation || '10+2 / Higher Secondary'], ['Institution', bachelor.schoolName], ['Board', bachelor.board], ['Score / Percentage', bachelor.percentage ? `${bachelor.percentage}%` : ''], ['Completion Year', bachelor.completionYear]];
+
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(18);
+      doc.setTextColor(22, 59, 108);
+      doc.text('Application Summary', margin, y);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(100, 116, 139);
+      doc.text(`Application ID: ${applicationNumber || 'Pending'}`, margin, y + 6);
+      y += 14;
+
+      addSection('APPLICATION STATUS', [
+        ['Status', applicationStatus],
+        ['Submitted', submittedAt ? formatSubmissionDate(submittedAt) : 'Pending'],
+        ['Applicant Type', applicantType],
+        ['Applying For', applyingFor]
+      ]);
+      addSection('APPLICANT', [
+        ['Name', fullName], ['Email', email], ['Phone', summary.phone || personal.phone || personal.mobile],
+        ['Date of Birth', personal.dateOfBirth], ['Gender', personal.gender], ['Citizenship', personal.citizenship]
+      ]);
+      addSection('EDUCATION', educationRows);
+
+      const testRows = [];
+      if (languageTest?.exam) {
+        const languageParts = [
+          `Score: ${languageTest.score || languageTest.overallScore || 'Submitted'}`,
+          languageTest.testDate ? `Date: ${languageTest.testDate}` : '',
+          ...[['Listening', languageTest.listeningScore], ['Reading', languageTest.readingScore], ['Writing', languageTest.writingScore], ['Speaking', languageTest.speakingScore], ['Literacy', languageTest.literacyScore], ['Comprehension', languageTest.comprehensionScore], ['Conversation', languageTest.conversationScore], ['Production', languageTest.productionScore]].filter(([, score]) => score).map(([label, score]) => `${label}: ${score}`)
+        ].filter(Boolean);
+        testRows.push([languageTest.exam, languageParts.join(' | ')]);
+      }
+      additionalTests.forEach((test) => {
+        const parts = [`Score: ${test.score || 'Recorded'}`, test.testDate ? `Date: ${test.testDate}` : ''].filter(Boolean);
+        testRows.push([test.exam || 'Additional Test', parts.join(' | ')]);
+      });
+      if (testScores.hasNotTaken) testRows.push(['Test declaration', 'No standardized tests taken / required']);
+      if (!testRows.length) testRows.push(['Test scores', 'No test scores recorded']);
+      addSection('STANDARDIZED & LANGUAGE TEST SCORES', testRows);
+
+      doc.save(`Application-Summary-${applicationNumber || 'application'}.pdf`);
+    } catch (error) {
+      console.error('Unable to download application summary:', error);
+    } finally {
+      setDownloadingSummary(false);
+    }
   };
 
   const handleLogout = () => {
@@ -185,6 +297,13 @@ const ApplicationStatus = () => {
   const personal = summary.personal || {};
   const education = summary.education || {};
   const testScores = summary.testScores || {};
+  const savedTests = Array.isArray(testScores.tests) ? testScores.tests : [];
+  const languageTest = testScores.languageTest || savedTests.find((test) =>
+    test.category === 'language' || String(test.id) === 'lang_test'
+  );
+  const additionalTests = Array.isArray(testScores.additionalTests)
+    ? testScores.additionalTests
+    : savedTests.filter((test) => test !== languageTest && test.category !== 'language' && String(test.id) !== 'lang_test');
   const fullName = `${summary.firstName || personal.firstName || 'Student'} ${summary.lastName || personal.lastName || ''}`.trim();
   const email = summary.email || personal.email || '';
 
@@ -635,25 +754,44 @@ const ApplicationStatus = () => {
               </div>
               <table className="summary-data-table">
                 <tbody>
-                  {testScores.languageTest && testScores.languageTest.exam ? (
+                  {languageTest?.exam ? (
                     <tr>
                       <td>Language Test:</td>
                       <td>
-                        <strong>{testScores.languageTest.exam}</strong> &mdash; Score: {testScores.languageTest.overallScore || 'Submitted'}
+                        <strong>{languageTest.exam}</strong> &mdash; Score: {languageTest.score || languageTest.overallScore || 'Submitted'}
+                        {languageTest.testDate ? ` (Date: ${languageTest.testDate})` : ''}
+                        {[
+                          ['Listening', languageTest.listeningScore],
+                          ['Reading', languageTest.readingScore],
+                          ['Writing', languageTest.writingScore],
+                          ['Speaking', languageTest.speakingScore],
+                          ['Literacy', languageTest.literacyScore],
+                          ['Comprehension', languageTest.comprehensionScore],
+                          ['Conversation', languageTest.conversationScore],
+                          ['Production', languageTest.productionScore]
+                        ].filter(([, score]) => score).map(([label, score]) => ` · ${label}: ${score}`).join('')}
                       </td>
                     </tr>
                   ) : (
                     <tr>
-                      <td>Language Test:</td>
-                      <td>Standard English Proficiency</td>
+                      <td>Test Scores:</td>
+                      <td>{testScores.hasNotTaken ? 'No standardized tests taken / required.' : 'No test scores recorded.'}</td>
                     </tr>
                   )}
 
-                  {Array.isArray(testScores.additionalTests) && testScores.additionalTests.length > 0 ? (
-                    testScores.additionalTests.map((t, idx) => (
+                  {additionalTests.length > 0 ? (
+                    additionalTests.map((t, idx) => (
                       <tr key={idx}>
                         <td>{t.exam || `Additional Test ${idx + 1}`}:</td>
-                        <td>Score: {t.score || 'Recorded'} (Date: {t.testDate || 'N/A'})</td>
+                        <td>
+                          Score: {t.score || 'Recorded'}{t.testDate ? ` (Date: ${t.testDate})` : ''}
+                          {[
+                            ['Verbal', t.verbalScore], ['Quantitative', t.quantitativeScore],
+                            ['Analytical Writing', t.analyticalWritingScore], ['Reading & Writing', t.readingWritingScore],
+                            ['Math', t.mathScore], ['English', t.englishScore], ['Science', t.scienceScore],
+                            ['Data Insights', t.dataInsightsScore], ['Percentile', t.percentile], ['Rank', t.allIndiaRank]
+                          ].filter(([, score]) => score).map(([label, score]) => ` · ${label}: ${score}`).join('')}
+                        </td>
                       </tr>
                     ))
                   ) : null}
@@ -680,6 +818,15 @@ const ApplicationStatus = () => {
               <FaArrowLeft /> View Full Form Review
             </button>
           )}
+
+          <button
+            onClick={handleDownloadSummary}
+            className="status-action-btn-secondary"
+            disabled={downloadingSummary}
+            type="button"
+          >
+            <FaDownload /> {downloadingSummary ? 'Preparing PDF...' : 'Download Summary'}
+          </button>
 
           <button
             onClick={() => window.print()}

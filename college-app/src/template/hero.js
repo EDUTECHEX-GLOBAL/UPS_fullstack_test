@@ -2,7 +2,14 @@ import React from 'react';
 import './hero.css';
 import heroImage from '../assets/university.png';
 
-const Hero = () => {
+const Hero = ({ onViewChange }) => {
+  const handleTalkToCounsellor = (e) => {
+    if (onViewChange) {
+      e.preventDefault();
+      onViewChange('contact');
+    }
+  };
+
   return (
     <section className="hero-section" id="home">
       <div className="hero-container">
@@ -25,7 +32,11 @@ const Hero = () => {
             <a href="#explore" className="btn btn-primary">
               Explore Universities <span className="arrow-icon">→</span>
             </a>
-            <a href="#consultation" className="btn btn-outline">
+            <a
+              href="#contact"
+              onClick={handleTalkToCounsellor}
+              className="btn btn-outline"
+            >
               Talk to Our Counsellor
             </a>
           </div>

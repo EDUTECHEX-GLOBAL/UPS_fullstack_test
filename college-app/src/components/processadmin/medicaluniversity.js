@@ -20,6 +20,9 @@ const MedicalUniversity = () => {
     const [selectedUniversityKeys, setSelectedUniversityKeys] = useState([]);
     const [universityActionBusy, setUniversityActionBusy] = useState(false);
     const [universityActionError, setUniversityActionError] = useState('');
+    const [approveModal, setApproveModal] = useState(null);
+    const [approveLoading, setApproveLoading] = useState(false);
+    const [approveError, setApproveError] = useState('');
 
     useEffect(() => {
         if (!statusDropdownOpen) return undefined;
@@ -38,6 +41,21 @@ const MedicalUniversity = () => {
             document.removeEventListener('keydown', closeOnEscape);
         };
     }, [statusDropdownOpen]);
+
+    const submitMedicalApproval = async () => {
+        if (!approveModal || approveLoading) return;
+        setApproveLoading(true);
+        setApproveError('');
+        try {
+            await axios.patch(`${API_BASE_URL}/api/enrollment-admin/medical/applications/${approveModal.studentId || approveModal.userId}/approve`, {}, { headers: getAuthHeaders() });
+            setApproveModal(null);
+            await fetchApplications();
+        } catch (err) {
+            setApproveError(err.response?.data?.message || err.message || 'Failed to approve program selection.');
+        } finally {
+            setApproveLoading(false);
+        }
+    };
 
     const toggleStatusDropdown = () => {
         if (!statusDropdownOpen && statusDropdownRef.current) {
@@ -372,6 +390,16 @@ const MedicalUniversity = () => {
                     <h1 className="med-page-title">Medical Applications</h1>
                     <p className="med-page-sub">Process and verify medical student applications</p>
                 </div>
+                <div className="med-page-header-right">
+                    <button type="button" className="med-refresh-btn" onClick={fetchApplications} disabled={loading}>
+                        <svg className={`med-refresh-icon${loading ? ' is-spinning' : ''}`} width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                            <path d="M20 7v5h-5" />
+                            <path d="M4 17v-5h5" />
+                            <path d="M5.6 9A7 7 0 0 1 18 6l2 6M4 12l2 6a7 7 0 0 0 12.4-3" />
+                        </svg>
+                        {loading ? 'Refreshing...' : 'Refresh'}
+                    </button>
+                </div>
             </div>
 
             <div className="med-stats-row">
@@ -488,28 +516,27 @@ const MedicalUniversity = () => {
                                         <span className={`med-badge ${getStatusClass(app)}`}>{getStatusLabel(app)}</span>
                                     </td>
                                     <td>
-                                        <button className="med-btn-view" onClick={() => openModal(app)}>View Details</button>
-                                        {hasSavedUniversity(app) ? (
-                                            <button className="med-btn-view" style={{ marginTop: 6 }} onClick={() => openUniversityModal(app, String(app.universitySelectionStatus || '').toLowerCase() === 'completed')}>View University</button>
-                                        ) : null}
-                                        {(String(app.programApprovalStatus || '').toLowerCase() === 'approved' || String(app.applicationStatus || '').toLowerCase() === 'approved') && !hasSavedUniversity(app) ? (
-                                            <button className="med-btn-view" style={{ marginTop: 6 }} onClick={() => openUniversityModal(app)}>View Universities</button>
-                                        ) : null}
-                                        {hasSavedUniversity(app) && String(app.universitySelectionStatus || '').toLowerCase() !== 'completed' && (String(app.programApprovalStatus || '').toLowerCase() === 'approved' || String(app.applicationStatus || '').toLowerCase() === 'approved') ? (
-                                            <button className="med-btn-verify" style={{ marginTop: 6 }} onClick={() => approveMedicalUniversities(app)}>Approve Selection</button>
-                                        ) : null}
-                                        {String(app.universitySelectionStatus || '').toLowerCase() === 'completed' ? (
-                                            <span className="med-sent-badge" style={{ background: '#dcfce7', color: '#166534' }}>Approved</span>
-                                        ) : null}
-                                        {String(app.programApprovalStatus || '').toLowerCase() !== 'approved' && app.universitySelectionStatus !== 'Completed' && String(app.applicationStatus || '').toLowerCase() !== 'approved' && (
-                                            <button className="med-btn-verify" onClick={() => {
-                                                if (window.confirm("Approve this student's program selection?")) {
-                                                     axios.patch(`${API_BASE_URL}/api/enrollment-admin/medical/applications/${app.studentId || app.userId}/approve`, {}, { headers: getAuthHeaders() })
-                                                        .then(() => fetchApplications())
-                                                        .catch(err => alert("Failed to approve: " + (err.response?.data?.message || err.message)));
-                                                }
-                                            }}>Approve</button>
-                                        )}
+                                        <div className="med-table-actions">
+                                            <button className="med-btn-view" onClick={() => openModal(app)}>View Details</button>
+                                            {hasSavedUniversity(app) ? (
+                                                <button className="med-btn-view" onClick={() => openUniversityModal(app, String(app.universitySelectionStatus || '').toLowerCase() === 'completed')}>View University</button>
+                                            ) : null}
+                                            {(String(app.programApprovalStatus || '').toLowerCase() === 'approved' || String(app.applicationStatus || '').toLowerCase() === 'approved') && !hasSavedUniversity(app) ? (
+                                                <button className="med-btn-view" onClick={() => openUniversityModal(app)}>View Universities</button>
+                                            ) : null}
+                                            {hasSavedUniversity(app) && String(app.universitySelectionStatus || '').toLowerCase() !== 'completed' && (String(app.programApprovalStatus || '').toLowerCase() === 'approved' || String(app.applicationStatus || '').toLowerCase() === 'approved') ? (
+                                                <button className="med-btn-verify" onClick={() => approveMedicalUniversities(app)}>Approve Selection</button>
+                                            ) : null}
+                                            {String(app.universitySelectionStatus || '').toLowerCase() === 'completed' ? (
+                                                <span className="med-sent-badge" style={{ background: '#dcfce7', color: '#166534' }}>Approved</span>
+                                            ) : null}
+                                            {String(app.programApprovalStatus || '').toLowerCase() !== 'approved' && app.universitySelectionStatus !== 'Completed' && String(app.applicationStatus || '').toLowerCase() !== 'approved' && (
+                                                <button className="med-btn-verify" onClick={() => {
+                                                    setApproveError('');
+                                                    setApproveModal(app);
+                                                }}>Approve Program</button>
+                                            )}
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
@@ -583,12 +610,9 @@ const MedicalUniversity = () => {
                                     <span className="med-sent-badge med-mob-status-approved">Approved</span>
                                 ) : !programApproved ? (
                                     <button className="med-btn-verify" onClick={() => {
-                                        if (window.confirm("Approve this student's program selection?")) {
-                                            axios.patch(`${API_BASE_URL}/api/enrollment-admin/medical/applications/${app.studentId || app.userId}/approve`, {}, { headers: getAuthHeaders() })
-                                                .then(() => fetchApplications())
-                                                .catch(err => alert("Failed to approve: " + (err.response?.data?.message || err.message)));
-                                        }
-                                    }}>Approve</button>
+                                        setApproveError('');
+                                        setApproveModal(app);
+                                    }}>Approve Program</button>
                                 ) : null}
                             </div>
                         </article>
@@ -731,22 +755,6 @@ const MedicalUniversity = () => {
                                         <span className="review-info-label">Phone / Mobile</span>
                                         <span className="review-info-val">{selectedApp.phone || selectedApp.personal?.phone || '-'}</span>
                                     </div>
-                                    <div className="review-info-item">
-                                        <span className="review-info-label">Gender</span>
-                                        <span className="review-info-val">{selectedApp.personal?.gender || '-'}</span>
-                                    </div>
-                                    <div className="review-info-item">
-                                        <span className="review-info-label">Date of Birth</span>
-                                        <span className="review-info-val">{formatDate(selectedApp.personal?.dob)}</span>
-                                    </div>
-                                    <div className="review-info-item">
-                                        <span className="review-info-label">Nationality</span>
-                                        <span className="review-info-val">{selectedApp.personal?.nationality || '-'}</span>
-                                    </div>
-                                    <div className="review-info-item">
-                                        <span className="review-info-label">Passport / ID Number</span>
-                                        <span className="review-info-val">{selectedApp.personal?.idNumber || '-'}</span>
-                                    </div>
                                     {selectedApp.personal?.permAddress && (
                                         <div className="review-info-item full-width">
                                             <span className="review-info-label">Permanent Address</span>
@@ -781,14 +789,6 @@ const MedicalUniversity = () => {
                                     <div className="review-info-item">
                                         <span className="review-info-label">Email Address</span>
                                         <span className="review-info-val">{selectedApp.personal?.parentEmail || selectedApp.familyDetails?.parent1?.email || '-'}</span>
-                                    </div>
-                                    <div className="review-info-item">
-                                        <span className="review-info-label">Occupation</span>
-                                        <span className="review-info-val">{selectedApp.personal?.parentOccupation || selectedApp.personal?.occupation || '-'}</span>
-                                    </div>
-                                    <div className="review-info-item">
-                                        <span className="review-info-label">Annual Income</span>
-                                        <span className="review-info-val">{selectedApp.personal?.parentIncome || selectedApp.personal?.income || '-'}</span>
                                     </div>
                                 </div>
                             </div>
@@ -971,6 +971,46 @@ const MedicalUniversity = () => {
                                     })()}
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* ── Approve Medical Program Modal ── */}
+            {approveModal && (
+                <div className="gus-overlay" onClick={() => !approveLoading && setApproveModal(null)}>
+                    <div className="gus-verify-modal" role="dialog" aria-modal="true" aria-labelledby="medical-program-approval-title" onClick={event => event.stopPropagation()}>
+                        <div className="gus-verify-header" style={{ background: 'linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%)', borderBottom: '1px solid #fecdd3' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                                <div style={{ width: 44, height: 44, borderRadius: 12, background: 'linear-gradient(135deg, #e11d48 0%, #be123c 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', boxShadow: '0 4px 12px rgba(225, 29, 72, 0.25)' }}>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M11 2v2" />
+                                        <path d="M5 2v2" />
+                                        <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" />
+                                        <path d="M8 15a6 6 0 0 0 12 0v-3" />
+                                        <circle cx="20" cy="10" r="2" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 id="medical-program-approval-title" style={{ margin: '0 0 4px', color: '#0f2942', fontSize: 18, fontWeight: 700 }}>Approve this medical application?</h3>
+                                    <p style={{ margin: 0, color: '#64748b', fontSize: 12.5 }}>Confirm the partner review of this student’s submitted program details.</p>
+                                </div>
+                            </div>
+                            <button type="button" onClick={() => setApproveModal(null)} disabled={approveLoading}>&times;</button>
+                        </div>
+                        <div className="gus-verify-details">
+                            <div><span>Student</span><strong>{approveModal.fullName || approveModal.studentName || 'Unknown'}</strong></div>
+                            <div><span>Application ID</span><strong>{approveModal.applicationId || '-'}</strong></div>
+                            <div><span>NEET Score / Rank</span><strong>{approveModal.neetScore || approveModal.education?.medicalDetails?.neetScore || '-'} {approveModal.neetRank ? `(Rank ${approveModal.neetRank})` : ''}</strong></div>
+                            <div><span>Target Countries</span><strong>{Array.isArray(approveModal.selectedCountries) && approveModal.selectedCountries.length > 0 ? approveModal.selectedCountries.join(', ') : (approveModal.country || '-')}</strong></div>
+                        </div>
+                        <p className="gus-verify-message">This approves the student’s medical program review and moves the application to university assignment. You will select and approve the universities; the student can view the assignment after your approval.</p>
+                        {approveError && <div className="gus-verify-error">{approveError}</div>}
+                        <div className="gus-verify-actions">
+                            <button type="button" className="gus-verify-cancel" onClick={() => setApproveModal(null)} disabled={approveLoading}>Cancel</button>
+                            <button type="button" className="gus-verify-submit" style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', border: 0, color: '#fff', boxShadow: '0 2px 8px rgba(16, 185, 129, 0.25)' }} onClick={submitMedicalApproval} disabled={approveLoading}>
+                                {approveLoading ? 'Approving...' : 'Confirm program approval'}
+                            </button>
                         </div>
                     </div>
                 </div>

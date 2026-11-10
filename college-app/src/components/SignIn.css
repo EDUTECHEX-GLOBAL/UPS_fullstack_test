@@ -815,6 +815,27 @@
    RESPONSIVE — Mobile (≤ 600px): centered card, no bottom-sheet
 ============================================================ */
 @media (max-width: 600px) {
+  .forgot-password-page {
+    min-height: 100vh;
+    padding: 16px !important;
+  }
+
+  .forgot-password-card {
+    padding: 28px 24px !important;
+  }
+
+  .forgot-password-title {
+    margin-right: 32px !important;
+    font-size: 27px !important;
+    line-height: 1.16 !important;
+    overflow-wrap: normal;
+    hyphens: none;
+  }
+
+  .forgot-password-card input {
+    font-size: 16px !important;
+  }
+
   .signin-overlay {
     padding: 16px;
     align-items: center;        /* Keep centered, no bottom-sheet gap */
@@ -909,6 +930,48 @@
     min-height: 42px;
     font-size: 0.88rem;
   }
+}
+
+.forgot-password-input-wrap {
+  position: relative;
+}
+
+.forgot-password-input-wrap input {
+  padding-right: 48px !important;
+}
+
+.forgot-password-visibility-toggle {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  display: inline-flex;
+  width: 40px;
+  height: calc(100% - 18px);
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.forgot-password-visibility-toggle:hover {
+  color: #263b8f;
+}
+
+.forgot-password-visibility-toggle:focus-visible {
+  outline: 2px solid #0891b2;
+  outline-offset: 1px;
+}
+
+.forgot-password-visibility-toggle svg {
+  display: block;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* ============================================================

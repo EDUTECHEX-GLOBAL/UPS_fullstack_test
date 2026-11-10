@@ -610,28 +610,33 @@ const GusUniversity = () => {
     };
 
     const formatAddressLine = (parts = []) =>
-        parts.filter((part) => part !== undefined && part !== null && part !== '').join(', ') || ' ';
+        parts.filter((part) => part !== undefined && part !== null && String(part).trim() !== '').join(', ') || '';
 
-    const getPermanentAddress = (address = {}) =>
-        address.permanentAddress || formatAddressLine([
-            address.careOf ? `c/o ${address.careOf}` : '',
-            address.streetAndHouseNumber,
-            address.city,
-            address.stateProvince,
-            address.country,
-            address.postcode,
+    const getPermanentAddress = (address = {}, personal = {}) =>
+        address?.permanentAddress || formatAddressLine([
+            address?.careOf ? `c/o ${address.careOf}` : '',
+            address?.streetAndHouseNumber || address?.address1 || personal?.permAddress1 || personal?.permanentAddress1 || personal?.address1,
+            address?.address2 || personal?.permAddress2 || personal?.permanentAddress2 || personal?.address2,
+            address?.city || personal?.permCity || personal?.permanentCity || personal?.city,
+            address?.stateProvince || address?.state || personal?.permState || personal?.permanentState || personal?.state,
+            address?.country || personal?.permCountry || personal?.permanentCountry || personal?.country,
+            address?.postcode || address?.zip || personal?.permZip || personal?.permanentPostalCode || personal?.postalCode,
         ]);
 
-    const getCorrespondenceAddress = (address = {}) => {
-        if (!address.hasDifferentCorrespondenceAddress) return getPermanentAddress(address);
-        return formatAddressLine([
-            address.correspondenceCareOf ? `c/o ${address.correspondenceCareOf}` : '',
-            address.correspondenceStreetAndHouseNumber,
-            address.correspondenceCity,
-            address.correspondenceStateProvince,
-            address.correspondenceCountry,
-            address.correspondencePostcode,
+    const getCorrespondenceAddress = (address = {}, personal = {}) => {
+        if (!address?.hasDifferentCorrespondenceAddress && address?.hasDifferentCorrespondenceAddress !== undefined) {
+            return getPermanentAddress(address, personal);
+        }
+        const line = formatAddressLine([
+            address?.correspondenceCareOf ? `c/o ${address.correspondenceCareOf}` : '',
+            address?.correspondenceStreetAndHouseNumber || address?.correspondenceAddress1 || address?.tempAddress1 || personal?.tempAddress1 || personal?.address1,
+            address?.correspondenceAddress2 || address?.tempAddress2 || personal?.tempAddress2 || personal?.address2,
+            address?.correspondenceCity || address?.tempCity || personal?.tempCity || personal?.city,
+            address?.correspondenceStateProvince || address?.correspondenceState || address?.tempState || personal?.tempState || personal?.state,
+            address?.correspondenceCountry || address?.tempCountry || personal?.tempCountry || personal?.country,
+            address?.correspondencePostcode || address?.tempZip || personal?.tempZip || personal?.postalCode,
         ]);
+        return line || getPermanentAddress(address, personal);
     };
 
     const calculateStats = useCallback((apps) => {
@@ -712,7 +717,7 @@ const GusUniversity = () => {
         try {
             const res = await fetchApplicationDetails(app.studentId, app.source);
             if (res.success) {
-                setSelectedApp(res.data);
+                setSelectedApp({ ...app, ...res.data });
             } else {
                 setSelectedApp({ ...app, _detailsError: true });
             }
@@ -1464,7 +1469,7 @@ const GusUniversity = () => {
                             <div><span>Application ID</span><strong>{verifyModal.applicationId || '-'}</strong></div>
                             <div><span>Target Countries</span><strong>{Array.isArray(verifyModal.selectedCountries) && verifyModal.selectedCountries.length > 0 ? verifyModal.selectedCountries.join(', ') : '-'}</strong></div>
                         </div>
-                        <p className="gus-verify-message">Once approved, the student will be able to select their specific university in the enrollment portal.</p>
+                        <p className="gus-verify-message">After the application is approved, you will select and approve the university assignment. The student can view the assigned universities in the enrollment portal.</p>
                         {verifyError && <div className="gus-verify-error">{verifyError}</div>}
                         <div className="gus-verify-actions">
                             <button type="button" className="gus-verify-cancel" onClick={() => setVerifyModal(null)} disabled={verifyLoading}>Cancel</button>
@@ -1588,15 +1593,15 @@ const GusUniversity = () => {
                                 fields={[
                                     { label: 'Application ID', value: val(selectedApp.applicationNumber || selectedApp.applicationId) },
                                     { label: 'Student ID', value: val(selectedApp.studentId) },
-                                    { label: 'Title', value: val(selectedApp.title) },
-                                    { label: 'Full Name', value: val(selectedApp.studentName) },
-                                    { label: 'Applicant Type', value: val(selectedApp.applicantType) },
-                                    { label: 'Program Type', value: val(selectedApp.programType) },
-                                    { label: 'Target Countries', value: Array.isArray(selectedApp.selectedCountries) && selectedApp.selectedCountries.length > 0 ? selectedApp.selectedCountries.join(', ') : '' },
-                                    { label: 'Gender', value: selectedApp.gender ? formatGender(selectedApp.gender) : '' },
-                                    { label: 'Date of Birth', value: formatDate(selectedApp.dateOfBirth) },
-                                    { label: 'Place of Birth', value: val(selectedApp.placeOfBirth) },
-                                    { label: 'Country of Birth', value: val(selectedApp.countryOfBirth) },
+                                    { label: 'Title', value: val(selectedApp.title || selectedApp.personal?.title) },
+                                    { label: 'Full Name', value: val(selectedApp.studentName || [selectedApp.personal?.firstName, selectedApp.personal?.lastName].filter(Boolean).join(' ')) },
+                                    { label: 'Applicant Type', value: val(selectedApp.applicantType || selectedApp.personal?.applicantType) },
+                                    { label: 'Program Type', value: val(selectedApp.programType || selectedApp.personal?.programType || selectedApp.programSelection?.programType) },
+                                    { label: 'Target Countries', value: Array.isArray(selectedApp.selectedCountries) && selectedApp.selectedCountries.length > 0 ? selectedApp.selectedCountries.join(', ') : (Array.isArray(selectedApp.programSelection?.selectedCountries) && selectedApp.programSelection.selectedCountries.length > 0 ? selectedApp.programSelection.selectedCountries.join(', ') : (selectedApp.programSelection?.countryName || selectedApp.countryName || '')) },
+                                    { label: 'Gender', value: (selectedApp.gender || selectedApp.personal?.gender) ? formatGender(selectedApp.gender || selectedApp.personal?.gender) : '' },
+                                    { label: 'Date of Birth', value: formatDate(selectedApp.dateOfBirth || selectedApp.personal?.dateOfBirth) },
+                                    { label: 'Place of Birth', value: val(selectedApp.placeOfBirth || selectedApp.personal?.placeOfBirth) },
+                                    { label: 'Country of Birth', value: val(selectedApp.countryOfBirth || selectedApp.personal?.countryOfBirth) },
                                 ]}
                             />
 
@@ -1604,54 +1609,54 @@ const GusUniversity = () => {
                                 title="Contact Information"
                                 dotClass="gus-dot-blue"
                                 fields={[
-                                    { label: 'Email', value: val(selectedApp.email) },
-                                    { label: 'Mobile', value: val(selectedApp.phone) },
-                                    { label: 'Landline', value: val(selectedApp.landline) },
-                                    { label: 'Country of Residence', value: val(selectedApp.countryOfResidence) },
-                                    { label: 'Correspondence Language', value: capFirst(selectedApp.correspondenceLanguage) },
-                                    { label: 'Years Lived in United States', value: val(selectedApp.yearsLivedInUnitedStates) },
-                                    { label: 'U.S. Citizenship Status', value: selectedApp.usCitizenshipStatus ? formatUsCitizenshipStatus(selectedApp.usCitizenshipStatus) : '' },
-                                    { label: 'Last Updated', value: formatDate(selectedApp.updatedAt) },
+                                    { label: 'Email', value: val(selectedApp.email || selectedApp.personal?.email) },
+                                    { label: 'Mobile', value: val(selectedApp.phone || selectedApp.personal?.mobile || selectedApp.personal?.phone) },
+                                    { label: 'Landline', value: val(selectedApp.landline || selectedApp.personal?.landline) },
+                                    { label: 'Country of Residence', value: val(selectedApp.countryOfResidence || selectedApp.personal?.country || selectedApp.personal?.tempCountry || selectedApp.personal?.permCountry) },
+                                    { label: 'Correspondence Language', value: capFirst(selectedApp.correspondenceLanguage || selectedApp.personal?.correspondenceLanguage) },
+                                    { label: 'Years Lived in United States', value: val(selectedApp.yearsLivedInUnitedStates || selectedApp.personal?.yearsLivedInUnitedStates) },
+                                    { label: 'U.S. Citizenship Status', value: (selectedApp.usCitizenshipStatus || selectedApp.personal?.usCitizenshipStatus) ? formatUsCitizenshipStatus(selectedApp.usCitizenshipStatus || selectedApp.personal?.usCitizenshipStatus) : '' },
+                                    { label: 'Last Updated', value: formatDate(selectedApp.updatedAt || selectedApp.submittedAt || selectedApp.createdAt) },
                                 ]}
                             />
 
-                            {selectedApp.familyDetails && (
+                            {(selectedApp.familyDetails || selectedApp.personal?.parent1FullName || selectedApp.personal?.fatherName || selectedApp.personal?.fatherFirstName) && (
                                 <DetailSection
                                     title="Family Details"
                                     dotClass="gus-dot-blue"
                                     fields={[
-                                        { label: 'Parent 1 Relationship', value: capFirst(selectedApp.familyDetails?.parent1?.relationship) },
-                                        { label: 'Parent 1 Full Name', value: val(selectedApp.familyDetails?.parent1?.fullName) },
-                                        { label: 'Parent 1 Email', value: val(selectedApp.familyDetails?.parent1?.email) },
-                                        { label: 'Parent 1 Phone', value: val(selectedApp.familyDetails?.parent1?.phone) },
-                                        ...(selectedApp.familyDetails?.parent2?.enabled === true ? [
-                                            { label: 'Parent 2 Relationship', value: capFirst(selectedApp.familyDetails?.parent2?.relationship) },
-                                            { label: 'Parent 2 Full Name', value: val(selectedApp.familyDetails?.parent2?.fullName) },
-                                            { label: 'Parent 2 Email', value: val(selectedApp.familyDetails?.parent2?.email) },
-                                            { label: 'Parent 2 Phone', value: val(selectedApp.familyDetails?.parent2?.phone) },
+                                        { label: 'Parent 1 Relationship', value: capFirst(selectedApp.familyDetails?.parent1?.relationship || selectedApp.personal?.parent1Relationship || 'Father') },
+                                        { label: 'Parent 1 Full Name', value: val(selectedApp.familyDetails?.parent1?.fullName || [selectedApp.personal?.fatherFirstName, selectedApp.personal?.fatherLastName].filter(Boolean).join(' ') || selectedApp.personal?.fatherName) },
+                                        { label: 'Parent 1 Email', value: val(selectedApp.familyDetails?.parent1?.email || selectedApp.personal?.fatherEmail) },
+                                        { label: 'Parent 1 Phone', value: val(selectedApp.familyDetails?.parent1?.phone || selectedApp.personal?.fatherPhone) },
+                                        ...((selectedApp.familyDetails?.parent2?.enabled === true || selectedApp.personal?.parent2FullName || selectedApp.personal?.motherName || selectedApp.personal?.motherFirstName) ? [
+                                            { label: 'Parent 2 Relationship', value: capFirst(selectedApp.familyDetails?.parent2?.relationship || selectedApp.personal?.parent2Relationship || 'Mother') },
+                                            { label: 'Parent 2 Full Name', value: val(selectedApp.familyDetails?.parent2?.fullName || [selectedApp.personal?.motherFirstName, selectedApp.personal?.motherLastName].filter(Boolean).join(' ') || selectedApp.personal?.motherName) },
+                                            { label: 'Parent 2 Email', value: val(selectedApp.familyDetails?.parent2?.email || selectedApp.personal?.motherEmail) },
+                                            { label: 'Parent 2 Phone', value: val(selectedApp.familyDetails?.parent2?.phone || selectedApp.personal?.motherPhone) },
                                         ] : []),
                                     ]}
                                 />
                             )}
 
-                            {selectedApp.address && (
+                            {(selectedApp.address || selectedApp.personal?.address1 || selectedApp.personal?.permAddress1 || selectedApp.personal?.permanentAddress1 || selectedApp.personal?.city || selectedApp.personal?.permCity || selectedApp.personal?.tempCity) && (
                                 <DetailSection
                                     title="Address Information"
                                     dotClass="gus-dot-blue"
                                     fields={[
-                                        { label: 'Permanent Address', value: selectedApp.address ? getPermanentAddress(selectedApp.address) : [selectedApp.personal?.permanentAddress1 || selectedApp.personal?.address1, selectedApp.personal?.permanentAddress2 || selectedApp.personal?.address2, selectedApp.personal?.permanentCity, selectedApp.personal?.permanentState, selectedApp.personal?.permanentPostalCode, selectedApp.personal?.permanentCountry].filter(Boolean).join(', ') },
-                                        { label: 'Correspondence Address', value: getCorrespondenceAddress(selectedApp.address) },
+                                        { label: 'Permanent Address', value: getPermanentAddress(selectedApp.address, selectedApp.personal) },
+                                        { label: 'Correspondence Address', value: getCorrespondenceAddress(selectedApp.address, selectedApp.personal) },
                                         { label: 'Care Of', value: val(selectedApp.address?.careOf) },
-                                        { label: 'City', value: val(selectedApp.address?.city) },
-                                        { label: 'State', value: val(selectedApp.address?.stateProvince) },
-                                        { label: 'Country', value: val(selectedApp.address?.country) },
-                                        { label: 'Postcode', value: val(selectedApp.address?.postcode) },
+                                        { label: 'City', value: val(selectedApp.address?.city || selectedApp.personal?.permCity || selectedApp.personal?.permanentCity || selectedApp.personal?.city) },
+                                        { label: 'State', value: val(selectedApp.address?.stateProvince || selectedApp.personal?.permState || selectedApp.personal?.permanentState || selectedApp.personal?.state) },
+                                        { label: 'Country', value: val(selectedApp.address?.country || selectedApp.personal?.permCountry || selectedApp.personal?.permanentCountry || selectedApp.personal?.country) },
+                                        { label: 'Postcode', value: val(selectedApp.address?.postcode || selectedApp.personal?.permZip || selectedApp.personal?.permanentPostalCode || selectedApp.personal?.postalCode) },
                                         ...(selectedApp.address?.hasDifferentCorrespondenceAddress ? [
                                             { label: 'Correspondence Care Of', value: val(selectedApp.address?.correspondenceCareOf) },
-                                            { label: 'Correspondence City', value: val(selectedApp.address?.correspondenceCity) },
-                                            { label: 'Correspondence State', value: val(selectedApp.address?.correspondenceStateProvince) },
-                                            { label: 'Correspondence Country', value: val(selectedApp.address?.correspondenceCountry) },
-                                            { label: 'Correspondence Postcode', value: val(selectedApp.address?.correspondencePostcode) },
+                                            { label: 'Correspondence City', value: val(selectedApp.address?.correspondenceCity || selectedApp.personal?.tempCity) },
+                                            { label: 'Correspondence State', value: val(selectedApp.address?.correspondenceStateProvince || selectedApp.personal?.tempState) },
+                                            { label: 'Correspondence Country', value: val(selectedApp.address?.correspondenceCountry || selectedApp.personal?.tempCountry) },
+                                            { label: 'Correspondence Postcode', value: val(selectedApp.address?.correspondencePostcode || selectedApp.personal?.tempZip) },
                                         ] : []),
                                     ]}
                                 />
@@ -1661,15 +1666,15 @@ const GusUniversity = () => {
                                 title="Passport & Travel"
                                 dotClass="gus-dot-purple"
                                 fields={[
-                                    { label: 'Citizenship', value: val(selectedApp.citizenship) },
-                                    { label: 'Passport Number', value: val(selectedApp.passportNumber) },
-                                    { label: 'Issue Date', value: formatDate(selectedApp.passportIssueDate) },
-                                    { label: 'Expiry Date', value: formatDate(selectedApp.passportExpiryDate) },
-                                    { label: 'Issuing Country', value: val(selectedApp.issuingCountry) },
-                                    { label: 'Document Type', value: capFirst(selectedApp.documentType) },
-                                    { label: 'EU Citizen', value: selectedApp.isEUCitizen !== undefined ? yesNo(selectedApp.isEUCitizen) : '' },
-                                    { label: 'Needs Visa', value: capFirst(selectedApp.needVisa) },
-                                    { label: 'Passport Uploaded', value: selectedApp.passportUploaded ? 'Yes' : '' },
+                                    { label: 'Citizenship', value: val(selectedApp.citizenship || selectedApp.personal?.citizenship) },
+                                    { label: 'Passport Number', value: val(selectedApp.passportNumber || selectedApp.personal?.passportNumber) },
+                                    { label: 'Issue Date', value: formatDate(selectedApp.passportIssueDate || selectedApp.personal?.passportIssueDate) },
+                                    { label: 'Expiry Date', value: formatDate(selectedApp.passportExpiryDate || selectedApp.personal?.passportExpiryDate) },
+                                    { label: 'Issuing Country', value: val(selectedApp.issuingCountry || selectedApp.personal?.issuingCountry) },
+                                    { label: 'Document Type', value: capFirst(selectedApp.documentType || selectedApp.personal?.documentType) },
+                                    { label: 'EU Citizen', value: (selectedApp.isEUCitizen !== undefined || selectedApp.personal?.isEUCitizen !== undefined) ? yesNo(selectedApp.isEUCitizen ?? selectedApp.personal?.isEUCitizen) : '' },
+                                    { label: 'Needs Visa', value: capFirst(selectedApp.needVisa || selectedApp.personal?.needVisa) },
+                                    { label: 'Passport Uploaded', value: (selectedApp.passportUploaded || selectedApp.personal?.passportDoc?.fileUrl || selectedApp.personal?.passportDoc?.fileName) ? 'Yes' : '' },
                                 ]}
                             />
 
@@ -1699,7 +1704,7 @@ const GusUniversity = () => {
                                 </div>
                             )}
 
-                            {selectedApp.educationSummary && selectedApp.educationSummary.length > 0 ? (
+                            {(selectedApp.educationSummary?.length > 0 || selectedApp.education?.entries?.length > 0) ? (
                                 <div className="review-section-card">
                                     <h3 className="review-card-title">
                                         <span className="gus-sec-dot gus-dot-blue" style={{ marginRight: '8px' }} />
@@ -1718,7 +1723,7 @@ const GusUniversity = () => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {selectedApp.educationSummary.map((edu, idx) => (
+                                                {(selectedApp.educationSummary?.length > 0 ? selectedApp.educationSummary : selectedApp.education.entries).map((edu, idx) => (
                                                     <tr key={idx}>
                                                         <td className="cell-primary">{edu.qualification || edu.degree || '-'}</td>
                                                         <td>{edu.schoolName || edu.institutionName || '-'}</td>

@@ -4,6 +4,7 @@ import crypto from "node:crypto";
 import Account from "../models/accountModel.js";
 import Admin from "../models/Admin.js";
 import { authenticateAdmin } from "../middleware/adminAuthMiddleware.js";
+import { sendAccountApprovalEmail } from "../utils/sendEmail.js";
 const router = express.Router();
 console.log("✅ Public impersonate-from-signin route loaded");
 const ALLOWED_ADMIN_EMAIL = "edutechexcollege@gmail.com";
@@ -332,6 +333,7 @@ router.put("/:id", validateUser, async (req, res) => {
       { new: true, runValidators: true }
     ).select("-password");
     if (!updatedUser) return res.status(404).json({ success: false, message: "User not found" });
+
     // Calculate updated statistics
     const totalUsers = await Account.countDocuments();
     const activeUsers = await Account.countDocuments({ 
@@ -438,6 +440,18 @@ router.patch("/:id/approve", async (req, res) => {
       { new: true }
     ).select("-password");
     if (!updatedUser) return res.status(404).json({ success: false, message: "User not found" });
+
+    // Send approval notification email to student
+    try {
+      const studentName = `${updatedUser.firstName || ""} ${updatedUser.lastName || ""}`.trim() || "Student";
+      await sendAccountApprovalEmail({
+        to: updatedUser.email,
+        studentName,
+      });
+      console.log(`✅ Approval email successfully sent to student: ${updatedUser.email}`);
+    } catch (emailErr) {
+      console.error(`⚠️ Failed to send approval email to student ${updatedUser.email}:`, emailErr.message);
+    }
     // Calculate updated statistics
     const totalUsers = await Account.countDocuments();
     const activeUsers = await Account.countDocuments({ 
@@ -476,6 +490,7 @@ router.post("/bulk-approve", async (req, res) => {
         message: "User IDs array is required" 
       });
     }
+    const usersToApprove = await Account.find({ _id: { $in: userIds } }).select("firstName lastName email");
     const result = await Account.updateMany(
       { _id: { $in: userIds } },
       { 
@@ -505,6 +520,22 @@ router.post("/bulk-approve", async (req, res) => {
         pendingApprovalUsers
       },
       modifiedCount: result.modifiedCount
+    });
+
+    // Send bulk approval notification emails in background
+    Promise.allSettled(
+      usersToApprove.map(user => {
+        const studentName = `${user.firstName || ""} ${user.lastName || ""}`.trim() || "Student";
+        return sendAccountApprovalEmail({
+          to: user.email,
+          studentName,
+        });
+      })
+    ).then(results => {
+      const sent = results.filter(r => r.status === "fulfilled").length;
+      console.log(`✅ Bulk approval emails sent: ${sent}/${usersToApprove.length}`);
+    }).catch(err => {
+      console.error("⚠️ Bulk approval email error:", err.message);
     });
   } catch (error) {
     console.error("❌ Bulk approve users error:", error);
@@ -656,6 +687,16 @@ router.patch("/medical-users/:id/status", async (req, res) => {
     if (action === 'approve') {
       user.isApproved = true;
       user.status = 'Approved';
+      try {
+        const medName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || user.name || 'User';
+        await sendAccountApprovalEmail({
+          to: user.email,
+          studentName: medName,
+        });
+        console.log(`✅ Medical user approval email sent to: ${user.email}`);
+      } catch (medErr) {
+        console.error('⚠️ Medical user approval email error:', medErr.message);
+      }
     } else if (action === 'reject') {
       user.isApproved = false;
       user.status = 'Rejected';

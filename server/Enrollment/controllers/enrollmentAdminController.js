@@ -326,11 +326,20 @@ const buildListRow = (prog, personal, account, education, tests, uniSelection) =
     ? selectedCountries[selectedCountries.length - 1]
     : sel.countryName || prog.countryName || '');
 
-  const uniName = uniSelection?.selectedUniversities?.length 
+  const previousApprovalAt = prog?.approvedAt || prog?.updatedAt;
+  const resubmittedAfterApproval = account?.applicationStatus === 'Submitted for Approval' &&
+    account?.submittedAt && previousApprovalAt &&
+    new Date(account.submittedAt).getTime() > new Date(previousApprovalAt).getTime();
+  const uniName = !resubmittedAfterApproval && uniSelection?.selectedUniversities?.length
     ? uniSelection.selectedUniversities.map(u => u.universityName).join(', ') 
-    : (sel.universityName || sel.institutionName || prog.universityName || '');
+    : (resubmittedAfterApproval ? '' : (sel.universityName || sel.institutionName || prog.universityName || ''));
   const programType = String(sel.programType || prog.programType || account?.applyingFor || '').toLowerCase();
   const isBachelorProgram = programType.includes('bachelor') || programType === 'ug' || programType === 'undergraduate';
+  // Treat legacy records as awaiting partner review when the student
+  // resubmitted after the previous approval, even if the old approval fields
+  // were not reset by an earlier version of the submit endpoint.
+  const programApprovalStatus = resubmittedAfterApproval ? 'pending' : (prog.programApprovalStatus || 'pending');
+  const selectedUniversities = resubmittedAfterApproval ? [] : (uniSelection?.selectedUniversities || []);
 
   return {
     _id:              prog._id,
@@ -344,17 +353,17 @@ const buildListRow = (prog, personal, account, education, tests, uniSelection) =
     programType:      sel.programType || prog.programType || account?.applyingFor || '',
     selectedCountries,
     primaryCountry,
-    universityId:     uniSelection?.selectedUniversities?.[0]?.universityId || sel.universityId || '',
+    universityId:     selectedUniversities[0]?.universityId || (resubmittedAfterApproval ? '' : sel.universityId) || '',
     universityName:   uniName,
-    selectedUniversities: uniSelection?.selectedUniversities || [],
-    universitySelectionStatus: uniSelection?.status || 'selected',
+    selectedUniversities,
+    universitySelectionStatus: resubmittedAfterApproval ? 'selected' : (uniSelection?.status || 'selected'),
     programName:      '',
-    status:               prog.programApprovalStatus || 'pending',
-    programApprovalStatus: prog.programApprovalStatus || 'pending',
+    status:               programApprovalStatus,
+    programApprovalStatus,
     applicationStatus:    account?.applicationStatus || prog.status || 'Pending',
     applicationNumber:    account?.applicationNumber || '',
     applicantType:        account?.applicantType || '',
-    overviewStatus:       prog.programApprovalStatus || 'pending',
+    overviewStatus:       programApprovalStatus,
     completionPercentage: prog.status === 'Completed' ? 100 : 0,
     isCompleted:          prog.status === 'Completed',
     processAdminVerified: prog.processAdminVerified || false,
@@ -398,6 +407,17 @@ const buildDetailRow = (prog, personal, account, education, tests, documents, un
 
   return {
     ...row,
+    title:              personal?.title || '',
+    gender:             personal?.gender || '',
+    dateOfBirth:        fmtDate(personal?.dateOfBirth),
+    placeOfBirth:       personal?.placeOfBirth || '',
+    countryOfBirth:     personal?.countryOfBirth || '',
+    citizenship:        personal?.citizenship || '',
+    passportNumber:     personal?.passportNumber || '',
+    passportIssueDate:  fmtDate(personal?.passportIssueDate),
+    passportExpiryDate: fmtDate(personal?.passportExpiryDate),
+    issuingCountry:     personal?.issuingCountry || '',
+    passportUploaded:   Boolean(personal?.passportDoc?.fileUrl || personal?.passportDoc?.fileName || row.passportUploaded),
     personal: personal ? {
       title:              personal.title            || '',
       firstName:          personal.firstName        || '',
@@ -756,15 +776,16 @@ const getApplicationDetail = async (req, res, programType) => {
     }
 
     const uid = prog.userId.toString();
+    const userQuery = { $or: [{ userId: prog.userId }, { userId: uid }, ...(objId ? [{ userId: objId }] : [])] };
     const [personalRecord, accountRecord, educationRecord, testsRecord, documentsRecord, uniSelection, allDocumentRecords, additionalDocumentRecords] = await Promise.all([
-      PersonalDetails.findOne({ userId: prog.userId }).lean(),
+      PersonalDetails.findOne(userQuery).lean(),
       Account.findById(objId || uid).select('firstName lastName email phone applicantType applyingFor applicationNumber applicationStatus submittedAt isLocked').lean(),
-      EducationDetails.findOne({ userId: prog.userId }).lean(),
-      TestScores.findOne({ userId: prog.userId }).lean(),
-      Documents.findOne({ userId: prog.userId }).lean(),
-      UniversitySelection.findOne({ userId: prog.userId }).lean(),
-      AllDocument.find({ userId: prog.userId }).sort({ createdAt: 1 }).lean(),
-      AdditionalDocument.find({ userId: prog.userId }).lean(),
+      EducationDetails.findOne(userQuery).lean(),
+      TestScores.findOne(userQuery).lean(),
+      Documents.findOne(userQuery).lean(),
+      UniversitySelection.findOne(userQuery).lean(),
+      AllDocument.find(userQuery).sort({ createdAt: 1 }).lean(),
+      AdditionalDocument.find(userQuery).lean(),
     ]);
 
     const fallback = prog._adminFallback || {};
@@ -860,6 +881,13 @@ const updateApprovalStatus = async (req, res, newStatus, routeProgramType) => {
           { upsert: true, new: true }
         );
       }
+
+      // Program approval is the gate for university selection. Keep Master
+      // and Medical approvals in sync with the GUS approval flow so the
+      // student's university step unlocks after a partner re-review.
+      await Account.findByIdAndUpdate(objId, {
+        $set: { applicationStatus: 'University Selection Pending', isLocked: false }
+      });
     }
 
     return res.status(200).json({

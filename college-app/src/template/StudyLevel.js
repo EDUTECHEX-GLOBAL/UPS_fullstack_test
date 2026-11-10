@@ -11,6 +11,16 @@ import CountryFlag from './countryFlags';
 const StudyLevel = ({ level, prefix, hashKey, eyebrow, title, accent, intro, onViewChange }) => {
   const isMaster = level === 'master';
 
+  const handleCountrySelect = (e, countryId) => {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
+      return;
+    }
+    e.preventDefault();
+    if (onViewChange) {
+      onViewChange(`${level}-country`, countryId);
+    }
+  };
+
   return (
     <div className={`${prefix}-page`}>
       <section className={`${prefix}-hero`}>
@@ -23,7 +33,12 @@ const StudyLevel = ({ level, prefix, hashKey, eyebrow, title, accent, intro, onV
 
           <div className={`${prefix}-chips`}>
             {partnerCountries.map((c) => (
-              <a key={c.id} href={`#${hashKey}-${c.id}`} className={`${prefix}-chip`}>
+              <a
+                key={c.id}
+                href={`#${hashKey}-${c.id}`}
+                className={`${prefix}-chip`}
+                onClick={(e) => handleCountrySelect(e, c.id)}
+              >
                 <CountryFlag id={c.id} size={18} />
                 {c.name}
               </a>
@@ -36,7 +51,12 @@ const StudyLevel = ({ level, prefix, hashKey, eyebrow, title, accent, intro, onV
         <div className={`${prefix}-container`}>
           <div className={`${prefix}-grid`}>
             {partnerCountries.map((c) => (
-              <a key={c.id} href={`#${hashKey}-${c.id}`} className={`${prefix}-card`}>
+              <a
+                key={c.id}
+                href={`#${hashKey}-${c.id}`}
+                className={`${prefix}-card`}
+                onClick={(e) => handleCountrySelect(e, c.id)}
+              >
                 <div className={`${prefix}-card-head`}>
                   <CountryFlag id={c.id} size={34} className={`${prefix}-card-flag`} />
                   <div>

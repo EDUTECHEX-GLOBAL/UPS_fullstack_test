@@ -989,7 +989,7 @@ const TestScores = ({
                 <h4 style={{ fontSize: '0.92rem', color: '#334155', marginBottom: '12px', fontWeight: '600' }}>
                   IELTS Band Scores (0 – 9)
                 </h4>
-                <div className="test-score-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                <div className="test-score-grid test-score-sub-grid">
                   <div className="test-score-field">
                     <label>Listening Score</label>
                     <input
@@ -1070,7 +1070,7 @@ const TestScores = ({
                 <h4 style={{ fontSize: '0.92rem', color: '#334155', marginBottom: '12px', fontWeight: '600' }}>
                   TOEFL iBT Section Scores (0 – 30)
                 </h4>
-                <div className="test-score-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                <div className="test-score-grid test-score-sub-grid">
                   <div className="test-score-field">
                     <label>Reading (0-30)</label>
                     <input
@@ -1146,7 +1146,7 @@ const TestScores = ({
                 <h4 style={{ fontSize: '0.92rem', color: '#334155', marginBottom: '12px', fontWeight: '600' }}>
                   PTE Academic Scores (10 – 90)
                 </h4>
-                <div className="test-score-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                <div className="test-score-grid test-score-sub-grid">
                   <div className="test-score-field">
                     <label>Listening (10-90)</label>
                     <input
@@ -1222,7 +1222,7 @@ const TestScores = ({
                 <h4 style={{ fontSize: '0.92rem', color: '#334155', marginBottom: '12px', fontWeight: '600' }}>
                   Duolingo Sub-Scores (10 – 160)
                 </h4>
-                <div className="test-score-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                <div className="test-score-grid test-score-sub-grid">
                   <div className="test-score-field">
                     <label>Literacy</label>
                     <input
@@ -1475,7 +1475,7 @@ const TestScores = ({
                       <h4 style={{ fontSize: '0.88rem', color: '#334155', marginBottom: '10px', fontWeight: '600' }}>
                         GRE General Scores
                       </h4>
-                      <div className="test-score-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))' }}>
+                      <div className="test-score-grid test-score-sub-grid">
                         <div className="test-score-field">
                           <label>Verbal Reasoning (130-170)</label>
                           <input
@@ -1541,7 +1541,7 @@ const TestScores = ({
                       <h4 style={{ fontSize: '0.88rem', color: '#334155', marginBottom: '10px', fontWeight: '600' }}>
                         GMAT Focus Edition Section Scores
                       </h4>
-                      <div className="test-score-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))' }}>
+                      <div className="test-score-grid test-score-sub-grid">
                         <div className="test-score-field">
                           <label>Quantitative (60-90)</label>
                           <input
@@ -1606,7 +1606,7 @@ const TestScores = ({
                       <h4 style={{ fontSize: '0.88rem', color: '#334155', marginBottom: '10px', fontWeight: '600' }}>
                         SAT Section Scores
                       </h4>
-                      <div className="test-score-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                      <div className="test-score-grid test-score-sub-grid">
                         <div className="test-score-field">
                           <label>Reading / Writing (200-800)</label>
                           <input
@@ -1658,7 +1658,7 @@ const TestScores = ({
                       <h4 style={{ fontSize: '0.88rem', color: '#334155', marginBottom: '10px', fontWeight: '600' }}>
                         ACT Section Scores (1 – 36)
                       </h4>
-                      <div className="test-score-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}>
+                      <div className="test-score-grid test-score-sub-grid">
                         <div className="test-score-field">
                           <label>English</label>
                           <input
@@ -1736,7 +1736,7 @@ const TestScores = ({
                       <h4 style={{ fontSize: '0.88rem', color: '#334155', marginBottom: '10px', fontWeight: '600' }}>
                         MCAT Section Scores (118 – 132)
                       </h4>
-                      <div className="test-score-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                      <div className="test-score-grid test-score-sub-grid">
                         <div className="test-score-field">
                           <label>Chem &amp; Phys (118-132)</label>
                           <input
@@ -1812,7 +1812,7 @@ const TestScores = ({
                   {['LSAT', 'NEET', 'UCAT'].includes(test.exam) && TEST_CONFIG[test.exam] && (
                     <div style={{ marginTop: '18px' }}>
                       <h4 style={{ fontSize: '0.88rem', color: '#334155', marginBottom: '10px', fontWeight: '600' }}>{TEST_CONFIG[test.exam].title}</h4>
-                      <div className="test-score-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+                      <div className="test-score-grid test-score-sub-grid">
                         {TEST_CONFIG[test.exam].fields.map((field) => (
                           <div className="test-score-field" key={field.key}>
                             <label>{field.label}</label>

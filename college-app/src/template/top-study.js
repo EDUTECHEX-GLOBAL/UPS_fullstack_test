@@ -47,7 +47,7 @@ const topDestinations = [
   }
 ];
 
-const TopStudy = () => {
+const TopStudy = ({ onViewChange }) => {
   return (
     <section className="top-study-section" id="destinations">
       <div className="top-study-container">
@@ -61,7 +61,15 @@ const TopStudy = () => {
               Find the right destination that matches your goals, budget, and career plans.
             </p>
             <div className="top-study-cta">
-              <a href="#bachelor" className="btn btn-primary">
+              <a
+                href="#bachelor"
+                className="btn btn-primary"
+                onClick={(e) => {
+                  if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+                  e.preventDefault();
+                  if (onViewChange) onViewChange('bachelor');
+                }}
+              >
                 View All Destinations <span className="arrow-icon">→</span>
               </a>
             </div>

@@ -26,18 +26,33 @@ const isValidEmailAddress = (value) => /^[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(?:[A-Z0-
 // EMAIL TEMPLATES
 // =====================================================
 
+const emailHeadTags = `
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light only">
+  <meta name="supported-color-schemes" content="light">
+  <style>
+    :root { color-scheme: light only; supported-color-schemes: light; }
+  </style>
+</head>`;
+
 // ✅ FIX: This function was MISSING — caused the 500 error on register & resend-otp
 const buildOtpEmail = (firstName, otp) => `
 <!DOCTYPE html>
 <html>
+${emailHeadTags}
 <body style="margin:0;padding:0;background:#f4f6f9;font-family:'Segoe UI',Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
     <tr><td align="center">
-      <table width="520" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);">
+      <table width="520" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);max-width:92%;">
         <tr>
-          <td style="background:linear-gradient(135deg,#14b8a6,#0d9488);padding:32px 40px;text-align:center;">
-            <h1 style="color:#fff;margin:0;font-size:22px;font-weight:700;">EdutechEX — Process Admin</h1>
-            <p style="color:rgba(255,255,255,0.85);margin:6px 0 0;font-size:13px;">Email Verification</p>
+          <td style="background:linear-gradient(135deg,#14b8a6,#0d9488);padding:30px 40px;text-align:center;">
+            <div style="margin:0 auto 14px;text-align:center;">
+              <img src="cid:edutechex-logo" alt="EdutechEX" width="190" style="display:inline-block;width:190px;max-width:100%;height:auto;border:0;outline:none;" />
+            </div>
+            <h1 style="color:#ffffff;margin:0;font-size:20px;font-weight:700;letter-spacing:0.3px;">Process Admin</h1>
+            <p style="color:rgba(255,255,255,0.92);margin:4px 0 0;font-size:13px;">Email Verification</p>
           </td>
         </tr>
         <tr>
@@ -70,14 +85,18 @@ const buildOtpEmail = (firstName, otp) => `
 const buildPendingApprovalEmail = (firstName) => `
 <!DOCTYPE html>
 <html>
+${emailHeadTags}
 <body style="margin:0;padding:0;background:#f4f6f9;font-family:'Segoe UI',Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
     <tr><td align="center">
-      <table width="520" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);">
+      <table width="520" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);max-width:92%;">
         <tr>
-          <td style="background:linear-gradient(135deg,#14b8a6,#0d9488);padding:32px 40px;text-align:center;">
-            <h1 style="color:#fff;margin:0;font-size:22px;font-weight:700;">EdutechEX — Process Admin</h1>
-            <p style="color:rgba(255,255,255,0.85);margin:6px 0 0;font-size:13px;">Registration Received</p>
+          <td style="background:linear-gradient(135deg,#14b8a6,#0d9488);padding:30px 40px;text-align:center;">
+            <div style="margin:0 auto 14px;text-align:center;">
+              <img src="cid:edutechex-logo" alt="EdutechEX" width="190" style="display:inline-block;width:190px;max-width:100%;height:auto;border:0;outline:none;" />
+            </div>
+            <h1 style="color:#ffffff;margin:0;font-size:20px;font-weight:700;letter-spacing:0.3px;">Process Admin</h1>
+            <p style="color:rgba(255,255,255,0.92);margin:4px 0 0;font-size:13px;">Registration Received</p>
           </td>
         </tr>
         <tr>
@@ -108,14 +127,18 @@ const buildPendingApprovalEmail = (firstName) => `
 const buildApprovedEmail = (firstName) => `
 <!DOCTYPE html>
 <html>
+${emailHeadTags}
 <body style="margin:0;padding:0;background:#f4f6f9;font-family:'Segoe UI',Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
     <tr><td align="center">
-      <table width="520" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);">
+      <table width="520" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);max-width:92%;">
         <tr>
-          <td style="background:linear-gradient(135deg,#14b8a6,#0d9488);padding:32px 40px;text-align:center;">
-            <h1 style="color:#fff;margin:0;font-size:22px;font-weight:700;">EdutechEX — Process Admin</h1>
-            <p style="color:rgba(255,255,255,0.85);margin:6px 0 0;font-size:13px;">Account Approved ✅</p>
+          <td style="background:linear-gradient(135deg,#14b8a6,#0d9488);padding:30px 40px;text-align:center;">
+            <div style="margin:0 auto 14px;text-align:center;">
+              <img src="cid:edutechex-logo" alt="EdutechEX" width="190" style="display:inline-block;width:190px;max-width:100%;height:auto;border:0;outline:none;" />
+            </div>
+            <h1 style="color:#ffffff;margin:0;font-size:20px;font-weight:700;letter-spacing:0.3px;">Process Admin</h1>
+            <p style="color:rgba(255,255,255,0.92);margin:4px 0 0;font-size:13px;">Account Approved ✅</p>
           </td>
         </tr>
         <tr>
@@ -143,14 +166,18 @@ const buildApprovedEmail = (firstName) => `
 const buildPasswordResetEmail = (firstName, otp) => `
 <!DOCTYPE html>
 <html>
+${emailHeadTags}
 <body style="margin:0;padding:0;background:#f4f6f9;font-family:'Segoe UI',Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
     <tr><td align="center">
-      <table width="520" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);">
+      <table width="520" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);max-width:92%;">
         <tr>
-          <td style="background:linear-gradient(135deg,#14b8a6,#0d9488);padding:32px 40px;text-align:center;">
-            <h1 style="color:#fff;margin:0;font-size:22px;font-weight:700;">EdutechEX Process Admin</h1>
-            <p style="color:rgba(255,255,255,0.85);margin:6px 0 0;font-size:13px;">Password Reset</p>
+          <td style="background:linear-gradient(135deg,#14b8a6,#0d9488);padding:30px 40px;text-align:center;">
+            <div style="margin:0 auto 14px;text-align:center;">
+              <img src="cid:edutechex-logo" alt="EdutechEX" width="190" style="display:inline-block;width:190px;max-width:100%;height:auto;border:0;outline:none;" />
+            </div>
+            <h1 style="color:#ffffff;margin:0;font-size:20px;font-weight:700;letter-spacing:0.3px;">Process Admin</h1>
+            <p style="color:rgba(255,255,255,0.92);margin:4px 0 0;font-size:13px;">Password Reset</p>
           </td>
         </tr>
         <tr>
@@ -171,7 +198,7 @@ const buildPasswordResetEmail = (firstName, otp) => `
         </tr>
         <tr>
           <td style="padding:16px 40px 28px;text-align:center;border-top:1px solid #f1f5f9;">
-            <p style="color:#cbd5e1;font-size:11px;margin:0;">EdutechEX. All rights reserved.</p>
+            <p style="color:#cbd5e1;font-size:11px;margin:0;">© 2026 EdutechEX. All rights reserved.</p>
           </td>
         </tr>
       </table>
@@ -183,14 +210,18 @@ const buildPasswordResetEmail = (firstName, otp) => `
 const buildRejectedEmail = (firstName, reason) => `
 <!DOCTYPE html>
 <html>
+${emailHeadTags}
 <body style="margin:0;padding:0;background:#f4f6f9;font-family:'Segoe UI',Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
     <tr><td align="center">
-      <table width="520" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);">
+      <table width="520" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);max-width:92%;">
         <tr>
-          <td style="background:linear-gradient(135deg,#ef4444,#b91c1c);padding:32px 40px;text-align:center;">
-            <h1 style="color:#fff;margin:0;font-size:22px;font-weight:700;">EdutechEX — Process Admin</h1>
-            <p style="color:rgba(255,255,255,0.85);margin:6px 0 0;font-size:13px;">Account Not Approved</p>
+          <td style="background:linear-gradient(135deg,#ef4444,#b91c1c);padding:30px 40px;text-align:center;">
+            <div style="margin:0 auto 14px;text-align:center;">
+              <img src="cid:edutechex-logo" alt="EdutechEX" width="190" style="display:inline-block;width:190px;max-width:100%;height:auto;border:0;outline:none;" />
+            </div>
+            <h1 style="color:#ffffff;margin:0;font-size:20px;font-weight:700;letter-spacing:0.3px;">Process Admin</h1>
+            <p style="color:rgba(255,255,255,0.92);margin:4px 0 0;font-size:13px;">Account Not Approved</p>
           </td>
         </tr>
         <tr>
@@ -229,6 +260,19 @@ export const registerProcessAdmin = async (req, res) => {
 
     if (!email || !password || !firstName || !lastName) {
       return res.status(400).json({ success: false, message: "All fields are required." });
+    }
+
+    const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ .'-]{2,50}$/;
+    if (!nameRegex.test(String(firstName).trim())) {
+      return res.status(400).json({ success: false, message: "First name can only contain letters (min. 2 characters)." });
+    }
+    if (!nameRegex.test(String(lastName).trim())) {
+      return res.status(400).json({ success: false, message: "Last name can only contain letters (min. 2 characters)." });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (!emailRegex.test(String(email).trim())) {
+      return res.status(400).json({ success: false, message: "Enter a valid email address, such as name@gmail.com." });
     }
 
     if (password.length < 8) {
@@ -278,6 +322,10 @@ export const registerProcessAdmin = async (req, res) => {
     console.error("❌ Registration error:", error);
     if (error.code === 11000) {
       return res.status(400).json({ success: false, message: "Email already registered." });
+    }
+    if (error.name === "ValidationError") {
+      const firstError = Object.values(error.errors || {})[0]?.message || "Enter a valid email address, such as name@gmail.com.";
+      return res.status(400).json({ success: false, message: firstError });
     }
     return res.status(500).json({ success: false, message: "Server error during registration." });
   }

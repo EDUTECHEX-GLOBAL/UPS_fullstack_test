@@ -248,6 +248,7 @@ const EnrollmentDashboard = () => {
           selectedUniversities: universityData.selectedUniversities || [],
           studentSelectedPrograms: savedPrograms,
           eligibleUniversities: universityData.eligibleUniversities || [],
+          universitySelectionStatus: universityData.status || 'selected',
           programApprovalStatus: rawProgData.programApprovalStatus || 'pending',
         };
 
@@ -346,38 +347,6 @@ const EnrollmentDashboard = () => {
     else handleSetActiveView('dashboard');
   };
 
-  const handleUniversitySelectionChange = (changes) => {
-    setApplicationData((prev) => ({
-      ...prev,
-      programSelection: { ...prev.programSelection, ...changes },
-    }));
-  };
-
-  const saveUniversitySelection = async () => {
-    const selection = applicationData.programSelection;
-    if (!selection.selectedUniversities || selection.selectedUniversities.length === 0) {
-      alert('Please select at least one university before continuing.');
-      return;
-    }
-    if (selection.selectedUniversities.length > 5) {
-      alert('You can select up to 5 universities / programs across your approved study destinations.');
-      return;
-    }
-    try {
-      const response = await axiosInstance.post('/api/enrollment/university-selection', {
-        programType: selection.programType,
-        selectedCountry: selection.countryName,
-        selectedUniversities: selection.selectedUniversities,
-      });
-      if (!response.data?.success) throw new Error('Unable to save university selection.');
-      setSteps((prev) => prev.map((step) => step.id === 2 ? { ...step, status: 'Completed', percentage: '100%' } : step));
-      navigate('/firstyear/enrollment/additionaldocument');
-    } catch (error) {
-      console.error('Unable to save university selection:', error);
-      alert('Unable to save university selection. Please try again.');
-    }
-  };
-
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userData');
@@ -385,12 +354,13 @@ const EnrollmentDashboard = () => {
   };
 
   const handleOpenApplicationStatus = () => {
-    setShowApplicationStatusModal(true);
+    setShowApplicationStatusModal(false);
+    setShowReviewProgressModal(false);
+    navigate('/application-status');
   };
 
   const handleViewDetailedStatus = () => {
-    setShowApplicationStatusModal(false);
-    setShowReviewProgressModal(true);
+    handleOpenApplicationStatus();
   };
 
   const handleGoToApprovedDashboard = () => {
@@ -1212,7 +1182,7 @@ const EnrollmentDashboard = () => {
           </div>
         )}
 
-        {activeMainStep === 2 && (applicationData.programSelection.programApprovalStatus === 'approved' ? (
+        {activeMainStep === 2 && (String(applicationData.programSelection.universitySelectionStatus || '').toLowerCase() === 'completed' ? (
           <div className="personal-section">
             <UniversitySection
               programType={applicationData.programSelection.programType}
@@ -1220,18 +1190,15 @@ const EnrollmentDashboard = () => {
               selectedCountry={applicationData.programSelection.countryName}
               selectedUniversities={applicationData.programSelection.selectedUniversities || []}
               eligibleUniversities={applicationData.programSelection.eligibleUniversities || []}
-              onCountryChange={(countryName) => handleUniversitySelectionChange({ countryName })}
-              onUniversityChange={(universities) => handleUniversitySelectionChange({ selectedUniversities: universities })}
+              selectionStatus={applicationData.programSelection.universitySelectionStatus}
+              readOnly
             />
-            <div className="personal-actions">
-              <button type="button" className="btn-back" onClick={handleBack}>Back</button>
-              <button type="button" className="btn-next" onClick={saveUniversitySelection}>Save &amp; Continue <FaArrowRight style={{ marginLeft: '8px', fontSize: '0.8rem' }} /></button>
-            </div>
+            <div className="personal-actions"><button type="button" className="btn-back" onClick={() => navigate('/firstyear/enrollment/dashboard')}>Return to Dashboard</button></div>
           </div>
         ) : (
           <div className="personal-section">
-            <h2 className="personal-title">University Selection</h2>
-            <p className="personal-subtitle">Your program selection must be approved by a process admin before you can choose a university.</p>
+            <h2 className="personal-title">University Assignment</h2>
+            <p className="personal-subtitle">Your partner is reviewing your application and will select and approve the universities assigned to you. You can view them here once the assignment is complete.</p>
             <div className="personal-actions"><button type="button" className="btn-back" onClick={handleBack}>Back</button></div>
           </div>
         ))}

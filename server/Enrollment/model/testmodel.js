@@ -29,6 +29,7 @@ const testSchema = new mongoose.Schema({
   hasNotTaken: { type: Boolean, default: false },
   tests: [{
     id: String,
+    category: { type: String, enum: ['language','additional'], default: '' }, // Added field
     exam: String,
     score: String,
     testDate: String,

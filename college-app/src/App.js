@@ -1,6 +1,7 @@
 // src/App.js - Updated for admin folder
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import "./App.css";
 
 const RoleSelection = lazy(() => import("./components/RoleSelection"));
 const AdminLogin = lazy(() => import("./components/AdminLogin"));
@@ -19,7 +20,15 @@ const EnrollmentDashboard = lazy(() => import("./components/User/first-year-stud
 const StudentDashboardGuard = lazy(() => import("./components/User/first-year-student/StudentDashboardGuard"));
 const ApplicationStatus = lazy(() => import("./components/User/first-year-student/ApplicationStatus"));
 const TemplateLandingPage = lazy(() => import("./template/TemplateLandingPage"));
-const PageFallback = () => <div className="app-page-loading">Loading...</div>;
+const PageFallback = () => (
+  <main className="app-page-loading" role="status" aria-live="polite" aria-label="Loading page">
+    <div className="app-page-loading__content">
+      <span className="app-page-loading__spinner" aria-hidden="true" />
+      <span className="app-page-loading__label">Loading your page</span>
+      <span className="app-page-loading__hint">This will only take a moment</span>
+    </div>
+  </main>
+);
 function App() {
   return (
     <Router>
@@ -27,6 +36,8 @@ function App() {
       <Routes>
         {/* Study abroad template landing page */}
         <Route path="/" element={<TemplateLandingPage />} />
+        <Route path="/privacy" element={<TemplateLandingPage initialView="privacy" />} />
+        <Route path="/terms" element={<TemplateLandingPage initialView="terms" />} />
         <Route path="/roles" element={<RoleSelection />} />
 
         {/* Old Homepage */}

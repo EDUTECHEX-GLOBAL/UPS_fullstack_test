@@ -102,11 +102,13 @@
   transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .medical-card--link {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 }
 
 .medical-card:hover {
@@ -117,14 +119,14 @@
 
 .medical-card--flagged {
   border-color: #FED7AA;
-  background-color: #FFFBEB;
+  background: linear-gradient(180deg, #FFFBEB 0%, #FFFFFF 40%);
 }
 
 .medical-card-head {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .medical-card-flag {
@@ -149,32 +151,24 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin: 0 0 14px 0;
-}
-
-.medical-fact {
   background-color: #F8FAFC;
   border: 1px solid #F1F5F9;
-  border-radius: 12px;
-  padding: 12px 14px;
-}
-
-.medical-card--flagged .medical-fact {
-  background-color: #FFFFFF;
-  border-color: #FEF3C7;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 0 0 14px 0;
 }
 
 .medical-fact dt {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   color: #94A3B8;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .medical-fact dd {
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   color: #0F172A;
   margin: 0;
@@ -182,17 +176,17 @@
 
 .medical-advisory {
   font-size: 12px;
-  line-height: 1.55;
-  color: #475569;
-  background-color: #F1F5F9;
+  line-height: 1.5;
+  color: #D97706;
+  background-color: #FFFBEB;
+  border: 1px solid #FDE68A;
   border-radius: 8px;
-  padding: 9px 12px;
-  margin: 0 0 14px 0;
+  padding: 8px 10px;
+  margin: 0 0 12px 0;
 }
 
 .medical-advisory--strong {
-  background-color: #FEF2F2;
-  color: #9A3412;
+  color: #B45309;
   font-weight: 500;
 }
 
@@ -205,30 +199,6 @@
 
 .medical-card:hover .medical-card-cta {
   text-decoration: underline;
-}
-
-.medical-unis-label {
-  display: block;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #0284C7;
-  margin-bottom: 8px;
-}
-
-.medical-unis ul {
-  margin: 0;
-  padding-left: 18px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 4px 24px;
-}
-
-.medical-unis li {
-  font-size: 13.5px;
-  color: #334155;
-  line-height: 1.5;
 }
 
 /* Bottom CTA */
@@ -264,19 +234,86 @@
 }
 
 @media (max-width: 768px) {
+  .medical-hero {
+    padding: 36px 0 30px;
+  }
+
+  .medical-container,
+  .medical-hero-container {
+    padding: 0 16px;
+  }
+
   .medical-title {
-    font-size: 30px;
+    font-size: clamp(26px, 7.5vw, 32px);
+  }
+
+  .medical-subtitle {
+    font-size: 14.5px;
+    margin-bottom: 18px;
+  }
+
+  .medical-country-nav {
+    gap: 8px;
+  }
+
+  .medical-chip {
+    font-size: 12.5px;
+    padding: 6px 12px;
+  }
+
+  .medical-callout {
+    padding: 12px 14px;
+    font-size: 12.5px;
+  }
+
+  .medical-list-section {
+    padding: 20px 0 44px;
   }
 
   .medical-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .medical-card {
-    padding: 22px 18px;
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+
+  .medical-cta-section {
+    padding: 0 0 44px;
   }
 
   .medical-cta-card {
-    padding: 30px 22px;
+    padding: 26px 18px;
+    border-radius: 16px;
+  }
+
+  .medical-cta-card h2 {
+    font-size: clamp(19px, 5.5vw, 22px);
+  }
+
+  .medical-cta-card p {
+    font-size: 14px;
+  }
+
+  .medical-cta-card .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .medical-hero {
+    padding: 28px 0 24px;
+  }
+
+  .medical-title {
+    font-size: 25px;
+  }
+
+  .medical-chip {
+    font-size: 12px;
+    padding: 5px 10px;
   }
 }

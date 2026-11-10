@@ -854,6 +854,13 @@ const AdminDashboard = () => {
   const notificationStats = dashData?.notificationStats || EMPTY_NOTIFICATION_STATS;
   const activityStats     = dashData?.activityStats     || EMPTY_ACTIVITY_STATS;
   const recentActivities  = useMemo(() => dashData?.recentActivities || [], [dashData]);
+
+// Filter recent activities based on search query (student name)
+const filteredActivities = useMemo(() => {
+  if (!searchQuery) return recentActivities;
+  const q = searchQuery.toLowerCase();
+  return recentActivities.filter(item => (item.user || '').toLowerCase().includes(q));
+}, [searchQuery, recentActivities]);
   const quickStats        = dashData?.quickStats        || EMPTY_QUICK_STATS;
 
   // ── Content Router ────────────────────────────────────────────────────
@@ -868,7 +875,7 @@ const AdminDashboard = () => {
       verificationStats={verificationStats}
       notificationStats={notificationStats}
       activityStats={activityStats}
-      recentActivities={recentActivities}
+      recentActivities={filteredActivities}
       quickStats={quickStats}
       onRefresh={handleDashboardRefresh}
       onTabChange={handleTabChange}
@@ -881,7 +888,7 @@ const AdminDashboard = () => {
     verificationStats,
     notificationStats,
     activityStats,
-    recentActivities,
+    filteredActivities,
     quickStats,
     handleDashboardRefresh,
     handleTabChange,

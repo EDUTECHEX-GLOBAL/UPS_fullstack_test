@@ -116,6 +116,9 @@ const styles = {
     boxShadow: "none",
   },
   link: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "7px",
     marginTop: "22px",
     border: "none",
     background: "transparent",
@@ -147,6 +150,41 @@ const styles = {
   },
 };
 
+const PasswordVisibilityButton = function({ visible, onClick, label }) {
+  return (
+    <button
+      type="button"
+      className="forgot-password-visibility-toggle"
+      onClick={onClick}
+      aria-label={visible ? `Hide ${label}` : `Show ${label}`}
+      aria-pressed={visible}
+    >
+      <svg
+        aria-hidden="true"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {visible ? (
+          <>
+            <path d="M3 3L21 21" />
+            <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" />
+            <path d="M9.9 5.2A10.8 10.8 0 0 1 12 5c5 0 8.5 4.2 9.5 6-.4.8-1.2 1.9-2.4 3" />
+            <path d="M6.2 6.2C4.2 7.5 2.9 9.4 2.5 11c.5 1.1 3.6 7 9.5 7 1 0 1.9-.2 2.7-.5" />
+          </>
+        ) : (
+          <>
+            <path d="M2.5 12S6 5 12 5s9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7Z" />
+            <circle cx="12" cy="12" r="3" />
+          </>
+        )}
+      </svg>
+    </button>
+  );
+};
+
 const ForgotPassword = function() {
   const [step, setStep] = useState("email");
   const [identifier, setIdentifier] = useState("");
@@ -155,6 +193,8 @@ const ForgotPassword = function() {
   const [error, setError] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -243,11 +283,24 @@ const ForgotPassword = function() {
     setStep("password");
   };
 
+  const handleResendOtp = async function() {
+    const response = await axiosInstance.post(
+      "/api/" + apiPrefix + "/forgot-password/request-otp",
+      { [isFirstYear ? "email" : "username"]: identifier.trim() }
+    );
+    if (!response.data?.success) {
+      throw new Error(response.data?.message || "Could not resend the OTP.");
+    }
+    return response.data.message || "A new OTP has been sent to your email.";
+  };
+
   const OtpModal = OtpVerification;
 
   if (step === "otp") {
     return React.createElement(OtpModal, {
       email: identifier,
+      isFirstYear,
+      onResend: handleResendOtp,
       onVerified: handleOtpVerified,
       onClose: function() { navigate(-1); },
     });
@@ -259,8 +312,8 @@ const ForgotPassword = function() {
     : loading || !newPassword || !confirmPassword;
 
   return (
-    <div style={styles.page}>
-      <main style={styles.card}>
+    <div className="forgot-password-page" style={styles.page}>
+      <main className="forgot-password-card" style={styles.card}>
         <button
           type="button"
           aria-label="Close"
@@ -274,7 +327,7 @@ const ForgotPassword = function() {
           <img src={EdutechLogo} alt="EDUTECHEX" style={styles.logo} />
         </div>
 
-        <h1 style={styles.title}>
+        <h1 className="forgot-password-title" style={styles.title}>
           {isEmailStep ? `Reset ${studentTypeLabel} Password` : "Create New Password"}
         </h1>
         <p style={styles.subtitle}>
@@ -313,28 +366,42 @@ const ForgotPassword = function() {
         ) : (
           <form onSubmit={handleResetPassword}>
             <label style={styles.label}>New Password</label>
-            <input
-              type="password"
-              value={newPassword}
-              onChange={function(e) { setNewPassword(e.target.value); }}
-              placeholder="Enter new password"
-              required
-              disabled={loading}
-              autoComplete="new-password"
-              style={styles.input}
-            />
+            <div className="forgot-password-input-wrap">
+              <input
+                type={showNewPassword ? "text" : "password"}
+                value={newPassword}
+                onChange={function(e) { setNewPassword(e.target.value); }}
+                placeholder="Enter new password"
+                required
+                disabled={loading}
+                autoComplete="new-password"
+                style={styles.input}
+              />
+              <PasswordVisibilityButton
+                visible={showNewPassword}
+                onClick={() => setShowNewPassword((visible) => !visible)}
+                label="new password"
+              />
+            </div>
 
             <label style={styles.label}>Confirm Password</label>
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={function(e) { setConfirmPassword(e.target.value); }}
-              placeholder="Confirm your new password"
-              required
-              disabled={loading}
-              autoComplete="new-password"
-              style={styles.input}
-            />
+            <div className="forgot-password-input-wrap">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                value={confirmPassword}
+                onChange={function(e) { setConfirmPassword(e.target.value); }}
+                placeholder="Confirm your new password"
+                required
+                disabled={loading}
+                autoComplete="new-password"
+                style={styles.input}
+              />
+              <PasswordVisibilityButton
+                visible={showConfirmPassword}
+                onClick={() => setShowConfirmPassword((visible) => !visible)}
+                label="confirmed password"
+              />
+            </div>
 
             <button
               type="submit"
@@ -350,7 +417,24 @@ const ForgotPassword = function() {
         )}
 
         <button type="button" onClick={goToSignIn} style={styles.link}>
-          {"<- Back to Sign In"}
+          <svg
+            aria-hidden="true"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ display: "block", flex: "0 0 auto" }}
+          >
+            <path
+              d="M19 12H5M5 12L11 18M5 12L11 6"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span>Back to Sign In</span>
         </button>
       </main>
     </div>

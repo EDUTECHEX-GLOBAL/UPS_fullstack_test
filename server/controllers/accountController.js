@@ -1,7 +1,7 @@
-import Account from "../models/accountModel.js";
+﻿import Account from "../models/accountModel.js";
 import AllDocument from "../models/AllDocumentModel.js";
 import Otp from "../models/otpModel.js";
-import { sendEmail } from "../utils/sendEmail.js";
+import { sendEmail, sendEmailEnhanced, sendPasswordResetOTPEmail } from "../utils/sendEmail.js";
 import Notification from "../models/notificationModel.js";
 import { createNewUserNotification } from "./notificationController.js";
 import { S3Client, DeleteObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
@@ -1341,13 +1341,7 @@ export const forgotPasswordRequestOtp = async (req, res) => {
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
     await Otp.create({ email: email.toLowerCase(), otp: otpCode, expiresAt: otpExpiry, purpose: "password_reset" });
 
-    await sendEmail(email, "College App - Reset Your Password", `
-      <h2>Password Reset Code</h2>
-      <p>Hi ${account.firstName || 'there'},</p>
-      <p>Your code is:</p>
-      <h1 style="letter-spacing:3px">${otpCode}</h1>
-      <p>Expires in <b>10 minutes</b>.</p>
-    `);
+    await sendPasswordResetOTPEmail(email, account.firstName, otpCode);
 
     res.status(200).json({ success: true, message: "OTP has been sent to your registered email." });
   } catch (error) {
@@ -1745,14 +1739,72 @@ export const sendStudentOtp = async (req, res) => {
     await Otp.create({ email: normalizedEmail, otp: otpCode, expiresAt: otpExpiry, purpose: "email_verification" });
 
     const studentName = firstName ? String(firstName).trim() : "Student";
-    await sendEmail(normalizedEmail, "EduTechEX - Your Verification Code", `
-      <h2>EduTechEX Verification Code</h2>
-      <p>Hi ${studentName},</p>
-      <p>Your verification code for creating your account is:</p>
-      <h1 style="letter-spacing:4px;color:#0e7490;font-size:32px;">${otpCode}</h1>
-      <p>This code will expire in <b>10 minutes</b>.</p>
-    `);
-
+    await sendEmailEnhanced({
+      to: normalizedEmail,
+      subject: "EduTechEX - Your Verification Code",
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body style="margin:0;padding:0;background-color:#f4f6f9;font-family:Arial,sans-serif;">
+          <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f9;padding:30px 0;">
+            <tr>
+              <td align="center">
+                <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);max-width:600px;">
+                  <!-- LOGO HEADER -->
+                  <tr>
+                    <td align="center" style="background:linear-gradient(135deg,#0e7490 0%,#155e75 100%);padding:28px 30px;">
+                      <img src="cid:edutechex-logo" alt="EduTechEX" width="140" style="display:block;margin:0 auto 10px auto;max-width:140px;" />
+                      <div style="color:#bae6fd;font-size:12px;margin-top:4px;letter-spacing:1px;font-family:Arial,sans-serif;">University Platform System</div>
+                    </td>
+                  </tr>
+                  <!-- BODY -->
+                  <tr>
+                    <td style="padding:36px 40px 20px 40px;">
+                      <h2 style="margin:0 0 16px 0;color:#0e7490;font-size:20px;font-family:Arial,sans-serif;">EduTechEX Verification Code</h2>
+                      <p style="margin:0 0 10px 0;color:#374151;font-size:15px;font-family:Arial,sans-serif;">Hi <strong>${studentName}</strong>,</p>
+                      <p style="margin:0 0 24px 0;color:#374151;font-size:15px;font-family:Arial,sans-serif;">Your verification code for creating your account is:</p>
+                      <!-- OTP BOX -->
+                      <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td align="center" style="padding:16px 0 24px 0;">
+                            <div style="background:#f0fdff;border:2px dashed #0e7490;border-radius:10px;padding:18px 40px;display:inline-block;">
+                              <span style="font-size:38px;font-weight:900;letter-spacing:12px;color:#0e7490;font-family:'Courier New',Courier,monospace;">${otpCode}</span>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                      <p style="margin:0 0 8px 0;color:#374151;font-size:14px;font-family:Arial,sans-serif;">This code will expire in <strong>10 minutes</strong>.</p>
+                      <p style="margin:0;color:#6b7280;font-size:13px;font-family:Arial,sans-serif;">If you did not request this, please ignore this email.</p>
+                    </td>
+                  </tr>
+                  <!-- FOOTER -->
+                  <tr>
+                    <td style="padding:20px 40px 30px 40px;border-top:1px solid #e5e7eb;">
+                      <p style="margin:0;color:#9ca3af;font-size:12px;text-align:center;font-family:Arial,sans-serif;">
+                        Questions? Contact us at <a href="mailto:edutechexcollege@gmail.com" style="color:#0e7490;">edutechexcollege@gmail.com</a>
+                      </p>
+                      <p style="margin:8px 0 0 0;color:#d1d5db;font-size:11px;text-align:center;font-family:Arial,sans-serif;">&copy; EduTechEX University Platform System</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </body>
+        </html>
+      `,
+      attachments: [
+        {
+          filename: "Edutech-logo.png",
+          path: new URL("../src/assets/Edutech-logo.png", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"),
+          cid: "edutechex-logo",
+        },
+      ],
+    });
     res.status(200).json({
       success: true,
       message: `Verification code sent to ${normalizedEmail}. Please check your inbox.`,

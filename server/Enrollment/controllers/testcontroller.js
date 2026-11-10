@@ -175,6 +175,12 @@ export const saveTestScores = async (req, res) => {
 
             return {
               id: testId,
+              // Older saved tests may not include a category. Keep the schema
+              // value valid when editing those records and preserve the
+              // language test's stable id used by the form.
+              category: test.category === 'language' || String(test.id || '') === 'lang_test'
+                ? 'language'
+                : 'additional',
               exam: str(test.exam),
               score: str(test.score),
               testDate: test.testDate || '',

@@ -1,5 +1,5 @@
 // ProcessAdminDashboard.js — Teal Design System + Real EDUTECHEX SVG Logo
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./processAdminDashboard.css";
@@ -148,6 +148,17 @@ const IcoMortarBoard = () => (
   </svg>
 );
 
+/* ─── Medical Application Icon ─── */
+const IcoStethoscope = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M11 2v2" />
+    <path d="M5 2v2" />
+    <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" />
+    <path d="M8 15a6 6 0 0 0 12 0v-3" />
+    <circle cx="20" cy="10" r="2" />
+  </svg>
+);
+
 
 
 /* ─── EDUTECHEX SVG LOGO ─── */
@@ -239,6 +250,25 @@ const ProcessAdminDashboard = () => {
   const [recentApps,      setRecentApps]      = useState([]);
   const [recentLoading,   setRecentLoading]   = useState(false);
   const [dashboardError,  setDashboardError]  = useState(null);
+  const [searchQuery,     setSearchQuery]     = useState("");
+
+  /* Filter recent applications by student name, university, program, or status */
+  const filteredApps = useMemo(() => {
+    if (!searchQuery.trim()) return recentApps;
+    const q = searchQuery.toLowerCase().trim();
+    return recentApps.filter((app) => {
+      const studentName = (app.studentName || "").toLowerCase();
+      const university = (app.university || "").toLowerCase();
+      const program = (app.program || "").toLowerCase();
+      const status = (app.status || "").toLowerCase();
+      return (
+        studentName.includes(q) ||
+        university.includes(q) ||
+        program.includes(q) ||
+        status.includes(q)
+      );
+    });
+  }, [recentApps, searchQuery]);
 
 
 
@@ -599,20 +629,20 @@ const ProcessAdminDashboard = () => {
                 <th>Program</th>
                 <th>Status</th>
                 <th>Date</th>
-                <th></th>
+                
               </tr>
             </thead>
             <tbody>
               {recentLoading ? (
                 [1,2,3,4,5].map(i => <SkeletonRow key={i} />)
-              ) : recentApps.length === 0 ? (
+              ) : filteredApps.length === 0 ? (
                 <tr>
-                  <td colSpan={6} style={{ textAlign: 'center', padding: '28px 18px', color: 'var(--text-lt)', fontSize: 13 }}>
-                    No applications found.
+                  <td colSpan={5} style={{ textAlign: 'center', padding: '28px 18px', color: 'var(--text-lt)', fontSize: 13 }}>
+                    {searchQuery ? `No applications found matching "${searchQuery}".` : 'No applications found.'}
                   </td>
                 </tr>
               ) : (
-                recentApps.map((app) => (
+                filteredApps.map((app) => (
                   <tr key={app._id}>
                     <td style={{ fontWeight: 600 }}>
                       {app.studentName}
@@ -626,7 +656,7 @@ const ProcessAdminDashboard = () => {
                       </span>
                     </td>
                     <td style={{ fontSize: 12, color: 'var(--text-lt)' }}>{app.date}</td>
-                    <td className="pad-chev">∨</td>
+                    
                   </tr>
                 ))
               )}
@@ -636,9 +666,11 @@ const ProcessAdminDashboard = () => {
           <div className="pad-mobile-app-list">
             {recentLoading ? (
               [1, 2, 3].map((item) => <div className="pad-mobile-app-skeleton" key={item} />)
-            ) : recentApps.length === 0 ? (
-              <div className="pad-mobile-app-empty">No applications found.</div>
-            ) : recentApps.map((app) => (
+            ) : filteredApps.length === 0 ? (
+              <div className="pad-mobile-app-empty">
+                {searchQuery ? `No applications found matching "${searchQuery}".` : 'No applications found.'}
+              </div>
+            ) : filteredApps.map((app) => (
               <article className="pad-mobile-app-card" key={`mobile-${app._id}`}>
                 <div className="pad-mobile-app-top">
                   <div className="pad-mobile-app-student">
@@ -696,14 +728,14 @@ const ProcessAdminDashboard = () => {
                   </div>
                 </div>
               ))
-            ) : recentApps.length === 0 ? (
+            ) : filteredApps.length === 0 ? (
               <div style={{ color: 'var(--text-lt)', fontSize: 12, textAlign: 'center', padding: '20px 0' }}>
-                No recent activity.
+                {searchQuery ? 'No matching activity.' : 'No recent activity.'}
               </div>
             ) : (
               <>
                 <div className="pad-act-day">Recent</div>
-                {recentApps.slice(0, 5).map((app) => (
+                {filteredApps.slice(0, 5).map((app) => (
                   <div key={app._id} className="pad-act-item">
                     <span className={getActivityDot(app.type)}>
                       <IcoCheck />
@@ -803,7 +835,11 @@ const ProcessAdminDashboard = () => {
           {/* Bachelor Application */}
           <li
             className={`kansas-parent ${gusExpanded ? 'expanded' : ''}`}
-            onClick={() => setGusExpanded(p => !p)}
+            title={!sidebarOpen && !isMobile ? 'Bachelor Applications' : undefined}
+            onClick={() => {
+              if (!sidebarOpen && !isMobile) handleTabChange('gus-applications');
+              else setGusExpanded(p => !p);
+            }}
           >
             <span className="sb-ico sb-teal"><IcoGradCap /></span>
             {(sidebarOpen || isMobile) && (
@@ -830,7 +866,11 @@ const ProcessAdminDashboard = () => {
           {/* Master Application */}
           <li
             className={`kansas-parent ${masterExpanded ? 'expanded' : ''}`}
-            onClick={() => setMasterExpanded(p => !p)}
+            title={!sidebarOpen && !isMobile ? 'Master Applications' : undefined}
+            onClick={() => {
+              if (!sidebarOpen && !isMobile) handleTabChange('master-applications');
+              else setMasterExpanded(p => !p);
+            }}
           >
             <span className="sb-ico sb-indigo"><IcoMortarBoard /></span>
             {(sidebarOpen || isMobile) && (
@@ -857,8 +897,13 @@ const ProcessAdminDashboard = () => {
           {/* Medical Application */}
           <li
             className={`kansas-parent ${medicalExpanded ? 'expanded' : ''}`}
-            onClick={() => setMedicalExpanded(p => !p)}
+            title={!sidebarOpen && !isMobile ? 'Medical Applications' : undefined}
+            onClick={() => {
+              if (!sidebarOpen && !isMobile) handleTabChange('medical-applications');
+              else setMedicalExpanded(p => !p);
+            }}
           >
+            <span className="sb-ico sb-rose"><IcoStethoscope /></span>
             {(sidebarOpen || isMobile) && (
               <>
                 <span>Medical Application</span>
@@ -917,7 +962,33 @@ const ProcessAdminDashboard = () => {
                 type="text"
                 placeholder="Search applications, documents..."
                 className="search-input"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  style={{
+                    position: "absolute",
+                    right: "14px",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    color: "var(--text-lt, #94a3b8)",
+                    fontSize: "13px",
+                    lineHeight: 1,
+                    padding: "4px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
+                  }}
+                  title="Clear search"
+                  aria-label="Clear search"
+                >
+                  ✕
+                </button>
+              )}
             </div>
           </div>
           <div className="navbar-right">

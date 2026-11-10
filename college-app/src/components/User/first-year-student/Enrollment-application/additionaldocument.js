@@ -21,6 +21,7 @@ const AdditionalDocument = ({ programType, data = {}, onUpdate, onNext, onBack, 
   const [uploadingTypes, setUploadingTypes] = useState({}); // { [docType]: true }
   const [deletingTypes, setDeletingTypes] = useState({});   // { [docType]: true }
   const [alert, setAlert] = useState(null); // { type: 'success' | 'error', message: '' }
+  const [pendingDelete, setPendingDelete] = useState(null);
 
   // Update studyType if prop changes
   useEffect(() => {
@@ -123,10 +124,6 @@ const AdditionalDocument = ({ programType, data = {}, onUpdate, onNext, onBack, 
   // Delete file handler
   const handleDeleteDocument = async (docItem) => {
     if (!docItem.docId && !docItem.file) return;
-
-    if (!window.confirm(`Are you sure you want to delete ${docItem.documentName}?`)) {
-      return;
-    }
 
     const docType = docItem.documentType;
     setDeletingTypes(prev => ({ ...prev, [docType]: true }));
@@ -271,7 +268,7 @@ const AdditionalDocument = ({ programType, data = {}, onUpdate, onNext, onBack, 
                             {item.docId && <button
                                 type="button"
                                 className="btn-doc-action delete"
-                                onClick={() => handleDeleteDocument(item)}
+                                onClick={() => setPendingDelete(item)}
                                 disabled={isDeleting}
                                 title="Delete file"
                               >
@@ -345,6 +342,32 @@ const AdditionalDocument = ({ programType, data = {}, onUpdate, onNext, onBack, 
           Save &amp; Continue
         </button>
       </div>}
+
+      {pendingDelete && (
+        <div className="add-doc-delete-overlay" onMouseDown={(event) => {
+          if (event.target === event.currentTarget) setPendingDelete(null);
+        }}>
+          <section className="add-doc-delete-dialog" role="dialog" aria-modal="true" aria-labelledby="delete-dialog-title">
+            <div className="add-doc-delete-icon" aria-hidden="true">!</div>
+            <h2 id="delete-dialog-title">Delete uploaded document?</h2>
+            <p className="add-doc-delete-intro">This file will be removed from your application.</p>
+            <dl className="add-doc-delete-details">
+              <div><dt>Document</dt><dd>{pendingDelete.documentName}</dd></div>
+              <div><dt>File name</dt><dd>{pendingDelete.file?.originalName || pendingDelete.file?.fileName || 'Uploaded file'}</dd></div>
+              {pendingDelete.file?.size && <div><dt>File size</dt><dd>{pendingDelete.file.size}</dd></div>}
+              <div><dt>Status</dt><dd>Uploaded</dd></div>
+            </dl>
+            <div className="add-doc-delete-actions">
+              <button type="button" className="add-doc-delete-cancel" onClick={() => setPendingDelete(null)}>Cancel</button>
+              <button type="button" className="add-doc-delete-confirm" onClick={() => {
+                const doc = pendingDelete;
+                setPendingDelete(null);
+                handleDeleteDocument(doc);
+              }}>Delete file</button>
+            </div>
+          </section>
+        </div>
+      )}
     </div>
   );
 };

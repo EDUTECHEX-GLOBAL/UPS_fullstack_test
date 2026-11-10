@@ -3,7 +3,7 @@ import { sendEmailEnhanced } from '../utils/sendEmail.js';
 
 const cleanText = (value) => typeof value === 'string' ? value.trim() : '';
 const EMAIL_PATTERN = /^[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,63}$/i;
-const NAME_PATTERN = /^\p{L}[\p{L}\p{M}]*(?:[ .'-]\p{L}[\p{L}\p{M}]*)*$/u;
+const NAME_PATTERN = /^[\p{L}\s]+$/u;
 const ALLOWED_COUNTRIES = new Set(['USA', 'UK', 'Canada', 'Australia', 'Germany', 'New Zealand']);
 const ALLOWED_PROGRAM_LEVELS = new Set(["Bachelor's Degree", "Master's Degree", 'Doctorate / PhD', 'Diploma / Certificate']);
 const escapeHtml = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({
@@ -26,7 +26,7 @@ export const submitContactMessage = async (req, res) => {
       return res.status(400).json({ success: false, message: 'One or more fields exceed the allowed length.' });
     }
     if (fullName.length < 2 || !NAME_PATTERN.test(fullName)) {
-      return res.status(400).json({ success: false, message: 'Enter a valid name using letters, spaces, apostrophes, periods, or hyphens.' });
+      return res.status(400).json({ success: false, message: 'Enter a valid name using letters and spaces only.' });
     }
     if (!EMAIL_PATTERN.test(email)) {
       return res.status(400).json({ success: false, message: 'Enter a valid email address, including a valid domain.' });
@@ -41,8 +41,8 @@ export const submitContactMessage = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Select a program level from the provided list.' });
     }
     const messageWords = message.match(/\p{L}{2,}/gu) || [];
-    if (/\p{N}/u.test(message)) {
-      return res.status(400).json({ success: false, message: 'Please remove numbers from your message.' });
+    if (/[^\p{L}\s]/u.test(message)) {
+      return res.status(400).json({ success: false, message: 'Only letters and spaces are allowed. Numbers, punctuation and special characters are not allowed.' });
     }
     if (message.length < 10 || messageWords.length < 2) {
       return res.status(400).json({ success: false, message: 'Enter a message of at least 10 characters with a few words.' });

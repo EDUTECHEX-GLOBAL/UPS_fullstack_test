@@ -853,3 +853,93 @@
   .summary-data-table td { font-size: 0.74rem; }
 }
 
+/* ── Print Stylesheet (PDF Download / Print Summary) ── */
+@media print {
+  @page {
+    margin: 10mm 12mm;
+    size: portrait;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .status-page-wrapper {
+    background: #ffffff !important;
+    padding-bottom: 0 !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Reset sticky navbar to static so it only appears ONCE at the top of Page 1, never overlapping sections on later pages */
+  .status-header {
+    position: static !important;
+    top: auto !important;
+    box-shadow: none !important;
+    border-bottom: 2px solid #0891b2 !important;
+    background: #ffffff !important;
+    padding: 0 0 10px 0 !important;
+    margin-bottom: 16px !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  .status-header-inner {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Hide interactive buttons and web controls from printed summary */
+  .status-signout-btn,
+  .status-copy-btn,
+  .status-bottom-actions,
+  .status-toast-alert,
+  .changes-action-buttons,
+  .status-approved-dashboard-action {
+    display: none !important;
+  }
+
+  .status-content-container {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Prevent sections from breaking awkwardly across page cuts */
+  .status-hero-card,
+  .status-timeline-card,
+  .status-summary-card {
+    box-shadow: none !important;
+    border: 1px solid #cbd5e1 !important;
+    padding: 16px !important;
+    margin-bottom: 14px !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .summary-section-box {
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 14px !important;
+    background: #ffffff !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 12px !important;
+  }
+
+  .summary-data-table tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .status-notice-banner {
+    box-shadow: none !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 14px !important;
+  }
+}
+

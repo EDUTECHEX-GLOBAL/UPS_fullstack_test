@@ -123,7 +123,7 @@
 @media (min-width: 769px) and (max-width: 1024px) {
   .home-page .header { padding: 18px 6%; }
   .home-page .logo-img { width: 160px; }
-  .home-page .header-btn { padding: 10px 18px; font-size: 14px; }
+  .home-page .header-btn { padding: 10px 18px; font-size: 14px; background: rgb(29, 56, 131); color: #fbfcff; border: 2px solid rgb(29, 56, 131); }
   .home-page .home-wrapper {
     min-height: 0;
     background-position: center center;
@@ -141,7 +141,7 @@
   .home-page .header { padding: 16px 5%; gap: 12px; }
   .home-page .logo-img { width: 150px; }
   .home-page .header-buttons { gap: 8px; }
-  .home-page .header-btn { padding: 9px 14px; font-size: 13px; background: white; color: #1e3d6f; }
+  .home-page .header-btn { padding: 9px 14px; font-size: 13px; background: rgb(29, 56, 131); color: #fbfcff; border: 2px solid rgb(29, 56, 131); }
   .home-page .home-wrapper { min-height: 380px; background-position: 56% center; }
   .home-page .home-content { align-items: center; text-align: center; padding: 40px 6%; }
   .home-page .headline { max-width: 100%; margin-bottom: 14px; }
@@ -152,7 +152,7 @@
   .home-page .header { flex-wrap: wrap; justify-content: center; padding: 12px 4%; gap: 10px; }
   .home-page .logo-img { width: 138px; }
   .home-page .header-buttons { width: 100%; justify-content: center; gap: 8px; }
-  .home-page .header-btn { padding: 9px 12px; font-size: 12px; }
+  .home-page .header-btn { padding: 9px 12px; font-size: 12px; background: rgb(29, 56, 131); color: #fbfcff; border: 2px solid rgb(29, 56, 131); }
   .home-page .home-wrapper { min-height: 420px; background-position: 58% center; }
   .home-page .home-content { padding: 32px 6%; }
   .home-page .headline { font-size: clamp(1.8rem, 8vw, 2.2rem); }

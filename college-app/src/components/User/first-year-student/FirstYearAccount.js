@@ -783,13 +783,7 @@ const FirstYearAccount = () => {
           </button>
         </form>
 
-        <footer className="fy-card-footer">
-          <p className="fy-terms-text">
-            By clicking "Create Account", you agree to the{" "}
-            <Link to="/terms">Terms of Use</Link> and{" "}
-            <Link to="/privacy">Privacy Policy</Link>.
-          </p>
-        </footer>
+     
       </main>
     </div>
   );

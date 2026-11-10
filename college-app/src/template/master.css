@@ -184,15 +184,81 @@
 }
 
 @media (max-width: 768px) {
+  .master-hero {
+    padding: 36px 0 30px;
+  }
+
+  .master-container,
+  .master-hero-container {
+    padding: 0 16px;
+  }
+
   .master-title {
-    font-size: 30px;
+    font-size: clamp(26px, 7.5vw, 32px);
+  }
+
+  .master-subtitle {
+    font-size: 14.5px;
+    margin-bottom: 18px;
+  }
+
+  .master-chips {
+    gap: 8px;
+  }
+
+  .master-chip {
+    font-size: 12.5px;
+    padding: 6px 12px;
+  }
+
+  .master-list {
+    padding: 24px 0 44px;
   }
 
   .master-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .master-card {
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+
+  .master-cta {
+    padding: 0 0 44px;
   }
 
   .master-cta-card {
-    padding: 30px 22px;
+    padding: 26px 18px;
+    border-radius: 16px;
+  }
+
+  .master-cta-card h2 {
+    font-size: clamp(19px, 5.5vw, 22px);
+  }
+
+  .master-cta-card p {
+    font-size: 14px;
+  }
+
+  .master-cta-card .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .master-hero {
+    padding: 28px 0 24px;
+  }
+
+  .master-title {
+    font-size: 25px;
+  }
+
+  .master-chip {
+    font-size: 12px;
+    padding: 5px 10px;
   }
 }

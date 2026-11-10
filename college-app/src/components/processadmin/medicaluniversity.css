@@ -149,6 +149,10 @@
   transform: translateY(-1px);
   box-shadow: 0 5px 16px rgba(37,99,235,0.35);
 }
+.med-refresh-btn:disabled { opacity: .7; cursor: wait; transform: none; }
+.med-refresh-icon { flex: 0 0 auto; }
+.med-refresh-icon.is-spinning { animation: med-refresh-spin .8s linear infinite; }
+@keyframes med-refresh-spin { to { transform: rotate(360deg); } }
 
 /* ── Stat Cards ── with colored top borders ───────────────── */
 .med-stats-row {
@@ -303,7 +307,14 @@
 
 .med-table-wrap-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
-.med-table { width: 100%; border-collapse: collapse; min-width: 820px; font-size: 13px; }
+.med-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  min-width: 820px;
+  font-size: 13px;
+  background: #f8fafc;
+}
 
 .med-thead-row th {
   padding: 12px 18px;
@@ -315,7 +326,6 @@
 }
 
 .med-tbody-row {
-  border-bottom: 1px solid var(--border-lt);
   transition: background var(--t);
   animation: med-fadeRow 0.3s ease both;
 }
@@ -323,9 +333,16 @@
   from { opacity: 0; transform: translateY(4px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.med-tbody-row:last-child { border-bottom: none; }
-.med-tbody-row:hover      { background: #f8fafc; }
-.med-tbody-row td         { padding: 14px 18px; vertical-align: middle; }
+.med-tbody-row td {
+  padding: 14px 18px;
+  vertical-align: middle;
+  background: #fff;
+  border-top: 1px solid var(--border-lt);
+  border-bottom: 1px solid var(--border-lt);
+}
+.med-tbody-row td:first-child { border-left: 1px solid var(--border-lt); border-radius: 9px 0 0 9px; }
+.med-tbody-row td:last-child { border-right: 1px solid var(--border-lt); border-radius: 0 9px 9px 0; }
+.med-tbody-row:hover td { background: #f8fafc; }
 
 /* Application ID badge */
 .med-college-badge {
@@ -473,6 +490,8 @@
 
 /* Action buttons */
 .med-action-group { display: flex; align-items: center; gap: 6px; }
+.med-table-actions { display: flex; flex-direction: row; align-items: center; flex-wrap: wrap; gap: 6px; }
+.med-table-actions > button { max-width: 100%; margin: 0; }
 
 .med-btn-view {
   display: inline-flex; align-items: center; gap: 5px;
@@ -1252,6 +1271,8 @@
 
   .med-controls   { flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 14px; }
   .med-search-box { min-width: unset; }
+  /* The desktop 170px flex-basis becomes a 170px-tall row when controls stack. */
+  .med-status-select-wrap { flex: 0 0 auto; width: 100%; }
   .med-filters    { gap: 6px; }
   .med-filter-btn { flex: 1; min-width: 60px; font-size: 11px; padding: 7px 12px; justify-content: center; text-align: center; }
 

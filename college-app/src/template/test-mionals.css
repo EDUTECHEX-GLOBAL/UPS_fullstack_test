@@ -95,7 +95,7 @@
 @media (max-width: 992px) {
   .testimonials-layout {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 32px;
   }
 
   .testimonials-header .section-subtitle {
@@ -108,7 +108,36 @@
 }
 
 @media (max-width: 620px) {
+  .testimonials-section {
+    padding: 44px 0;
+  }
+
   .testimonials-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .testimonial-card {
+    padding: 20px 18px;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonials-section {
+    padding: 36px 0;
+  }
+
+  .testimonials-layout {
+    gap: 22px;
+  }
+
+  .testimonial-card {
+    padding: 18px 16px;
+  }
+
+  .testimonial-text {
+    font-size: 13.5px;
+    margin-bottom: 16px;
   }
 }

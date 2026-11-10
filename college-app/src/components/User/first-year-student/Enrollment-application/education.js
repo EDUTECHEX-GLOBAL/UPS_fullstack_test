@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { FaGraduationCap, FaArrowLeft, FaArrowRight, FaSave, FaUniversity, FaFileAlt, FaCheckCircle } from 'react-icons/fa';
 import axiosInstance from '../../../../api/axiosInstance';
 import ApplicationConsistency from './ApplicationConsistency';
@@ -1041,7 +1041,7 @@ const EducationDetails = ({
         )}
 
         {/* Action Controls */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '24px', flexWrap: 'wrap', gap: '12px' }}>
+        <div className="education-actions">
           <button
             type="button"
             onClick={onBack}
@@ -1052,16 +1052,14 @@ const EducationDetails = ({
             <FaArrowLeft aria-hidden="true" /> Back to Basic Details
           </button>
 
-          <div style={{ display: 'inline-flex', gap: '12px' }}>
-            <button
-              type="submit"
-              disabled={isSaving}
-              className="personal-btn-next"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-            >
-              {isSaving ? 'Saving...' : 'Save & Continue'} <FaArrowRight />
-            </button>
-          </div>
+          <button
+            type="submit"
+            disabled={isSaving || isLocked}
+            className="personal-btn-next"
+            aria-busy={isSaving}
+          >
+            {isSaving ? 'Saving...' : 'Save & Continue'} <FaArrowRight aria-hidden="true" />
+          </button>
         </div>
       </form>
     </div>

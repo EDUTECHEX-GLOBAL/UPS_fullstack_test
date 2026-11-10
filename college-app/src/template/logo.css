@@ -1,23 +1,33 @@
 .brand-logo {
   display: inline-flex;
   align-items: center;
+  line-height: 1;
 }
 
-.brand-logo__img {
-  height: 34px;
+.brand-logo__img,
+.template-site .brand-logo__img,
+.site-header .brand-logo__img,
+.site-footer .brand-logo__img {
+  height: 36px;
   width: auto;
+  max-width: 180px;
   display: block;
   object-fit: contain;
+  aspect-ratio: 506 / 106;
 }
 
 /* Light variant for dark backgrounds (footer) */
-.brand-logo--light .brand-logo__img {
+.brand-logo--light .brand-logo__img,
+.template-site .brand-logo--light .brand-logo__img {
   filter: brightness(0) invert(1);
   opacity: 0.95;
 }
 
 @media (max-width: 480px) {
-  .brand-logo__img {
+  .brand-logo__img,
+  .template-site .brand-logo__img,
+  .site-header .brand-logo__img,
+  .site-footer .brand-logo__img {
     height: 30px;
   }
 }

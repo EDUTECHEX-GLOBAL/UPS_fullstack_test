@@ -41,8 +41,6 @@
 }
 
 .country-info-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(2, 132, 199, 0.12);
   transform: translateY(-3px);
   box-shadow: 0 10px 22px rgba(2, 132, 199, 0.12);
   border-color: #BAE6FD;
@@ -102,16 +100,16 @@
 @media (max-width: 992px) {
   .top-study-layout {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 32px;
   }
 
   .top-study-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 16px;
   }
 
   .country-info-card {
-    padding: 18px 20px;
+    padding: 16px 18px;
   }
 
   .country-title {
@@ -124,7 +122,35 @@
 }
 
 @media (max-width: 560px) {
+  .top-study-section {
+    padding: 44px 0;
+  }
+
+  .top-study-layout {
+    gap: 24px;
+  }
+
+  .top-study-info .section-subtitle {
+    margin-bottom: 22px;
+  }
+
   .top-study-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .country-info-card {
+    padding: 14px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-study-section {
+    padding: 36px 0;
+  }
+
+  .top-study-cta .btn {
+    width: 100%;
+    justify-content: center;
   }
 }

@@ -89,15 +89,37 @@ const s3 = new S3Client({
   },
 });
 const BUCKET_NAME = process.env.AWS_BUCKET_NAME;
+let s3LastError = null;
 const checkS3Connection = async () => {
   try {
     await s3.send(new HeadBucketCommand({ Bucket: BUCKET_NAME }));
     console.log(`✅ S3 Bucket Connected: ${BUCKET_NAME}`);
+    s3LastError = null;
     return true;
   } catch (err) {
+    const statusCode = err.$metadata?.httpStatusCode;
+    let hint = "Check your AWS credentials and IAM permissions.";
+    if (statusCode === 403) {
+      hint = "HTTP 403 Forbidden: Invalid AWS Access Key ID / Secret, or the IAM user lacks s3:ListBucket / s3:HeadBucket permissions for bucket '" + BUCKET_NAME + "'.";
+    } else if (statusCode === 404) {
+      hint = "HTTP 404 Not Found: Bucket '" + BUCKET_NAME + "' does not exist in your AWS account.";
+    } else if (statusCode === 301) {
+      hint = "HTTP 301 Redirect: Bucket '" + BUCKET_NAME + "' is located in a different AWS region than '" + process.env.AWS_REGION + "'.";
+    } else if (err.code === 'ENOTFOUND') {
+      hint = "DNS / Network Error: Could not resolve S3 endpoint. Check internet connection.";
+    }
+
+    s3LastError = {
+      message: err.message || err.name,
+      code: err.name || err.Code || err.code,
+      statusCode: statusCode || null,
+      hint,
+    };
+
     console.error(`❌ S3 Bucket Connection Failed!`);
+    console.error(`   → Status  : ${statusCode || 'Unknown'}`);
     console.error(`   → Error   : ${err.message}`);
-    console.error(`   → Code    : ${err.Code || err.code}`);
+    console.error(`   → Reason  : ${hint}`);
     console.error(`   → Bucket  : ${BUCKET_NAME}`);
     console.error(`   → Region  : ${process.env.AWS_REGION}`);
     console.error(`   → Key Set : ${!!process.env.AWS_ACCESS_KEY_ID}`);
@@ -248,9 +270,12 @@ app.get('/api/test', (req, res) =>
 app.get('/api/debug/s3', async (req, res) => {
   const connected = await checkS3Connection();
   res.json({
-    connected, bucket: BUCKET_NAME, region: process.env.AWS_REGION,
+    connected,
+    bucket: BUCKET_NAME,
+    region: process.env.AWS_REGION,
     accessKeySet: !!process.env.AWS_ACCESS_KEY_ID,
     secretKeySet: !!process.env.AWS_SECRET_ACCESS_KEY,
+    lastError: s3LastError,
     message: connected ? '✅ S3 is working correctly' : '❌ S3 connection failed',
   });
 });

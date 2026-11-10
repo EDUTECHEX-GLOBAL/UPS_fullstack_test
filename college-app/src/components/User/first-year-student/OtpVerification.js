@@ -4,9 +4,10 @@ import "./OtpVerification.css";
 
 
 
-const OtpVerification = ({ email, onVerified, onClose }) => {
+const OtpVerification = ({ email, onVerified, onClose, onResend, isFirstYear = true }) => {
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
+  const [resending, setResending] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
 
   const handleSubmit = async (e) => {
@@ -19,10 +20,10 @@ const OtpVerification = ({ email, onVerified, onClose }) => {
 
     try {
       setLoading(true);
-    const response = await axiosInstance.post('/api/students/verify-otp', {
-  email,
-  otp,
-});
+      const response = await axiosInstance.post(
+        isFirstYear ? "/api/students/verify-otp" : "/api/transfer/forgot-password/verify-otp",
+        { [isFirstYear ? "email" : "username"]: email, otp }
+      );
 
       setLoading(false);
       setMessage({ type: "success", text: response.data.message });
@@ -36,6 +37,24 @@ const OtpVerification = ({ email, onVerified, onClose }) => {
           error.response?.data?.message ||
           "Failed to verify OTP. Please check and try again.",
       });
+    }
+  };
+
+  const handleResend = async () => {
+    if (!onResend || resending) return;
+    setResending(true);
+    setMessage({ type: "", text: "" });
+    try {
+      const successMessage = await onResend();
+      setOtp("");
+      setMessage({ type: "success", text: successMessage });
+    } catch (error) {
+      setMessage({
+        type: "error",
+        text: error.response?.data?.message || error.message || "Failed to resend OTP. Please try again.",
+      });
+    } finally {
+      setResending(false);
     }
   };
 
@@ -62,13 +81,21 @@ const OtpVerification = ({ email, onVerified, onClose }) => {
             onChange={(e) => setOtp(e.target.value)}
           />
           <div className="modal-actions">
-            <button type="button" className="modal-btn secondary" onClick={onClose}>
+            <button type="button" className="modal-btn secondary" onClick={onClose} disabled={loading || resending}>
               Cancel
             </button>
-            <button type="submit" className="modal-btn primary" disabled={loading}>
+            <button type="submit" className="modal-btn primary" disabled={loading || resending}>
               {loading ? "Verifying..." : "Verify"}
             </button>
           </div>
+          <button
+            type="button"
+            className="otp-resend-button"
+            onClick={handleResend}
+            disabled={resending || loading}
+          >
+            {resending ? "Sending new OTP..." : "Resend OTP"}
+          </button>
         </form>
       </div>
     </div>

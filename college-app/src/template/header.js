@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './header.css';
 import Logo from './logo';
@@ -22,16 +22,62 @@ const Header = ({ currentView, onViewChange }) => {
     setOpenMenu(null);
   };
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+
+      const handleResize = () => {
+        if (window.innerWidth > 980) {
+          closeAll();
+        }
+      };
+
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') {
+          closeAll();
+        }
+      };
+
+      window.addEventListener('resize', handleResize);
+      window.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        document.body.style.overflow = originalOverflow;
+        window.removeEventListener('resize', handleResize);
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [mobileMenuOpen]);
+
   const handleNav = (viewName) => {
     closeAll();
+    if (viewName === 'home') {
+      navigate('/');
+      if (typeof window !== 'undefined') {
+        window.history.pushState(null, '', '/');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
     if (onViewChange) onViewChange(viewName);
   };
 
   const handleMenuNav = (menu, countryId) => {
     closeAll();
-    if (onViewChange) onViewChange(menu.view);
-    if (typeof window !== 'undefined') {
-      window.location.hash = countryId ? `${menu.key}-${countryId}` : menu.key;
+    if (countryId) {
+      if (onViewChange) {
+        onViewChange(`${menu.key}-country`, countryId);
+      } else if (typeof window !== 'undefined') {
+        window.location.hash = `${menu.key}-${countryId}`;
+      }
+    } else {
+      if (onViewChange) {
+        onViewChange(menu.view);
+      } else if (typeof window !== 'undefined') {
+        window.location.hash = menu.key;
+      }
     }
   };
 
@@ -44,7 +90,12 @@ const Header = ({ currentView, onViewChange }) => {
     <header className="site-header">
       <div className="header-container">
         <div className="header-logo">
-          <button onClick={() => handleNav('home')} className="logo-btn" aria-label="StudyAbroad home">
+          <button
+            type="button"
+            onClick={() => handleNav('home')}
+            className="logo-btn"
+            aria-label="StudyAbroad home"
+          >
             <Logo />
           </button>
         </div>
@@ -53,6 +104,7 @@ const Header = ({ currentView, onViewChange }) => {
           <ul className="nav-list">
             <li className="nav-item">
               <button
+                type="button"
                 onClick={() => handleNav('home')}
                 className={`nav-link ${currentView === 'home' ? 'active' : ''}`}
               >
@@ -106,6 +158,7 @@ const Header = ({ currentView, onViewChange }) => {
 
             <li className="nav-item">
               <button
+                type="button"
                 onClick={() => handleNav('contact')}
                 className={`nav-link ${currentView === 'contact' ? 'active' : ''}`}
               >
@@ -132,7 +185,11 @@ const Header = ({ currentView, onViewChange }) => {
               </ul>
             </li>
             <li className="nav-item nav-item--cta">
-              <button onClick={() => handleNav('contact')} className="btn btn-primary-pill">
+              <button
+                type="button"
+                onClick={() => handleNav('contact')}
+                className="btn btn-primary-pill"
+              >
                 Get Free Consultation
               </button>
             </li>
@@ -161,10 +218,15 @@ const Header = ({ currentView, onViewChange }) => {
               <li><button type="button" className="nav-dropdown-link" onClick={() => handleLoginNav('/admin-login')}>Admin</button></li>
             </ul>
           </div>
-          <button onClick={() => handleNav('contact')} className="btn btn-primary-pill header-cta-desktop">
+          <button
+            type="button"
+            onClick={() => handleNav('contact')}
+            className="btn btn-primary-pill header-cta-desktop"
+          >
             Get Free Consultation
           </button>
           <button
+            type="button"
             className="mobile-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Menu"

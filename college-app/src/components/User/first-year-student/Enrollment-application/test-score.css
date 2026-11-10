@@ -1,4 +1,4 @@
-/* ── Test Scores Section Styling ── */
+﻿/* ── Test Scores Section Styling ── */
 
 .test-score-section {
   background-color: #ffffff;
@@ -109,7 +109,8 @@
 
 .test-score-country-dropdown {
   position: relative;
-  max-width: 380px;
+  max-width: 100%;
+  width: 100%;
 }
 
 .test-score-country-trigger {
@@ -215,10 +216,17 @@
 .test-score-card-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 12px;
   margin-bottom: 1.25rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid #E2E8F0;
+  flex-wrap: wrap;
+}
+
+.test-score-card-header > div {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .test-score-card-header h3 {
@@ -226,6 +234,7 @@
   font-size: 1.05rem;
   font-weight: 700;
   color: #0F172A;
+  word-break: break-word;
 }
 
 .btn-remove {
@@ -238,6 +247,8 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .btn-remove:hover {
@@ -254,6 +265,10 @@
 
 .test-score-grid.multi-field {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.test-score-sub-grid {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
 
 .test-score-field {
@@ -731,7 +746,8 @@ input[type="date"].test-score-input {
 
 .test-score-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   gap: 16px;
   border-top: 1px solid #E2E8F0;
   padding-top: 24px;
@@ -815,9 +831,19 @@ input[type="date"].test-score-input {
   }
 }
 
+@media (max-width: 600px) {
+  .test-score-grid,
+  .test-score-grid.multi-field,
+  .test-score-sub-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+}
+
 @media (max-width: 768px) {
   .test-score-grid,
-  .test-score-grid.multi-field {
+  .test-score-grid.multi-field,
+  .test-score-sub-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -1255,17 +1281,61 @@ input[type="date"].test-score-input {
 
 @media (max-width: 480px) {
   .test-score-section {
-    padding: 16px 10px;
+    padding: 14px 10px;
     border-radius: 12px;
   }
 
   .test-score-card {
-    padding: 14px 10px;
+    padding: 12px 10px;
   }
 
   .test-score-select-option {
     padding: 9px 10px;
     font-size: 0.85rem;
+  }
+
+  .test-score-title {
+    font-size: 1.2rem;
+  }
+
+  .test-score-subtitle {
+    font-size: 0.88rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .test-score-opt-out {
+    padding: 0.75rem 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .test-score-country-selection {
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .test-score-country-tags {
+    gap: 0.4rem;
+  }
+
+  .test-score-country-tag {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.55rem;
+  }
+
+  .test-score-country-dropdown {
+    max-width: 100%;
+  }
+
+  .test-score-actions {
+    flex-direction: column-reverse;
+    gap: 8px;
+    padding-top: 14px;
+  }
+
+  .btn-next, .btn-back {
+    width: 100%;
+    height: 44px;
+    font-size: 0.88rem;
   }
 }
 

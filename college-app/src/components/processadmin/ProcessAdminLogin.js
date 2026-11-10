@@ -7,6 +7,7 @@ import LoginImage from "../../assets/login.png";
 import API_BASE_URL from "../../config/api";
 
 const isValidEmailAddress = (value) => /^[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,}$/i.test(value);
+const isValidName = (value) => /^[A-Za-zÀ-ÖØ-öø-ÿ .'-]{2,50}$/.test(String(value || "").trim());
 // ══════════════════════════════════════════════════════
 //  SVG ICONS  (outside component — never remount)
 // ══════════════════════════════════════════════════════
@@ -117,6 +118,8 @@ const ProcessAdminLogin = () => {
   // ── Register ──
   const [firstName,          setFirstName]          = useState("");
   const [lastName,           setLastName]           = useState("");
+  const [firstNameError,     setFirstNameError]     = useState("");
+  const [lastNameError,      setLastNameError]      = useState("");
   const [regPassword,        setRegPassword]        = useState("");
   const [regConfirmPassword, setRegConfirmPassword] = useState("");
   const [showRegPass,        setShowRegPass]        = useState(false);
@@ -151,7 +154,13 @@ const ProcessAdminLogin = () => {
   }, [resendCooldown]);
 
   const clearError = () => setError("");
-  const clearMessages = () => { setError(""); setSuccess(""); };
+  const clearMessages = () => {
+    setError("");
+    setSuccess("");
+    setEmailValidationError("");
+    setFirstNameError("");
+    setLastNameError("");
+  };
 
   // ── OTP handlers ──
   const handleOtpChange = (index, value) => {
@@ -184,6 +193,40 @@ const ProcessAdminLogin = () => {
     e.preventDefault();
     setError("");
 
+    const trimmedFirst = firstName.trim();
+    const trimmedLast = lastName.trim();
+
+    if (!trimmedFirst) {
+      setFirstNameError("Please enter your first name.");
+      return;
+    }
+    if (!isValidName(trimmedFirst)) {
+      setFirstNameError("First name can only contain letters (min. 2 characters).");
+      return;
+    }
+    setFirstNameError("");
+
+    if (!trimmedLast) {
+      setLastNameError("Please enter your last name.");
+      return;
+    }
+    if (!isValidName(trimmedLast)) {
+      setLastNameError("Last name can only contain letters (min. 2 characters).");
+      return;
+    }
+    setLastNameError("");
+
+    const normalizedEmail = email.trim();
+    if (!normalizedEmail) {
+      setEmailValidationError("Please enter your email address.");
+      return;
+    }
+    if (!isValidEmailAddress(normalizedEmail)) {
+      setEmailValidationError("Enter a valid email address, such as name@gmail.com.");
+      return;
+    }
+    setEmailValidationError("");
+
     if (regPassword !== regConfirmPassword) {
       setError("Passwords do not match.");
       return;
@@ -197,16 +240,34 @@ const ProcessAdminLogin = () => {
     try {
       const response = await axios.post(
       `${API_BASE_URL}/api/process-admin/register`,
-        { firstName, lastName, email, password: regPassword }
+        { firstName: firstName.trim(), lastName: lastName.trim(), email: normalizedEmail, password: regPassword }
       );
       if (response.data.success) {
         setStep("verify_otp");
         setResendCooldown(60);
       } else {
-        setError(response.data.message || "Registration failed.");
+        const msg = response.data.message || "Registration failed.";
+        if (msg.toLowerCase().includes("first name")) {
+          setFirstNameError(msg);
+        } else if (msg.toLowerCase().includes("last name")) {
+          setLastNameError(msg);
+        } else if (msg.toLowerCase().includes("valid email") || msg.toLowerCase().includes("email is required")) {
+          setEmailValidationError(msg);
+        } else {
+          setError(msg);
+        }
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed. Please try again.");
+      const msg = err.response?.data?.message || "Registration failed. Please try again.";
+      if (msg.toLowerCase().includes("first name")) {
+        setFirstNameError(msg);
+      } else if (msg.toLowerCase().includes("last name")) {
+        setLastNameError(msg);
+      } else if (msg.toLowerCase().includes("valid email") || msg.toLowerCase().includes("email is required")) {
+        setEmailValidationError(msg);
+      } else {
+        setError(msg);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -272,13 +333,10 @@ const ProcessAdminLogin = () => {
 
     if (!normalizedEmail) {
       setEmailValidationError("Please enter your email address.");
-      setError("Please enter your email address.");
       return;
     }
     if (!isValidEmailAddress(normalizedEmail)) {
-      const message = "Enter a valid email address, such as name@gmail.com.";
-      setEmailValidationError(message);
-      setError(message);
+      setEmailValidationError("Enter a valid email address, such as name@gmail.com.");
       return;
     }
     setEmailValidationError("");
@@ -390,12 +448,10 @@ const ProcessAdminLogin = () => {
     const normalizedEmail = email.trim();
     if (!normalizedEmail) {
       setEmailValidationError("Please enter your email address.");
-      setError("Please enter your email address.");
       return;
     }
     if (!isValidEmailAddress(normalizedEmail)) {
       setEmailValidationError("Enter a valid email address, such as name@gmail.com.");
-      setError("Enter a valid email address, such as name@gmail.com.");
       return;
     }
     setEmailValidationError("");
@@ -450,29 +506,72 @@ const ProcessAdminLogin = () => {
         <div className="process-name-row">
           <InputField
             label="First Name" icon={<IconUser />} type="text"
-            value={firstName} onChange={(e) => setFirstName(e.target.value)}
+            value={firstName} onChange={(e) => {
+              const val = e.target.value;
+              setFirstName(val);
+              if (firstNameError && isValidName(val)) setFirstNameError("");
+              if (error) setError("");
+            }}
             placeholder="John" disabled={isLoading} autoComplete="given-name"
+            error={firstNameError}
             focused={!!focused.firstName}
             onFocus={() => setFieldFocused("firstName")}
-            onBlur={() => setFieldUnfocused("firstName")}
+            onBlur={() => {
+              setFieldUnfocused("firstName");
+              const trimmed = firstName.trim();
+              if (trimmed && !isValidName(trimmed)) {
+                setFirstNameError("First name can only contain letters (min. 2 characters).");
+              } else if (!trimmed) {
+                setFirstNameError("");
+              }
+            }}
           />
           <InputField
             label="Last Name" icon={<IconUser />} type="text"
-            value={lastName} onChange={(e) => setLastName(e.target.value)}
+            value={lastName} onChange={(e) => {
+              const val = e.target.value;
+              setLastName(val);
+              if (lastNameError && isValidName(val)) setLastNameError("");
+              if (error) setError("");
+            }}
             placeholder="Doe" disabled={isLoading} autoComplete="family-name"
+            error={lastNameError}
             focused={!!focused.lastName}
             onFocus={() => setFieldFocused("lastName")}
-            onBlur={() => setFieldUnfocused("lastName")}
+            onBlur={() => {
+              setFieldUnfocused("lastName");
+              const trimmed = lastName.trim();
+              if (trimmed && !isValidName(trimmed)) {
+                setLastNameError("Last name can only contain letters (min. 2 characters).");
+              } else if (!trimmed) {
+                setLastNameError("");
+              }
+            }}
           />
         </div>
 
         <InputField
           label="Email Address" icon={<IconEmail />} type="email"
-          value={email} onChange={(e) => setEmail(e.target.value)}
+          value={email} onChange={(e) => {
+            const nextEmail = e.target.value;
+            const trimmedEmail = nextEmail.trim();
+            setEmail(nextEmail);
+            setEmailValidationError(trimmedEmail.includes('@') && /\.[^@\s]{2,}$/.test(trimmedEmail) && !isValidEmailAddress(trimmedEmail)
+              ? "Enter a valid email address, such as name@gmail.com."
+              : "");
+            if (error) setError("");
+          }}
           placeholder="you@edutechex.com" disabled={isLoading} autoComplete="email"
+          error={emailValidationError}
           focused={!!focused.regEmail}
           onFocus={() => setFieldFocused("regEmail")}
-          onBlur={() => setFieldUnfocused("regEmail")}
+          onBlur={() => {
+            setFieldUnfocused("regEmail");
+            const enteredEmail = email.trim();
+            if (enteredEmail && !isValidEmailAddress(enteredEmail)) {
+              setEmailValidationError("Enter a valid email address, such as name@gmail.com.");
+            }
+          }}
         />
 
         <InputField
@@ -499,7 +598,7 @@ const ProcessAdminLogin = () => {
           <EyeButton show={showConfirmPass} toggle={() => setShowConfirmPass((v) => !v)} disabled={isLoading} />
         </InputField>
 
-        {error && (
+        {error && error !== emailValidationError && error !== firstNameError && error !== lastNameError && (
           <div className="process-error">
             <IconAlert /><span>{error}</span>
             <button type="button" className="process-error-close" onClick={clearError}>✕</button>
@@ -644,14 +743,12 @@ const ProcessAdminLogin = () => {
             setFieldUnfocused("forgotEmail");
             const enteredEmail = email.trim();
             if (enteredEmail && !isValidEmailAddress(enteredEmail)) {
-              const message = "Enter a valid email address, such as name@gmail.com.";
-              setEmailValidationError(message);
-              setError(message);
+              setEmailValidationError("Enter a valid email address, such as name@gmail.com.");
             }
           }}
         />
 
-        {error && (
+        {error && error !== emailValidationError && error !== firstNameError && error !== lastNameError && (
           <div className="process-error">
             <IconAlert /><span>{error}</span>
             <button type="button" className="process-error-close" onClick={clearError}>x</button>
@@ -811,9 +908,7 @@ const ProcessAdminLogin = () => {
             setFieldUnfocused("loginEmail");
             const enteredEmail = email.trim();
             if (enteredEmail && !isValidEmailAddress(enteredEmail)) {
-              const message = "Enter a valid email address, such as name@gmail.com.";
-              setEmailValidationError(message);
-              setError(message);
+              setEmailValidationError("Enter a valid email address, such as name@gmail.com.");
             }
           }}
         />
@@ -830,7 +925,7 @@ const ProcessAdminLogin = () => {
           <EyeButton show={showPassword} toggle={() => setShowPassword((v) => !v)} disabled={isLoading} />
         </InputField>
 
-        {error && (
+        {error && error !== emailValidationError && error !== firstNameError && error !== lastNameError && (
           <div className="process-error">
             <IconAlert /><span>{error}</span>
             <button type="button" className="process-error-close" onClick={clearError}>✕</button>

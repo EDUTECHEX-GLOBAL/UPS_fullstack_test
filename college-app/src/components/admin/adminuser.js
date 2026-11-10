@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo, memo, useRef } from "react";
 import "./adminuser.css";
+import EdutechLogo from "../../assets/Edutech-logo.svg";
 
 // ── Constants outside component (never recreated) ─────────────────────────
 import API_BASE_URL from "../../config/api";
@@ -295,6 +296,96 @@ const CreateStudentModal = memo(({ open, loading, error, onClose, onSubmit }) =>
   );
 });
 
+const NotificationModal = memo(({ popup, onClose }) => {
+  if (!popup) return null;
+  const isSuccess = popup.type !== "error";
+  return (
+    <div
+      role="presentation"
+      onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 1300,
+        display: "grid",
+        placeItems: "center",
+        padding: 20,
+        background: "rgba(15, 23, 42, 0.45)",
+        backdropFilter: "blur(3px)",
+      }}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        style={{
+          width: "min(420px, 100%)",
+          padding: "32px 28px 24px",
+          borderRadius: 18,
+          background: "#ffffff",
+          boxShadow: "0 24px 60px -12px rgba(15, 23, 42, 0.25)",
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <img src={EdutechLogo} alt="EDUTECHEX" style={{ height: 28, objectFit: "contain", marginBottom: 20 }} />
+        <div
+          style={{
+            width: 64,
+            height: 64,
+            borderRadius: "50%",
+            background: isSuccess ? "#ecfdf5" : "#fef2f2",
+            border: `2px solid ${isSuccess ? "#a7f3d0" : "#fecaca"}`,
+            display: "grid",
+            placeItems: "center",
+            marginBottom: 18,
+          }}
+        >
+          {isSuccess ? (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20 6L9 17l-5-5" />
+            </svg>
+          ) : (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="15" y1="9" x2="9" y2="15" />
+              <line x1="9" y1="9" x2="15" y2="15" />
+            </svg>
+          )}
+        </div>
+
+        <h3 style={{ margin: "0 0 8px", color: "#0f172a", fontSize: 20, fontWeight: 700 }}>
+          {popup.title || (isSuccess ? "Success!" : "Notice")}
+        </h3>
+
+        <p style={{ margin: "0 0 24px", color: "#64748b", fontSize: 14, lineHeight: 1.6, maxWidth: 360 }}>
+          {popup.message}
+        </p>
+
+        <button
+          type="button"
+          onClick={onClose}
+          style={{
+            width: "100%",
+            padding: "12px 20px",
+            borderRadius: 10,
+            border: "none",
+            background: isSuccess ? "#0d9488" : "#0f172a",
+            color: "#ffffff",
+            fontSize: 15,
+            fontWeight: 600,
+            cursor: "pointer",
+            boxShadow: isSuccess ? "0 4px 12px rgba(13, 148, 136, 0.25)" : "none",
+          }}
+        >
+          {popup.buttonText || "Got it"}
+        </button>
+      </div>
+    </div>
+  );
+});
+
 const StudentCredentialsModal = memo(({ credentials, onClose }) => {
   if (!credentials) return null;
   return (
@@ -465,6 +556,11 @@ const AdminUserManagement = () => {
   const [creatingStudent,     setCreatingStudent]     = useState(false);
   const [createStudentError,  setCreateStudentError]  = useState("");
   const [studentCredentials,  setStudentCredentials]  = useState(null);
+  const [popup, setPopup] = useState(null);
+
+  const showPopup = useCallback((message, title = "Success!", type = "success") => {
+    setPopup({ message, title, type });
+  }, []);
   const lastUsersQueryRef = useRef("");
 
   // ── Stable auth headers ───────────────────────────────────────────────
@@ -611,7 +707,7 @@ const AdminUserManagement = () => {
       const data = await res.json();
       if (data?.success) {
         setMedicalUsers(prev => prev.map(u => u._id === id ? { ...u, isApproved: true, status: "Approved" } : u));
-        alert("Medical user approved!");
+        showPopup("Medical user approved!", "Medical User Approved ✅", "success");
       } else alert(data.message || "Failed to approve.");
     } catch (err) { console.error(err); alert("Failed to approve medical user."); }
   }, [getAdminHeaders]);
@@ -626,7 +722,7 @@ const AdminUserManagement = () => {
       const data = await res.json();
       if (data?.success) {
         setMedicalUsers(prev => prev.map(u => u._id === id ? { ...u, isApproved: false, status: "Rejected" } : u));
-        alert("Medical user rejected!");
+        showPopup("Medical user rejected!", "Medical User Rejected", "success");
       } else alert(data.message || "Failed to reject.");
     } catch (err) { console.error(err); alert("Failed to reject medical user."); }
   }, [getAdminHeaders]);
@@ -658,9 +754,9 @@ const AdminUserManagement = () => {
         setUsers(prev => prev.map(u => u.id === userId ? { ...u, status: "active" } : u));
         if (data.stats) setUserStats(data.stats);
         await loadUsersData();
-        alert("User approved successfully!");
-      } else alert(data.message || "Failed to approve user");
-    } catch (err) { console.error(err); alert("Failed to approve user."); }
+        showPopup("User approved successfully! An approval email has been sent to the student.", "Account Approved ✅", "success");
+      } else showPopup(data.message || "Failed to approve user", "Error", "error");
+    } catch (err) { console.error(err); showPopup("Failed to approve user.", "Error", "error"); }
   }, [getAdminHeaders, loadUsersData]);
 
   const handleRejectUser = useCallback(async (userId) => {
@@ -675,7 +771,7 @@ const AdminUserManagement = () => {
         setUsers(prev => prev.map(u => u.id === userId ? { ...u, status: "suspended" } : u));
         if (data.stats) setUserStats(data.stats);
         await loadUsersData();
-        alert("User rejected successfully!");
+        showPopup("User rejected successfully!", "User Rejected", "success");
       } else alert(data.message || "Failed to reject user");
     } catch (err) { console.error(err); alert("Failed to reject user."); }
   }, [getAdminHeaders, loadUsersData]);
@@ -785,7 +881,7 @@ const AdminUserManagement = () => {
       if (data?.success) {
         setProcessAdmins(prev => prev.map(pa => pa._id === id ? { ...pa, status: "active", isApproved: true } : pa));
         setPendingPaCount(prev => Math.max(prev - 1, 0));
-        alert("Process admin approved! Approval email sent.");
+        showPopup("Process admin approved! Approval email sent.", "Process Admin Approved ✅", "success");
       } else alert(data.message || "Failed to approve.");
     } catch (err) { console.error(err); alert("Failed to approve process admin."); }
   }, [getAdminHeaders]);
@@ -808,7 +904,7 @@ const AdminUserManagement = () => {
         setPendingPaCount(prev => Math.max(prev - 1, 0));
         setRejectTarget(null);
         setRejectReason("");
-        alert("Process admin rejected. Rejection email sent.");
+        showPopup("Process admin rejected. Rejection email sent.", "Process Admin Rejected", "success");
       } else alert(data.message || "Failed to reject.");
     } catch (err) { console.error(err); alert("Failed to reject process admin."); }
   }, [rejectTarget, rejectReason, getAdminHeaders]);
@@ -845,6 +941,7 @@ const AdminUserManagement = () => {
         onSubmit={handleCreateStudent}
       />
       <StudentCredentialsModal credentials={studentCredentials} onClose={() => setStudentCredentials(null)} />
+      <NotificationModal popup={popup} onClose={() => setPopup(null)} />
 
       {/* Header */}
       <div className="users-header">

@@ -11,15 +11,12 @@
 
 .banner-card {
   background: linear-gradient(135deg, #0284C7 0%, #38BDF8 100%);
-  border-radius: 24px;
-  padding: 48px 56px;
   border-radius: 20px;
   padding: 44px 52px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 40px;
-  box-shadow: 0 12px 36px rgba(2, 132, 199, 0.25);
   box-shadow: 0 10px 30px rgba(2, 132, 199, 0.22);
   position: relative;
   overflow: hidden;
@@ -29,7 +26,6 @@
   color: #E0F2FE;
   font-size: 13px;
   font-weight: 700;
-  letter-spacing: 1px;
   letter-spacing: 0.8px;
   display: block;
   margin-bottom: 12px;
@@ -37,18 +33,14 @@
 
 .banner-title {
   color: #FFFFFF;
-  font-size: 36px;
   font-size: 34px;
   font-weight: 600;
   line-height: 1.25;
-  margin-bottom: 16px;
   margin-bottom: 14px;
 }
 
 .banner-subtitle {
   color: #F0F9FF;
-  font-size: 17px;
-  margin-bottom: 32px;
   font-size: 16px;
   margin-bottom: 30px;
   opacity: 0.95;
@@ -60,19 +52,16 @@
   padding: 12px 28px;
   border-radius: 50px;
   font-weight: 600;
-  font-size: 15px;
   font-size: 14.5px;
   text-decoration: none;
   display: inline-block;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .btn-white-pill:hover {
   background-color: #F8FAFC;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   color: #0369A1;
 }
@@ -93,24 +82,39 @@
 
 @media (max-width: 992px) {
   .counsellor-img {
-    max-width: 340px;
+    max-width: 320px;
+  }
+
+  .banner-card {
+    grid-template-columns: 1fr;
+    padding: 36px 28px;
+    text-align: center;
+    gap: 28px;
+  }
+
+  .banner-title {
+    font-size: 26px;
   }
 }
 
 @media (max-width: 560px) {
+  .your-future-section {
+    padding: 40px 0;
+  }
+
   .banner-card {
-    padding: 28px 20px;
+    padding: 26px 18px;
     gap: 20px;
     border-radius: 16px;
   }
 
   .banner-title {
-    font-size: clamp(23px, 7vw, 28px);
+    font-size: clamp(21px, 6.5vw, 24px);
   }
 
   .banner-subtitle {
-    font-size: 15px;
-    margin-bottom: 22px;
+    font-size: 14.5px;
+    margin-bottom: 20px;
   }
 
   .btn-white-pill {
@@ -118,20 +122,12 @@
     justify-content: center;
     max-width: 100%;
     white-space: normal;
+    padding: 11px 22px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .counsellor-img {
+    max-width: 240px;
   }
 }
-
-@media (max-width: 992px) {
-  .banner-card {
-    grid-template-columns: 1fr;
-    padding: 40px 32px;
-    padding: 36px 28px;
-    text-align: center;
-  }
-
-  .banner-title {
-    font-size: 28px;
-    font-size: 26px;
-  }
-}
-

@@ -544,7 +544,8 @@
 
 .gus-btn-dl {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 32px; height: 32px;
+  min-width: 48px; height: 32px;
+  padding: 0 12px;
   background: var(--primary-lt);
   border: 1.5px solid var(--primary-bd); 
   border-radius: 7px;
@@ -1437,6 +1438,12 @@
   flex: 1;
   justify-content: center;
 }
+.gus-mob-card-footer .gus-btn-dl {
+  min-width: 60px;
+  height: 32px;
+  padding: 6px 14px;
+  box-sizing: border-box;
+}
 
 .gus-mob-list-footer {
   display: flex; align-items: center; justify-content: space-between;
@@ -1581,12 +1588,16 @@
   .gus-mob-card-footer .gus-btn-verify,
   .gus-mob-card-footer .gus-btn-final-approve,
   .gus-mob-card-footer .gus-stage-badge,
-  .gus-mob-card-footer .gus-sent-badge {
+  .gus-mob-card-footer .gus-sent-badge,
+  .gus-mob-card-footer .gus-btn-dl {
     width: 100%;
     min-width: 0;
+    min-height: 32px;
+    height: 32px;
     white-space: normal;
     overflow-wrap: anywhere;
     text-align: center;
+    box-sizing: border-box;
   }
   .gus-mob-name  { font-size: 13px; }
   .gus-mob-email { font-size: 10.5px; }
@@ -3718,16 +3729,325 @@
   background: #eff6ff;
 }
 
+/* Comprehensive, robust application review modal layout & mobile responsive design */
+.gus-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.gus-modal {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: min(1080px, calc(100vw - 48px));
+  max-width: 1080px;
+  max-height: calc(100dvh - 48px);
+  height: auto;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #f8fafc;
+  box-shadow: 0 32px 80px rgba(15, 23, 42, 0.24);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.gus-modal-hdr.gus-premium-hdr {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #0b63f6 0%, #0047c7 58%, #00349b 100%);
+  color: #ffffff;
+  border-bottom: 0;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+}
+
+.gus-modal-hdr-left.gus-premium-student {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.gus-modal-hdr-right.gus-premium-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 1 auto;
+  min-width: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.gus-modal-body {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 22px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.gus-modal-ftr.gus-premium-ftr {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+}
+
+.gus-modal .review-section-card {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 0;
+}
+
+.gus-modal .review-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 14px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+}
+
+.gus-modal .review-info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px 18px;
+}
+
+.gus-modal .review-info-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.gus-modal .review-docs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gus-modal .review-doc-row {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.gus-modal .review-doc-title-group {
+  flex: 1 1 200px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.gus-modal .review-doc-actions {
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
 @media (max-width: 1024px) {
   .gus-modal .review-info-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 768px) {
-  .gus-modal .review-info-grid,
+  .gus-overlay {
+    padding: 8px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gus-modal {
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100dvh - 16px);
+    border-radius: 16px;
+  }
+
+  .gus-modal-hdr.gus-premium-hdr {
+    position: relative;
+    padding: 14px 14px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .gus-modal-hdr-left.gus-premium-student {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-right: 44px; /* Ensure title does not overlap top-right close button */
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .gus-premium-avatar {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .gus-premium-title {
+    font-size: 16px;
+    margin: 0 0 4px;
+    line-height: 1.25;
+    word-break: break-word;
+  }
+
+  .gus-premium-eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+
+  .gus-premium-appid {
+    font-size: 9.5px;
+    padding: 2px 7px;
+  }
+
+  .gus-modal-hdr-right.gus-premium-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: stretch;
+  }
+
+  .gus-status-card {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 8px 12px;
+  }
+
+  .gus-premium-outline-btn,
+  .gus-premium-gradient-btn {
+    width: 100%;
+    min-width: 0;
+    min-height: 36px;
+    padding: 0 8px;
+    font-size: 11px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .gus-premium-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gus-modal-body {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .gus-premium-stats-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 0;
+  }
+
+  .gus-premium-stat-card {
+    min-height: 60px;
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  .gus-premium-stat-card strong {
+    font-size: 15px;
+  }
+
+  .gus-modal .review-section-card {
+    padding: 12px 14px;
+    border-radius: 10px;
+  }
+
+  .gus-modal .review-card-title {
+    font-size: 0.92rem;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+  }
+
+  .gus-modal .review-info-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
   .gus-modal .review-docs-grid {
     grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .gus-modal-ftr.gus-premium-ftr {
+    padding: 10px 14px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .gus-premium-footer-info {
+    width: 100%;
+    text-align: center;
+  }
+
+  .gus-modal-close-btn {
+    width: 100%;
   }
 }
 

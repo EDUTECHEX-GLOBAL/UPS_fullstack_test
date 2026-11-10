@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import * as jsPDFModule from "jspdf";
 import { FiBookOpen, FiCalendar, FiCheckCircle, FiDownload, FiFileText, FiFolder, FiGlobe, FiHome, FiMail, FiMapPin, FiPrinter } from "react-icons/fi";
 import "./MasterUniversity.css";
@@ -153,17 +153,37 @@ const ISSUE_REASONS = [
 
 const DocumentEmailModal = ({ doc, studentEmail, studentName, studentId, onClose }) => {
   const [reason,     setReason]     = useState("not_uploaded");
+  const [reasonOpen, setReasonOpen] = useState(false);
   const [adminNotes, setAdminNotes] = useState("");
   const [deadline,   setDeadline]   = useState(7);
   const [sending,    setSending]    = useState(false);
   const [sent,       setSent]       = useState(false);
   const [error,      setError]      = useState("");
+  const reasonPickerRef = useRef(null);
 
   useEffect(() => {
-    const handler = (e) => { if (e.key === "Escape") onClose(); };
+    const handler = (e) => {
+      if (e.key === "Escape") {
+        if (reasonOpen) setReasonOpen(false);
+        else onClose();
+      }
+    };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [onClose]);
+  }, [onClose, reasonOpen]);
+
+  useEffect(() => {
+    if (!reasonOpen) return undefined;
+    const closeOnOutsideClick = (event) => {
+      if (!reasonPickerRef.current?.contains(event.target)) setReasonOpen(false);
+    };
+    document.addEventListener("mousedown", closeOnOutsideClick);
+    document.addEventListener("touchstart", closeOnOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", closeOnOutsideClick);
+      document.removeEventListener("touchstart", closeOnOutsideClick);
+    };
+  }, [reasonOpen]);
 
   const handleSend = async () => {
     setError("");
@@ -234,15 +254,34 @@ const DocumentEmailModal = ({ doc, studentEmail, studentName, studentId, onClose
 
             <div className="email-field">
               <label className="email-field-label">Issue / Reason *</label>
-              <select
-                className="email-select"
-                value={reason}
-                onChange={(e) => setReason(e.target.value)}
-              >
-                {ISSUE_REASONS.map((r) => (
-                  <option key={r.value} value={r.value}>{r.label}</option>
-                ))}
-              </select>
+              <div className="email-reason-picker" ref={reasonPickerRef}>
+                <button
+                  type="button"
+                  className="email-select-trigger"
+                  aria-haspopup="listbox"
+                  aria-expanded={reasonOpen}
+                  onClick={() => setReasonOpen((open) => !open)}
+                >
+                  <span>{ISSUE_REASONS.find((item) => item.value === reason)?.label || 'Select an issue'}</span>
+                  <span className={`email-select-chevron${reasonOpen ? ' is-open' : ''}`} aria-hidden="true" />
+                </button>
+                {reasonOpen && (
+                  <div className="email-reason-options" role="listbox" aria-label="Issue or reason">
+                    {ISSUE_REASONS.map((item) => (
+                      <button
+                        key={item.value}
+                        type="button"
+                        role="option"
+                        aria-selected={reason === item.value}
+                        className={`email-reason-option${reason === item.value ? ' is-selected' : ''}`}
+                        onClick={() => { setReason(item.value); setReasonOpen(false); }}
+                      >
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="email-field">
@@ -271,21 +310,19 @@ const DocumentEmailModal = ({ doc, studentEmail, studentName, studentId, onClose
                   </button>
                 ))}
               </div>
-            </div>
-
-            {error && <div className="email-error-box">Warning: {error}</div>}
-
-            <div className="email-modal-actions">
-              <button className="email-modal-btn-cancel" onClick={onClose} disabled={sending}>
-                Cancel
-              </button>
-              <button
-                className="email-modal-btn-primary"
-                onClick={handleSend}
-                disabled={sending}
-              >
-                {sending ? "Sending..." : "Send Email"}
-              </button>
+              {error && <div className="email-error-box">Warning: {error}</div>}
+              <div className="email-modal-actions">
+                <button className="email-modal-btn-cancel" onClick={onClose} disabled={sending}>
+                  Cancel
+                </button>
+                <button
+                  className="email-modal-btn-primary"
+                  onClick={handleSend}
+                  disabled={sending}
+                >
+                  {sending ? "Sending..." : "Send Email"}
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -311,16 +348,18 @@ const getProgrammeGroups = (d) => {
     const map = {};
     d.selectedUniversities.forEach((u) => {
       const uniName = u.universityName || u.name || u.university || 'Selected University';
-      if (!map[uniName]) {
-        map[uniName] = {
+      const country = u.country || d.primaryCountry || '';
+      const groupKey = `${uniName.trim().toLocaleLowerCase()}|${country.trim().toLocaleLowerCase()}`;
+      if (!map[groupKey]) {
+        map[groupKey] = {
           universityId: u.universityId || uniName,
           universityName: uniName,
-          country: u.country || d.primaryCountry || '',
-          location: u.country || d.primaryCountry || '',
+          country,
+          location: country,
           selectedCourses: []
         };
       }
-      map[uniName].selectedCourses.push({
+      map[groupKey].selectedCourses.push({
         programId: u.programId || u.programName,
         title: u.programName || u.degree || d.programName || 'Degree Program',
         degree: u.degree || d.programType || 'Master',
@@ -692,8 +731,8 @@ const DetailModal = ({ studentId, onClose }) => {
     const studentPhone = contact.mobileNumber || detail?.phone || personal.mobile || "";
 
     return (
-        <div className="gus-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
-            <div className="gus-modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="application-detail-title">
+        <div className="gus-overlay master-detail-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
+            <div className="gus-modal master-detail-modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="application-detail-title">
                 
                 {/* ── Premium Modal Header ── */}
                 <div className="gus-modal-hdr gus-premium-hdr">
@@ -1006,6 +1045,9 @@ export default function MasterUniversity() {
   const [verifyModal,        setVerifyModal]        = useState(null);
   const [verifyLoading,      setVerifyLoading]      = useState(false);
   const [verifyError,        setVerifyError]        = useState("");
+  const [approveProgramModal, setApproveProgramModal] = useState(null);
+  const [approveProgramLoading, setApproveProgramLoading] = useState(false);
+  const [approveProgramError, setApproveProgramError] = useState("");
   const [universities,       setUniversities]       = useState([]);
   const [universityMatchesApp, setUniversityMatchesApp] = useState(null);
   const [selectedMasterUniversityKeys, setSelectedMasterUniversityKeys] = useState([]);
@@ -1185,17 +1227,35 @@ export default function MasterUniversity() {
         <button type="button" className="mu-btn-final-approve" onClick={() => approveMasterUniversityMatches(app)}>Approve Selection</button>
       )}
       {universityApproved ? <span className="mu-badge-approved">✓ Approved</span> : !programApproved ? (
-        <button type="button" className="mu-btn-approve" onClick={async () => {
-          if (!window.confirm(`Approve the master program for ${app.fullName || app.studentName || 'this student'}?`)) return;
-          try {
-            const response = await fetch(`${API_BASE_URL}/api/enrollment-admin/masters/applications/${app.studentId || app.userId}/approve`, { method: 'PATCH', headers: authHeaders() });
-            const result = await response.json().catch(() => ({}));
-            if (!response.ok || !result.success) throw new Error(result.message || 'Failed to approve program.');
-            await Promise.all([loadApplications(), loadStats()]);
-          } catch (error) { window.alert(error.message || 'Failed to approve program.'); }
+        <button type="button" className="mu-btn-approve" onClick={() => {
+          setApproveProgramError("");
+          setApproveProgramModal(app);
         }}>Approve Program</button>
       ) : null}
     </>;
+  };
+
+  const submitProgramApproval = async () => {
+    if (!approveProgramModal || approveProgramLoading) return;
+    setApproveProgramLoading(true);
+    setApproveProgramError("");
+    try {
+      const studentId = approveProgramModal.studentId || approveProgramModal.userId || approveProgramModal._id;
+      const response = await fetch(`${API_BASE_URL}/api/enrollment-admin/masters/applications/${studentId}/approve`, {
+        method: 'PATCH',
+        headers: authHeaders(),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Failed to approve program.');
+      }
+      setApproveProgramModal(null);
+      await Promise.all([loadApplications(), loadStats()]);
+    } catch (error) {
+      setApproveProgramError(error.message || 'Failed to approve program.');
+    } finally {
+      setApproveProgramLoading(false);
+    }
   };
 
   const submitVerification = async () => {
@@ -1716,6 +1776,98 @@ export default function MasterUniversity() {
           </section>
         </div>
       )}
+      {approveProgramModal && (
+        <div className="master-verify-overlay" onClick={() => !approveProgramLoading && setApproveProgramModal(null)}>
+          <div
+            className="master-verify-modal mu-approve-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="master-approve-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="mu-approve-header">
+              <div className="mu-approve-icon-badge">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="12 2 22 8.5 12 15 2 8.5 12 2" />
+                  <path d="M6 11.5V17c0 0 2 3 6 3s6-3 6-3v-5.5" />
+                  <line x1="22" y1="8.5" x2="22" y2="14" />
+                </svg>
+              </div>
+              <div className="mu-approve-header-text">
+                <h3 id="master-approve-title">Approve Master Program</h3>
+                <p>Approve program selection for this student</p>
+              </div>
+              <button
+                type="button"
+                className="mu-approve-close-btn"
+                aria-label="Close"
+                onClick={() => setApproveProgramModal(null)}
+                disabled={approveProgramLoading}
+              >
+                &times;
+              </button>
+            </div>
+
+            <div className="master-verify-details">
+              <div>
+                <span>Student</span>
+                <strong>{approveProgramModal.fullName || approveProgramModal.studentName || "Unknown"}</strong>
+              </div>
+              <div>
+                <span>Application ID</span>
+                <strong>{approveProgramModal.applicationId || "-"}</strong>
+              </div>
+              <div>
+                <span>Programme</span>
+                <strong>{approveProgramModal.course?.preferredCourse || approveProgramModal.program || "Master's Degree"}</strong>
+              </div>
+              <div>
+                <span>Target Countries</span>
+                <strong>
+                  {Array.isArray(approveProgramModal.selectedCountries) && approveProgramModal.selectedCountries.length > 0
+                    ? approveProgramModal.selectedCountries.join(", ")
+                    : (approveProgramModal.country || "-")}
+                </strong>
+              </div>
+            </div>
+
+            <div className="mu-approve-notice">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 1 }}>
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+              <span>After the application is approved, you will select and approve the university assignment. The student can view the assigned universities in the enrollment portal.</span>
+            </div>
+
+            {approveProgramError && (
+              <div className="master-verify-error" role="alert">
+                {approveProgramError}
+              </div>
+            )}
+
+            <div className="master-verify-actions">
+              <button
+                type="button"
+                className="master-verify-cancel"
+                onClick={() => setApproveProgramModal(null)}
+                disabled={approveProgramLoading}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="mu-btn-submit-approve"
+                onClick={submitProgramApproval}
+                disabled={approveProgramLoading}
+              >
+                {approveProgramLoading ? "Approving..." : "✓ Approve Program"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {verifyModal && (
         <div className="master-verify-overlay" onClick={() => !verifyLoading && setVerifyModal(null)}>
           <div className="master-verify-modal" role="dialog" aria-modal="true" aria-labelledby="master-verify-title" onClick={(event) => event.stopPropagation()}>

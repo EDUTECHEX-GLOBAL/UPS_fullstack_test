@@ -47,6 +47,7 @@ const UniversitySection = ({
   selectedCountry, 
   selectedUniversities = [], 
   eligibleUniversities = [],
+  selectionStatus = '',
   readOnly = false,
   onCountryChange, 
   onUniversityChange,
@@ -76,13 +77,18 @@ const UniversitySection = ({
 
   // Auto-select first country from displayCountries if current selection is invalid or empty
   useEffect(() => {
-    if (displayCountries.length > 0 && (!selectedCountry || !displayCountries.includes(selectedCountry))) {
+    if (!readOnly && onCountryChange && displayCountries.length > 0 && (!selectedCountry || !displayCountries.includes(selectedCountry))) {
       onCountryChange(displayCountries[0]);
     }
-  }, [displayCountries, onCountryChange, selectedCountry]);
+  }, [displayCountries, onCountryChange, readOnly, selectedCountry]);
 
   // Fetch country universities from API
   useEffect(() => {
+    if (readOnly) {
+      setApiUniversities([]);
+      setLoading(false);
+      return undefined;
+    }
     if (!selectedCountry || !resolvedProgramType) { 
       setApiUniversities([]); 
       return undefined; 
@@ -171,6 +177,43 @@ const UniversitySection = ({
   }, [combinedUniversities, universitySearch]);
 
   const selectedCount = selectedUniversities.length;
+
+  if (readOnly) {
+    const assignmentApproved = String(selectionStatus).toLowerCase() === 'completed';
+    return (
+      <section className="university-section">
+        <div className="university-section-heading">
+          <h2>Partner-assigned Universities</h2>
+          <p>Your partner selects and approves the universities assigned to your application.</p>
+        </div>
+        {!assignmentApproved || selectedUniversities.length === 0 ? (
+          <div className="university-empty">
+            Your partner is reviewing your application and preparing your university assignment. The universities will appear here after approval.
+          </div>
+        ) : (
+          <div className="university-list">
+            {selectedUniversities.map((university, index) => {
+              const programs = Array.isArray(university.selectedPrograms) && university.selectedPrograms.length
+                ? university.selectedPrograms
+                : String(university.programName || '').split(',').map((program) => program.trim()).filter(Boolean);
+              return (
+                <article className="university-result is-selected" key={`${university.universityId || university.universityName}-${index}`}>
+                  <div className="university-card-header">
+                    <div className="university-info">
+                      <strong className="university-name">{university.universityName}</strong>
+                      <div className="university-meta"><span className="university-country-text">{university.country}</span></div>
+                    </div>
+                    <span className="qualifying-badge">Assigned by partner</span>
+                  </div>
+                  {programs.length > 0 && <div className="program-options-flex">{programs.map((program) => <span className="program-chip checked" key={program}>{program}</span>)}</div>}
+                </article>
+              );
+            })}
+          </div>
+        )}
+      </section>
+    );
+  }
 
   return (
     <section className="university-section">

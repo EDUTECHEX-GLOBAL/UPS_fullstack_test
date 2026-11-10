@@ -2,7 +2,14 @@ import React from 'react';
 import './your-furture.css';
 import consultantImage from '../assets/consultant.png';
 
-const YourFuture = () => {
+const YourFuture = ({ onViewChange }) => {
+  const handleConsultation = (e) => {
+    if (onViewChange) {
+      e.preventDefault();
+      onViewChange('contact');
+    }
+  };
+
   return (
     <section className="your-future-section" id="consultation">
       <div className="your-future-container">
@@ -16,7 +23,11 @@ const YourFuture = () => {
               Book free consultation today with our Counsellor
             </p>
             <div className="banner-action">
-              <a href="#contact" className="btn btn-white-pill">
+              <a
+                href="#contact"
+                onClick={handleConsultation}
+                className="btn btn-white-pill"
+              >
                 Book Free Consultation
               </a>
             </div>
@@ -36,4 +47,3 @@ const YourFuture = () => {
 };
 
 export default YourFuture;
-

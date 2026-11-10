@@ -335,7 +335,13 @@ const UniversityReview = ({ onBack, onComplete, readOnly = false }) => {
             <p className="review-empty-text">No test scores recorded.</p>
           ) : (
             <div className="review-test-list">
-              {testList.map((t, idx) => (
+              {testList.map((t, idx) => {
+                const hasReport = Boolean(t.reportFileUrl || t.reportFileName);
+                const rawStatus = String(t.verificationStatus || '').trim();
+                const statusLabel = /^(verified|rejected|failed)$/i.test(rawStatus)
+                  ? rawStatus
+                  : hasReport ? 'Awaiting verification' : 'Self-reported';
+                return (
                 <div key={idx} className="review-test-card">
                   <div className="review-test-header">
                     <span className="review-test-name">{t.exam}</span>
@@ -343,9 +349,9 @@ const UniversityReview = ({ onBack, onComplete, readOnly = false }) => {
                       <span className="review-score-badge">
                         Score: {t.score || 'N/A'}
                       </span>
-                      {t.verificationStatus && (
+                      {statusLabel && (
                         <span className="review-status-badge">
-                          {t.verificationStatus}
+                          {statusLabel}
                         </span>
                       )}
                     </div>
@@ -354,6 +360,15 @@ const UniversityReview = ({ onBack, onComplete, readOnly = false }) => {
                   <div className="review-test-date">
                     Test Date: {t.testDate || 'N/A'}
                   </div>
+                  {hasReport && (
+                    <div className="review-test-report">
+                      {t.reportFileUrl ? (
+                        <a href={t.reportFileUrl} target="_blank" rel="noreferrer">
+                          View score report{t.reportFileName ? ` (${t.reportFileName})` : ''}
+                        </a>
+                      ) : <span>Score report: {t.reportFileName}</span>}
+                    </div>
+                  )}
 
                   {/* Sub-scores & Breakdown Chips */}
                   {(t.readingScore || t.listeningScore || t.speakingScore || t.writingScore || t.verbalScore || t.quantitativeScore || t.analyticalWritingScore || t.chemicalPhysicalScore || t.carsScore || t.biologicalBiochemicalScore || t.psychologicalSocialScore || t.percentile || t.allIndiaRank || t.sjtBand) && (
@@ -385,7 +400,8 @@ const UniversityReview = ({ onBack, onComplete, readOnly = false }) => {
                  
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>

@@ -360,6 +360,12 @@ body {
   color: var(--violet);
 }
 
+/* ── Medical Application sidebar icon colour ── */
+.process-admin-dashboard .sb-rose {
+  background: #ffe4e6;
+  color: #e11d48;
+}
+
 .process-admin-dashboard .sidebar.closed .sub-menu {
   display: none;
 }

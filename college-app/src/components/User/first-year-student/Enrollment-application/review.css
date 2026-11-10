@@ -151,7 +151,9 @@
 .review-card-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
   margin-bottom: 16px;
   padding-bottom: 12px;
   border-bottom: 1px solid #e2e8f0;
@@ -164,6 +166,9 @@
   margin: 0;
   border-bottom: none;
   padding-bottom: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  word-break: break-word;
 }
 
 .review-edit-btn {
@@ -179,6 +184,8 @@
   align-items: center;
   gap: 6px;
   transition: all 0.2s ease;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .review-edit-btn:hover {
@@ -766,5 +773,25 @@
   .review-test-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .review-doc-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .review-doc-title-group {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .review-doc-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .review-card-title {
+    font-size: 1rem;
   }
 }

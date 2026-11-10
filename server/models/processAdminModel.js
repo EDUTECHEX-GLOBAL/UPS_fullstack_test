@@ -9,8 +9,8 @@ const processAdminSchema = new mongoose.Schema({
     lowercase: true,
     trim: true,
     match: [
-      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      'Please enter a valid email'
+      /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+      'Enter a valid email address, such as name@gmail.com.'
     ]
   },
   password: {
@@ -21,12 +21,20 @@ const processAdminSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: [true, 'First name is required'],
-    trim: true
+    trim: true,
+    match: [
+      /^[A-Za-zÀ-ÖØ-öø-ÿ .'-]{2,50}$/,
+      'First name can only contain letters (min. 2 characters).'
+    ]
   },
   lastName: {
     type: String,
     required: [true, 'Last name is required'],
-    trim: true
+    trim: true,
+    match: [
+      /^[A-Za-zÀ-ÖØ-öø-ÿ .'-]{2,50}$/,
+      'Last name can only contain letters (min. 2 characters).'
+    ]
   },
   role: {
     type: String,

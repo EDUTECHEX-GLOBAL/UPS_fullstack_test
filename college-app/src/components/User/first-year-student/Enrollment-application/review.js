@@ -222,9 +222,19 @@ const ReviewApplication = ({ data = {}, onNavigateToStep, onBack, onOpenApplicat
     const href = rawUrl ? resolveFileUrl(rawUrl) : null;
 
     return (
-      <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-        <FaFilePdf style={{ color: '#dc2626', fontSize: '1.1rem' }} />
-        <span style={{ fontWeight: '600', color: '#1e293b', fontSize: '0.85rem' }}>{fileName}</span>
+      <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px', minWidth: 0, maxWidth: '100%' }}>
+        <FaFilePdf style={{ color: '#dc2626', fontSize: '1.1rem', flexShrink: 0 }} />
+        <span style={{
+          fontWeight: '600',
+          color: '#1e293b',
+          fontSize: '0.85rem',
+          minWidth: 0,
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          maxWidth: 'calc(100% - 90px)',
+          flex: '1 1 auto'
+        }}>{fileName}</span>
         {href && (
           <a
             href={href}
@@ -241,7 +251,9 @@ const ReviewApplication = ({ data = {}, onNavigateToStep, onBack, onOpenApplicat
               color: '#2563eb',
               fontSize: '0.78rem',
               fontWeight: '600',
-              textDecoration: 'none'
+              textDecoration: 'none',
+              flexShrink: 0,
+              whiteSpace: 'nowrap'
             }}
           >
             View <FaExternalLinkAlt style={{ fontSize: '0.65rem' }} />
@@ -554,7 +566,7 @@ const ReviewApplication = ({ data = {}, onNavigateToStep, onBack, onOpenApplicat
                 <div className="review-info-item">
                   <span className="review-info-label">Percentage / CGPA</span>
                   <span className="review-info-val" style={{ color: '#16a34a', fontWeight: '700' }}>
-                    {b.percentageCgpa || '-'}
+                    {b.percentage || b.percentageCgpa || b.cgpa || b.score || '-'}
                   </span>
                 </div>
                 <div className="review-info-item full-width">
@@ -593,7 +605,7 @@ const ReviewApplication = ({ data = {}, onNavigateToStep, onBack, onOpenApplicat
                     <div className="review-info-item">
                       <span className="review-info-label">GPA / CGPA</span>
                       <span className="review-info-val" style={{ color: '#16a34a', fontWeight: '700' }}>
-                        {t.gpaCgpa || '-'}
+                        {t.gpa || t.gpaCgpa || t.cgpa || t.percentage || '-'}
                       </span>
                     </div>
                     <div className="review-info-item full-width">
@@ -640,7 +652,7 @@ const ReviewApplication = ({ data = {}, onNavigateToStep, onBack, onOpenApplicat
                 <div className="review-info-item">
                   <span className="review-info-label">GPA / CGPA</span>
                   <span className="review-info-val" style={{ color: '#16a34a', fontWeight: '700' }}>
-                    {m.gpaCgpa || '-'}
+                    {m.gpa || m.gpaCgpa || m.cgpa || m.percentage || '-'}
                   </span>
                 </div>
                 <div className="review-info-item">
@@ -717,7 +729,7 @@ const ReviewApplication = ({ data = {}, onNavigateToStep, onBack, onOpenApplicat
                 <div className="review-info-item">
                   <span className="review-info-label">GPA / Percentage</span>
                   <span className="review-info-val" style={{ color: '#16a34a', fontWeight: '700' }}>
-                    {med.gpaPercentage || '-'}
+                    {med.percentageGpa || med.gpaPercentage || med.percentage || med.gpa || '-'}
                   </span>
                 </div>
                 <div className="review-info-item full-width">

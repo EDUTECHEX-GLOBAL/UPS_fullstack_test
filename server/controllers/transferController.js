@@ -2,7 +2,7 @@
 import TransferStudent from "../models/transferModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { sendEmail } from "../utils/sendEmail.js";
+import { sendEmail, sendPasswordResetOTPEmail } from "../utils/sendEmail.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -410,17 +410,7 @@ export const forgotPasswordRequestOtp = async (req, res) => {
 
     console.log(`🔢 New OTP generated for ${student.email}: ${otpCode}`);
 
-    // Send OTP email
-    const htmlContent = `
-      <h2>Password Reset Code</h2>
-      <p>Hi ${student.firstName || 'there'},</p>
-      <p>You requested to reset your password. Your code is:</p>
-      <h1 style="letter-spacing: 3px;">${otpCode}</h1>
-      <p>This code expires in <b>10 minutes</b>.</p>
-      <p>If you did not request this, please ignore this email.</p>
-    `;
-
-    await sendEmail(student.email, "College App - Reset Your Password", htmlContent);
+    await sendPasswordResetOTPEmail(student.email, student.firstName, otpCode);
 
     console.log(`✅ Password reset OTP sent to: ${student.email}`);
     

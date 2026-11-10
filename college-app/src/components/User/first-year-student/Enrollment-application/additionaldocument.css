@@ -1,5 +1,52 @@
 /* Additional Documents Section Styles */
 
+.add-doc-delete-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.58);
+  backdrop-filter: blur(2px);
+}
+
+.add-doc-delete-dialog {
+  width: min(100%, 440px);
+  box-sizing: border-box;
+  padding: 28px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.25);
+  color: #0f172a;
+}
+
+.add-doc-delete-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.add-doc-delete-dialog h2 { margin: 0; font-size: 1.2rem; }
+.add-doc-delete-intro { margin: 8px 0 18px; color: #64748b; font-size: 0.92rem; }
+.add-doc-delete-details { margin: 0; padding: 14px 16px; border-radius: 10px; background: #f8fafc; }
+.add-doc-delete-details div { display: flex; justify-content: space-between; gap: 16px; padding: 6px 0; font-size: 0.88rem; }
+.add-doc-delete-details dt { flex: 0 0 auto; color: #64748b; }
+.add-doc-delete-details dd { min-width: 0; margin: 0; color: #1e293b; font-weight: 600; text-align: right; overflow-wrap: anywhere; }
+.add-doc-delete-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px; }
+.add-doc-delete-actions button { min-height: 40px; padding: 0 16px; border-radius: 8px; font: inherit; font-weight: 600; cursor: pointer; }
+.add-doc-delete-cancel { border: 1px solid #cbd5e1; background: #fff; color: #334155; }
+.add-doc-delete-confirm { border: 1px solid #b91c1c; background: #b91c1c; color: #fff; }
+.add-doc-delete-actions button:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+
 .add-docs-container {
   background: #ffffff;
   border-radius: 16px;

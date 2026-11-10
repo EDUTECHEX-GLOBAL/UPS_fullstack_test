@@ -5,12 +5,43 @@ import TestScores from '../model/testmodel.js';
 import { getPresignedUrl } from '../../middleware/uploadMiddleware.js';
 import Account from '../../models/accountModel.js';
 import AdditionalDocument from '../model/additionaldocumentmodel.js';
+import ProgramSelection from '../model/programmodel.js';
+import UniversitySelection from '../model/universityselectionmodel.js';
 
 // Helper to generate Application Number: APP-2026-XXXXX
 const generateApplicationNumber = () => {
   const year = new Date().getFullYear();
   const randomSuffix = Math.floor(10000 + Math.random() * 90000); // 5 digits
   return `APP-${year}-${randomSuffix}`;
+};
+
+const resetPartnerApprovalForResubmission = async (userId) => {
+  const [programSelection, universitySelection] = await Promise.all([
+    ProgramSelection.findOne({ userId }),
+    UniversitySelection.findOne({ userId })
+  ]);
+
+  if (programSelection) {
+    programSelection.programApprovalStatus = 'pending';
+    programSelection.approvedAt = null;
+    programSelection.approvedBy = '';
+    programSelection.approvalNotes = '';
+    programSelection.processAdminVerified = false;
+    programSelection.processAdminVerifiedAt = null;
+    programSelection.verificationStatus = 'pending_admin_review';
+    programSelection.rejectedAt = null;
+    programSelection.rejectionReason = '';
+    programSelection.changeRequestedAt = null;
+    programSelection.changeRequestReason = '';
+    await programSelection.save();
+  }
+
+  if (universitySelection) {
+    universitySelection.selectedUniversities = [];
+    universitySelection.studentSelectedPrograms = [];
+    universitySelection.status = 'selected';
+    await universitySelection.save();
+  }
 };
 
 // GET /api/enrollment/review - Aggregate all application sections for review
@@ -268,6 +299,8 @@ export const submitForApproval = async (req, res) => {
       { new: true, upsert: true }
     );
 
+    await resetPartnerApprovalForResubmission(userId);
+
     res.status(200).json({
       success: true,
       message: "Application submitted for approval successfully!",
@@ -395,6 +428,8 @@ export const resubmitApplication = async (req, res) => {
       { status: "Submitted", submittedAt: new Date() },
       { upsert: true }
     );
+
+    await resetPartnerApprovalForResubmission(userId);
 
     res.status(200).json({
       success: true,

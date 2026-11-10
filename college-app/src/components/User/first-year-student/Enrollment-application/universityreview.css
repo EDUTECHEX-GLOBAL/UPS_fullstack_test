@@ -353,6 +353,20 @@
   margin-bottom: 12px;
 }
 
+.review-test-report {
+  margin: -4px 0 12px;
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.review-test-report a {
+  color: #0e7490;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.review-test-report a:hover { text-decoration: underline; }
+
 .review-subscores-section {
   margin-top: 10px;
 }

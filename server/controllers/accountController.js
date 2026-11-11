@@ -1739,7 +1739,7 @@ export const sendStudentOtp = async (req, res) => {
     await Otp.create({ email: normalizedEmail, otp: otpCode, expiresAt: otpExpiry, purpose: "email_verification" });
 
     const studentName = firstName ? String(firstName).trim() : "Student";
-    await sendEmailEnhanced({
+    const emailResult = await sendEmailEnhanced({
       to: normalizedEmail,
       subject: "EduTechEX - Your Verification Code",
       html: `
@@ -1796,15 +1796,18 @@ export const sendStudentOtp = async (req, res) => {
           </table>
         </body>
         </html>
-      `,
-      attachments: [
-        {
-          filename: "Edutech-logo.png",
-          path: new URL("../src/assets/Edutech-logo.png", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"),
-          cid: "edutechex-logo",
-        },
-      ],
+      `
     });
+
+    if (!emailResult?.success) {
+      console.error("❌ sendStudentOtp email delivery failed:", emailResult?.error);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to send verification code email. Please check your email configuration.",
+        ...(process.env.NODE_ENV === "development" && { error: emailResult?.error }),
+      });
+    }
+
     res.status(200).json({
       success: true,
       message: `Verification code sent to ${normalizedEmail}. Please check your inbox.`,

@@ -771,8 +771,8 @@ const AdminDashboard = () => {
   }, [navigate]);
 
   // ── Data fetcher with cache ──────────────────────────────────────────
-  const loadDashboardData = useCallback(async (silent = false) => {
-    if (!silent && dashCache.data && Date.now() - dashCache.ts < CACHE_TTL) {
+  const loadDashboardData = useCallback(async (silent = false, forceRefresh = false) => {
+    if (!forceRefresh && !silent && dashCache.data && Date.now() - dashCache.ts < CACHE_TTL) {
       setDashData(dashCache.data);
       setLoading(false);
       return;
@@ -783,9 +783,20 @@ const AdminDashboard = () => {
     setApiError(null);
 
     try {
+      if (forceRefresh) {
+        // A manual refresh must not join an older in-flight request or use a
+        // cached GET response; start a new request and replace the shared cache.
+        dashCache = { data: null, ts: 0 };
+        dashboardRequest = null;
+      }
+
       if (!dashboardRequest) {
         const headers = authHeaders();
-        dashboardRequest = fetch(`${API_BASE_URL}/api/admin/dashboard/overview`, { headers })
+        const refreshQuery = forceRefresh ? `?refresh=${Date.now()}` : "";
+        dashboardRequest = fetch(`${API_BASE_URL}/api/admin/dashboard/overview${refreshQuery}`, {
+          headers,
+          cache: forceRefresh ? "no-store" : "default",
+        })
           .then(async (dashRes) => {
             if (!dashRes.ok) throw new Error(`HTTP ${dashRes.status}: ${dashRes.statusText}`);
             const dashJson = await dashRes.json();
@@ -845,7 +856,7 @@ const AdminDashboard = () => {
   }, [location.pathname, navigate]);
 
   const handleDashboardRefresh = useCallback(() => {
-    loadDashboardData(true);
+    loadDashboardData(true, true);
   }, [loadDashboardData]);
 
   // ── Destructure data ──────────────────────────────────────────────────
@@ -910,8 +921,8 @@ const filteredActivities = useMemo(() => {
     }
     switch (activeTab) {
       case "dashboard":        return dashboardContent;
-      case "users":            return <LazySection resetKey={activeTab} fallback={<TabFallback label="Loading users..." />}><AdminUserManagement /></LazySection>;
-      case "verify-documents": return <LazySection resetKey={activeTab}><AdminVerifyDocuments /></LazySection>;
+      case "users":            return <LazySection resetKey={activeTab} fallback={<TabFallback label="Loading users..." />}><AdminUserManagement globalSearchQuery={searchQuery} /></LazySection>;
+      case "verify-documents": return <LazySection resetKey={activeTab}><AdminVerifyDocuments globalSearchQuery={searchQuery} /></LazySection>;
       case "settings":         return <SettingsContent />;
       default:                 return dashboardContent;
     }
@@ -922,10 +933,10 @@ const filteredActivities = useMemo(() => {
     const isActive  = activeTab === tab;
     const iconColor = isActive ? "#1e40af" : "#64748b";
     return (
-      <li className={isActive ? "active" : ""} onClick={() => handleTabChange(tab)}>
+      <li className={isActive ? "active" : ""} onClick={() => handleTabChange(tab)} title={!sidebarOpen ? label : undefined}>
         <span className="menu-icon">
           {ICONS[iconKey](iconColor)}
-          {badge > 0 && <span className="notification-badge-sidebar">{badge}</span>}
+          {!sidebarOpen && badge > 0 && <span className="notification-badge-sidebar">{badge}</span>}
         </span>
         {sidebarOpen && (
           <>
@@ -951,9 +962,7 @@ const filteredActivities = useMemo(() => {
       {/* Sidebar */}
       <div className={`sidebar ${sidebarOpen ? "open" : "closed"}`}>
         <div className="sidebar-logo-strip">
-          {sidebarOpen
-            ? <img src={EdutechLogo} alt="EduTech" className="sidebar-logo" loading="lazy" />
-            : <div className="sidebar-logo-icon">{ICONS.dashboard("#1e40af")}</div>}
+          {sidebarOpen && <img src={EdutechLogo} alt="EduTech" className="sidebar-logo" loading="lazy" />}
           <button className="sidebar-toggle" onClick={toggleSidebar} aria-label="Toggle sidebar">
             {sidebarOpen ? ICONS.collapse : ICONS.expand}
           </button>
@@ -971,7 +980,7 @@ const filteredActivities = useMemo(() => {
 
         <div className="sidebar-footer">
           <button className="logout-btn" onClick={handleLogout}>
-            <span className="menu-icon">{ICONS.logout}</span>
+            <span className="logout-circle">{ICONS.logout}</span>
             {sidebarOpen && <span>Logout</span>}
           </button>
         </div>
@@ -986,7 +995,7 @@ const filteredActivities = useMemo(() => {
           </div>
           <div className="navbar-center">
             <div className="search-container">
-              <input type="text" placeholder="Search..." value={searchQuery} onChange={handleSearch} className="search-input" />
+              <input type="search" name="admin-dashboard-search" autoComplete="off" placeholder="Search..." value={searchQuery} onChange={handleSearch} className="search-input" />
               <button className="search-btn">{ICONS.search}</button>
             </div>
           </div>

@@ -4,7 +4,7 @@ import './medicaluniversity.css';
 import API_BASE_URL from '../../config/api';
 import { resolveFileUrl } from '../../utils/fileUrl';
 
-const MedicalUniversity = () => {
+const MedicalUniversity = ({ globalSearchQuery = '' }) => {
     const [applications, setApplications] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -14,7 +14,7 @@ const MedicalUniversity = () => {
     const [statusDropdownUp, setStatusDropdownUp] = useState(false);
     const statusDropdownRef = useRef(null);
     const [selectedApp, setSelectedApp] = useState(null);
-    const [stats, setStats] = useState({ total: 0, approved: 0, completed: 0, incomplete: 0, underReview: 0 });
+    const [stats, setStats] = useState({ total: 0, approved: 0, completed: 0, awaitingUniversities: 0, incomplete: 0, underReview: 0 });
     const [docViewer, setDocViewer] = useState(null);
     const [universityModal, setUniversityModal] = useState(null);
     const [selectedUniversityKeys, setSelectedUniversityKeys] = useState([]);
@@ -77,6 +77,36 @@ const MedicalUniversity = () => {
         if (!d) return ' ';
         try { return new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }); }
         catch { return ' '; }
+    };
+
+    const formatAddressLine = (parts = []) =>
+        parts.filter((part) => part !== undefined && part !== null && String(part).trim() !== '').join(', ') || '';
+
+    const getPermanentAddress = (address = {}, personal = {}) =>
+        address?.permanentAddress || formatAddressLine([
+            address?.careOf ? `c/o ${address.careOf}` : '',
+            address?.streetAndHouseNumber || address?.address1 || personal?.permAddress1 || personal?.permanentAddress1 || personal?.address1 || personal?.permAddress,
+            address?.address2 || personal?.permAddress2 || personal?.permanentAddress2 || personal?.address2,
+            address?.city || personal?.permCity || personal?.permanentCity || personal?.city,
+            address?.stateProvince || address?.state || personal?.permState || personal?.permanentState || personal?.state,
+            address?.country || personal?.permCountry || personal?.permanentCountry || personal?.country,
+            address?.postcode || address?.zip || personal?.permZip || personal?.permanentPostalCode || personal?.postalCode,
+        ]);
+
+    const getCorrespondenceAddress = (address = {}, personal = {}) => {
+        if (!address?.hasDifferentCorrespondenceAddress && address?.hasDifferentCorrespondenceAddress !== undefined) {
+            return getPermanentAddress(address, personal);
+        }
+        const line = formatAddressLine([
+            address?.correspondenceCareOf ? `c/o ${address.correspondenceCareOf}` : '',
+            address?.correspondenceStreetAndHouseNumber || address?.correspondenceAddress1 || address?.tempAddress1 || personal?.tempAddress1 || personal?.address1 || personal?.corrAddress,
+            address?.correspondenceAddress2 || address?.tempAddress2 || personal?.tempAddress2 || personal?.address2,
+            address?.correspondenceCity || address?.tempCity || personal?.tempCity || personal?.city,
+            address?.correspondenceStateProvince || address?.correspondenceState || address?.tempState || personal?.tempState || personal?.state,
+            address?.correspondenceCountry || address?.tempCountry || personal?.tempCountry || personal?.country,
+            address?.correspondencePostcode || address?.tempZip || personal?.tempZip || personal?.postalCode,
+        ]);
+        return line || getPermanentAddress(address, personal);
     };
 
     const pickDisplayValue = (...values) => {
@@ -143,6 +173,7 @@ const MedicalUniversity = () => {
         const accountStatus = String(app.applicationStatus || '').trim().toLowerCase();
         const overviewStatus = String(app.overviewStatus || '').trim().toLowerCase();
         if (isMedicalFinalApproved(app)) return 'approved';
+        if (isMedicalProgramApproved(app)) return 'awaiting';
         if (
             Number(app.completionPercentage) >= 100 || app.isCompleted === true ||
             overviewStatus === 'completed' ||
@@ -184,6 +215,7 @@ const MedicalUniversity = () => {
                     total: apps.length,
                     approved: apps.filter(a => getProgressBucket(a) === 'approved').length,
                     completed: apps.filter(a => getProgressBucket(a) === 'completed').length,
+                    awaitingUniversities: apps.filter(a => getProgressBucket(a) === 'awaiting').length,
                     incomplete: apps.filter(a => getProgressBucket(a) === 'incomplete').length,
                     underReview: apps.filter(a => getProgressBucket(a) === 'inprogress').length,
                 });
@@ -200,11 +232,11 @@ const MedicalUniversity = () => {
     useEffect(() => { fetchApplications(); }, []);
 
     const filtered = applications.filter(app => {
-        const q = searchQuery.toLowerCase();
+        const q = (globalSearchQuery || searchQuery).toLowerCase().trim();
         const uniName = getUniversityName(app).toLowerCase();
         const progName = getProgramName(app).toLowerCase();
         const matchSearch =
-            (app.studentName || '').toLowerCase().includes(q) ||
+            (app.studentName || [app.personal?.firstName, app.personal?.lastName].filter(Boolean).join(' ')).toLowerCase().includes(q) ||
             (app.email || '').toLowerCase().includes(q)       ||
             String(app.studentId || '').includes(q)          ||
             (app.applicationId || '').toLowerCase().includes(q) ||
@@ -230,7 +262,7 @@ const MedicalUniversity = () => {
                 } catch (matchesError) {
                     console.error('Failed to load eligible medical universities:', matchesError);
                 }
-                setSelectedApp({ ...res.data.data, eligibleScoreUniversities });
+                setSelectedApp({ ...app, ...res.data.data, eligibleScoreUniversities });
             }
         } catch (err) {
             console.error('Failed to load details', err);
@@ -403,36 +435,25 @@ const MedicalUniversity = () => {
             </div>
 
             <div className="med-stats-row">
-                <div className="med-stat-card med-stat-total">
-                    <div className="med-stat-text">
-                        <span className="med-stat-label">Total Applications</span>
-                        <span className="med-stat-num">{stats.total}</span>
+                {[
+                    { cls: 'med-stat-total',    label: 'Total Applications',           val: stats.total,               filter: 'all' },
+                    { cls: 'med-stat-approved', label: 'Approved',                     val: stats.approved,            filter: 'approved' },
+                    { cls: 'med-stat-completed',label: 'Completed',                    val: stats.completed,           filter: 'completed' },
+                    { cls: 'med-stat-awaiting', label: 'Awaiting for University Selection', val: stats.awaitingUniversities, filter: 'awaiting' },
+                ].map(({ cls, label, val: v, filter }) => (
+                    <div
+                        key={cls}
+                        className={`med-stat-card ${cls} ${filterStatus === filter ? 'active' : ''}`}
+                        onClick={() => setFilterStatus(filter)}
+                        style={{ cursor: 'pointer' }}
+                        title={`Filter by ${label}`}
+                    >
+                        <div className="med-stat-text">
+                            <span className="med-stat-label">{label}</span>
+                            <span className="med-stat-num">{v ?? 0}</span>
+                        </div>
                     </div>
-                </div>
-                <div className="med-stat-card med-stat-approved">
-                    <div className="med-stat-text">
-                        <span className="med-stat-label">Approved</span>
-                        <span className="med-stat-num">{stats.approved}</span>
-                    </div>
-                </div>
-                <div className="med-stat-card med-stat-completed">
-                    <div className="med-stat-text">
-                        <span className="med-stat-label">Completed</span>
-                        <span className="med-stat-num">{stats.completed}</span>
-                    </div>
-                </div>
-                <div className="med-stat-card med-stat-review">
-                    <div className="med-stat-text">
-                        <span className="med-stat-label">In Progress</span>
-                        <span className="med-stat-num">{stats.underReview}</span>
-                    </div>
-                </div>
-                <div className="med-stat-card med-stat-incomplete">
-                    <div className="med-stat-text">
-                        <span className="med-stat-label">Incomplete</span>
-                        <span className="med-stat-num">{stats.incomplete}</span>
-                    </div>
-                </div>
+                ))}
             </div>
 
             <div className="med-controls">
@@ -448,7 +469,7 @@ const MedicalUniversity = () => {
                         aria-expanded={statusDropdownOpen}
                         aria-label="Filter medical applications by status"
                     >
-                        <span>{{ all: 'All Status', approved: 'Approved', completed: 'Completed', inprogress: 'In Progress', incomplete: 'Incomplete' }[filterStatus]}</span>
+                        <span>{{ all: 'All Status', approved: 'Approved', completed: 'Completed', awaiting: 'Awaiting Universities', inprogress: 'In Progress', incomplete: 'Incomplete' }[filterStatus] || 'All Status'}</span>
                         <span className="med-status-select-arrow" aria-hidden="true" />
                     </button>
                     {statusDropdownOpen && (
@@ -457,8 +478,7 @@ const MedicalUniversity = () => {
                                 { value: 'all', label: 'All Status' },
                                 { value: 'approved', label: 'Approved' },
                                 { value: 'completed', label: 'Completed' },
-                                { value: 'inprogress', label: 'In Progress' },
-                                { value: 'incomplete', label: 'Incomplete' },
+                                { value: 'awaiting', label: 'Awaiting Universities' },
                             ].map((option) => (
                                 <button
                                     type="button"
@@ -745,7 +765,7 @@ const MedicalUniversity = () => {
                                 <div className="review-info-grid">
                                     <div className="review-info-item">
                                         <span className="review-info-label">Full Name</span>
-                                        <span className="review-info-val">{selectedApp.studentName || '-'}</span>
+                                        <span className="review-info-val">{selectedApp.studentName || [selectedApp.personal?.firstName, selectedApp.personal?.lastName].filter(Boolean).join(' ') || '-'}</span>
                                     </div>
                                     <div className="review-info-item">
                                         <span className="review-info-label">Email Address</span>
@@ -753,18 +773,42 @@ const MedicalUniversity = () => {
                                     </div>
                                     <div className="review-info-item">
                                         <span className="review-info-label">Phone / Mobile</span>
-                                        <span className="review-info-val">{selectedApp.phone || selectedApp.personal?.phone || '-'}</span>
+                                        <span className="review-info-val">{selectedApp.phone || selectedApp.personal?.phone || selectedApp.personal?.mobile || '-'}</span>
                                     </div>
-                                    {selectedApp.personal?.permAddress && (
-                                        <div className="review-info-item full-width">
-                                            <span className="review-info-label">Permanent Address</span>
-                                            <span className="review-info-val">{selectedApp.personal.permAddress || selectedApp.personal?.address1 || '-'}</span>
+                                    {(selectedApp.gender || selectedApp.personal?.gender) && (
+                                        <div className="review-info-item">
+                                            <span className="review-info-label">Gender</span>
+                                            <span className="review-info-val">{selectedApp.gender || selectedApp.personal?.gender}</span>
                                         </div>
                                     )}
-                                    {selectedApp.personal?.corrAddress && (
+                                    {(selectedApp.dateOfBirth || selectedApp.personal?.dateOfBirth) && (
+                                        <div className="review-info-item">
+                                            <span className="review-info-label">Date of Birth</span>
+                                            <span className="review-info-val">{formatDate(selectedApp.dateOfBirth || selectedApp.personal?.dateOfBirth)}</span>
+                                        </div>
+                                    )}
+                                    {(selectedApp.citizenship || selectedApp.personal?.citizenship) && (
+                                        <div className="review-info-item">
+                                            <span className="review-info-label">Citizenship</span>
+                                            <span className="review-info-val">{selectedApp.citizenship || selectedApp.personal?.citizenship}</span>
+                                        </div>
+                                    )}
+                                    {(selectedApp.passportNumber || selectedApp.personal?.passportNumber) && (
+                                        <div className="review-info-item">
+                                            <span className="review-info-label">Passport Number</span>
+                                            <span className="review-info-val">{selectedApp.passportNumber || selectedApp.personal?.passportNumber}</span>
+                                        </div>
+                                    )}
+                                    {(selectedApp.address?.address1 || selectedApp.personal?.permAddress || selectedApp.personal?.permAddress1 || selectedApp.personal?.permanentAddress1 || selectedApp.personal?.address1) && (
+                                        <div className="review-info-item full-width">
+                                            <span className="review-info-label">Permanent Address</span>
+                                            <span className="review-info-val">{getPermanentAddress(selectedApp.address, selectedApp.personal)}</span>
+                                        </div>
+                                    )}
+                                    {(selectedApp.address?.correspondenceAddress1 || selectedApp.personal?.corrAddress || selectedApp.personal?.tempAddress1 || selectedApp.personal?.address2) && (
                                         <div className="review-info-item full-width">
                                             <span className="review-info-label">Correspondence Address</span>
-                                            <span className="review-info-val">{selectedApp.personal.corrAddress || selectedApp.personal?.address2 || '-'}</span>
+                                            <span className="review-info-val">{getCorrespondenceAddress(selectedApp.address, selectedApp.personal)}</span>
                                         </div>
                                     )}
                                 </div>
@@ -776,19 +820,19 @@ const MedicalUniversity = () => {
                                 <div className="review-info-grid">
                                     <div className="review-info-item">
                                         <span className="review-info-label">Parent / Guardian Name</span>
-                                        <span className="review-info-val">{selectedApp.personal?.parentName || selectedApp.familyDetails?.parent1?.fullName || '-'}</span>
+                                        <span className="review-info-val">{selectedApp.personal?.parentName || selectedApp.personal?.parent1FullName || selectedApp.familyDetails?.parent1?.fullName || [selectedApp.personal?.fatherFirstName, selectedApp.personal?.fatherLastName].filter(Boolean).join(' ') || selectedApp.personal?.fatherName || '-'}</span>
                                     </div>
                                     <div className="review-info-item">
                                         <span className="review-info-label">Relationship</span>
-                                        <span className="review-info-val">{selectedApp.personal?.parentType || selectedApp.familyDetails?.parent1?.relationship || '-'}</span>
+                                        <span className="review-info-val">{selectedApp.personal?.parentType || selectedApp.personal?.parent1Relationship || selectedApp.familyDetails?.parent1?.relationship || 'Father'}</span>
                                     </div>
                                     <div className="review-info-item">
                                         <span className="review-info-label">Phone Number</span>
-                                        <span className="review-info-val">{selectedApp.personal?.parentPhone || selectedApp.familyDetails?.parent1?.phone || '-'}</span>
+                                        <span className="review-info-val">{selectedApp.personal?.parentPhone || selectedApp.personal?.parent1Phone || selectedApp.personal?.fatherPhone || selectedApp.familyDetails?.parent1?.phone || '-'}</span>
                                     </div>
                                     <div className="review-info-item">
                                         <span className="review-info-label">Email Address</span>
-                                        <span className="review-info-val">{selectedApp.personal?.parentEmail || selectedApp.familyDetails?.parent1?.email || '-'}</span>
+                                        <span className="review-info-val">{selectedApp.personal?.parentEmail || selectedApp.personal?.parent1Email || selectedApp.personal?.fatherEmail || selectedApp.familyDetails?.parent1?.email || '-'}</span>
                                     </div>
                                 </div>
                             </div>

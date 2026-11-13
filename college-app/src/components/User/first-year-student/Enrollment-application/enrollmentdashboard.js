@@ -994,7 +994,6 @@ const EnrollmentDashboard = () => {
       { key: 'personal', label: 'Personal', onClick: () => handleSetActiveView('personal') },
       { key: 'education', label: 'Education', onClick: () => handleSetActiveView('education') },
       { key: 'test', label: 'Test', onClick: () => handleSetActiveView('test') },
-      { key: 'resume', label: 'Documents', onClick: () => navigate('/firstyear/enrollment/resume') },
       { key: 'review', label: 'Review & Submit', onClick: () => navigate('/firstyear/enrollment/review') },
     ];
     const activeKey = activeMainStep === 3

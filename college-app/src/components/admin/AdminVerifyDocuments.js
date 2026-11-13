@@ -116,10 +116,13 @@ const readQueueCache = () => {
   }
 };
 
-const AdminVerifyDocuments = () => {
+const VERIFY_PAGE_SIZE = 10;
+
+const AdminVerifyDocuments = ({ globalSearchQuery = '' }) => {
   const [applications, setApplications] = useState(readQueueCache);
   const [selected, setSelected] = useState(null);
   const [loading, setLoading] = useState(() => readQueueCache().length === 0);
+  const [refreshing, setRefreshing] = useState(false);
   const [detailLoading, setDetailLoading] = useState(false);
   const [actionLoading, setActionLoading] = useState('');
   const [reason, setReason] = useState('');
@@ -127,11 +130,14 @@ const AdminVerifyDocuments = () => {
   const [decisionError, setDecisionError] = useState('');
   const [toast, setToast] = useState(null);
   const [error, setError] = useState('');
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(globalSearchQuery);
+  const [currentPage, setCurrentPage] = useState(1);
   const [statusFilter, setStatusFilter] = useState('');
   const [applicationSection, setApplicationSection] = useState('all');
   const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
   const statusDropdownRef = useRef(null);
+  useEffect(() => { setSearch(globalSearchQuery); }, [globalSearchQuery]);
+  useEffect(() => { setCurrentPage(1); }, [search, statusFilter, applicationSection]);
   const token = localStorage.getItem('adminToken') || localStorage.getItem('token') || '';
   const api = useCallback(config => axios({ baseURL: API_BASE_URL, ...config, headers: { Authorization: `Bearer ${token}`, ...(config.headers || {}) } }), [token]);
 
@@ -148,15 +154,20 @@ const AdminVerifyDocuments = () => {
     }
 
     if (!cachedData.length) setLoading(true);
+    if (force) setRefreshing(true);
     setError('');
     try {
-      const response = await api({ method: 'get', url: '/api/admin/verification/verify-documents' });
+      const refreshQuery = force ? `?_refresh=${Date.now()}` : '';
+      const response = await api({
+        method: 'get',
+        url: `/api/admin/verification/verify-documents${refreshQuery}`,
+      });
       const data = response.data.data || [];
       window.__avdQueueCache = { data, ts: Date.now() };
       try { window.sessionStorage.setItem(QUEUE_CACHE_KEY, JSON.stringify(window.__avdQueueCache)); } catch { /* session storage may be unavailable */ }
       setApplications(data);
     } catch (err) { setError(err.response?.data?.message || 'Failed to load verification queue.'); }
-    finally { setLoading(false); }
+    finally { setLoading(false); setRefreshing(false); }
   }, [api]);
   useEffect(() => { loadQueue(); }, [loadQueue]);
   useEffect(() => { if (!toast) return undefined; const timer = setTimeout(() => setToast(null), 4000); return () => clearTimeout(timer); }, [toast]);
@@ -188,6 +199,15 @@ const AdminVerifyDocuments = () => {
       return matchesStatus && matchesSection && matchesSearch;
     });
   }, [applications, search, statusFilter, applicationSection, getAppType]);
+
+  const totalPages = Math.ceil(filteredApplications.length / VERIFY_PAGE_SIZE);
+  const visiblePage = totalPages ? Math.min(currentPage, totalPages) : 1;
+  const pageApplications = useMemo(() => {
+    const start = (visiblePage - 1) * VERIFY_PAGE_SIZE;
+    return filteredApplications.slice(start, start + VERIFY_PAGE_SIZE);
+  }, [filteredApplications, visiblePage]);
+  const firstVisibleItem = filteredApplications.length ? (visiblePage - 1) * VERIFY_PAGE_SIZE + 1 : 0;
+  const lastVisibleItem = Math.min(visiblePage * VERIFY_PAGE_SIZE, filteredApplications.length);
 
   const selectedStatusLabel = STATUS_OPTIONS.find(option => option.value === statusFilter)?.label || 'All Status';
 
@@ -265,7 +285,7 @@ const AdminVerifyDocuments = () => {
       <div className="avd-wrapper">
         <div className="avd-page-header">
           <div><h1 className="avd-page-title">Verify Documents</h1><p className="avd-page-sub">Review application summaries and uploaded documents sent by Process Admin.</p></div>
-          <button className="avd-refresh-btn" type="button" onClick={() => loadQueue(true)} disabled={loading}><RefreshIcon />{loading ? 'Refreshing...' : 'Refresh'}</button>
+          <button className="avd-refresh-btn" type="button" onClick={() => loadQueue(true)} disabled={loading || refreshing}><RefreshIcon />{loading || refreshing ? 'Refreshing...' : 'Refresh'}</button>
         </div>
         {error && <div className="avd-error"><span>{error}</span><button type="button" onClick={() => setError('')}>&times;</button></div>}
         <div className="avd-stats-grid">
@@ -288,8 +308,9 @@ const AdminVerifyDocuments = () => {
           </div>
 
           {loading ? <div className="avd-state"><div className="avd-spinner" />Loading verification queue...</div> : filteredApplications.length === 0 ? <div className="avd-state"><SearchIcon /><span>No {applicationSection === 'medical' ? 'medical ' : ''}verification applications found.</span></div> : <>
-            <div className="avd-table-wrap avd-desktop-table"><table className="avd-table"><thead>{applicationSection === 'medical' ? <tr><th>Application ID</th><th>Medical Student</th><th>Medical Course</th><th>NEET Score / Rank</th><th>Verified Date</th><th>Status</th><th>Actions</th></tr> : <tr><th>Application ID</th><th>Student</th><th>University</th><th>Programme</th><th>Verified Date</th><th>Status</th><th>Actions</th></tr>}</thead><tbody>{filteredApplications.map(app => <tr className="avd-tr" key={app.applicationId}><td><strong className="avd-app-id">{app.applicationId}</strong></td><td><div className="avd-student-cell"><span className="avd-avatar">{getInitials(app.studentName)}</span><div><div className="avd-student-name">{app.studentName}</div><div className="avd-student-email">{app.email}</div></div></div></td>{applicationSection === 'medical' ? <><td><div className="avd-medical-course"><strong>{getProgrammeSummary(app)}</strong><span>{getUniversitySummary(app)}</span></div></td><td><span className="avd-neet-score">{app.neetScore || '-'}<small>{app.neetRank ? `Rank: ${app.neetRank}` : 'Rank: -'}</small></span></td></> : <><td><span className="avd-primary-text" title={getUniversitySummary(app)}>{getUniversitySummary(app)}</span></td><td><span className="avd-programme" title={getProgrammeSummary(app)}>{getProgrammeSummary(app)}</span></td></>}<td><span className="avd-date">{formatDate(app.verifiedAt)}</span></td><td><StatusBadge status={app.verificationStatus} /></td><td><RowActions app={app} /></td></tr>)}</tbody></table></div>
-            <div className="avd-mobile-list">{filteredApplications.map(app => <article className="avd-mobile-card" key={app.applicationId}><div className="avd-mobile-top"><div className="avd-student-cell"><span className="avd-avatar">{getInitials(app.studentName)}</span><div><div className="avd-student-name">{app.studentName}</div><div className="avd-student-email">{app.email}</div></div></div><StatusBadge status={app.verificationStatus} /></div><div className="avd-mobile-grid avd-mobile-meta-grid"><div><span>Application ID</span><strong>{app.applicationId}</strong></div><div><span>Verified</span><strong>{formatDate(app.verifiedAt)}</strong></div><div className="avd-mobile-wide"><span>{applicationSection === 'medical' ? 'Medical Course' : 'University'}</span><strong>{applicationSection === 'medical' ? getProgrammeSummary(app) : getUniversitySummary(app)}</strong></div>{applicationSection === 'medical' ? <div className="avd-mobile-wide"><span>NEET Score / Rank</span><strong>{app.neetScore || '-'} {app.neetRank ? `/ ${app.neetRank}` : ''}</strong></div> : <div className="avd-mobile-wide"><span>Programme</span><strong>{getProgrammeSummary(app)}</strong></div>}</div><RowActions app={app} mobile /></article>)}</div>
+            <div className="avd-table-wrap avd-desktop-table"><table className="avd-table"><thead>{applicationSection === 'medical' ? <tr><th>Application ID</th><th>Medical Student</th><th>Medical Course</th><th>NEET Score / Rank</th><th>Verified Date</th><th>Status</th><th>Actions</th></tr> : <tr><th>Application ID</th><th>Student</th><th>University</th><th>Programme</th><th>Verified Date</th><th>Status</th><th>Actions</th></tr>}</thead><tbody>{pageApplications.map(app => <tr className="avd-tr" key={app.applicationId}><td><strong className="avd-app-id">{app.applicationId}</strong></td><td><div className="avd-student-cell"><span className="avd-avatar">{getInitials(app.studentName)}</span><div><div className="avd-student-name">{app.studentName}</div><div className="avd-student-email">{app.email}</div></div></div></td>{applicationSection === 'medical' ? <><td><div className="avd-medical-course"><strong>{getProgrammeSummary(app)}</strong><span>{getUniversitySummary(app)}</span></div></td><td><span className="avd-neet-score">{app.neetScore || '-'}<small>{app.neetRank ? `Rank: ${app.neetRank}` : 'Rank: -'}</small></span></td></> : <><td><span className="avd-primary-text" title={getUniversitySummary(app)}>{getUniversitySummary(app)}</span></td><td><span className="avd-programme" title={getProgrammeSummary(app)}>{getProgrammeSummary(app)}</span></td></>}<td><span className="avd-date">{formatDate(app.verifiedAt)}</span></td><td><StatusBadge status={app.verificationStatus} /></td><td><RowActions app={app} /></td></tr>)}</tbody></table></div>
+            <div className="avd-mobile-list">{pageApplications.map(app => <article className="avd-mobile-card" key={app.applicationId}><div className="avd-mobile-top"><div className="avd-student-cell"><span className="avd-avatar">{getInitials(app.studentName)}</span><div><div className="avd-student-name">{app.studentName}</div><div className="avd-student-email">{app.email}</div></div></div><StatusBadge status={app.verificationStatus} /></div><div className="avd-mobile-grid avd-mobile-meta-grid"><div><span>Application ID</span><strong>{app.applicationId}</strong></div><div><span>Verified</span><strong>{formatDate(app.verifiedAt)}</strong></div><div className="avd-mobile-wide"><span>{applicationSection === 'medical' ? 'Medical Course' : 'University'}</span><strong>{applicationSection === 'medical' ? getProgrammeSummary(app) : getUniversitySummary(app)}</strong></div>{applicationSection === 'medical' ? <div className="avd-mobile-wide"><span>NEET Score / Rank</span><strong>{app.neetScore || '-'} {app.neetRank ? `/ ${app.neetRank}` : ''}</strong></div> : <div className="avd-mobile-wide"><span>Programme</span><strong>{getProgrammeSummary(app)}</strong></div>}</div><RowActions app={app} mobile /></article>)}</div>
+            {totalPages > 1 && <div className="avd-pagination"><span>Showing {firstVisibleItem}–{lastVisibleItem} of {filteredApplications.length} applications</span><div><button type="button" onClick={() => setCurrentPage(page => Math.max(1, page - 1))} disabled={visiblePage === 1}>Previous</button><span>Page {visiblePage} of {totalPages}</span><button type="button" onClick={() => setCurrentPage(page => Math.min(totalPages, page + 1))} disabled={visiblePage === totalPages}>Next</button></div></div>}
           </>}
         </div>
       </div>

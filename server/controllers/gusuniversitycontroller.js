@@ -70,6 +70,7 @@ const getApplicationProgressBucket = (application = {}) => {
         applicationStatus === 'approved' ||
         (application.programApprovalStatus === 'approved' && universitySelectionStatus === 'completed')
     ) return 'approved';
+    if (String(application.programApprovalStatus || '').trim().toLowerCase() === 'approved' || application.isProgramApproved === true) return 'awaiting';
     if (
         Number(application.completionPercentage) >= 100 ||
         application.isCompleted === true ||
@@ -393,13 +394,14 @@ export const getGusUniversityStats = async (req, res) => {
         const apps = await fetchEnrollmentList('bachelors', 'all', '').catch(() => []);
         const total = apps.length;
         const approved = apps.filter(a => getApplicationProgressBucket(a) === 'approved').length;
+        const awaitingUniversities = apps.filter(a => getApplicationProgressBucket(a) === 'awaiting').length;
         const completed = apps.filter(a => getApplicationProgressBucket(a) === 'completed').length;
         const incomplete = apps.filter(a => a.overviewStatus === 'rejected' || a.programApprovalStatus === 'rejected').length;
-        const underReview = total - completed - approved - incomplete;
+        const underReview = total - completed - approved - awaitingUniversities - incomplete;
 
         return res.status(200).json({
             success: true,
-            stats: { total, approved, completed, incomplete, underReview: underReview > 0 ? underReview : 0 },
+            stats: { total, approved, completed, awaitingUniversities, incomplete, underReview: underReview > 0 ? underReview : 0 },
         });
     } catch (error) {
         console.error('getGusUniversityStats Error:', error);

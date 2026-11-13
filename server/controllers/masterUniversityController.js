@@ -225,14 +225,29 @@ export const getMasterUniversityStats = async (req, res) => {
 
     const all = [...legacyApps, ...enrollmentMasters];
     const total = all.length;
-    const completed = all.filter(a => a.overviewStatus === 'approved' || a.programApprovalStatus === 'approved' || a.applicationStatus === 'submitted' || a.status === 'approved' || a.isCompleted).length;
+    const isMasterFinalApproved = (a = {}) => {
+      const universityStatus = String(a.universitySelectionStatus || '').toLowerCase();
+      const status = String(a.applicationStatus || a.status || '').toLowerCase();
+      return universityStatus === 'completed' || status === 'approved' || a.isFinalApplicationApproved === true || a.isUniversityApproved === true;
+    };
+    const isMasterProgramApproved = (a = {}) => {
+      return String(a.programApprovalStatus || '').toLowerCase() === 'approved' ||
+        String(a.overviewStatus || '').toLowerCase() === 'approved' ||
+        Boolean(a.processAdminVerified) ||
+        a.isProgramApproved === true;
+    };
+    const approved = all.filter(a => isMasterFinalApproved(a)).length;
+    const awaitingUniversities = all.filter(a => isMasterProgramApproved(a) && !isMasterFinalApproved(a)).length;
+    const completed = all.filter(a => !isMasterProgramApproved(a) && !isMasterFinalApproved(a) && (a.applicationStatus === 'submitted' || a.isCompleted || a.overviewStatus === 'completed')).length;
     const incomplete = all.filter(a => a.overviewStatus === 'rejected' || a.programApprovalStatus === 'rejected' || a.applicationStatus === 'draft').length;
-    const inProgress = total - completed - incomplete;
+    const inProgress = total - approved - awaitingUniversities - completed - incomplete;
 
     return res.status(200).json({
       success: true,
       stats: {
         total,
+        approved,
+        awaitingUniversities,
         submitted: completed,
         draft: incomplete,
         underReview: inProgress > 0 ? inProgress : 0,

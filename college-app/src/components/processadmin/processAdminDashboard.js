@@ -8,7 +8,6 @@ import API_BASE_URL from "../../config/api";
 const GusUniversity = React.lazy(() => import("./gusuniversity"));
 const MasterUniversity = React.lazy(() => import("./MasterUniversity"));
 const MedicalUniversity = React.lazy(() => import("./medicaluniversity"));
-const ProcessAdminSupportTickets = React.lazy(() => import("./ProcessAdminSupportTickets"));
 
 
 const PROCESS_ADMIN_TAB_TO_PATH = {
@@ -16,7 +15,6 @@ const PROCESS_ADMIN_TAB_TO_PATH = {
   "gus-applications": "/process-admin-dashboard/gus-applications",
   "master-applications": "/process-admin-dashboard/master-applications",
   "medical-applications": "/process-admin-dashboard/medical-applications",
-  "support-tickets": "/process-admin-dashboard/support-tickets",
 };
 
 const PROCESS_ADMIN_PATH_TO_TAB = {
@@ -29,8 +27,6 @@ const PROCESS_ADMIN_PATH_TO_TAB = {
   "/process-admin-dashboard/master-applications": "master-applications",
   "/process-admin-dashboard/medical": "medical-applications",
   "/process-admin-dashboard/medical-applications": "medical-applications",
-  "/process-admin-dashboard/support": "support-tickets",
-  "/process-admin-dashboard/support-tickets": "support-tickets",
 };
 
 const getProcessAdminTabFromPath = (pathname = "") => {
@@ -122,14 +118,6 @@ const IcoClose = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
     <line x1="18" y1="6" x2="6" y2="18"/>
     <line x1="6"  y1="6" x2="18" y2="18"/>
-  </svg>
-);
-const IcoHeadset = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
-    <path d="M4 14a2 2 0 0 1 2-2h1v6H6a2 2 0 0 1-2-2v-2Z" />
-    <path d="M20 14a2 2 0 0 0-2-2h-1v6h1a2 2 0 0 0 2-2v-2Z" />
-    <path d="M18 18c0 2-2 3-5 3h-1" />
   </svg>
 );
 const IcoRefresh = () => (
@@ -482,13 +470,16 @@ const ProcessAdminDashboard = () => {
             </div>
 
             <div className="pad-stat-card">
-              <StatIcon bg="#fef3c7" stroke="#d97706">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
+              <StatIcon bg="#ffe4e6" stroke="#e11d48">
+                <path d="M11 2v2" />
+                <path d="M5 2v2" />
+                <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" />
+                <path d="M8 15a6 6 0 0 0 12 0v-3" />
+                <circle cx="20" cy="10" r="2" />
               </StatIcon>
               <div>
-                <div className="pad-sv">{stats?.totalPending ?? 0}</div>
-                <div className="pad-sl">Pending Reviews</div>
+                <div className="pad-sv">{stats?.medical?.total ?? 0}</div>
+                <div className="pad-sl">Medical Apps</div>
               </div>
             </div>
           </>
@@ -771,12 +762,11 @@ const ProcessAdminDashboard = () => {
       case "gus-applications":   ContentComponent = GusUniversity; break;
       case "master-applications": ContentComponent = MasterUniversity; break;
       case "medical-applications": ContentComponent = MedicalUniversity; break;
-      case "support-tickets": ContentComponent = ProcessAdminSupportTickets; break;
       default:                   return null;
     }
     return (
       <React.Suspense fallback={<div style={{ padding: '20px', textAlign: 'center' }}>Loading application module...</div>}>
-        <ContentComponent />
+        <ContentComponent globalSearchQuery={searchQuery} />
       </React.Suspense>
     );
   };
@@ -925,13 +915,6 @@ const ProcessAdminDashboard = () => {
             </ul>
           )}
 
-          <li
-            className={activeTab === "support-tickets" ? "active" : ""}
-            onClick={() => handleTabChange("support-tickets")}
-          >
-            <span className="sb-ico sb-blue"><IcoHeadset /></span>
-            {(sidebarOpen || isMobile) && <span>Support Tickets</span>}
-          </li>
         </ul>
 
         <div className="sidebar-footer">

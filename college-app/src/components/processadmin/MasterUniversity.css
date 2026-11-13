@@ -458,6 +458,11 @@
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
+.stat-card.stat-card-active {
+  border-color: #93c5fd;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
+  transform: translateY(-2px);
+}
 
 .stat-card-text {
   flex: 1;
@@ -481,7 +486,10 @@
   letter-spacing: -0.5px;
 }
 
-.stat-card-total      { border-left: 3px solid var(--primary); }
+.stat-card-total      { border-left: 3px solid #2563eb; }
+.stat-card-approved   { border-left: 3px solid #0f9f83; }
+.stat-card-completed  { border-left: 3px solid #059669; }
+.stat-card-awaiting   { border-left: 3px solid #f59e0b; }
 .stat-card-completed  { border-left: 3px solid var(--green); }
 .stat-card-incomplete { border-left: 3px solid var(--amber); }
 .stat-card-inprogress { border-left: 3px solid var(--violet); }
@@ -4145,83 +4153,90 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px 24px;
-  background: linear-gradient(135deg, #eff6ff 0%, #ffffff 50%, #dbeafe 100%);
-  border-bottom: 1px solid #dbeafe;
+  background: linear-gradient(135deg, #0b63f6 0%, #0047c7 58%, #00349b 100%) !important;
+  color: #ffffff !important;
+  border-bottom: 0 !important;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2) !important;
   position: sticky;
   top: 0;
   z-index: 20;
   gap: 16px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .gus-premium-student {
   display: flex;
   align-items: center;
   gap: 14px;
-  flex: 1;
+  flex: 1 1 auto;
   min-width: 0;
 }
 
 .gus-premium-avatar {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: #ffffff;
-  font-size: 18px;
+  background: #ffffff !important;
+  color: #0b63f6 !important;
+  font-size: 20px;
   font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .gus-premium-eyebrow {
-  font-size: 11px;
-  font-weight: 700;
-  color: #2563eb;
+  font-size: 10px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.8) !important;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   margin: 0 0 2px 0;
 }
 
 .gus-premium-title {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
-  color: #0f172a;
+  color: #ffffff !important;
   margin: 0 0 4px 0;
   line-height: 1.25;
 }
 
 .gus-premium-appid {
   font-size: 11px;
-  font-weight: 700;
-  color: #1d4ed8;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
-  padding: 2px 8px;
-  border-radius: 6px;
+  font-weight: 600;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  padding: 3px 12px;
+  border-radius: 999px;
   display: inline-block;
-  font-family: monospace;
+  font-family: inherit;
+  letter-spacing: 0.04em;
 }
 
 .gus-premium-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  flex-wrap: nowrap;
   flex-shrink: 0;
+  justify-content: flex-end;
 }
 
 .gus-status-card {
-  padding: 6px 14px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid #bfdbfe;
-  border-radius: 10px;
+  padding: 7px 16px;
+  background: rgba(255, 255, 255, 0.14) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  border-radius: 14px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   min-width: 0;
-  flex: 1 1 280px;
+  flex: 0 0 auto;
+  backdrop-filter: blur(8px);
 }
 
 .gus-status-card > div {
@@ -4231,68 +4246,80 @@
 .gus-status-card span {
   display: block;
   font-size: 9px;
-  font-weight: 700;
-  color: #64748b;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.75) !important;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  margin: 0;
 }
 
 .gus-status-card strong {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 800;
-  color: #0f172a;
+  color: #ffffff !important;
   line-height: 1.2;
+  margin: 2px 0;
   overflow-wrap: anywhere;
 }
 
 .gus-status-card em {
   display: block;
-  font-size: 10px;
-  color: #2563eb;
+  font-size: 9.5px;
+  color: rgba(255, 255, 255, 0.75) !important;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0;
 }
 
 .gus-premium-outline-btn {
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: 1.5px solid #bfdbfe;
-  background: #ffffff;
-  color: #2563eb;
-  font-size: 12px;
-  font-weight: 700;
+  padding: 9px 18px;
+  border-radius: 12px;
+  border: none !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  font-size: 13px;
+  font-weight: 800;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  transition: all 0.18s ease;
+  gap: 6px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .gus-premium-outline-btn:hover {
-  background: #eff6ff;
-  border-color: #2563eb;
+  background: #f8fafc !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .gus-premium-gradient-btn {
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: none;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 700;
+  padding: 9px 18px;
+  border-radius: 12px;
+  border: none !important;
+  background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%) !important;
+  color: #ffffff !important;
+  font-size: 13px;
+  font-weight: 800;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-  transition: all 0.18s ease;
+  gap: 6px;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+  flex-shrink: 0;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-.gus-premium-gradient-btn:hover {
-  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+.gus-premium-gradient-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #4338ca 0%, #2563eb 100%) !important;
   transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.45);
 }
 
 .gus-premium-gradient-btn:disabled {
@@ -4301,26 +4328,32 @@
 }
 
 .gus-premium-close {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  min-height: 38px;
   border-radius: 50%;
-  border: 1px solid #e2e8f0;
-  background: #ffffff;
-  color: #64748b;
+  border: none !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
-  transition: all 0.18s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+  padding: 0;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
 .gus-premium-close:hover {
-  background: #fef2f2;
-  color: #ef4444;
-  border-color: #fecaca;
+  background: #f1f5f9 !important;
+  color: #ef4444 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 .gus-modal-body {
@@ -4884,25 +4917,96 @@
   flex-direction: row !important;
   align-items: center !important;
   justify-content: space-between !important;
-  flex-wrap: wrap !important;
-  gap: 14px !important;
+  flex-wrap: nowrap !important;
+  gap: 16px !important;
   width: 100% !important;
   height: auto !important;
   min-height: 0 !important;
-  padding: 18px 22px !important;
+  padding: 18px 24px !important;
+  background: linear-gradient(135deg, #0b63f6 0%, #0047c7 58%, #00349b 100%) !important;
+  color: #ffffff !important;
+  border-bottom: 0 !important;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2) !important;
 }
 
 .master-detail-modal .gus-modal-hdr-left.gus-premium-student {
-  flex: 1 1 250px !important;
+  flex: 1 1 auto !important;
   width: auto !important;
-  min-width: 220px !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+
+.master-detail-modal .gus-modal-avatar.gus-premium-avatar {
+  background: #ffffff !important;
+  color: #0b63f6 !important;
+}
+
+.master-detail-modal .gus-premium-eyebrow {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.master-detail-modal .gus-premium-title {
+  color: #ffffff !important;
+}
+
+.master-detail-modal .gus-premium-appid {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
 
 .master-detail-modal .gus-modal-hdr-right.gus-premium-actions {
-  flex: 0 1 auto !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 12px !important;
+  flex: 0 0 auto !important;
   width: auto !important;
   min-width: 0 !important;
   justify-content: flex-end !important;
+}
+
+.master-detail-modal .gus-status-card {
+  background: rgba(255, 255, 255, 0.14) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+}
+
+.master-detail-modal .gus-status-card span {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.master-detail-modal .gus-status-card strong {
+  color: #ffffff !important;
+}
+
+.master-detail-modal .gus-status-card em {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.master-detail-modal .gus-premium-outline-btn {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: none !important;
+  flex-shrink: 0 !important;
+}
+
+.master-detail-modal .gus-premium-gradient-btn {
+  background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  flex-shrink: 0 !important;
+}
+
+.master-detail-modal .gus-premium-close {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: none !important;
+  flex-shrink: 0 !important;
 }
 
 .master-detail-modal > .gus-modal-body {

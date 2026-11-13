@@ -402,6 +402,38 @@ const StudentCredentialsModal = memo(({ credentials, onClose }) => {
   );
 });
 
+const DeleteUserModal = memo(({ userName, loading, onCancel, onConfirm }) => {
+  if (!userName) return null;
+  return (
+    <div role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget && !loading) onCancel(); }} style={{ position: "fixed", inset: 0, zIndex: 1301, display: "grid", placeItems: "center", padding: 20, background: "rgba(15, 23, 42, .5)" }}>
+      <section role="alertdialog" aria-modal="true" aria-labelledby="delete-user-title" aria-describedby="delete-user-description" style={{ width: "min(440px, 100%)", padding: 24, borderRadius: 16, background: "#fff", boxShadow: "0 24px 60px rgba(15, 23, 42, .25)" }}>
+        <h2 id="delete-user-title" style={{ margin: "0 0 8px", color: "#0f172a", fontSize: 20 }}>Delete user?</h2>
+        <p id="delete-user-description" style={{ margin: "0 0 20px", color: "#64748b", lineHeight: 1.5 }}>Are you sure you want to permanently delete <strong style={{ color: "#334155" }}>{userName}</strong>? This action cannot be undone.</p>
+        <div style={{ display: "flex", justifyContent: "flex-end", gap: 10 }}>
+          <button type="button" className="seed-users-btn" onClick={onCancel} disabled={loading}>Cancel</button>
+          <button type="button" className="btn-delete" onClick={onConfirm} disabled={loading} style={{ padding: "9px 14px", opacity: loading ? .7 : 1 }}>{loading ? "Deleting..." : "Delete user"}</button>
+        </div>
+      </section>
+    </div>
+  );
+});
+
+const ActionConfirmModal = memo(({ confirmation, loading, onCancel, onConfirm }) => {
+  if (!confirmation) return null;
+  return (
+    <div role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget && !loading) onCancel(); }} style={{ position: "fixed", inset: 0, zIndex: 1301, display: "grid", placeItems: "center", padding: 20, background: "rgba(15, 23, 42, .5)" }}>
+      <section role="alertdialog" aria-modal="true" aria-labelledby="action-confirm-title" style={{ width: "min(440px, 100%)", padding: 24, borderRadius: 16, background: "#fff", boxShadow: "0 24px 60px rgba(15, 23, 42, .25)" }}>
+        <h2 id="action-confirm-title" style={{ margin: "0 0 8px", color: "#0f172a", fontSize: 20 }}>{confirmation.title}</h2>
+        <p style={{ margin: "0 0 20px", color: "#64748b", lineHeight: 1.5 }}>{confirmation.message}</p>
+        <div style={{ display: "flex", justifyContent: "flex-end", gap: 10 }}>
+          <button type="button" className="seed-users-btn" onClick={onCancel} disabled={loading}>Cancel</button>
+          <button type="button" className={confirmation.danger ? "btn-delete" : "refresh-btn"} onClick={onConfirm} disabled={loading} style={{ padding: "9px 14px", opacity: loading ? .7 : 1 }}>{loading ? "Please wait..." : confirmation.confirmLabel || "Continue"}</button>
+        </div>
+      </section>
+    </div>
+  );
+});
+
 const LoadingSpinner = memo(() => (
   <div className="loading-container">
     <div className="loading-spinner" />
@@ -424,17 +456,7 @@ const UserRow = memo(({ user, onApprove, onReject, onUpdate, onDelete }) => (
         </div>
       </div>
     </td>
-    <td>
-      <select
-        className="role-select"
-        value={user.role.toLowerCase()}
-        onChange={(e) => onUpdate(user.id, "role", e.target.value)}
-      >
-        <option value="user">User</option>
-        <option value="admin">Admin</option>
-        <option value="moderator">Moderator</option>
-      </select>
-    </td>
+    <td><span className="role-value">{user.role}</span></td>
     <td><StatusBadge status={user.status} /></td>
     <td className="last-login">{user.lastLogin}</td>
     <td className="join-date">{user.joinDate}</td>
@@ -457,8 +479,8 @@ const UserRow = memo(({ user, onApprove, onReject, onUpdate, onDelete }) => (
             {user.status === "active" ? <><IconMinus /> Deactivate</> : <><IconPlus /> Activate</>}
           </button>
         )}
-        <button className="btn-delete" onClick={() => onDelete(user.id)} title="Delete">
-          <IconTrash />
+        <button className="btn-delete" onClick={() => onDelete(user.id, user.name)} title="Delete" aria-label={`Delete ${user.name}`}>
+          <IconTrash /> Delete
         </button>
       </div>
     </td>
@@ -489,12 +511,7 @@ const MobileUserCard = memo(({ user, expanded, onToggle, onApprove, onReject, on
         <div className="mobile-meta-row">
           <div className="mobile-meta-item">
             <span className="mobile-meta-label">Role</span>
-            <UserFilterDropdown
-              label={`Role for ${user.name}`}
-              value={user.role.toLowerCase()}
-              options={ROLE_OPTIONS}
-              onChange={(value) => onUpdate(user.id, "role", value)}
-            />
+            <span className="mobile-meta-value">{user.role}</span>
           </div>
           <div className="mobile-meta-item">
             <span className="mobile-meta-label">Last Login</span>
@@ -510,7 +527,7 @@ const MobileUserCard = memo(({ user, expanded, onToggle, onApprove, onReject, on
             <>
               <button className="btn-approve" onClick={() => onApprove(user.id)}>✓ Approve</button>
               <button className="btn-reject"  onClick={() => onReject(user.id)}>✗ Reject</button>
-              <button className="btn-delete"  onClick={() => onDelete(user.id)}>Delete</button>
+              <button className="btn-delete"  onClick={() => onDelete(user.id, user.name)}>Delete</button>
             </>
           ) : (
             <>
@@ -520,7 +537,7 @@ const MobileUserCard = memo(({ user, expanded, onToggle, onApprove, onReject, on
               >
                 {user.status === "active" ? "Deactivate" : "Activate"}
               </button>
-              <button className="btn-delete" onClick={() => onDelete(user.id)}>Delete</button>
+              <button className="btn-delete" onClick={() => onDelete(user.id, user.name)}>Delete</button>
             </>
           )}
         </div>
@@ -530,9 +547,9 @@ const MobileUserCard = memo(({ user, expanded, onToggle, onApprove, onReject, on
 ));
 
 // ── Main component ────────────────────────────────────────────────────────
-const AdminUserManagement = () => {
+const AdminUserManagement = ({ globalSearchQuery = "" }) => {
   const [loading,             setLoading]             = useState(false);
-  const [searchQuery,         setSearchQuery]         = useState("");
+  const [searchQuery,         setSearchQuery]         = useState(globalSearchQuery);
   const [debouncedSearch,     setDebouncedSearch]     = useState("");
   const [roleFilter,          setRoleFilter]          = useState("all");
   const [statusFilter,        setStatusFilter]        = useState("all");
@@ -557,11 +574,35 @@ const AdminUserManagement = () => {
   const [createStudentError,  setCreateStudentError]  = useState("");
   const [studentCredentials,  setStudentCredentials]  = useState(null);
   const [popup, setPopup] = useState(null);
+  const [deleteTarget, setDeleteTarget] = useState(null);
+  const [deletingUser, setDeletingUser] = useState(false);
+  const [actionConfirmation, setActionConfirmation] = useState(null);
+  const [confirmationLoading, setConfirmationLoading] = useState(false);
+  const confirmationActionRef = useRef(null);
 
   const showPopup = useCallback((message, title = "Success!", type = "success") => {
     setPopup({ message, title, type });
   }, []);
+  const requestConfirmation = useCallback((confirmation, action) => {
+    confirmationActionRef.current = action;
+    setActionConfirmation(confirmation);
+  }, []);
+  const runConfirmedAction = useCallback(async () => {
+    if (!confirmationActionRef.current || confirmationLoading) return;
+    setConfirmationLoading(true);
+    try {
+      await confirmationActionRef.current();
+    } finally {
+      confirmationActionRef.current = null;
+      setActionConfirmation(null);
+      setConfirmationLoading(false);
+    }
+  }, [confirmationLoading]);
   const lastUsersQueryRef = useRef("");
+
+  useEffect(() => {
+    setSearchQuery(globalSearchQuery);
+  }, [globalSearchQuery]);
 
   // ── Stable auth headers ───────────────────────────────────────────────
   const getAdminHeaders = useCallback(() => ({
@@ -627,12 +668,12 @@ const AdminUserManagement = () => {
       lastUsersQueryRef.current = usersQueryKey;
     } catch (err) {
       console.error("Error loading users:", err);
-      alert("Failed to fetch users.");
+      showPopup("Failed to fetch users.", "Unable to load users", "error");
     } finally {
       console.log(`Users loaded in ${((Date.now() - startedAt) / 1000).toFixed(2)}s`);
       setLoading(false);
     }
-  }, [currentPage, debouncedSearch, roleFilter, statusFilter, usersQueryKey, getAdminHeaders]);
+  }, [currentPage, debouncedSearch, roleFilter, statusFilter, usersQueryKey, getAdminHeaders, showPopup]);
 
   const loadPendingProcessAdminCount = useCallback(async () => {
     try {
@@ -708,12 +749,12 @@ const AdminUserManagement = () => {
       if (data?.success) {
         setMedicalUsers(prev => prev.map(u => u._id === id ? { ...u, isApproved: true, status: "Approved" } : u));
         showPopup("Medical user approved!", "Medical User Approved ✅", "success");
-      } else alert(data.message || "Failed to approve.");
-    } catch (err) { console.error(err); alert("Failed to approve medical user."); }
-  }, [getAdminHeaders]);
+      } else showPopup(data.message || "Failed to approve.", "Approval failed", "error");
+    } catch (err) { console.error(err); showPopup("Failed to approve medical user.", "Approval failed", "error"); }
+  }, [getAdminHeaders, showPopup]);
 
-  const handleRejectMedicalUser = useCallback(async (id) => {
-    if (!window.confirm("Reject this medical user?")) return;
+  const handleRejectMedicalUser = useCallback((id) => {
+    requestConfirmation({ title: "Reject medical user?", message: "This medical user will be marked as rejected.", confirmLabel: "Reject", danger: true }, async () => {
     try {
       const res = await fetch(`${MEDICAL_API}/${id}/status`, {
         method: "PATCH", headers: getAdminHeaders(),
@@ -723,9 +764,10 @@ const AdminUserManagement = () => {
       if (data?.success) {
         setMedicalUsers(prev => prev.map(u => u._id === id ? { ...u, isApproved: false, status: "Rejected" } : u));
         showPopup("Medical user rejected!", "Medical User Rejected", "success");
-      } else alert(data.message || "Failed to reject.");
-    } catch (err) { console.error(err); alert("Failed to reject medical user."); }
-  }, [getAdminHeaders]);
+      } else showPopup(data.message || "Failed to reject.", "Rejection failed", "error");
+    } catch (err) { console.error(err); showPopup("Failed to reject medical user.", "Rejection failed", "error"); }
+    });
+  }, [getAdminHeaders, requestConfirmation, showPopup]);
 
   useEffect(() => {
     if (
@@ -757,10 +799,10 @@ const AdminUserManagement = () => {
         showPopup("User approved successfully! An approval email has been sent to the student.", "Account Approved ✅", "success");
       } else showPopup(data.message || "Failed to approve user", "Error", "error");
     } catch (err) { console.error(err); showPopup("Failed to approve user.", "Error", "error"); }
-  }, [getAdminHeaders, loadUsersData]);
+  }, [getAdminHeaders, loadUsersData, showPopup]);
 
-  const handleRejectUser = useCallback(async (userId) => {
-    if (!window.confirm("Reject this user? Status will be set to 'suspended'.")) return;
+  const handleRejectUser = useCallback((userId) => {
+    requestConfirmation({ title: "Reject user?", message: "This user’s status will be changed to suspended.", confirmLabel: "Reject", danger: true }, async () => {
     try {
       const res  = await fetch(`${ADMIN_API}/${userId}/status`, { // ✅ ADMIN_API (was API_BASE_URL)
         method: "PATCH", headers: getAdminHeaders(),
@@ -772,9 +814,10 @@ const AdminUserManagement = () => {
         if (data.stats) setUserStats(data.stats);
         await loadUsersData();
         showPopup("User rejected successfully!", "User Rejected", "success");
-      } else alert(data.message || "Failed to reject user");
-    } catch (err) { console.error(err); alert("Failed to reject user."); }
-  }, [getAdminHeaders, loadUsersData]);
+      } else showPopup(data.message || "Failed to reject user", "Rejection failed", "error");
+    } catch (err) { console.error(err); showPopup("Failed to reject user.", "Rejection failed", "error"); }
+    });
+  }, [getAdminHeaders, loadUsersData, requestConfirmation, showPopup]);
 
   const handleUpdateUser = useCallback(async (userId, field, value) => {
     const isStatus = field === "status";
@@ -792,14 +835,20 @@ const AdminUserManagement = () => {
         setUsers(prev => prev.map(u => u.id === userId ? { ...u, [field]: value } : u));
         if (data.stats) setUserStats(data.stats);
         await loadUsersData();
-        alert(`User ${field} updated successfully!`);
-      } else alert(data.message || "Failed to update user");
-    } catch (err) { console.error(err); alert("Failed to update user."); }
-  }, [getAdminHeaders, loadUsersData]);
+        showPopup(`User ${field} updated successfully!`, "User updated", "success");
+      } else showPopup(data.message || "Failed to update user", "Update failed", "error");
+    } catch (err) { console.error(err); showPopup("Failed to update user.", "Update failed", "error"); }
+  }, [getAdminHeaders, loadUsersData, showPopup]);
 
-  const handleDeleteUser = useCallback(async (userId) => {
-    if (!window.confirm("Delete this user permanently?")) return;
+  const handleDeleteUser = useCallback((userId, userName) => {
+    setDeleteTarget({ id: userId, name: userName || "this user" });
+  }, []);
+
+  const confirmDeleteUser = useCallback(async () => {
+    if (!deleteTarget || deletingUser) return;
+    const userId = deleteTarget.id;
     const deleteUrl = `${ADMIN_API}/${encodeURIComponent(userId)}`;
+    setDeletingUser(true);
     try {
       const headers = getAdminHeaders();
       delete headers["Content-Type"];
@@ -819,18 +868,22 @@ const AdminUserManagement = () => {
       setUsers(prev => prev.filter(u => u.id !== userId));
       if (data.stats) setUserStats(data.stats);
       await loadUsersData();
-      alert("User deleted successfully!");
+      setDeleteTarget(null);
+      setPopup({ title: "User deleted", message: `${deleteTarget.name} was deleted successfully.`, type: "success" });
     } catch (err) {
       console.error(`Failed to delete user ${userId} via ${deleteUrl}:`, err);
       const message = err instanceof TypeError
         ? `Could not reach the admin API at ${ADMIN_API}. Check that the backend is running and allows this frontend origin.`
         : err.message || "Failed to delete user.";
-      alert(message);
+      setDeleteTarget(null);
+      setPopup({ title: "Delete failed", message, type: "error" });
+    } finally {
+      setDeletingUser(false);
     }
-  }, [getAdminHeaders, loadUsersData]);
+  }, [deleteTarget, deletingUser, getAdminHeaders, loadUsersData]);
 
-  const handleSeedUsers = useCallback(async () => {
-    if (!window.confirm("This will create or reset one sample student account. Continue?")) return;
+  const handleSeedUsers = useCallback(() => {
+    requestConfirmation({ title: "Create sample account?", message: "This will create or reset one sample student account.", confirmLabel: "Continue" }, async () => {
     try {
       const res  = await fetch(`${ADMIN_API}/seed`, { method: "POST", headers: getAdminHeaders() }); // ✅ ADMIN_API
       const data = await res.json();
@@ -845,9 +898,10 @@ const AdminUserManagement = () => {
       });
     } catch (err) {
       console.error("Failed to seed users:", err);
-      alert(err.message || "Failed to create sample users.");
+      showPopup(err.message || "Failed to create sample users.", "Sample account failed", "error");
     }
-  }, [getAdminHeaders, loadUsersData]);
+    });
+  }, [getAdminHeaders, loadUsersData, requestConfirmation, showPopup]);
 
   const handleCreateStudent = useCallback(async ({ firstName, lastName, email }) => {
     setCreatingStudent(true);
@@ -882,9 +936,9 @@ const AdminUserManagement = () => {
         setProcessAdmins(prev => prev.map(pa => pa._id === id ? { ...pa, status: "active", isApproved: true } : pa));
         setPendingPaCount(prev => Math.max(prev - 1, 0));
         showPopup("Process admin approved! Approval email sent.", "Process Admin Approved ✅", "success");
-      } else alert(data.message || "Failed to approve.");
-    } catch (err) { console.error(err); alert("Failed to approve process admin."); }
-  }, [getAdminHeaders]);
+      } else showPopup(data.message || "Failed to approve.", "Approval failed", "error");
+    } catch (err) { console.error(err); showPopup("Failed to approve process admin.", "Approval failed", "error"); }
+  }, [getAdminHeaders, showPopup]);
 
   const openRejectModal = useCallback((id) => {
     setRejectTarget(id);
@@ -905,22 +959,23 @@ const AdminUserManagement = () => {
         setRejectTarget(null);
         setRejectReason("");
         showPopup("Process admin rejected. Rejection email sent.", "Process Admin Rejected", "success");
-      } else alert(data.message || "Failed to reject.");
-    } catch (err) { console.error(err); alert("Failed to reject process admin."); }
-  }, [rejectTarget, rejectReason, getAdminHeaders]);
+      } else showPopup(data.message || "Failed to reject.", "Rejection failed", "error");
+    } catch (err) { console.error(err); showPopup("Failed to reject process admin.", "Rejection failed", "error"); }
+  }, [rejectTarget, rejectReason, getAdminHeaders, showPopup]);
 
-  const handleDeactivateProcessAdmin = useCallback(async (id, currentStatus) => {
+  const handleDeactivateProcessAdmin = useCallback((id, currentStatus) => {
     const action = currentStatus === "active" ? "deactivate" : "reactivate";
-    if (!window.confirm(`Are you sure you want to ${action} this process admin?`)) return;
+    requestConfirmation({ title: `${action === "deactivate" ? "Deactivate" : "Reactivate"} process admin?`, message: `Are you sure you want to ${action} this process admin?`, confirmLabel: action === "deactivate" ? "Deactivate" : "Reactivate", danger: action === "deactivate" }, async () => {
     try {
       const res  = await fetch(`${PA_API}/deactivate/${id}`, { method: "PATCH", headers: getAdminHeaders() });
       const data = await res.json();
       if (data?.success) {
         setProcessAdmins(prev => prev.map(pa => pa._id === id ? { ...pa, status: data.data.status, isActive: data.data.isActive } : pa));
-        alert(`Process admin ${action}d successfully.`);
-      } else alert(data.message || `Failed to ${action}.`);
-    } catch (err) { console.error(err); alert(`Failed to ${action} process admin.`); }
-  }, [getAdminHeaders]);
+        showPopup(`Process admin ${action}d successfully.`, "Process admin updated", "success");
+      } else showPopup(data.message || `Failed to ${action}.`, "Update failed", "error");
+    } catch (err) { console.error(err); showPopup(`Failed to ${action} process admin.`, "Update failed", "error"); }
+    });
+  }, [getAdminHeaders, requestConfirmation, showPopup]);
 
   const toggleRow = useCallback((id) =>
     setExpandedRow(prev => prev === id ? null : id), []);
@@ -942,6 +997,18 @@ const AdminUserManagement = () => {
       />
       <StudentCredentialsModal credentials={studentCredentials} onClose={() => setStudentCredentials(null)} />
       <NotificationModal popup={popup} onClose={() => setPopup(null)} />
+      <DeleteUserModal
+        userName={deleteTarget?.name}
+        loading={deletingUser}
+        onCancel={() => setDeleteTarget(null)}
+        onConfirm={confirmDeleteUser}
+      />
+      <ActionConfirmModal
+        confirmation={actionConfirmation}
+        loading={confirmationLoading}
+        onCancel={() => { confirmationActionRef.current = null; setActionConfirmation(null); }}
+        onConfirm={runConfirmedAction}
+      />
 
       {/* Header */}
       <div className="users-header">
@@ -1027,12 +1094,7 @@ const AdminUserManagement = () => {
               </span>
             )}
           </button>
-          <button
-            className={activeTab === "medical" ? "admin-tab-btn active" : "admin-tab-btn"}
-            onClick={() => handleTabSwitch("medical")}
-          >
-            Medical Users
-          </button>
+
         </div>
       </div>
 
@@ -1110,12 +1172,12 @@ const AdminUserManagement = () => {
             <table className="users-table">
               <thead>
                 <tr>
-                  <th style={{width:"32%"}}>User</th>
-                  <th style={{width:"11%"}}>Role</th>
+                  <th style={{width:"27%"}}>User</th>
+                  <th style={{width:"9%"}}>Role</th>
                   <th style={{width:"11%"}}>Status</th>
                   <th style={{width:"18%"}}>Last Login</th>
-                  <th style={{width:"14%"}}>Joined</th>
-                  <th style={{width:"14%"}}>Actions</th>
+                  <th style={{width:"13%"}}>Joined</th>
+                  <th style={{width:"22%"}}>Actions</th>
                 </tr>
               </thead>
               <tbody>

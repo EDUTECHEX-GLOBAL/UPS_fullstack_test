@@ -232,7 +232,7 @@
 /* ── Stat Cards ── with colored top accent ───────────────── */
 .gus-stats-row {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 14px; 
   margin-bottom: 20px;
 }
@@ -262,11 +262,17 @@
   transform: translateY(-2px); 
   box-shadow: 0 6px 16px rgba(37,99,235,0.08); 
 }
+.gus-stat-card.active {
+  border-color: #93c5fd;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
+  transform: translateY(-2px);
+}
 
 /* Stat card accent colors */
 .gus-stat-total::after      { background: #2563eb; }
 .gus-stat-approved::after   { background: #0f9f83; }
 .gus-stat-completed::after  { background: #059669; }
+.gus-stat-awaiting::after   { background: #f59e0b; }
 .gus-stat-review::after     { background: #3b82f6; }
 .gus-stat-incomplete::after { background: #d97706; }
 
@@ -3768,7 +3774,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 16px;
   padding: 20px 24px;
   background: linear-gradient(135deg, #0b63f6 0%, #0047c7 58%, #00349b 100%);
@@ -3781,17 +3787,17 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  flex: 1 1 260px;
+  flex: 1 1 auto;
   min-width: 0;
 }
 
 .gus-modal-hdr-right.gus-premium-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
-  flex: 0 1 auto;
+  gap: 12px;
+  flex: 0 0 auto;
   min-width: 0;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-end;
 }
 

@@ -600,6 +600,9 @@
   vertical-align: middle;
 }
 
+.users-table th:last-child,
+.users-table td:last-child { min-width: 230px; }
+
 .users-table tbody tr {
   transition: var(--transition);
   border-left: 3px solid transparent;
@@ -618,6 +621,15 @@
 .users-table tbody tr:last-child td { border-bottom: none; }
 
 /* ── User Info Cell ── */
+.users-table .user-info,
+.mobile-user-card .user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
 .adminuser-user-info {
   display: flex;
   align-items: center;
@@ -647,7 +659,8 @@
 .mobile-user-card:nth-child(3n+2) .user-avatar { background: linear-gradient(135deg, #10b981, #34d399); }
 .mobile-user-card:nth-child(3n+3) .user-avatar { background: linear-gradient(135deg, #6366f1, #818cf8); }
 
-.user-details { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.users-table .user-details,
+.mobile-user-card .user-details { display: flex; flex: 1; flex-direction: column; gap: 2px; min-width: 0; }
 
 .user-name {
   font-weight: 700;
@@ -675,26 +688,11 @@
   margin-top: 2px;
 }
 
-/* ── Role Select ── */
-.role-select {
-  padding: 5px 10px;
-  border: 1.5px solid var(--border);
-  border-radius: 8px;
-  font-size: 0.78rem;
-  font-family: 'Poppins', sans-serif;
+/* User role is informational in this table, so keep it read-only. */
+.role-value {
   color: var(--text);
-  background: var(--card);
-  cursor: pointer;
-  transition: var(--transition);
+  font-size: 0.82rem;
   font-weight: 600;
-  width: 100%;
-  max-width: 110px;
-}
-
-.role-select:focus {
-  outline: none;
-  border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(8,145,178,0.10);
 }
 
 /* ── Status Badges ── */
@@ -872,6 +870,8 @@
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
+
+.mobile-card-top > .user-info { overflow: hidden; }
 
 .mobile-card-top:active { background: #f0f9ff; }
 

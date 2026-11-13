@@ -81,20 +81,49 @@ const verifyApplication = async (application) => {
   return result;
 };
 
+const isMasterFinalApproved = (app = {}) => {
+  const universityStatus = String(app.universitySelectionStatus || '').toLowerCase();
+  const status = String(app.applicationStatus || app.status || '').toLowerCase();
+  return universityStatus === 'completed' || status === 'approved' || app.isFinalApplicationApproved === true || app.isUniversityApproved === true;
+};
+
+const isMasterProgramApproved = (app = {}) => {
+  return String(app.programApprovalStatus || '').toLowerCase() === 'approved' ||
+    String(app.overviewStatus || '').toLowerCase() === 'approved' ||
+    Boolean(app.processAdminVerified) ||
+    app.isProgramApproved === true;
+};
+
+const getMasterApplicationBucket = (app = {}) => {
+  if (isMasterFinalApproved(app)) return 'approved';
+  if (isMasterProgramApproved(app)) return 'awaiting';
+  const status = String(app.applicationStatus || app.status || app.overviewStatus || '').toLowerCase();
+  if (status === 'draft' || status === 'incomplete') return 'incomplete';
+  if (status === 'under_review' || status === 'in_progress') return 'inprogress';
+  return 'completed';
+};
+
 /* ──────────────────────────────────────────────────────────────────────────────────────────────────
    HELPERS
 ────────────────────────────────────────────────────────────────────────────────────────────────── */
-const getStatusLabel = (applicationStatus) => {
-  if (applicationStatus === "submitted")    return "COMPLETED";
-  if (applicationStatus === "draft")        return "INCOMPLETE";
-  if (applicationStatus === "under_review") return "IN PROGRESS";
+const getStatusLabel = (applicationStatus, app = null) => {
+  if (app && isMasterFinalApproved(app)) return "APPROVED";
+  if (app && isMasterProgramApproved(app)) return (app.selectedUniversities || []).length > 0 ? "UNIVERSITIES SELECTED" : "AWAITING UNIVERSITIES";
+  const s = String(applicationStatus || '').toLowerCase();
+  if (s === "submitted" || s === "completed") return "COMPLETED";
+  if (s === "draft") return "INCOMPLETE";
+  if (s === "under_review") return "IN PROGRESS";
+  if (s === "approved") return "APPROVED";
   return applicationStatus?.toUpperCase() || "UNKNOWN";
 };
 
-const getStatusClass = (applicationStatus) => {
-  if (applicationStatus === "submitted")    return "status-completed";
-  if (applicationStatus === "draft")        return "status-incomplete";
-  if (applicationStatus === "under_review") return "status-inprogress";
+const getStatusClass = (applicationStatus, app = null) => {
+  if (app && isMasterFinalApproved(app)) return "status-approved";
+  if (app && isMasterProgramApproved(app)) return "status-inprogress";
+  const s = String(applicationStatus || '').toLowerCase();
+  if (s === "approved") return "status-approved";
+  if (s === "submitted" || s === "completed") return "status-completed";
+  if (s === "under_review") return "status-inprogress";
   return "status-incomplete";
 };
 
@@ -1029,7 +1058,7 @@ const MasterLoadingState = ({ label = "Loading applications..." }) => (
   </div>
 );
 
-export default function MasterUniversity() {
+export default function MasterUniversity({ globalSearchQuery = "" }) {
   const [stats,              setStats]              = useState({ total: 0, submitted: 0, draft: 0, underReview: 0 });
   const [applications,       setApplications]       = useState([]);
   const [loading,            setLoading]            = useState(true);
@@ -1084,7 +1113,7 @@ export default function MasterUniversity() {
         page,
         limit: LIMIT,
         status: filterToStatus[activeFilter] || "all",
-        search: searchQuery,
+        search: globalSearchQuery || searchQuery,
       });
 
       if (res.success) {
@@ -1110,7 +1139,7 @@ export default function MasterUniversity() {
     } finally {
       setLoading(false);
     }
-  }, [page, activeFilter, searchQuery, filterToStatus]);
+  }, [page, activeFilter, searchQuery, globalSearchQuery, filterToStatus]);
 
   useEffect(() => { loadStats(); },        [loadStats]);
   useEffect(() => { loadApplications(); }, [loadApplications]);
@@ -1273,23 +1302,50 @@ export default function MasterUniversity() {
     }
   };
 
-  const filteredApps = selectedUniversity
-    ? applications.filter((app) => app.course?.universityName === selectedUniversity.id)
-    : applications;
+  const displayStats = useMemo(() => {
+    const list = selectedUniversity
+      ? applications.filter((app) => app.course?.universityName === selectedUniversity.id)
+      : applications;
+    return {
+      total:     list.length,
+      approved:  list.filter((a) => getMasterApplicationBucket(a) === "approved").length,
+      completed: list.filter((a) => getMasterApplicationBucket(a) === "completed").length,
+      awaiting:  list.filter((a) => getMasterApplicationBucket(a) === "awaiting").length,
+    };
+  }, [applications, selectedUniversity]);
 
-  const displayStats = selectedUniversity
-    ? {
-        total:      filteredApps.length,
-        completed:  filteredApps.filter((a) => a.applicationStatus === "submitted").length,
-        incomplete: filteredApps.filter((a) => a.applicationStatus === "draft").length,
-        inProgress: filteredApps.filter((a) => a.applicationStatus === "under_review").length,
-      }
-    : {
-        total:      statsLoading ? "..." : stats.total,
-        completed:  statsLoading ? "..." : stats.submitted,
-        incomplete: statsLoading ? "..." : stats.draft,
-        inProgress: statsLoading ? "..." : stats.underReview,
-      };
+  const filteredApps = useMemo(() => {
+    let list = selectedUniversity
+      ? applications.filter((app) => app.course?.universityName === selectedUniversity.id)
+      : applications;
+
+    if (activeFilter === "Approved") {
+      list = list.filter((a) => getMasterApplicationBucket(a) === "approved");
+    } else if (activeFilter === "Completed") {
+      list = list.filter((a) => getMasterApplicationBucket(a) === "completed");
+    } else if (activeFilter === "Awaiting Universities") {
+      list = list.filter((a) => getMasterApplicationBucket(a) === "awaiting");
+    } else if (activeFilter === "Incomplete") {
+      list = list.filter((a) => getMasterApplicationBucket(a) === "incomplete");
+    } else if (activeFilter === "In Progress") {
+      list = list.filter((a) => getMasterApplicationBucket(a) === "inprogress");
+    }
+
+    const activeSearchQuery = (globalSearchQuery || searchQuery).toLowerCase().trim();
+    if (activeSearchQuery) {
+      const q = activeSearchQuery;
+      list = list.filter((app) => {
+        const studentName = String(app.fullName || app.studentName || [app.personal?.firstName, app.personal?.lastName].filter(Boolean).join(" ")).toLowerCase();
+        const email = String(app.contact?.emailAddress || app.email || "").toLowerCase();
+        const appId = String(app.applicationId || "").toLowerCase();
+        const studentId = String(app.studentId || "").toLowerCase();
+        const uniName = String(app.course?.universityName || app.universityName || "").toLowerCase();
+        return studentName.includes(q) || email.includes(q) || appId.includes(q) || studentId.includes(q) || uniName.includes(q);
+      });
+    }
+
+    return list;
+  }, [applications, selectedUniversity, activeFilter, searchQuery, globalSearchQuery]);
 
   return (
     <div className="mu-wrapper">
@@ -1413,28 +1469,48 @@ export default function MasterUniversity() {
         </div>
 
         <div className="stats-row">
-          <div className="stat-card stat-card-total">
+          <div
+            className={`stat-card stat-card-total ${activeFilter === "All" ? "stat-card-active" : ""}`}
+            onClick={() => { setActiveFilter("All"); setPage(1); }}
+            style={{ cursor: "pointer" }}
+            title="Filter by Total Applications"
+          >
             <div className="stat-card-text">
-              <div className="stat-label">Total</div>
+              <div className="stat-label">TOTAL APPLICATIONS</div>
               <div className="stat-value">{displayStats.total}</div>
             </div>
           </div>
-          <div className="stat-card stat-card-incomplete">
+          <div
+            className={`stat-card stat-card-approved ${activeFilter === "Approved" ? "stat-card-active" : ""}`}
+            onClick={() => { setActiveFilter("Approved"); setPage(1); }}
+            style={{ cursor: "pointer" }}
+            title="Filter by Approved"
+          >
             <div className="stat-card-text">
-              <div className="stat-label">Draft</div>
-              <div className="stat-value">{displayStats.incomplete}</div>
+              <div className="stat-label">APPROVED</div>
+              <div className="stat-value">{displayStats.approved}</div>
             </div>
           </div>
-          <div className="stat-card stat-card-completed">
+          <div
+            className={`stat-card stat-card-completed ${activeFilter === "Completed" ? "stat-card-active" : ""}`}
+            onClick={() => { setActiveFilter("Completed"); setPage(1); }}
+            style={{ cursor: "pointer" }}
+            title="Filter by Completed"
+          >
             <div className="stat-card-text">
-              <div className="stat-label">Done</div>
+              <div className="stat-label">COMPLETED</div>
               <div className="stat-value">{displayStats.completed}</div>
             </div>
           </div>
-          <div className="stat-card stat-card-inprogress">
+          <div
+            className={`stat-card stat-card-awaiting ${activeFilter === "Awaiting Universities" ? "stat-card-active" : ""}`}
+            onClick={() => { setActiveFilter("Awaiting Universities"); setPage(1); }}
+            style={{ cursor: "pointer" }}
+            title="Filter by Awaiting for University Selection"
+          >
             <div className="stat-card-text">
-              <div className="stat-label">Review</div>
-              <div className="stat-value">{displayStats.inProgress}</div>
+              <div className="stat-label">AWAITING FOR UNIVERSITY SELECTION</div>
+              <div className="stat-value">{displayStats.awaiting}</div>
             </div>
           </div>
         </div>
@@ -1461,13 +1537,13 @@ export default function MasterUniversity() {
           </div>
 
           <div className="filter-btns-scroll">
-            {["All", "Completed", "Incomplete", "In Progress"].map((f) => (
+            {["All", "Approved", "Completed", "Awaiting Universities"].map((f) => (
               <button
                 key={f}
                 className={`filter-btn ${activeFilter === f ? "filter-btn-active" : ""}`}
                 onClick={() => { setActiveFilter(f); setPage(1); }}
               >
-                {f === "In Progress" ? "Progress" : f}
+                {f}
               </button>
             ))}
           </div>
@@ -1646,8 +1722,8 @@ export default function MasterUniversity() {
                         </td>
 
                         <td>
-                          <span className={`status-badge ${getStatusClass(app.applicationStatus)}`}>
-                            {getStatusLabel(app.applicationStatus)}
+                          <span className={`status-badge ${getStatusClass(app.applicationStatus, app)}`}>
+                            {getStatusLabel(app.applicationStatus, app)}
                           </span>
                         </td>
 

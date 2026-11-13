@@ -192,6 +192,7 @@
 .med-stat-approved::after   { background: var(--green); }
 .med-stat-incomplete::after { background: var(--amber); }
 .med-stat-completed::after  { background: var(--green); }
+.med-stat-awaiting::after   { background: var(--amber); }
 .med-stat-review::after     { background: var(--violet); }
 
 .med-stat-text { 
@@ -1333,7 +1334,7 @@
 
   .med-stats-row { gap: 6px; margin-bottom: 10px; }
   .med-stat-card { min-width: 0; padding: 9px 10px; gap: 8px; border-radius: 10px; }
-  .med-stat-card:last-child { grid-column: 1 / -1; }
+  /* .med-stat-card:last-child removed for 4-card grid */
   .med-stat-num   { font-size: 21px; }
   .med-stat-label { font-size: 7.8px; letter-spacing: 0.05em; }
   .med-controls { display: grid; grid-template-columns: minmax(0, 1fr) 112px; gap: 7px; margin-bottom: 10px; }
@@ -3574,4 +3575,148 @@
 @media (max-width: 768px) {
   .med-university-overlay { align-items: center; padding: 14px; }
   .med-university-picker { width: min(100%, 560px); max-height: 88dvh; border-radius: 16px; }
+}
+
+/* Ensure medical details modal has proper responsive flex layout and scrolling */
+.med-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.med-modal {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: min(1080px, calc(100vw - 48px));
+  max-width: 1080px;
+  max-height: calc(100dvh - 48px);
+  height: auto;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #f8fafc;
+  box-shadow: 0 32px 80px rgba(15, 23, 42, 0.24);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.med-modal-hdr.med-premium-hdr {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px 24px;
+}
+
+.med-modal-body {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+  .med-overlay {
+    padding: 8px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .med-modal {
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100dvh - 16px);
+    border-radius: 16px;
+  }
+
+  .med-modal-hdr.med-premium-hdr {
+    position: relative;
+    padding: 14px 14px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .med-modal-hdr-left.med-premium-student {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-right: 44px; /* Ensure title does not overlap top-right close button */
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .med-premium-avatar {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .med-premium-title {
+    font-size: 16px;
+    margin: 0 0 4px;
+    line-height: 1.25;
+    word-break: break-word;
+  }
+
+  .med-premium-eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+
+  .med-premium-appid {
+    font-size: 9.5px;
+    padding: 2px 7px;
+  }
+
+  .med-modal-hdr-right.med-premium-actions {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .med-status-card {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 8px 12px;
+  }
+
+  .med-premium-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .med-modal-body {
+    padding: 12px 14px !important;
+  }
 }

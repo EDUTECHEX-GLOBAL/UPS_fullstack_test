@@ -269,6 +269,40 @@
     overflow-x: auto
 }
 
+.avd-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    border-top: 1px solid #eef2f7;
+    color: #64748b;
+    font-size: 12px;
+}
+
+.avd-pagination > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avd-pagination button {
+    border: 1px solid #dbe3ef;
+    border-radius: 8px;
+    background: #fff;
+    color: #2563eb;
+    padding: 7px 11px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.avd-pagination button:disabled {
+    color: #94a3b8;
+    background: #f8fafc;
+    cursor: not-allowed;
+}
+
 .avd-table {
     width: 100%;
     min-width: 930px;

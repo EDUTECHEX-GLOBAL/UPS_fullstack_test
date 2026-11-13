@@ -49,7 +49,7 @@ const DetailSection = ({ title, dotClass = 'gus-dot-blue', fields = [] }) => {
     );
 };
 
-const GusUniversity = () => {
+const GusUniversity = ({ globalSearchQuery = '' }) => {
 
     const [applications, setApplications] = useState([]);
     const [loading, setLoading]           = useState(true);
@@ -66,7 +66,7 @@ const GusUniversity = () => {
     const [savingUniversitySelection, setSavingUniversitySelection] = useState(false);
     const [universitySelectionMessage, setUniversitySelectionMessage] = useState('');
     const [pdfLoading, setPdfLoading]     = useState(null);
-    const [stats, setStats]               = useState({ total: 0, approved: 0, completed: 0, incomplete: 0, underReview: 0 });
+    const [stats, setStats]               = useState({ total: 0, approved: 0, completed: 0, awaitingUniversities: 0, incomplete: 0, underReview: 0 });
     const [docViewer, setDocViewer]       = useState(null);
     const [downloadingDoc, setDownloadingDoc] = useState(false);
     const [emailModal, setEmailModal]     = useState(null); // { app, docLabel }
@@ -254,9 +254,8 @@ const GusUniversity = () => {
     const getApplicationProgressBucket = (app = {}) => {
         const accountStatus = String(app.applicationStatus || '').trim().toLowerCase();
         const overviewStatus = String(app.overviewStatus || '').trim().toLowerCase();
-        // University approval is a separate workflow outcome, not an
-        // application-completion state.
         if (isFinalApplicationApproved(app)) return 'approved';
+        if (isProgramApproved(app)) return 'awaiting';
         if (
             Number(app.completionPercentage) >= 100 ||
             app.isCompleted === true ||
@@ -641,11 +640,12 @@ const GusUniversity = () => {
 
     const calculateStats = useCallback((apps) => {
         setStats({
-            total:       apps.length,
-            completed:   apps.filter(a => getApplicationProgressBucket(a) === 'completed').length,
-            approved:    apps.filter(a => getApplicationProgressBucket(a) === 'approved').length,
-            incomplete:  apps.filter(a => getApplicationProgressBucket(a) === 'incomplete').length,
-            underReview: apps.filter(a => getApplicationProgressBucket(a) === 'inprogress').length,
+            total:                apps.length,
+            approved:             apps.filter(a => getApplicationProgressBucket(a) === 'approved').length,
+            completed:            apps.filter(a => getApplicationProgressBucket(a) === 'completed').length,
+            awaitingUniversities: apps.filter(a => getApplicationProgressBucket(a) === 'awaiting').length,
+            incomplete:           apps.filter(a => getApplicationProgressBucket(a) === 'incomplete').length,
+            underReview:          apps.filter(a => getApplicationProgressBucket(a) === 'inprogress').length,
         });
     }, []);
 
@@ -677,10 +677,10 @@ const GusUniversity = () => {
     useEffect(() => { fetchApplications(); }, [fetchApplications]);
 
     const filtered = applications.filter(app => {
-        const q = searchQuery.toLowerCase();
+        const q = (globalSearchQuery || searchQuery).toLowerCase().trim();
         const uniName = getUniversityName(app).toLowerCase();
         const matchSearch =
-            app.studentName?.toLowerCase().includes(q) ||
+            (app.studentName || [app.personal?.firstName, app.personal?.lastName].filter(Boolean).join(' ')).toLowerCase().includes(q) ||
             app.email?.toLowerCase().includes(q)       ||
             String(app.studentId).includes(q)          ||
             app.applicationId?.toLowerCase().includes(q) ||
@@ -1205,9 +1205,10 @@ const GusUniversity = () => {
                                 all: 'All Status',
                                 approved: 'Approved',
                                 completed: 'Completed',
+                                awaiting: 'Awaiting Universities',
                                 inprogress: 'In Progress',
                                 incomplete: 'Incomplete',
-                            }[filterStatus]}</span>
+                            }[filterStatus] || 'All Status'}</span>
                             <span className="gus-filter-select-arrow" aria-hidden="true" />
                         </button>
                         {statusDropdownOpen && (
@@ -1216,8 +1217,7 @@ const GusUniversity = () => {
                                     { value: 'all', label: 'All Status' },
                                     { value: 'approved', label: 'Approved' },
                                     { value: 'completed', label: 'Completed' },
-                                    { value: 'inprogress', label: 'In Progress' },
-                                    { value: 'incomplete', label: 'Incomplete' },
+                                    { value: 'awaiting', label: 'Awaiting Universities' },
                                 ].map((option) => (
                                     <button
                                         type="button"
@@ -1246,16 +1246,21 @@ const GusUniversity = () => {
             {/* ── Stats ── */}
             <div className="gus-stats-row">
                 {[
-                    { cls:'gus-stat-total',      label:'TOTAL APPLICATIONS', val:stats.total },
-                    { cls:'gus-stat-approved',   label:'APPROVED',           val:stats.approved },
-                    { cls:'gus-stat-completed',   label:'COMPLETED',          val:stats.completed },
-                    { cls:'gus-stat-review',      label:'IN PROGRESS',        val:stats.underReview },
-                    { cls:'gus-stat-incomplete',  label:'INCOMPLETE',         val:stats.incomplete },
-                ].map(({ cls, label, val: v }) => (
-                    <div key={cls} className={`gus-stat-card ${cls}`}>
+                    { cls:'gus-stat-total',      label:'TOTAL APPLICATIONS',           val:stats.total,               filter:'all' },
+                    { cls:'gus-stat-approved',   label:'APPROVED',                     val:stats.approved,            filter:'approved' },
+                    { cls:'gus-stat-completed',  label:'COMPLETED',                    val:stats.completed,           filter:'completed' },
+                    { cls:'gus-stat-awaiting',   label:'AWAITING FOR UNIVERSITY SELECTION', val:stats.awaitingUniversities, filter:'awaiting' },
+                ].map(({ cls, label, val: v, filter }) => (
+                    <div
+                        key={cls}
+                        className={`gus-stat-card ${cls} ${filterStatus === filter ? 'active' : ''}`}
+                        onClick={() => setFilterStatus(filter)}
+                        style={{ cursor: 'pointer' }}
+                        title={`Filter by ${label}`}
+                    >
                         <div className="gus-stat-text">
                             <span className="gus-stat-label">{label}</span>
-                            <span className="gus-stat-num">{v}</span>
+                            <span className="gus-stat-num">{v ?? 0}</span>
                         </div>
                     </div>
                 ))}

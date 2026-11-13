@@ -429,7 +429,7 @@
 }
 
 .signin-password-wrapper input {
-  padding-right: 48px;
+  padding-right: 48px !important;
 }
 
 .signin-eye-btn {
@@ -641,12 +641,12 @@
 }
 
 .signin-assist-input-wrap input {
-  padding-left: 44px;
+  padding-left: 44px !important;
 }
 
 .signin-assist-input-wrap input[type="password"],
 .signin-assist-input-wrap input[type="text"][name="adminPassword"] {
-  padding-right: 48px;
+  padding-right: 48px !important;
 }
 
 .signin-assist-input-icon {
@@ -895,6 +895,16 @@
     font-size: 0.9rem;
   }
 
+  .signin-assist-input-wrap input {
+    padding-left: 44px !important;
+  }
+
+  .signin-assist-input-wrap input[type="password"],
+  .signin-assist-input-wrap input[type="text"][name="adminPassword"],
+  .signin-password-wrapper input {
+    padding-right: 48px !important;
+  }
+
   .signin-submit-btn {
     padding: 14px 20px;
     font-size: 0.95rem;
@@ -1002,6 +1012,16 @@
   .signin-field input {
     padding: 11px 12px;
     font-size: 0.875rem;
+  }
+
+  .signin-assist-input-wrap input {
+    padding-left: 42px !important;
+  }
+
+  .signin-assist-input-wrap input[type="password"],
+  .signin-assist-input-wrap input[type="text"][name="adminPassword"],
+  .signin-password-wrapper input {
+    padding-right: 44px !important;
   }
 
   .signin-submit-btn {

@@ -152,7 +152,7 @@
 .admin-dashboard .logout-btn:hover .logout-circle { background: rgba(255,255,255,.25); }
 .admin-dashboard .sidebar.closed .sidebar-footer { padding: 12px 10px 18px; }
 .admin-dashboard .sidebar.closed .logout-btn { padding: 9px 4px; }
-.admin-dashboard .sidebar.closed .logout-btn > span:last-child { display: none; }
+.admin-dashboard .sidebar.closed .logout-btn .logout-label { display: none; }
 
 /* ══════════════════════════════════════
    MAIN CONTENT

@@ -314,7 +314,7 @@ const AdminVerifyDocuments = ({ globalSearchQuery = '' }) => {
           </>}
         </div>
       </div>
-      <div className="avd-footer">&copy; 2026 Admin Dashboard. All rights reserved.</div>
+     
       {toast && <div className={`avd-toast avd-toast-${toast.type}`} role="status"><span>{toast.type === 'success' ? '✓' : '!'}</span>{toast.message}<button onClick={() => setToast(null)}>&times;</button></div>}
 
       {selected && <div className="avd-overlay" onClick={() => setSelected(null)}><div className="avd-modal" onClick={event => event.stopPropagation()}><div className="avd-modal-header"><div><h2>Application Verification</h2><span>{selected.applicationId}</span></div><button type="button" onClick={() => setSelected(null)}>&times;</button></div><div className="avd-modal-body">

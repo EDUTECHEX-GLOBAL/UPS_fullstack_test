@@ -370,6 +370,8 @@ export const getGusUniversityApplicationById = async (req, res) => {
         Object.entries(translatedDocs).forEach(([key, value]) => {
           if (value) docRecToMap[key] = value;
         });
+        data.data.allDocuments = rawDocs;
+        data.data.rawDocuments = rawDocs;
         data.data.documents = mapDocuments(docRecToMap);
       }
       return originalJson.call(this, data);

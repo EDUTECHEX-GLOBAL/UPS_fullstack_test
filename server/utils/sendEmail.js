@@ -496,12 +496,100 @@ export const emailTemplates = {
         </html>`,
     };
   },
+
+  accountRejected: (data) => {
+    const { studentName = "Student", reason, supportUrl } = data;
+    const finalSupportUrl = supportUrl || `${(process.env.CLIENT_URL || "http://localhost:3000").replace(/\/$/, "")}/contact`;
+    const rejectionReason = reason && reason.trim() ? reason.trim() : "Application criteria not met or incomplete documentation provided.";
+    return {
+      subject: "Update Regarding Your Account Application - EduTechEx UPS Platform",
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Account Application Status</title>
+        </head>
+        <body style="margin:0;padding:0;background:#f4f6f9;font-family:'Segoe UI',Arial,sans-serif;">
+          <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
+            <tr><td align="center">
+              <table width="560" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);max-width:92%;">
+                <tr>
+                  <td style="background:linear-gradient(135deg,#dc2626,#b91c1c);padding:36px 40px;text-align:center;">
+                    <div style="background:#ffffff;padding:12px 28px;border-radius:12px;display:inline-block;margin:0 auto 14px;box-shadow:0 4px 14px rgba(0,0,0,0.12);">
+                      <img src="cid:edutechex-logo" alt="EDUTECHEX" width="180" style="display:block;max-width:180px;height:auto;margin:0 auto;" />
+                    </div>
+                    <p style="color:rgba(255,255,255,0.95);margin:0;font-size:14px;font-weight:600;letter-spacing:0.3px;">Account Application Status: Rejected</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:36px 40px;">
+                    <p style="color:#1e293b;font-size:16px;margin:0 0 16px;font-weight:600;">Dear <strong>${studentName}</strong>,</p>
+                    <p style="color:#475569;font-size:15px;line-height:1.7;margin:0 0 20px;">
+                      Thank you for your interest in the EduTechEx UPS Platform. After careful review of your registration details, our admissions administration has marked your account application as <strong style="color:#dc2626;">Rejected</strong> at this time.
+                    </p>
+                    <div style="background:#fef2f2;border-left:4px solid #dc2626;padding:16px 20px;border-radius:6px;margin:0 0 28px;">
+                      <p style="color:#991b1b;font-size:14px;font-weight:600;margin:0 0 6px;">Reason for Rejection / Remarks:</p>
+                      <p style="color:#b91c1c;font-size:13px;line-height:1.5;margin:0;">
+                        ${rejectionReason}
+                      </p>
+                    </div>
+                    <p style="color:#475569;font-size:14px;line-height:1.6;margin:0 0 20px;">
+                      If you believe this decision was made in error or if you would like to provide updated documentation or clarify your information, please reach out to our admissions support team.
+                    </p>
+                    <div style="text-align:center;margin:32px 0;">
+                      <a href="${finalSupportUrl}" target="_blank" style="background:#dc2626;color:#ffffff;text-decoration:none;padding:14px 32px;font-size:15px;font-weight:600;border-radius:8px;display:inline-block;box-shadow:0 4px 12px rgba(220,38,38,0.3);">
+                        Contact Admissions Support →
+                      </a>
+                    </div>
+                    <p style="color:#64748b;font-size:13px;line-height:1.6;margin:24px 0 0;">
+                      If the button above does not work, you can copy and paste this link into your browser:<br>
+                      <a href="${finalSupportUrl}" style="color:#dc2626;word-break:break-all;">${finalSupportUrl}</a>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:20px 40px 28px;text-align:center;border-top:1px solid #f1f5f9;background:#fafafa;">
+                    <p style="color:#64748b;font-size:12px;margin:0 0 4px;">Questions? Contact us at <a href="mailto:${SUPPORT_ADDR}" style="color:#dc2626;">${SUPPORT_ADDR}</a></p>
+                    <p style="color:#94a3b8;font-size:11px;margin:0;">© 2026 EduTechEx UPS Platform. All rights reserved.</p>
+                  </td>
+                </tr>
+              </table>
+            </td></tr>
+          </table>
+        </body>
+        </html>`,
+    };
+  },
 };
 
 // SEND ACCOUNT APPROVAL EMAIL HELPER
 export const sendAccountApprovalEmail = async ({ to, studentName, loginUrl }) => {
   const finalLoginUrl = loginUrl || `${(process.env.CLIENT_URL || "http://localhost:3000").replace(/\/$/, "")}/sign-in`;
   const template = emailTemplates.accountApproved({ studentName, loginUrl: finalLoginUrl });
+
+  const attachments = [];
+  if (fs.existsSync(LOGO_PATH)) {
+    attachments.push({
+      filename: "edutech-logo.png",
+      path: LOGO_PATH,
+      cid: "edutechex-logo",
+    });
+  }
+
+  return await sendEmailEnhanced({
+    to,
+    subject: template.subject,
+    html: template.html,
+    attachments,
+  });
+};
+
+// SEND ACCOUNT REJECTION EMAIL HELPER
+export const sendAccountRejectionEmail = async ({ to, studentName, reason, supportUrl }) => {
+  const finalSupportUrl = supportUrl || `${(process.env.CLIENT_URL || "http://localhost:3000").replace(/\/$/, "")}/contact`;
+  const template = emailTemplates.accountRejected({ studentName, reason, supportUrl: finalSupportUrl });
 
   const attachments = [];
   if (fs.existsSync(LOGO_PATH)) {
@@ -545,6 +633,7 @@ const emailService = {
   sendPasswordResetOTPEmail,
   sendOTPEmail,
   sendAccountApprovalEmail,
+  sendAccountRejectionEmail,
   emailTemplates,
   sendBatchEmails,
 };

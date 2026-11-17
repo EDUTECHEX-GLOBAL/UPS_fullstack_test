@@ -185,11 +185,34 @@
 .enrollment-quick-nav-link:hover { background: #f1f5f9; color: #1e3a8a; }
 .enrollment-quick-nav-link.is-active { background: #eaf3ff; color: #1d4ed8; }
 .enrollment-quick-nav-link:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
+.enrollment-logout-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 38px;
+  margin-left: 10px;
+  padding: 8px 13px;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  background: #fff7f7;
+  color: #dc2626;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease;
+}
+.enrollment-logout-button:hover { background: #fee2e2; border-color: #fca5a5; }
+.enrollment-logout-button:focus-visible { outline: 2px solid #ef4444; outline-offset: 2px; }
 
 @media (max-width: 768px) {
   .enrollment-body-only > .saas-topnav { margin: -20px -12px 30px; width: calc(100% + 24px); padding: 8px 14px; }
-  .enrollment-quick-nav { flex: 1 1 100%; width: 100%; margin: 0; justify-content: space-between; overflow-x: auto; }
+  .enrollment-body-only .saas-topnav-mobile-left { order: 1; flex: 1 1 auto; }
+  .enrollment-quick-nav { order: 3; flex: 1 1 100%; width: 100%; margin: 0; justify-content: space-between; overflow-x: auto; }
   .enrollment-quick-nav-link { flex: 0 0 auto; padding: 8px 12px; }
+  .enrollment-logout-button { order: 2; margin-left: auto; }
 }
 
 @media (max-width: 480px) {
@@ -605,10 +628,12 @@
    ══════════════════════════════════════════════ */
 .approved-root {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
   margin: 0;
   padding: 0;
   background: #f5faff;
+  overflow: hidden;
 }
 
 .approved-dashboard {
@@ -617,28 +642,47 @@
   --approved-muted: #6d8ab7;
   position: relative;
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
   width: 100%;
   box-sizing: border-box;
   color: var(--approved-navy);
   background: #f5faff;
   font-family: Inter, 'Segoe UI', sans-serif;
+  overflow: hidden;
 }
 .approved-dashboard *, .approved-dashboard *::before, .approved-dashboard *::after { box-sizing: border-box; }
 
 /* Sidebar */
 .approved-sidebar {
-  position: sticky;
+  position: relative;
   top: 0;
+  left: 0;
   z-index: 30;
   display: flex;
   flex: 0 0 240px;
   flex-direction: column;
   width: 240px;
   height: 100vh;
+  height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
   padding: 18px 11px;
   border-right: 1px solid #dfebfa;
   background: #f8fbff;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+.approved-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.approved-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.approved-sidebar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 .approved-sidebar.is-collapsed { display: none; }
 .approved-overlay { position: fixed; inset: 0; z-index: 25; background: rgba(15, 23, 42, .4); }
@@ -669,11 +713,23 @@
 .approved-logout { margin-top: auto; color: #7390ba; }
 
 /* Main + topbar */
-.approved-main { flex: 1; min-width: 0; }
+.approved-main {
+  flex: 1;
+  min-width: 0;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 .approved-topbar {
   position: sticky;
   z-index: 20;
   top: 0;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 25px;
@@ -1720,7 +1776,7 @@
 .approved-nav { gap: 5px; margin-top: 12px; }
 .approved-nav-link { min-height: 40px; border-radius: 9px; font-size: 12px; }
 .approved-nav-link.is-active { background: linear-gradient(135deg, #0891b2, #0e7490); box-shadow: 0 4px 11px #0891b23b; }
-.approved-topbar { position: sticky; z-index: 20; display: flex; gap: 16px; height: 64px; padding: 0 max(24px, calc((100% - 1280px) / 2)); }
+.approved-topbar { position: sticky; top: 0; flex-shrink: 0; z-index: 20; display: flex; gap: 16px; height: 64px; padding: 0 max(24px, calc((100% - 1280px) / 2)); background: #fff; }
 .approved-topbar-title { display: grid; align-content: center; gap: 2px; min-width: 0; }
 .approved-topbar-title strong { color: #0f172a; font-size: 16px; font-weight: 800; }
 .approved-topbar-title small { color: #64748b; font-size: 11px; }

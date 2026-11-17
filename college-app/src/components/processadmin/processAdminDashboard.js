@@ -540,7 +540,7 @@ const ProcessAdminDashboard = () => {
             <span className="pad-chart-title"><strong>Master</strong> Applications</span>
             <div className="pad-pills">
               <span className="pad-pill pad-pill-teal">{stats?.master?.total ?? 0} Total</span>
-              <span className="pad-pill pad-pill-amber">{stats?.master?.underReview ?? 0} Review</span>
+              <span className="pad-pill pad-pill-amber">{stats?.master?.pendingApproval ?? stats?.master?.pending ?? 0} Pending Approval</span>
             </div>
           </div>
           <div className="pad-chart-body">
@@ -552,17 +552,17 @@ const ProcessAdminDashboard = () => {
               {(() => {
                 const total     = Math.max(stats?.master?.total ?? 1, 1);
                 const submitted = stats?.master?.submitted    ?? 0;
-                const draft     = stats?.master?.draft        ?? 0;
-                const review    = stats?.master?.underReview  ?? 0;
+                const viewUniversity = stats?.master?.viewUniversity ?? 0;
+                const pendingApproval = stats?.master?.pendingApproval ?? stats?.master?.pending ?? 0;
                 const maxH      = 95;
                 const subH  = Math.max(Math.round((submitted / total) * maxH), 4);
-                const draftH = Math.max(Math.round((draft    / total) * maxH), 4);
-                const revH  = Math.max(Math.round((review   / total) * maxH), 4);
+                const universityH = Math.max(Math.round((viewUniversity / total) * maxH), 4);
+                const pendingH = Math.max(Math.round((pendingApproval / total) * maxH), 4);
                 return (
                   <>
                     <rect x="60"  y={105 - subH}  width="60" height={subH}  rx="5" fill="#14b8a6" opacity="0.85"/>
-                    <rect x="170" y={105 - draftH} width="60" height={draftH} rx="5" fill="#f59e0b" opacity="0.85"/>
-                    <rect x="280" y={105 - revH}   width="60" height={revH}  rx="5" fill="#7c3aed" opacity="0.85"/>
+                    <rect x="170" y={105 - universityH} width="60" height={universityH} rx="5" fill="#0ea5e9" opacity="0.85"/>
+                    <rect x="280" y={105 - pendingH} width="60" height={pendingH} rx="5" fill="#f59e0b" opacity="0.85"/>
                   </>
                 );
               })()}
@@ -570,8 +570,8 @@ const ProcessAdminDashboard = () => {
           </div>
           <div className="pad-bar-xlbls">
             <span style={{ flex: 1, textAlign: 'center' }}>Submitted</span>
-            <span style={{ flex: 1, textAlign: 'center' }}>Draft</span>
-            <span style={{ flex: 1, textAlign: 'center' }}>Under Review</span>
+            <span style={{ flex: 1, textAlign: 'center' }}>View University</span>
+            <span style={{ flex: 1, textAlign: 'center' }}>Pending Approval</span>
           </div>
           <div className="pad-chart-footer">
             <span className="pad-cfi">
@@ -579,12 +579,12 @@ const ProcessAdminDashboard = () => {
               <strong>{stats?.master?.submitted ?? 0}</strong> Submitted
             </span>
             <span className="pad-cfi">
-              <span className="pad-cfd" style={{ background: '#f59e0b' }}></span>
-              <strong>{stats?.master?.draft ?? 0}</strong> Draft
+              <span className="pad-cfd" style={{ background: '#0ea5e9' }}></span>
+              <strong>{stats?.master?.viewUniversity ?? 0}</strong> View University
             </span>
             <span className="pad-cfi">
-              <span className="pad-cfd" style={{ background: '#7c3aed' }}></span>
-              <strong>{stats?.master?.underReview ?? 0}</strong> Review
+              <span className="pad-cfd" style={{ background: '#f59e0b' }}></span>
+              <strong>{stats?.master?.pendingApproval ?? stats?.master?.pending ?? 0}</strong> Pending Approval
             </span>
           </div>
         </div>

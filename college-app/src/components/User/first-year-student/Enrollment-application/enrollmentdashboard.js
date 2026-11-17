@@ -1018,6 +1018,10 @@ const EnrollmentDashboard = () => {
             </button>
           ))}
         </div>
+        <button type="button" className="enrollment-logout-button" onClick={handleLogout}>
+          <FaSignOutAlt aria-hidden="true" />
+          <span>Logout</span>
+        </button>
       </nav>
     );
   };

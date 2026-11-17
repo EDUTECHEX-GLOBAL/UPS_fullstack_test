@@ -169,6 +169,15 @@ const Contact = () => {
       }
       setSubmitted(true);
       setFieldErrors({});
+      setFormData({
+        fullName: '',
+        email: '',
+        phone: '',
+        country: '',
+        programLevel: '',
+        message: '',
+      });
+      setOpenSelect(null);
     } catch (error) {
       setSubmitError(error.message || 'Unable to send your message. Please try again.');
     } finally {

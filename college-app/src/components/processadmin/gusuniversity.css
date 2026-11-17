@@ -4057,6 +4057,40 @@
   }
 }
 
+/* Keep the review dialog in its desktop layout when the app has a wide viewport. */
+@media (min-width: 1101px) {
+  .gus-modal-hdr.gus-premium-hdr {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .gus-modal-hdr-right.gus-premium-actions {
+    width: auto;
+    flex-wrap: nowrap;
+  }
+
+  .gus-premium-stats-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1100px) {
+  .gus-modal-hdr.gus-premium-hdr {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gus-modal-hdr-right.gus-premium-actions {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .gus-premium-stats-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 /* Tablet header: give the title and search controls separate full-width rows. */
 @media (min-width: 541px) and (max-width: 1100px) {
   .gus-wrap { padding: 20px 16px 32px; }

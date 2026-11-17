@@ -17,10 +17,29 @@ const Header = ({ currentView, onViewChange }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
 
+  const canHover = () => {
+    if (typeof window === 'undefined') return false;
+    if (mobileMenuOpen || window.innerWidth <= 980) return false;
+    return !!(window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches);
+  };
+
   const closeAll = () => {
     setMobileMenuOpen(false);
     setOpenMenu(null);
   };
+
+  useEffect(() => {
+    if (!openMenu) return;
+    const handleClickOutside = (e) => {
+      if (!e.target.closest('.nav-item--dropdown') && !e.target.closest('.header-login-cta')) {
+        setOpenMenu(null);
+      }
+    };
+    document.addEventListener('pointerdown', handleClickOutside);
+    return () => {
+      document.removeEventListener('pointerdown', handleClickOutside);
+    };
+  }, [openMenu]);
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -116,8 +135,12 @@ const Header = ({ currentView, onViewChange }) => {
               <li
                 key={menu.key}
                 className={`nav-item nav-item--dropdown ${openMenu === menu.key ? 'open' : ''}`}
-                onMouseEnter={() => setOpenMenu(menu.key)}
-                onMouseLeave={() => setOpenMenu(null)}
+                onMouseEnter={() => {
+                  if (canHover()) setOpenMenu(menu.key);
+                }}
+                onMouseLeave={() => {
+                  if (canHover()) setOpenMenu(null);
+                }}
               >
                 <button
                   type="button"

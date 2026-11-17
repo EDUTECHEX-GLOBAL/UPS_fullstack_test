@@ -4,7 +4,7 @@ import crypto from "node:crypto";
 import Account from "../models/accountModel.js";
 import Admin from "../models/Admin.js";
 import { authenticateAdmin } from "../middleware/adminAuthMiddleware.js";
-import { sendAccountApprovalEmail } from "../utils/sendEmail.js";
+import { sendAccountApprovalEmail, sendAccountRejectionEmail } from "../utils/sendEmail.js";
 const router = express.Router();
 console.log("✅ Public impersonate-from-signin route loaded");
 const ALLOWED_ADMIN_EMAIL = "edutechexcollege@gmail.com";
@@ -359,7 +359,7 @@ router.put("/:id", validateUser, async (req, res) => {
 // Update user status - UPDATED ENDPOINT
 router.patch("/:id/status", validateStatus, async (req, res) => {
   try {
-    const { status } = req.body;
+    const { status, reason } = req.body;
     if (status === 'active') {
       const existingUser = await Account.findById(req.params.id).select('isApprovedByAdmin');
       if (!existingUser) return res.status(404).json({ success: false, message: "User not found" });
@@ -368,12 +368,32 @@ router.patch("/:id/status", validateStatus, async (req, res) => {
       }
     }
     const updateData = { status };
+    if (status === 'suspended') {
+      updateData.isApprovedByAdmin = false;
+      if (reason) updateData.adminNotes = `Rejected by Admin: ${reason}`;
+    }
     const updatedUser = await Account.findByIdAndUpdate(
       req.params.id,
       updateData,
       { new: true }
     ).select("-password");
     if (!updatedUser) return res.status(404).json({ success: false, message: "User not found" });
+
+    // Send rejection notification email if status is changed to suspended
+    if (status === 'suspended') {
+      try {
+        const studentName = `${updatedUser.firstName || ""} ${updatedUser.lastName || ""}`.trim() || "Student";
+        await sendAccountRejectionEmail({
+          to: updatedUser.email,
+          studentName,
+          reason: typeof reason === "string" ? reason.trim() : "",
+        });
+        console.log(`✅ Rejection email successfully sent to student: ${updatedUser.email}`);
+      } catch (emailErr) {
+        console.error(`⚠️ Failed to send rejection email to student ${updatedUser.email}:`, emailErr.message);
+      }
+    }
+
     // Calculate updated statistics
     const totalUsers = await Account.countDocuments();
     const activeUsers = await Account.countDocuments({ 
@@ -381,6 +401,11 @@ router.patch("/:id/status", validateStatus, async (req, res) => {
       isApprovedByAdmin: true 
     });
     const adminUsers = await Account.countDocuments({ role: 'admin' });
+    const pendingApprovalUsers = await Account.countDocuments({ 
+      isApprovedByAdmin: false,
+      isVerified: true,
+      status: { $in: ['pending', 'active'] }
+    });
     res.status(200).json({ 
       success: true, 
       message: `User status updated to ${status} successfully`, 
@@ -388,7 +413,8 @@ router.patch("/:id/status", validateStatus, async (req, res) => {
       stats: {
         totalUsers,
         activeUsers,
-        adminUsers
+        adminUsers,
+        pendingApprovalUsers
       }
     });
   } catch (error) {
@@ -480,6 +506,64 @@ router.patch("/:id/approve", async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to approve user" });
   }
 });
+// Reject user - UPDATED ENDPOINT (Sends rejection email to student)
+router.patch("/:id/reject", async (req, res) => {
+  try {
+    const { reason = "" } = req.body || {};
+    const rejectionReason = typeof reason === "string" ? reason.trim() : "";
+
+    const updatedUser = await Account.findByIdAndUpdate(
+      req.params.id,
+      { 
+        status: 'suspended', 
+        isApprovedByAdmin: false,
+        adminNotes: rejectionReason ? `Rejected by Admin: ${rejectionReason}` : "Rejected by Admin"
+      },
+      { new: true }
+    ).select("-password");
+    if (!updatedUser) return res.status(404).json({ success: false, message: "User not found" });
+
+    // Send rejection notification email to student
+    try {
+      const studentName = `${updatedUser.firstName || ""} ${updatedUser.lastName || ""}`.trim() || "Student";
+      await sendAccountRejectionEmail({
+        to: updatedUser.email,
+        studentName,
+        reason: rejectionReason,
+      });
+      console.log(`✅ Rejection email successfully sent to student: ${updatedUser.email}`);
+    } catch (emailErr) {
+      console.error(`⚠️ Failed to send rejection email to student ${updatedUser.email}:`, emailErr.message);
+    }
+
+    // Calculate updated statistics
+    const totalUsers = await Account.countDocuments();
+    const activeUsers = await Account.countDocuments({ 
+      status: 'active',
+      isApprovedByAdmin: true 
+    });
+    const adminUsers = await Account.countDocuments({ role: 'admin' });
+    const pendingApprovalUsers = await Account.countDocuments({ 
+      isApprovedByAdmin: false,
+      isVerified: true,
+      status: { $in: ['pending', 'active'] }
+    });
+    res.status(200).json({ 
+      success: true, 
+      message: "User rejected successfully", 
+      user: updatedUser,
+      stats: {
+        totalUsers,
+        activeUsers,
+        adminUsers,
+        pendingApprovalUsers
+      }
+    });
+  } catch (error) {
+    console.error("❌ Admin reject user error:", error);
+    res.status(500).json({ success: false, message: "Failed to reject user" });
+  }
+});
 // Bulk approve users - NEW ENDPOINT
 router.post("/bulk-approve", async (req, res) => {
   try {
@@ -540,6 +624,71 @@ router.post("/bulk-approve", async (req, res) => {
   } catch (error) {
     console.error("❌ Bulk approve users error:", error);
     res.status(500).json({ success: false, message: "Failed to approve users" });
+  }
+});
+// Bulk reject users - Sends rejection emails in background
+router.post("/bulk-reject", async (req, res) => {
+  try {
+    const { userIds, reason = "" } = req.body;
+    if (!userIds || !Array.isArray(userIds) || userIds.length === 0) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "User IDs array is required" 
+      });
+    }
+    const rejectionReason = typeof reason === "string" ? reason.trim() : "";
+    const usersToReject = await Account.find({ _id: { $in: userIds } }).select("firstName lastName email");
+    const result = await Account.updateMany(
+      { _id: { $in: userIds } },
+      { 
+        status: 'suspended',
+        isApprovedByAdmin: false,
+        adminNotes: rejectionReason ? `Rejected by Admin: ${rejectionReason}` : "Rejected by Admin"
+      }
+    );
+    // Calculate updated statistics
+    const totalUsers = await Account.countDocuments();
+    const activeUsers = await Account.countDocuments({ 
+      status: 'active',
+      isApprovedByAdmin: true 
+    });
+    const adminUsers = await Account.countDocuments({ role: 'admin' });
+    const pendingApprovalUsers = await Account.countDocuments({ 
+      isApprovedByAdmin: false,
+      isVerified: true,
+      status: { $in: ['pending', 'active'] }
+    });
+    res.status(200).json({ 
+      success: true, 
+      message: `${result.modifiedCount} users rejected successfully`,
+      stats: {
+        totalUsers,
+        activeUsers,
+        adminUsers,
+        pendingApprovalUsers
+      },
+      modifiedCount: result.modifiedCount
+    });
+
+    // Send bulk rejection notification emails in background
+    Promise.allSettled(
+      usersToReject.map(user => {
+        const studentName = `${user.firstName || ""} ${user.lastName || ""}`.trim() || "Student";
+        return sendAccountRejectionEmail({
+          to: user.email,
+          studentName,
+          reason: rejectionReason,
+        });
+      })
+    ).then(results => {
+      const sent = results.filter(r => r.status === "fulfilled").length;
+      console.log(`✅ Bulk rejection emails sent: ${sent}/${usersToReject.length}`);
+    }).catch(err => {
+      console.error("⚠️ Bulk rejection email error:", err.message);
+    });
+  } catch (error) {
+    console.error("❌ Bulk reject users error:", error);
+    res.status(500).json({ success: false, message: "Failed to reject users" });
   }
 });
 // Get user statistics - NEW ENDPOINT
@@ -700,6 +849,17 @@ router.patch("/medical-users/:id/status", async (req, res) => {
     } else if (action === 'reject') {
       user.isApproved = false;
       user.status = 'Rejected';
+      try {
+        const medName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || user.name || 'User';
+        await sendAccountRejectionEmail({
+          to: user.email,
+          studentName: medName,
+          reason: typeof req.body.reason === "string" ? req.body.reason.trim() : "",
+        });
+        console.log(`✅ Medical user rejection email sent to: ${user.email}`);
+      } catch (medErr) {
+        console.error('⚠️ Medical user rejection email error:', medErr.message);
+      }
     }
     await user.save();
     res.status(200).json({

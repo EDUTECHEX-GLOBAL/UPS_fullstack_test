@@ -981,7 +981,7 @@ const filteredActivities = useMemo(() => {
         <div className="sidebar-footer">
           <button className="logout-btn" onClick={handleLogout}>
             <span className="logout-circle">{ICONS.logout}</span>
-            {sidebarOpen && <span>Logout</span>}
+            {sidebarOpen && <span className="logout-label">Logout</span>}
           </button>
         </div>
       </div>

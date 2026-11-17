@@ -201,16 +201,16 @@ const UserAvatar = memo(({ char }) => (
   <div className="user-avatar">{char}</div>
 ));
 
-const RejectModal = memo(({ onConfirm, onCancel, reason, setReason }) => (
+const RejectModal = memo(({ onConfirm, onCancel, reason, setReason, title, subtitle }) => (
   <div style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.45)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:1000 }}>
-    <div style={{ background:"#fff", borderRadius:12, padding:"28px 32px", width:400, maxWidth:"90vw", boxShadow:"0 8px 32px rgba(0,0,0,0.15)" }}>
-      <h3 style={{ margin:"0 0 8px", fontSize:16, fontWeight:600 }}>Reject application</h3>
+    <div style={{ background:"#fff", borderRadius:12, padding:"28px 32px", width:420, maxWidth:"90vw", boxShadow:"0 8px 32px rgba(0,0,0,0.15)" }}>
+      <h3 style={{ margin:"0 0 8px", fontSize:16, fontWeight:600 }}>{title || "Reject application"}</h3>
       <p style={{ margin:"0 0 14px", fontSize:13, color:"#64748b" }}>
-        This reason will be included in the rejection email sent to the applicant.
+        {subtitle || "This reason will be included in the rejection email sent to the applicant."}
       </p>
       <textarea
         rows={3}
-        placeholder="e.g. Incomplete information provided…"
+        placeholder="e.g. Incomplete information provided, invalid documents, criteria not met…"
         value={reason}
         onChange={(e) => setReason(e.target.value)}
         style={{ width:"100%", boxSizing:"border-box", fontSize:13, padding:"8px 10px", borderRadius:6, border:"1px solid #e2e8f0", resize:"vertical", fontFamily:"inherit" }}
@@ -467,7 +467,7 @@ const UserRow = memo(({ user, onApprove, onReject, onUpdate, onDelete }) => (
             <button className="btn-approve" onClick={() => onApprove(user.id)} title="Approve">
               <IconCheck /> Approve
             </button>
-            <button className="btn-reject" onClick={() => onReject(user.id)} title="Reject">
+            <button className="btn-reject" onClick={() => onReject(user.id, user.name)} title="Reject">
               <IconX /> Reject
             </button>
           </>
@@ -526,7 +526,7 @@ const MobileUserCard = memo(({ user, expanded, onToggle, onApprove, onReject, on
           {needsApproval(user) ? (
             <>
               <button className="btn-approve" onClick={() => onApprove(user.id)}>✓ Approve</button>
-              <button className="btn-reject"  onClick={() => onReject(user.id)}>✗ Reject</button>
+              <button className="btn-reject"  onClick={() => onReject(user.id, user.name)}>✗ Reject</button>
               <button className="btn-delete"  onClick={() => onDelete(user.id, user.name)}>Delete</button>
             </>
           ) : (
@@ -753,21 +753,14 @@ const AdminUserManagement = ({ globalSearchQuery = "" }) => {
     } catch (err) { console.error(err); showPopup("Failed to approve medical user.", "Approval failed", "error"); }
   }, [getAdminHeaders, showPopup]);
 
-  const handleRejectMedicalUser = useCallback((id) => {
-    requestConfirmation({ title: "Reject medical user?", message: "This medical user will be marked as rejected.", confirmLabel: "Reject", danger: true }, async () => {
-    try {
-      const res = await fetch(`${MEDICAL_API}/${id}/status`, {
-        method: "PATCH", headers: getAdminHeaders(),
-        body: JSON.stringify({ action: "reject" }),
-      });
-      const data = await res.json();
-      if (data?.success) {
-        setMedicalUsers(prev => prev.map(u => u._id === id ? { ...u, isApproved: false, status: "Rejected" } : u));
-        showPopup("Medical user rejected!", "Medical User Rejected", "success");
-      } else showPopup(data.message || "Failed to reject.", "Rejection failed", "error");
-    } catch (err) { console.error(err); showPopup("Failed to reject medical user.", "Rejection failed", "error"); }
-    });
-  }, [getAdminHeaders, requestConfirmation, showPopup]);
+  const openRejectModal = useCallback((id, type = "student", name = "") => {
+    setRejectTarget({ id, type, name });
+    setRejectReason("");
+  }, []);
+
+  const handleRejectMedicalUser = useCallback((id, name = "") => {
+    openRejectModal(id, "medical", name || "Medical User");
+  }, [openRejectModal]);
 
   useEffect(() => {
     if (
@@ -801,23 +794,88 @@ const AdminUserManagement = ({ globalSearchQuery = "" }) => {
     } catch (err) { console.error(err); showPopup("Failed to approve user.", "Error", "error"); }
   }, [getAdminHeaders, loadUsersData, showPopup]);
 
-  const handleRejectUser = useCallback((userId) => {
-    requestConfirmation({ title: "Reject user?", message: "This user’s status will be changed to suspended.", confirmLabel: "Reject", danger: true }, async () => {
-    try {
-      const res  = await fetch(`${ADMIN_API}/${userId}/status`, { // ✅ ADMIN_API (was API_BASE_URL)
-        method: "PATCH", headers: getAdminHeaders(),
-        body: JSON.stringify({ status: "suspended", rejectedBy: localStorage.getItem("adminEmail") || "Admin", rejectedAt: new Date().toISOString() }),
-      });
-      const data = await res.json();
-      if (data?.success) {
-        setUsers(prev => prev.map(u => u.id === userId ? { ...u, status: "suspended" } : u));
-        if (data.stats) setUserStats(data.stats);
-        await loadUsersData();
-        showPopup("User rejected successfully!", "User Rejected", "success");
-      } else showPopup(data.message || "Failed to reject user", "Rejection failed", "error");
-    } catch (err) { console.error(err); showPopup("Failed to reject user.", "Rejection failed", "error"); }
-    });
-  }, [getAdminHeaders, loadUsersData, requestConfirmation, showPopup]);
+  const handleRejectUser = useCallback((userId, userName) => {
+    openRejectModal(userId, "student", userName);
+  }, [openRejectModal]);
+
+  const handleConfirmReject = useCallback(async () => {
+    if (!rejectTarget) return;
+    const targetId = typeof rejectTarget === "object" ? rejectTarget.id : rejectTarget;
+    const targetType = typeof rejectTarget === "object" ? (rejectTarget.type || "pa") : "pa";
+
+    if (targetType === "student") {
+      try {
+        const res = await fetch(`${ADMIN_API}/${targetId}/reject`, {
+          method: "PATCH",
+          headers: getAdminHeaders(),
+          body: JSON.stringify({
+            reason: rejectReason || "Application criteria not met / Incomplete documentation provided",
+            rejectedBy: localStorage.getItem("adminEmail") || "Admin",
+            rejectedAt: new Date().toISOString()
+          }),
+        });
+        const data = await res.json();
+        if (data?.success) {
+          setUsers(prev => prev.map(u => u.id === targetId ? { ...u, status: "suspended" } : u));
+          if (data.stats) setUserStats(data.stats);
+          await loadUsersData();
+          setRejectTarget(null);
+          setRejectReason("");
+          showPopup("Student application rejected. Rejection email sent to the student.", "Student Rejected ✉️", "success");
+        } else {
+          showPopup(data.message || "Failed to reject user.", "Rejection failed", "error");
+        }
+      } catch (err) {
+        console.error(err);
+        showPopup("Failed to reject student account.", "Rejection failed", "error");
+      }
+    } else if (targetType === "medical") {
+      try {
+        const res = await fetch(`${MEDICAL_API}/${targetId}/status`, {
+          method: "PATCH",
+          headers: getAdminHeaders(),
+          body: JSON.stringify({
+            action: "reject",
+            reason: rejectReason || "Application criteria not met / Incomplete documentation provided",
+          }),
+        });
+        const data = await res.json();
+        if (data?.success) {
+          setMedicalUsers(prev => prev.map(u => u._id === targetId ? { ...u, isApproved: false, status: "Rejected" } : u));
+          setRejectTarget(null);
+          setRejectReason("");
+          showPopup("Medical user rejected. Rejection email sent.", "Medical User Rejected ✉️", "success");
+        } else {
+          showPopup(data.message || "Failed to reject medical user.", "Rejection failed", "error");
+        }
+      } catch (err) {
+        console.error(err);
+        showPopup("Failed to reject medical user.", "Rejection failed", "error");
+      }
+    } else {
+      // Process Admin (pa)
+      try {
+        const res = await fetch(`${PA_API}/reject/${targetId}`, {
+          method: "POST",
+          headers: getAdminHeaders(),
+          body: JSON.stringify({ reason: rejectReason || "Not specified" }),
+        });
+        const data = await res.json();
+        if (data?.success) {
+          setProcessAdmins(prev => prev.map(pa => pa._id === targetId ? { ...pa, status: "rejected" } : pa));
+          setPendingPaCount(prev => Math.max(prev - 1, 0));
+          setRejectTarget(null);
+          setRejectReason("");
+          showPopup("Process admin rejected. Rejection email sent.", "Process Admin Rejected", "success");
+        } else {
+          showPopup(data.message || "Failed to reject.", "Rejection failed", "error");
+        }
+      } catch (err) {
+        console.error(err);
+        showPopup("Failed to reject process admin.", "Rejection failed", "error");
+      }
+    }
+  }, [rejectTarget, rejectReason, getAdminHeaders, loadUsersData, showPopup]);
 
   const handleUpdateUser = useCallback(async (userId, field, value) => {
     const isStatus = field === "status";
@@ -940,28 +998,7 @@ const AdminUserManagement = ({ globalSearchQuery = "" }) => {
     } catch (err) { console.error(err); showPopup("Failed to approve process admin.", "Approval failed", "error"); }
   }, [getAdminHeaders, showPopup]);
 
-  const openRejectModal = useCallback((id) => {
-    setRejectTarget(id);
-    setRejectReason("");
-  }, []);
-
-  const handleRejectProcessAdmin = useCallback(async () => {
-    if (!rejectTarget) return;
-    try {
-      const res  = await fetch(`${PA_API}/reject/${rejectTarget}`, {
-        method: "POST", headers: getAdminHeaders(),
-        body: JSON.stringify({ reason: rejectReason || "Not specified" }),
-      });
-      const data = await res.json();
-      if (data?.success) {
-        setProcessAdmins(prev => prev.map(pa => pa._id === rejectTarget ? { ...pa, status: "rejected" } : pa));
-        setPendingPaCount(prev => Math.max(prev - 1, 0));
-        setRejectTarget(null);
-        setRejectReason("");
-        showPopup("Process admin rejected. Rejection email sent.", "Process Admin Rejected", "success");
-      } else showPopup(data.message || "Failed to reject.", "Rejection failed", "error");
-    } catch (err) { console.error(err); showPopup("Failed to reject process admin.", "Rejection failed", "error"); }
-  }, [rejectTarget, rejectReason, getAdminHeaders, showPopup]);
+  const handleRejectProcessAdmin = handleConfirmReject;
 
   const handleDeactivateProcessAdmin = useCallback((id, currentStatus) => {
     const action = currentStatus === "active" ? "deactivate" : "reactivate";
@@ -1407,9 +1444,21 @@ const AdminUserManagement = ({ globalSearchQuery = "" }) => {
       {/* Reject Modal */}
       {rejectTarget && (
         <RejectModal
+          title={
+            (typeof rejectTarget === "object" && rejectTarget.type === "student")
+              ? "Reject Student Account"
+              : (typeof rejectTarget === "object" && rejectTarget.type === "medical")
+              ? "Reject Medical User"
+              : "Reject Process Admin"
+          }
+          subtitle={
+            (typeof rejectTarget === "object" && rejectTarget.name)
+              ? `This reason will be included in the rejection email sent to ${rejectTarget.name}.`
+              : "This reason will be included in the rejection email sent to the user."
+          }
           reason={rejectReason}
           setReason={setRejectReason}
-          onConfirm={handleRejectProcessAdmin}
+          onConfirm={handleConfirmReject}
           onCancel={() => { setRejectTarget(null); setRejectReason(""); }}
         />
       )}
@@ -1458,7 +1507,7 @@ const AdminUserManagement = ({ globalSearchQuery = "" }) => {
                           </button>
                         )}
                         {user.status !== "Rejected" && (
-                          <button className="btn-reject" onClick={() => handleRejectMedicalUser(user._id)} title="Reject">
+                          <button className="btn-reject" onClick={() => handleRejectMedicalUser(user._id, `${user.firstName || ""} ${user.lastName || ""}`.trim() || user.name)} title="Reject">
                             <IconX /> Reject
                           </button>
                         )}
@@ -1504,7 +1553,7 @@ const AdminUserManagement = ({ globalSearchQuery = "" }) => {
                           </button>
                         )}
                         {user.status !== "Rejected" && (
-                          <button className="btn-reject" onClick={() => handleRejectMedicalUser(user._id)}>
+                          <button className="btn-reject" onClick={() => handleRejectMedicalUser(user._id, `${user.firstName || ""} ${user.lastName || ""}`.trim() || user.name)}>
                             ✗ Reject
                           </button>
                         )}

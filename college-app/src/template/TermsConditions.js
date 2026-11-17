@@ -35,7 +35,6 @@ const TermsConditions = () => {
 
           {/* 2-Column Content Grid */}
           <div className="legal-v2-grid">
-            {/* Column 1 - Left */}
             {/* 1. Introduction */}
             <div className="legal-v2-item">
               <span className="legal-v2-number-badge">1</span>
@@ -43,24 +42,11 @@ const TermsConditions = () => {
                 <h2 className="legal-v2-item-title">Introduction</h2>
                 <p className="legal-v2-item-desc">
                   Welcome to EduTechEx. These Terms and Conditions govern your access to and use
-                  of the EduTechEx website, SAT practice platform, mock examinations, learning
+                  of the EduTechEx website, study abroad application platform, learning
                   resources, and related services.
                 </p>
                 <p className="legal-v2-item-desc">
                   By creating an account or using our services, you agree to these Terms and Conditions.
-                </p>
-              </div>
-            </div>
-
-            {/* 6. Intellectual Property */}
-            <div className="legal-v2-item">
-              <span className="legal-v2-number-badge">6</span>
-              <div className="legal-v2-item-body">
-                <h2 className="legal-v2-item-title">Intellectual Property</h2>
-                <p className="legal-v2-item-desc">
-                  All content, including logos, designs, educational materials, and software, belongs to
-                  EduTechEx or its licensors. You may not reproduce or distribute this content without
-                  prior written permission.
                 </p>
               </div>
             </div>
@@ -78,45 +64,19 @@ const TermsConditions = () => {
               </div>
             </div>
 
-            {/* 7. Test Results and Performance */}
-            <div className="legal-v2-item">
-              <span className="legal-v2-number-badge">7</span>
-              <div className="legal-v2-item-body">
-                <h2 className="legal-v2-item-title">Test Results and Performance</h2>
-                <p className="legal-v2-item-desc">
-                  Results are generated based on submitted answers and our scoring methodology.
-                  Scores are intended to help you understand your practice performance and do not
-                  guarantee actual SAT scores or university admission.
-                </p>
-              </div>
-            </div>
-
-            {/* 3. SAT Mock Tests and Practice Materials */}
+            {/* 3. Educational Resources and Platform Services */}
             <div className="legal-v2-item">
               <span className="legal-v2-number-badge">3</span>
               <div className="legal-v2-item-body">
-                <h2 className="legal-v2-item-title">SAT Mock Tests and Practice Materials</h2>
+                <h2 className="legal-v2-item-title">Educational Resources and Platform Services</h2>
                 <p className="legal-v2-item-desc">
-                  EduTechEx provides SAT practice examinations, mock tests, educational resources,
-                  and performance reports. Mock tests are intended for educational and practice
-                  purposes.
+                  EduTechEx provides university information, educational resources, application
+                  support, and counselling guidance. All materials are intended for educational
+                  and informational purposes.
                 </p>
                 <div className="legal-v2-disclaimer">
-                  EduTechEx is an independent educational platform and is not affiliated with,
-                  endorsed by, or officially associated with the College Board.
+                  EduTechEx is an independent educational platform dedicated to assisting students with higher education exploration and applications.
                 </div>
-              </div>
-            </div>
-
-            {/* 8. Service Availability */}
-            <div className="legal-v2-item">
-              <span className="legal-v2-number-badge">8</span>
-              <div className="legal-v2-item-body">
-                <h2 className="legal-v2-item-title">Service Availability</h2>
-                <p className="legal-v2-item-desc">
-                  We strive to ensure reliable platform availability. However, temporary interruptions
-                  may occur due to maintenance, technical issues, or third-party services.
-                </p>
               </div>
             </div>
 
@@ -134,6 +94,57 @@ const TermsConditions = () => {
               </div>
             </div>
 
+            {/* 5. Subscription and Payment Terms */}
+            <div className="legal-v2-item">
+              <span className="legal-v2-number-badge">5</span>
+              <div className="legal-v2-item-body">
+                <h2 className="legal-v2-item-title">Subscription and Payment Terms</h2>
+                <p className="legal-v2-item-desc">
+                  Certain features or premium services may require a paid subscription or fee. Subscription prices
+                  and available features will be displayed before payment. Payments may be processed
+                  through authorized third-party payment providers.
+                </p>
+              </div>
+            </div>
+
+            {/* 6. Intellectual Property */}
+            <div className="legal-v2-item">
+              <span className="legal-v2-number-badge">6</span>
+              <div className="legal-v2-item-body">
+                <h2 className="legal-v2-item-title">Intellectual Property</h2>
+                <p className="legal-v2-item-desc">
+                  All content, including logos, designs, educational materials, and software, belongs to
+                  EduTechEx or its licensors. You may not reproduce or distribute this content without
+                  prior written permission.
+                </p>
+              </div>
+            </div>
+
+            {/* 7. Application Guidance and Admissions */}
+            <div className="legal-v2-item">
+              <span className="legal-v2-number-badge">7</span>
+              <div className="legal-v2-item-body">
+                <h2 className="legal-v2-item-title">Application Guidance and Admissions</h2>
+                <p className="legal-v2-item-desc">
+                  Information and guidance provided across our platform are intended to help you
+                  explore educational options and navigate your application journey. They do not
+                  guarantee university admission, scholarship award, or visa approval.
+                </p>
+              </div>
+            </div>
+
+            {/* 8. Service Availability */}
+            <div className="legal-v2-item">
+              <span className="legal-v2-number-badge">8</span>
+              <div className="legal-v2-item-body">
+                <h2 className="legal-v2-item-title">Service Availability</h2>
+                <p className="legal-v2-item-desc">
+                  We strive to ensure reliable platform availability. However, temporary interruptions
+                  may occur due to maintenance, technical issues, or third-party services.
+                </p>
+              </div>
+            </div>
+
             {/* 9. Account Suspension and Termination */}
             <div className="legal-v2-item">
               <span className="legal-v2-number-badge">9</span>
@@ -142,19 +153,6 @@ const TermsConditions = () => {
                 <p className="legal-v2-item-desc">
                   EduTechEx may restrict or suspend accounts that violate these Terms, misuse the
                   platform, or engage in fraudulent activities.
-                </p>
-              </div>
-            </div>
-
-            {/* 5. Subscription and Payment Terms */}
-            <div className="legal-v2-item">
-              <span className="legal-v2-number-badge">5</span>
-              <div className="legal-v2-item-body">
-                <h2 className="legal-v2-item-title">Subscription and Payment Terms</h2>
-                <p className="legal-v2-item-desc">
-                  Certain features and mock tests may require a paid subscription. Subscription prices
-                  and available features will be displayed before payment. Payments may be processed
-                  through authorized third-party payment providers.
                 </p>
               </div>
             </div>

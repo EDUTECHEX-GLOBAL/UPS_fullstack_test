@@ -35,8 +35,6 @@ const PrivacyPolicy = () => {
 
           {/* 2-Column Content Grid */}
           <div className="legal-v2-grid">
-            {/* Column 1 - Left */}
-
             {/* 1. Introduction */}
             <div className="legal-v2-item">
               <span className="legal-v2-number-badge">1</span>
@@ -56,26 +54,6 @@ const PrivacyPolicy = () => {
               </div>
             </div>
 
-            {/* 7. Cookies and Tracking Technologies */}
-            <div className="legal-v2-item">
-              <span className="legal-v2-number-badge">7</span>
-              <div className="legal-v2-item-body">
-                <h2 className="legal-v2-item-title">Cookies and Tracking Technologies</h2>
-                <p className="legal-v2-item-desc">Our website may use cookies and similar technologies to:</p>
-                <ul className="legal-v2-item-list">
-                  <li>Maintain login sessions.</li>
-                  <li>Remember user preferences.</li>
-                  <li>Improve website functionality.</li>
-                  <li>Understand website usage.</li>
-                  <li>Support security features.</li>
-                </ul>
-                <p className="legal-v2-item-desc" style={{ marginTop: '6px' }}>
-                  Users may manage cookies through their browser settings. Disabling certain cookies
-                  may affect website functionality.
-                </p>
-              </div>
-            </div>
-
             {/* 2. Information We Collect */}
             <div className="legal-v2-item">
               <span className="legal-v2-number-badge">2</span>
@@ -91,10 +69,10 @@ const PrivacyPolicy = () => {
                 </ul>
 
                 <p className="legal-v2-item-desc" style={{ fontWeight: 600, color: '#0F172A', marginTop: '6px' }}>
-                  B. Examination Information:
+                  B. Academic and Application Information:
                 </p>
                 <ul className="legal-v2-item-list">
-                  <li>SAT mock test participation, answers submitted, examination scores, test completion status, performance reports, and examination history.</li>
+                  <li>Academic qualifications, preferred study destinations and program levels, application progress, and uploaded documents.</li>
                 </ul>
 
                 <p className="legal-v2-item-desc" style={{ fontWeight: 600, color: '#0F172A', marginTop: '6px' }}>
@@ -113,25 +91,6 @@ const PrivacyPolicy = () => {
               </div>
             </div>
 
-            {/* 8. Student Privacy and Children's Information */}
-            <div className="legal-v2-item">
-              <span className="legal-v2-number-badge">8</span>
-              <div className="legal-v2-item-body">
-                <h2 className="legal-v2-item-title">Student Privacy and Children&apos;s Information</h2>
-                <p className="legal-v2-item-desc">
-                  EduTechEx may be used by school students, including individuals under 18 years of age.
-                </p>
-                <p className="legal-v2-item-desc">
-                  Where required by applicable law, we will obtain verifiable parental or guardian
-                  consent before processing children&apos;s personal information.
-                </p>
-                <p className="legal-v2-item-desc">
-                  We do not knowingly use children&apos;s personal information for prohibited tracking,
-                  targeted advertising, or other unlawful purposes.
-                </p>
-              </div>
-            </div>
-
             {/* 3. How We Use Your Information */}
             <div className="legal-v2-item">
               <span className="legal-v2-number-badge">3</span>
@@ -140,31 +99,13 @@ const PrivacyPolicy = () => {
                 <p className="legal-v2-item-desc">We use collected information to:</p>
                 <ul className="legal-v2-item-list">
                   <li>Create and manage student accounts.</li>
-                  <li>Provide access to SAT mock examinations.</li>
-                  <li>Save examination answers and results.</li>
-                  <li>Generate student performance reports.</li>
-                  <li>Process subscription payments.</li>
+                  <li>Provide access to educational services and application features.</li>
+                  <li>Facilitate university guidance and counseling support.</li>
+                  <li>Process subscription and service payments.</li>
                   <li>Send account verification and service notifications.</li>
                   <li>Provide customer support.</li>
                   <li>Improve website performance and user experience.</li>
                   <li>Detect unauthorized access and prevent fraudulent activities.</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* 9. Your Privacy Rights */}
-            <div className="legal-v2-item">
-              <span className="legal-v2-number-badge">9</span>
-              <div className="legal-v2-item-body">
-                <h2 className="legal-v2-item-title">Your Privacy Rights</h2>
-                <p className="legal-v2-item-desc">Subject to applicable law, users may have the right to:</p>
-                <ul className="legal-v2-item-list">
-                  <li>Request access to their personal information.</li>
-                  <li>Request correction of inaccurate information.</li>
-                  <li>Request deletion of personal information.</li>
-                  <li>Withdraw consent where processing is based on consent.</li>
-                  <li>Raise concerns about the processing of their information.</li>
-                  <li>Submit privacy-related complaints.</li>
                 </ul>
               </div>
             </div>
@@ -191,21 +132,6 @@ const PrivacyPolicy = () => {
               </div>
             </div>
 
-            {/* 10. Third-Party Websites and Services */}
-            <div className="legal-v2-item">
-              <span className="legal-v2-number-badge">10</span>
-              <div className="legal-v2-item-body">
-                <h2 className="legal-v2-item-title">Third-Party Websites and Services</h2>
-                <p className="legal-v2-item-desc">
-                  Our platform may contain links to third-party websites or use external services.
-                </p>
-                <p className="legal-v2-item-desc">
-                  EduTechEx is not responsible for the privacy practices of independent third-party
-                  websites. Users should review their respective privacy policies.
-                </p>
-              </div>
-            </div>
-
             {/* 5. Data Storage and Security */}
             <div className="legal-v2-item">
               <span className="legal-v2-number-badge">5</span>
@@ -226,19 +152,6 @@ const PrivacyPolicy = () => {
               </div>
             </div>
 
-            {/* 11. Changes to This Privacy Policy */}
-            <div className="legal-v2-item">
-              <span className="legal-v2-number-badge">11</span>
-              <div className="legal-v2-item-body">
-                <h2 className="legal-v2-item-title">Changes to This Privacy Policy</h2>
-                <p className="legal-v2-item-desc">
-                  We may update this Privacy Policy to reflect changes in our services, technology, or
-                  applicable legal requirements. Any updates will be published on this page with a revised
-                  effective date.
-                </p>
-              </div>
-            </div>
-
             {/* 6. Data Retention */}
             <div className="legal-v2-item">
               <span className="legal-v2-number-badge">6</span>
@@ -250,6 +163,90 @@ const PrivacyPolicy = () => {
                 </p>
                 <p className="legal-v2-item-desc">
                   Students may request account deletion, subject to applicable legal retention requirements.
+                </p>
+              </div>
+            </div>
+
+            {/* 7. Cookies and Tracking Technologies */}
+            <div className="legal-v2-item">
+              <span className="legal-v2-number-badge">7</span>
+              <div className="legal-v2-item-body">
+                <h2 className="legal-v2-item-title">Cookies and Tracking Technologies</h2>
+                <p className="legal-v2-item-desc">Our website may use cookies and similar technologies to:</p>
+                <ul className="legal-v2-item-list">
+                  <li>Maintain login sessions.</li>
+                  <li>Remember user preferences.</li>
+                  <li>Improve website functionality.</li>
+                  <li>Understand website usage.</li>
+                  <li>Support security features.</li>
+                </ul>
+                <p className="legal-v2-item-desc" style={{ marginTop: '6px' }}>
+                  Users may manage cookies through their browser settings. Disabling certain cookies
+                  may affect website functionality.
+                </p>
+              </div>
+            </div>
+
+            {/* 8. Student Privacy and Children's Information */}
+            <div className="legal-v2-item">
+              <span className="legal-v2-number-badge">8</span>
+              <div className="legal-v2-item-body">
+                <h2 className="legal-v2-item-title">Student Privacy and Children&apos;s Information</h2>
+                <p className="legal-v2-item-desc">
+                  EduTechEx may be used by school students, including individuals under 18 years of age.
+                </p>
+                <p className="legal-v2-item-desc">
+                  Where required by applicable law, we will obtain verifiable parental or guardian
+                  consent before processing children&apos;s personal information.
+                </p>
+                <p className="legal-v2-item-desc">
+                  We do not knowingly use children&apos;s personal information for prohibited tracking,
+                  targeted advertising, or other unlawful purposes.
+                </p>
+              </div>
+            </div>
+
+            {/* 9. Your Privacy Rights */}
+            <div className="legal-v2-item">
+              <span className="legal-v2-number-badge">9</span>
+              <div className="legal-v2-item-body">
+                <h2 className="legal-v2-item-title">Your Privacy Rights</h2>
+                <p className="legal-v2-item-desc">Subject to applicable law, users may have the right to:</p>
+                <ul className="legal-v2-item-list">
+                  <li>Request access to their personal information.</li>
+                  <li>Request correction of inaccurate information.</li>
+                  <li>Request deletion of personal information.</li>
+                  <li>Withdraw consent where processing is based on consent.</li>
+                  <li>Raise concerns about the processing of their information.</li>
+                  <li>Submit privacy-related complaints.</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* 10. Third-Party Websites and Services */}
+            <div className="legal-v2-item">
+              <span className="legal-v2-number-badge">10</span>
+              <div className="legal-v2-item-body">
+                <h2 className="legal-v2-item-title">Third-Party Websites and Services</h2>
+                <p className="legal-v2-item-desc">
+                  Our platform may contain links to third-party websites or use external services.
+                </p>
+                <p className="legal-v2-item-desc">
+                  EduTechEx is not responsible for the privacy practices of independent third-party
+                  websites. Users should review their respective privacy policies.
+                </p>
+              </div>
+            </div>
+
+            {/* 11. Changes to This Privacy Policy */}
+            <div className="legal-v2-item">
+              <span className="legal-v2-number-badge">11</span>
+              <div className="legal-v2-item-body">
+                <h2 className="legal-v2-item-title">Changes to This Privacy Policy</h2>
+                <p className="legal-v2-item-desc">
+                  We may update this Privacy Policy to reflect changes in our services, technology, or
+                  applicable legal requirements. Any updates will be published on this page with a revised
+                  effective date.
                 </p>
               </div>
             </div>

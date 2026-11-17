@@ -330,24 +330,52 @@ export const getDashboardStats = async (req, res) => {
       ['submitted', 'completed', 'approved'].includes(String(app.overviewStatus || app.applicationStatus || app.status || '').toLowerCase()) ||
       app.isCompleted === true;
 
-    const bachelorCompleted = bachelorApps.filter(isAppCompleted).length;
+    // Master application approval helpers
+    const isMasterFinalApproved = (a = {}) => {
+      const universityStatus = String(a.universitySelectionStatus || '').toLowerCase();
+      const status = String(a.applicationStatus || a.status || '').toLowerCase();
+      return universityStatus === 'completed' || status === 'approved' || a.isFinalApplicationApproved === true || a.isUniversityApproved === true;
+    };
+    const isMasterProgramApproved = (a = {}) => {
+      return String(a.programApprovalStatus || '').toLowerCase() === 'approved' ||
+        String(a.overviewStatus || '').toLowerCase() === 'approved' ||
+        Boolean(a.processAdminVerified) ||
+        a.isProgramApproved === true;
+    };
+
+    // Bachelor application approval helpers
+    const isBachelorFinalApproved = (a = {}) =>
+      String(a.applicationStatus || '').trim().toLowerCase() === 'approved' &&
+      String(a.universitySelectionStatus || '').trim().toLowerCase() === 'completed';
+    const isBachelorProgramApproved = (a = {}) =>
+      String(a.programApprovalStatus || '').trim().toLowerCase() === 'approved' ||
+      Boolean(a.processAdminVerified);
+
+    // Master counts
+    const masterTotal = masterApps.length;
+    const masterFinalApproved = masterApps.filter(isMasterFinalApproved).length;
+    const masterViewUniversity = masterApps.filter((a) => isMasterProgramApproved(a) && !isMasterFinalApproved(a)).length;
+    const masterPendingApproval = masterApps.filter((a) => !isMasterProgramApproved(a) && !isMasterFinalApproved(a)).length;
+    const masterSubmitted = masterApps.filter(isAppCompleted).length || masterTotal;
+
+    // Bachelor counts
+    const bachelorTotal = bachelorApps.length;
+    const bachelorCompleted = bachelorApps.filter(isAppCompleted).length || bachelorTotal;
+    const bachelorFinalApproved = bachelorApps.filter(isBachelorFinalApproved).length;
+    const bachelorViewUniversity = bachelorApps.filter((a) => isBachelorProgramApproved(a) && !isBachelorFinalApproved(a)).length;
+    const bachelorPendingApproval = bachelorApps.filter((a) => !isBachelorProgramApproved(a) && !isBachelorFinalApproved(a)).length;
     const bachelorDraft = bachelorApps.filter((app) => app.completionPercentage === 0 || String(app.overviewStatus).toLowerCase() === 'draft').length;
-    const bachelorInProgress = bachelorApps.length - bachelorCompleted - bachelorDraft;
-    const bachelorPending = bachelorApps.filter((app) => !app.processAdminVerified && app.processAdminStatus === 'pending').length;
+    const bachelorInProgress = Math.max(0, bachelorTotal - bachelorCompleted - bachelorDraft);
 
-    const masterCompleted = masterApps.filter(isAppCompleted).length;
-    const masterDraft = masterApps.filter((app) => app.completionPercentage === 0 || String(app.overviewStatus).toLowerCase() === 'draft').length;
-    const masterUnderReview = masterApps.length - masterCompleted - masterDraft;
-    const masterPending = masterApps.filter((app) => !app.processAdminVerified && app.processAdminStatus === 'pending').length;
-
+    // Medical counts
     const medicalCompleted = medicalApps.filter(isAppCompleted).length;
     const medicalDraft = medicalApps.filter((app) => app.completionPercentage === 0 || String(app.overviewStatus).toLowerCase() === 'draft').length;
     const medicalPending = medicalApps.filter((app) => !app.processAdminVerified && app.processAdminStatus === 'pending').length;
 
-    const totalApplications = bachelorApps.length + masterApps.length + medicalApps.length;
-    const totalCompleted = bachelorCompleted + masterCompleted + medicalCompleted;
-    const totalPending = bachelorPending + masterPending + medicalPending;
-    const totalIncomplete = bachelorDraft + masterDraft + medicalDraft;
+    const totalApplications = bachelorTotal + masterTotal + medicalApps.length;
+    const totalCompleted = bachelorCompleted + masterSubmitted + medicalCompleted;
+    const totalPending = bachelorPendingApproval + masterPendingApproval + medicalPending;
+    const totalIncomplete = bachelorDraft + medicalDraft;
 
     return res.status(200).json({
       success: true,
@@ -357,26 +385,33 @@ export const getDashboardStats = async (req, res) => {
         totalCompleted,
         totalIncomplete,
         bachelor: {
-          total: bachelorApps.length,
+          total: bachelorTotal,
           completed: bachelorCompleted,
           incomplete: bachelorDraft,
           inProgress: bachelorInProgress,
-          pending: bachelorPending,
+          pending: bachelorPendingApproval,
+          viewUniversity: bachelorViewUniversity,
+          pendingApproval: bachelorPendingApproval,
         },
         master: {
-          total: masterApps.length,
-          submitted: masterCompleted,
-          completed: masterCompleted,
-          draft: masterDraft,
-          underReview: masterUnderReview,
-          pending: masterPending,
+          total: masterTotal,
+          submitted: masterSubmitted,
+          completed: masterSubmitted,
+          approved: masterFinalApproved,
+          viewUniversity: masterViewUniversity,
+          pendingApproval: masterPendingApproval,
+          pending: masterPendingApproval,
+          draft: 0,
+          underReview: 0,
         },
         medical: {
           total: medicalApps.length,
           completed: medicalCompleted,
           incomplete: medicalDraft,
-          inProgress: medicalApps.length - medicalCompleted - medicalDraft,
+          inProgress: Math.max(0, medicalApps.length - medicalCompleted - medicalDraft),
           pending: medicalPending,
+          viewUniversity: 0,
+          pendingApproval: medicalPending,
         },
       },
     });

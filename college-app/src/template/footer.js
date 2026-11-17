@@ -25,10 +25,11 @@ const Footer = ({ onViewChange }) => {
               <li><button onClick={() => handleNav('home')} className="footer-nav-btn">Home</button></li>
               <li><a href="#about" onClick={() => handleNav('home')}>About</a></li>
               <li><a href="#destinations" onClick={() => handleNav('home')}>University</a></li>
-              <li><a href="#partner" onClick={() => handleNav('home')}>Partner</a></li>
+              
               <li><button onClick={() => handleNav('contact')} className="footer-nav-btn">Contact</button></li>
             </ul>
           </nav>
+          
         </div>
 
         <div className="footer-bottom">

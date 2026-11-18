@@ -364,7 +364,20 @@ const ProcessAdminDashboard = () => {
   };
 
   /* ── Type pill ── */
-  const getTypePill = (type) => {
+  const normalizeApplicationType = (appOrType) => {
+    const values = typeof appOrType === 'object' && appOrType
+      ? [appOrType.programType, appOrType.applyingFor, appOrType.applicantType, appOrType.type]
+      : [appOrType];
+    const value = values.find((item) => typeof item === 'string' && item.trim()) || '';
+    const normalized = value.toLowerCase();
+    if (normalized.includes('med') || normalized.includes('mbbs')) return 'medical';
+    if (normalized.includes('master') || normalized === 'pg' || normalized.includes('postgraduate')) return 'master';
+    if (normalized.includes('bach') || normalized === 'ug' || normalized.includes('undergraduate')) return 'bachelor';
+    return normalized;
+  };
+
+  const getTypePill = (application) => {
+    const type = normalizeApplicationType(application);
     if (type === 'master') {
       return (
         <span style={{
@@ -372,6 +385,15 @@ const ProcessAdminDashboard = () => {
           borderRadius: 20, background: '#ede9fe', color: '#7c3aed',
           marginLeft: 6, verticalAlign: 'middle'
         }}>Master</span>
+      );
+    }
+    if (type === 'medical') {
+      return (
+        <span style={{
+          fontSize: 10, fontWeight: 700, padding: '2px 8px',
+          borderRadius: 20, background: '#fce7f3', color: '#be185d',
+          marginLeft: 6, verticalAlign: 'middle'
+        }}>Medical</span>
       );
     }
     return (
@@ -384,8 +406,12 @@ const ProcessAdminDashboard = () => {
   };
 
   /* ── Activity dot colour ── */
-  const getActivityDot = (type) =>
-    type === 'master' ? 'pad-act-dot pad-dot-indigo' : 'pad-act-dot pad-dot-teal';
+  const getActivityDot = (application) => {
+    const type = normalizeApplicationType(application);
+    if (type === 'master')  return 'pad-act-dot pad-dot-indigo';
+    if (type === 'medical') return 'pad-act-dot pad-dot-pink';
+    return 'pad-act-dot pad-dot-teal';
+  };
 
   /* ── Dashboard render ── */
   const renderDashboard = () => (
@@ -634,10 +660,10 @@ const ProcessAdminDashboard = () => {
                 </tr>
               ) : (
                 filteredApps.map((app) => (
-                  <tr key={app._id}>
+                  <tr key={`${normalizeApplicationType(app)}-${app._id}`}>
                     <td style={{ fontWeight: 600 }}>
                       {app.studentName}
-                      {getTypePill(app.type)}
+                      {getTypePill(app)}
                     </td>
                     <td style={{ fontSize: 12.5, color: 'var(--text-mid)' }}>{app.university}</td>
                     <td style={{ fontSize: 12, color: 'var(--text-lt)' }}>{app.program}</td>
@@ -662,11 +688,11 @@ const ProcessAdminDashboard = () => {
                 {searchQuery ? `No applications found matching "${searchQuery}".` : 'No applications found.'}
               </div>
             ) : filteredApps.map((app) => (
-              <article className="pad-mobile-app-card" key={`mobile-${app._id}`}>
+              <article className="pad-mobile-app-card" key={`mobile-${normalizeApplicationType(app)}-${app._id}`}>
                 <div className="pad-mobile-app-top">
                   <div className="pad-mobile-app-student">
                     <strong>{app.studentName || 'Student'}</strong>
-                    {getTypePill(app.type)}
+                    {getTypePill(app)}
                   </div>
                   <span className={getBadgeClass(app.statusType)}>
                     {getBadgeIcon(app.statusType)}{app.status}
@@ -726,14 +752,14 @@ const ProcessAdminDashboard = () => {
             ) : (
               <>
                 <div className="pad-act-day">Recent</div>
-                {filteredApps.slice(0, 5).map((app) => (
-                  <div key={app._id} className="pad-act-item">
-                    <span className={getActivityDot(app.type)}>
+                {filteredApps.slice(0, 6).map((app) => (
+                  <div key={`${normalizeApplicationType(app)}-${app._id}`} className="pad-act-item">
+                    <span className={getActivityDot(app)}>
                       <IcoCheck />
                     </span>
                     <span className="pad-act-txt">
                       <strong>{app.studentName}:</strong>{' '}
-                      {app.type === 'master' ? 'Master' : 'Bachelor'} application{' '}
+                      {normalizeApplicationType(app) === 'medical' ? 'Medical' : normalizeApplicationType(app) === 'master' ? 'Master' : 'Bachelor'} application{' '}
                       <span style={{
                         color: app.statusType === 'approved' ? 'var(--primary)'
                              : app.statusType === 'review'   ? 'var(--blue)'

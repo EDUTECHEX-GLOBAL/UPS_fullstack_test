@@ -1,8 +1,14 @@
 // backend/controllers/processAdminController.js
 import ProcessAdmin from "../models/processAdminModel.js";
-import { sendEmail } from "../utils/sendEmail.js";
+import { sendEmailEnhanced } from "../utils/sendEmail.js";
 import jwt from "jsonwebtoken";
 import { createProcessAdminRequestNotification } from "./notificationController.js";
+
+// Thin wrapper: matches the old sendEmail(to, subject, html) signature but uses
+// sendEmailEnhanced so we can supply an explicit plain-text fallback that
+// contains NO raw HTML entities (prevents "&nbsp;&#847;" showing in Gmail preview).
+const sendEmail = (to, subject, html, plainText) =>
+  sendEmailEnhanced({ to, subject, html, text: plainText || html.replace(/<[^>]*>/g, " ").replace(/\s{2,}/g, " ").trim() });
 
 // =====================================================
 // HELPERS
@@ -32,9 +38,6 @@ const emailHeadTags = `
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light">
-  <style>
-    :root { color-scheme: light only; supported-color-schemes: light; }
-  </style>
 </head>`;
 
 // ✅ FIX: This function was MISSING — caused the 500 error on register & resend-otp
@@ -43,6 +46,8 @@ const buildOtpEmail = (firstName, otp) => `
 <html>
 ${emailHeadTags}
 <body style="margin:0;padding:0;background:#f4f6f9;font-family:'Segoe UI',Arial,sans-serif;">
+  <!-- preheader spacer (keeps Gmail preview clean) -->
+  <div style="display:none;max-height:0;overflow:hidden;font-size:1px;color:#f4f6f9;">Your EdutechEX Process Admin email verification OTP is ready.</div>
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
     <tr><td align="center">
       <table width="520" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);max-width:92%;">
@@ -87,6 +92,8 @@ const buildPendingApprovalEmail = (firstName) => `
 <html>
 ${emailHeadTags}
 <body style="margin:0;padding:0;background:#f4f6f9;font-family:'Segoe UI',Arial,sans-serif;">
+  <!-- preheader spacer -->
+  <div style="display:none;max-height:0;overflow:hidden;font-size:1px;color:#f4f6f9;">Your EdutechEX Process Admin account is now pending approval.</div>
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
     <tr><td align="center">
       <table width="520" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);max-width:92%;">
@@ -129,6 +136,8 @@ const buildApprovedEmail = (firstName) => `
 <html>
 ${emailHeadTags}
 <body style="margin:0;padding:0;background:#f4f6f9;font-family:'Segoe UI',Arial,sans-serif;">
+  <!-- preheader spacer -->
+  <div style="display:none;max-height:0;overflow:hidden;font-size:1px;color:#f4f6f9;">Great news — your EdutechEX Process Admin account has been approved!</div>
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
     <tr><td align="center">
       <table width="520" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);max-width:92%;">
@@ -168,6 +177,8 @@ const buildPasswordResetEmail = (firstName, otp) => `
 <html>
 ${emailHeadTags}
 <body style="margin:0;padding:0;background:#f4f6f9;font-family:'Segoe UI',Arial,sans-serif;">
+  <!-- preheader spacer -->
+  <div style="display:none;max-height:0;overflow:hidden;font-size:1px;color:#f4f6f9;">Use the OTP inside to reset your EdutechEX Process Admin password.</div>
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
     <tr><td align="center">
       <table width="520" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);max-width:92%;">
@@ -212,6 +223,8 @@ const buildRejectedEmail = (firstName, reason) => `
 <html>
 ${emailHeadTags}
 <body style="margin:0;padding:0;background:#f4f6f9;font-family:'Segoe UI',Arial,sans-serif;">
+  <!-- preheader spacer -->
+  <div style="display:none;max-height:0;overflow:hidden;font-size:1px;color:#f4f6f9;">An update regarding your EdutechEX Process Admin account application.</div>
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
     <tr><td align="center">
       <table width="520" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);max-width:92%;">

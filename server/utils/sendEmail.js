@@ -104,7 +104,7 @@ const sendViaBrevoSMTP = async ({ to, subject, html, text, replyTo, attachments 
     to,
     subject,
     html: finalHtml,
-    text: text || finalHtml.replace(/<[^>]*>/g, ""),
+    text: text || finalHtml.replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/&#\d+;/g, " ").replace(/&[a-z]+;/gi, " ").replace(/\s{2,}/g, " ").trim(),
     replyTo: finalReplyTo,
     attachments: finalAttachments,
   });

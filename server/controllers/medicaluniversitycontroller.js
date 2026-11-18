@@ -3,9 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import Account from "../models/accountModel.js";
-import AllDocument from "../models/AllDocumentModel.js";
-import { buildFileUrl } from "../utils/s3FileKey.js";
-import { fetchEnrollmentList } from '../Enrollment/controllers/enrollmentAdminController.js';
+import { fetchEnrollmentList, getMedicalApplicationDetail } from '../Enrollment/controllers/enrollmentAdminController.js';
 import ProgramSelection from '../Enrollment/model/programmodel.js';
 import UniversitySelection from '../Enrollment/model/universityselectionmodel.js';
 import TestScores from '../Enrollment/model/testmodel.js';
@@ -66,245 +64,11 @@ const getMedicalApplicationStatusBucket = (application = {}) => {
     return 'incomplete';
 };
 
-const DOCUMENT_FIELDS = [
-    "photo",
-    "signature",
-    "idProof",
-    "birthCertificate",
-    "passport",
-    "ninthMarksheet",
-    "tenthMarksheet",
-    "tenthCertificate",
-    "eleventhMarksheet",
-    "twelfthMarksheet",
-    "twelfthCertificate",
-    "migrationCertificate",
-    "transferCertificate",
-    "characterCertificate",
-    "neetScorecard",
-    "neetAdmitCard",
-    "categoryCert",
-    "ewsCertificate",
-    "domicileCertificate",
-    "disabilityCertificate",
-    "medicalFitnessCertificate",
-    "gapCertificate",
-    "englishProficiencyCertificate",
-    "ucatScorecard",
-    "financialDocuments",
-    "universitySupportingDocuments",
-    "otherSupportingDocuments",
-];
-
-const toPlain = (doc) => {
-    if (!doc) return {};
-    return doc.toObject ? doc.toObject({ virtuals: true }) : (doc._doc ? doc._doc : doc);
-};
-
-// Each field on MedicalDocument is an object { fileName, fileKey, fileUrl, ... },
-// or an array of such objects, or a string.
-// Build a clean { fileName, fileUrl } pair for each one that's present.
-const populateDocuments = (docs) => {
-    if (!docs) return {};
-    const raw = toPlain(docs);
-    const output = {};
-
-    const normalizeFile = (fileData, fieldName) => {
-        if (!fileData) return null;
-        
-        let data = fileData;
-        if (data && data.toObject) data = data.toObject({ virtuals: true });
-        else if (data && data._doc) data = data._doc;
-
-        let fileKey = "";
-        let fileUrl = "";
-        let fileName = "";
-
-        if (typeof data === 'string') {
-            fileUrl = data;
-            fileName = fileUrl.split("/").pop();
-        } else {
-            fileKey = data.fileKey || data.s3Key || "";
-            fileUrl = fileKey ? buildFileUrl(fileKey) : (data.fileUrl || "");
-            fileName = data.fileName || data.originalName || data.name || fileKey.split("/").pop() || fileUrl.split("/").pop() || fieldName;
-        }
-
-        if (fileUrl) {
-            return {
-                fileName,
-                fileUrl,
-                fileKey: data.fileKey || data.s3Key || "",
-                originalName: data.originalName || fileName,
-                fileType: data.fileType || data.mimeType || ""
-            };
-        }
-        return null;
-    };
-
-    DOCUMENT_FIELDS.forEach((field) => {
-        const fileData = raw[field] || (field === "transferCertificate" ? raw.transferCert : null);
-        if (!fileData) return;
-
-        if (Array.isArray(fileData)) {
-            const normalizedArray = fileData.map(fd => normalizeFile(fd, field)).filter(Boolean);
-            if (normalizedArray.length > 0) {
-                output[field] = normalizedArray;
-            }
-        } else {
-            const normalized = normalizeFile(fileData, field);
-            if (normalized) {
-                output[field] = normalized;
-            }
-        }
-    });
-
-    return output;
-};
-
-const joinParts = (...values) => values
-    .map((value) => String(value || "").trim())
-    .filter(Boolean)
-    .join(", ");
-
-const normalizePersonalDetails = (personal) => {
-    const raw = toPlain(personal);
-    if (!Object.keys(raw).length) return {};
-
-    const fullName = raw.fullName || [raw.firstName, raw.middleName, raw.lastName]
-        .map((value) => String(value || "").trim())
-        .filter(Boolean)
-        .join(" ");
-    const permAddress = raw.permAddress || joinParts(
-        raw.permanentAddressLine1,
-        raw.permanentAddressLine2,
-        raw.permanentCity,
-        raw.permanentState,
-        raw.permanentCountry,
-        raw.permanentPostalCode
-    );
-    const corrAddress = raw.corrAddress || joinParts(
-        raw.correspondenceAddressLine1,
-        raw.correspondenceAddressLine2,
-        raw.correspondenceCity,
-        raw.correspondenceState,
-        raw.correspondenceCountry,
-        raw.correspondencePostalCode
-    );
-    const parentOccupation = raw.parentOccupation || raw.occupation || "";
-    const parentIncome = raw.parentIncome || raw.income || "";
-
-    return {
-        ...raw,
-        fullName,
-        idNumber: raw.idNumber || raw.nationalIdNumber || raw.aadhaarNumber || raw.passportNumber || "",
-        permAddress,
-        corrAddress,
-        parentOccupation,
-        parentIncome,
-        occupation: parentOccupation,
-        income: parentIncome,
-    };
-};
-
-// ---------------------------------------------------------------------------
-// Builds the { studentId, applicationId, studentName, ..., documents } shape
-// consumed by the process-admin frontend, merging the primary MedicalDocument
-// record with legacy ApplicationDocument / AllDocument fallbacks so nothing
-// uploaded earlier in the flow is lost.
-// ---------------------------------------------------------------------------
-const buildApplicationRecord = async (userId, overview) => {
-    const [medicalAccount, accountModel, personal, academic, course, documents, masterDocs] = await Promise.all([
-        Promise.resolve(null),
-        Account.findById(userId).lean(),
-        Promise.resolve(null),
-        Promise.resolve(null),
-        Promise.resolve(null),
-        Promise.resolve(null),
-        Promise.resolve(null),
-    ]);
-
-    const account = medicalAccount || accountModel;
-    const email = account?.email || personal?.email;
-
-    // Robustly fetch AllDocument by userId OR email (in case the generic upload wasn't properly linked to the userId)
-    const allDocsQuery = [{ userId }];
-    if (email) {
-        allDocsQuery.push({ 'extractedData.email': email });
-    }
-    const allDocsModel = await AllDocument.findOne({ $or: allDocsQuery }).lean();
-
-    const mergedDocs = documents ? (documents._doc ? { ...documents._doc } : { ...documents }) : {};
-    const allDocs = allDocsModel?.uploadedDocuments || {};
-
-    if (masterDocs || allDocsModel) {
-        if (!mergedDocs.photo) mergedDocs.photo = masterDocs?.photo || allDocs?.photo;
-        if (!mergedDocs.idProof) mergedDocs.idProof = masterDocs?.passport || allDocs?.passport;
-        if (!mergedDocs.passport) mergedDocs.passport = masterDocs?.passport || allDocs?.passport;
-        if (!mergedDocs.tenthMarksheet) mergedDocs.tenthMarksheet = masterDocs?.cert10th || allDocs?.grade10;
-        if (!mergedDocs.twelfthMarksheet) mergedDocs.twelfthMarksheet = masterDocs?.cert12th || masterDocs?.cert11th || allDocs?.grade12;
-        if (!mergedDocs.neetScorecard) mergedDocs.neetScorecard = masterDocs?.testScores || allDocs?.testScores?.neet;
-        if (!mergedDocs.ninthMarksheet) mergedDocs.ninthMarksheet = masterDocs?.cert9th || allDocs?.grade9;
-        if (!mergedDocs.eleventhMarksheet) mergedDocs.eleventhMarksheet = masterDocs?.cert11th || allDocs?.grade11;
-    }
-
-    // FIX: fall back through personal -> account -> a readable placeholder
-    // instead of a bare "-", so a record with a resolvable name never gets
-    // mistaken for one that should be filtered out downstream.
-    const resolvedName = personal?.fullName
-        || (account ? `${account.firstName || ''} ${account.lastName || ''}`.trim() : '')
-        || '';
-    const fullName = resolvedName || 'Unnamed Applicant';
-
-    return {
-        studentId: userId,
-        userId: userId,
-        applicationId: overview?.applicationId || '-',
-        studentName: fullName,
-        hasResolvedName: !!resolvedName,
-        email: account?.email || personal?.email || '-',
-        phone: account?.mobileNumber || personal?.phone || '-',
-        overviewStatus: overview?.applicationStatus || 'draft',
-        applicationStatus: overview?.applicationStatus || 'draft',
-        completionPercentage: overview?.completionPercentage || 0,
-        personal: normalizePersonalDetails(personal),
-        academic: academic || {},
-        course: course || {},
-        documents: populateDocuments(mergedDocs),
-        selectedPrograms: overview?.selectedPrograms || []
-    };
-};
-
 // GET all medical applications for process admin
 export const getAllMedicalApplications = async (req, res) => {
     try {
-        const overviews = await Promise.resolve([]);
-
-        const applications = await Promise.all(
-            overviews.map((overview) => buildApplicationRecord(overview.userId, overview))
-        );
-
-        // FIX: previously this did
-        //   applications.filter(app => app.studentName !== '-')
-        // which silently dropped ANY application whose personal-details step
-        // hadn't been filled in and whose Account/MedicalAccount lookup by
-        // userId didn't resolve a first/last name — even if the applicant
-        // had already submitted and uploaded every document. That meant
-        // fully-submitted applications could vanish from this list with no
-        // error anywhere. We now keep every application that has an
-        // overview record (i.e. was actually created/submitted) and just
-        // log the ones with an unresolved name so they're easy to spot
-        // and fix at the data level instead of being hidden.
-        applications
-            .filter((app) => !app.hasResolvedName)
-            .forEach((app) => {
-                console.warn(`[MedicalUniversity] Application ${app.applicationId} (userId: ${app.userId}) has no resolvable student name — showing as "Unnamed Applicant".`);
-            });
-
-        const validApplications = applications.map(({ hasResolvedName, ...app }) => app);
-
-        // Fetch enrollment medical applications and merge
-        const enrollmentMedical = await fetchEnrollmentList('medical', 'all', req.query?.search);
-        let mergedApplications = [...validApplications, ...enrollmentMedical];
+        // Medical records use the shared Enrollment collections.
+        let mergedApplications = await fetchEnrollmentList('medical', 'all', req.query?.search);
         const requestedStatus = String(req.query?.status || 'all').trim().toLowerCase();
         if (['approved', 'completed', 'inprogress', 'incomplete'].includes(requestedStatus)) {
             mergedApplications = mergedApplications.filter((application) =>
@@ -312,11 +76,12 @@ export const getAllMedicalApplications = async (req, res) => {
             );
         }
 
-        mergedApplications.sort(
-            (a, b) =>
-                new Date(b.submittedAt || b.updatedAt || b.createdAt || 0) -
-                new Date(a.submittedAt || a.updatedAt || a.createdAt || 0)
+        const getActivityTime = (application) => Math.max(
+            ...[application.submittedAt, application.updatedAt, application.createdAt]
+                .map((value) => new Date(value || 0).getTime())
+                .filter((value) => Number.isFinite(value))
         );
+        mergedApplications.sort((a, b) => getActivityTime(b) - getActivityTime(a));
 
         res.status(200).json({ success: true, data: mergedApplications });
     } catch (error) {
@@ -335,44 +100,6 @@ export const getMedicalApplicationDetails = async (req, res) => {
         }
 
         req.params.userId = studentId;
-        const { getMedicalApplicationDetail } = await import('../Enrollment/controllers/enrollmentAdminController.js');
-
-        // Wrap response handler to capture 404 if enrollment detail is not found
-        let foundEnrollment = true;
-        const originalStatus = res.status;
-        const originalJson = res.json;
-
-        res.status = function (code) {
-            if (code === 404) foundEnrollment = false;
-            return originalStatus.apply(this, arguments);
-        };
-
-        res.json = function (data) {
-            if (!foundEnrollment) {
-                // Reset handlers and continue to legacy fallback below
-                res.status = originalStatus;
-                res.json = originalJson;
-                return legacyFallback();
-            }
-            return originalJson.apply(this, arguments);
-        };
-
-        const legacyFallback = async () => {
-            const objectId = toObjectId(studentId);
-            const overview = await Promise.resolve(null).lean();
-            const record = await buildApplicationRecord(objectId, overview);
-
-            if (!overview && record.email === '-' && !record.hasResolvedName) {
-                return res.status(404).json({ success: false, message: "Application not found" });
-            }
-
-            const { hasResolvedName, ...application } = record;
-            application.studentId = studentId;
-            application.userId = studentId;
-
-            return res.status(200).json({ success: true, data: application });
-        };
-
         return await getMedicalApplicationDetail(req, res);
     } catch (error) {
         console.error("Error fetching medical application details:", error);

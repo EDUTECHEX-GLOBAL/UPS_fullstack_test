@@ -280,6 +280,8 @@ const ForgotPassword = function() {
   };
 
   const handleOtpVerified = function() {
+    setMessage("");
+    setError("");
     setStep("password");
   };
 

@@ -425,8 +425,23 @@ body {
   background: rgba(255, 255, 255, .25);
 }
 
-.process-admin-dashboard .sidebar.closed .logout-btn-sidebar span:last-child {
-  display: none;
+.process-admin-dashboard .sidebar.closed .sidebar-footer {
+  display: flex;
+  justify-content: center;
+  padding: 12px 8px;
+}
+
+.process-admin-dashboard .sidebar.closed .logout-btn-sidebar {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  gap: 0;
+  border-radius: 10px;
+}
+
+.process-admin-dashboard .sidebar.closed .logout-btn-sidebar .logout-circle {
+  width: 26px;
+  height: 26px;
 }
 
 /* ════════════════════════════════════

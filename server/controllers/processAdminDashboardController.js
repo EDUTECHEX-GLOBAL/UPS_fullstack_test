@@ -155,9 +155,15 @@ const getApplicationDedupeKey = (app = {}) => [
 ].join('|');
 
 const getApplicationTimestamp = (app = {}) => {
-  const date = app.submittedAt || app.updatedAt || app.createdAt || 0;
-  const time = new Date(date).getTime();
-  return Number.isNaN(time) ? 0 : time;
+  const timestamps = [app.submittedAt, app.updatedAt, app.createdAt]
+    .map((date) => new Date(date || 0).getTime())
+    .filter((time) => Number.isFinite(time) && time > 0);
+  return timestamps.length ? Math.max(...timestamps) : 0;
+};
+
+const getApplicationActivityDate = (app = {}) => {
+  const timestamp = getApplicationTimestamp(app);
+  return timestamp ? new Date(timestamp) : null;
 };
 
 const getApplicationStatusScore = (app = {}) => {
@@ -268,7 +274,7 @@ const loadBachelorApplications = async () => {
 
   const apps = [...enrollmentBachelors, ...legacyMapped];
   const dedupedApps = dedupeApplicationsByStudentProgram(apps);
-  dedupedApps.sort((a, b) => new Date(b.submittedAt || b.updatedAt || b.createdAt || 0) - new Date(a.submittedAt || a.updatedAt || a.createdAt || 0));
+  dedupedApps.sort((a, b) => getApplicationTimestamp(b) - getApplicationTimestamp(a));
   return dedupedApps;
 };
 
@@ -303,13 +309,13 @@ const loadMasterApplications = async () => {
 
   const apps = [...enrollmentMasters, ...legacyMapped];
   const dedupedApps = dedupeApplicationsByStudentProgram(apps);
-  dedupedApps.sort((a, b) => new Date(b.submittedAt || b.updatedAt || b.createdAt || 0) - new Date(a.submittedAt || a.updatedAt || a.createdAt || 0));
+  dedupedApps.sort((a, b) => getApplicationTimestamp(b) - getApplicationTimestamp(a));
   return dedupedApps;
 };
 
 const loadMedicalApplications = async () => {
   const enrollmentMedical = await fetchEnrollmentList('medical', 'all', '').catch(() => []);
-  enrollmentMedical.sort((a, b) => new Date(b.submittedAt || b.updatedAt || b.createdAt || 0) - new Date(a.submittedAt || a.updatedAt || a.createdAt || 0));
+  enrollmentMedical.sort((a, b) => getApplicationTimestamp(b) - getApplicationTimestamp(a));
   return enrollmentMedical;
 };
 
@@ -445,15 +451,18 @@ export const getRecentApplications = async (req, res) => {
         studentName: app.studentName || 'Unknown Student',
         email: app.email || '',
         university: app.universityName || 'University',
-        type: app.type || defaultType,
+        // The source collection determines the application category. Some
+        // enrollment records carry a stale `type` value from older flows.
+        type: defaultType,
+        programType: app.programType || app.applyingFor || defaultType,
         program: app.programName || 'Application',
         status: display.status,
         statusType: display.statusType,
         completionPercentage: app.completionPercentage || 0,
         processAdminStatus: app.processAdminStatus || 'pending',
         processAdminVerified: app.processAdminVerified || false,
-        date: fmtDate(app.submittedAt || app.updatedAt || app.createdAt),
-        createdAt: app.submittedAt || app.updatedAt || app.createdAt,
+        date: fmtDate(getApplicationActivityDate(app)),
+        createdAt: getApplicationActivityDate(app),
       };
     };
 
@@ -463,8 +472,21 @@ export const getRecentApplications = async (req, res) => {
       ...medicalApps.map(a => formatApp(a, 'medical')),
     ];
 
-    allApps.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
-    const recentApps = allApps.slice(0, 6);
+    allApps.sort((a, b) => getApplicationTimestamp(b) - getApplicationTimestamp(a));
+
+    // Keep the dashboard representative of every application stream. A busy
+    // Bachelor queue should not push all Medical entries out of the six rows.
+    const latestByType = ['bachelor', 'master', 'medical']
+      .map((type) => allApps.find((app) => app.type === type))
+      .filter(Boolean);
+    const recentApps = [...latestByType];
+    for (const app of allApps) {
+      if (recentApps.length >= 6) break;
+      if (!recentApps.some((recent) => recent.type === app.type && String(recent._id) === String(app._id))) {
+        recentApps.push(app);
+      }
+    }
+    recentApps.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
 
     console.log("Recent applications count:", recentApps.length);
 

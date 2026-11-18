@@ -24,6 +24,14 @@ const MedicalUniversity = ({ globalSearchQuery = '' }) => {
     const [approveLoading, setApproveLoading] = useState(false);
     const [approveError, setApproveError] = useState('');
 
+    const visibleEducationEntries = (selectedApp?.education?.entries || []).filter((entry) =>
+        [entry?.schoolName, entry?.yearOfPassing, entry?.score, entry?.country]
+            .some((value) => {
+                const normalized = String(value || '').trim();
+                return normalized && normalized !== '-' && normalized !== '—';
+            })
+    );
+
     useEffect(() => {
         if (!statusDropdownOpen) return undefined;
         const closeOnOutsideClick = (event) => {
@@ -840,7 +848,7 @@ const MedicalUniversity = ({ globalSearchQuery = '' }) => {
                             {/* 4. ACADEMIC QUALIFICATIONS */}
                             <div className="review-section-card">
                                 <h3 className="review-card-title">Academic Qualifications</h3>
-                                {selectedApp.education?.entries?.length > 0 ? (
+                                {visibleEducationEntries.length > 0 ? (
                                     <div className="review-table-wrapper">
                                         <table className="review-table">
                                             <thead>
@@ -853,7 +861,7 @@ const MedicalUniversity = ({ globalSearchQuery = '' }) => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {selectedApp.education.entries.map((edu, idx) => (
+                                                {visibleEducationEntries.map((edu, idx) => (
                                                     <tr key={idx}>
                                                         <td className="cell-primary">{edu.qualification || '-'}</td>
                                                         <td>{edu.schoolName || '-'}</td>
